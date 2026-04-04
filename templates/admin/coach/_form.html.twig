@@ -1,0 +1,297 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': 'coachForm'}}) }}
+
+{# ── Dynamic validation alert ── #}
+<div id="validationAlert" role="alert"
+     style="display:none; margin-bottom:18px; padding:14px 18px; border-radius:10px;
+            border-left:5px solid #dc3545; background:#fff5f5; color:#b91c1c;
+            animation: slideIn 0.3s ease-out;">
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+        <i class="fas fa-exclamation-circle" style="font-size:20px; margin-top:2px; flex-shrink:0;"></i>
+        <div>
+            <strong id="validationAlertTitle" style="font-size:14px;">Les champs sont vides</strong>
+            <ul id="validationErrors" style="margin:6px 0 0; padding-left:18px; font-size:13px; line-height:1.6;"></ul>
+        </div>
+        <button type="button" onclick="document.getElementById('validationAlert').style.display='none'"
+                style="margin-left:auto; background:none; border:none; color:#b91c1c; font-size:20px; cursor:pointer; line-height:1; padding:0;">×</button>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+
+    {# Nom and Prénom side by side #}
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Nom</label>
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du coach'}}) }}
+        <div class="field-hint" data-field="coach[nom]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.nom) }}
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Prénom</label>
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom du coach'}}) }}
+        <div class="field-hint" data-field="coach[prenom]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.prenom) }}
+    </div>
+
+    {# Biographie full width #}
+    <div class="col-12">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Biographie</label>
+        {{ form_widget(form.biographie, {'attr': {'class': 'form-control', 'rows': 4, 'placeholder': 'Description du coach (min 10 caractères)...'}}) }}
+        <div style="display:flex;justify-content:space-between;margin-top:3px;">
+            <div class="field-hint" data-field="coach[biographie]" style="display:none;color:#dc3545;font-size:11px;"></div>
+            <span id="bioCounter" style="font-size:11px;color:#9ca3af;margin-left:auto;">0 / 2000 caractères</span>
+        </div>
+        {{ form_errors(form.biographie) }}
+    </div>
+
+    {# Expérience and Tarif side by side #}
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Expérience (années)</label>
+        {{ form_widget(form.experienceAnnees, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 5'}}) }}
+        <div class="field-hint" data-field="coach[experienceAnnees]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.experienceAnnees) }}
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Tarif (DT/H)</label>
+        {{ form_widget(form.tarifHoraire, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 45,00 DT'}}) }}
+        <div class="field-hint" data-field="coach[tarifHoraire]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.tarifHoraire) }}
+    </div>
+
+    {# Disponibilité #}
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Disponibilité</label>
+        {{ form_widget(form.disponibilite, {'attr': {'class': 'form-select'}}) }}
+        <div class="field-hint" data-field="coach[disponibilite]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.disponibilite) }}
+    </div>
+
+    {# Numéro de téléphone with Tunisia flag #}
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Numéro de téléphone</label>
+        <div class="input-group">
+            <span class="input-group-text" style="background:#fff;border-color:#d1d5db;">
+                <span style="font-size:20px;margin-right:6px;">🇹🇳</span>
+                <span style="color:#6b7280;font-size:13px;">+216</span>
+            </span>
+            {{ form_widget(form.numTel, {'attr': {'class': 'form-control', 'placeholder': 'ex: 12345678', 'maxlength': '8'}}) }}
+        </div>
+        <div class="field-hint" data-field="coach[numTel]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.numTel) }}
+    </div>
+
+    {# Domaine #}
+    <div class="col-md-6">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Domaine</label>
+        {{ form_widget(form.domaine, {'attr': {'class': 'form-select'}}) }}
+        <div class="field-hint" data-field="coach[domaine]" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>
+        {{ form_errors(form.domaine) }}
+    </div>
+
+    {# Certification if exists #}
+    {% if form.certification is defined %}
+    <div class="col-12">
+        <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Certification</label>
+        {{ form_widget(form.certification, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.certification) }}
+    </div>
+    {% endif %}
+
+</div>
+
+{# Submit / Cancel buttons #}
+<div class="d-flex gap-2">
+    <button type="submit" class="btn btn-success" id="submitBtn">
+        <i class="fas fa-check"></i> Valider
+    </button>
+    <a href="{{ path('admin_coach_index') }}" class="btn btn-secondary">
+        <i class="fas fa-times"></i> Annuler
+    </a>
+</div>
+
+{{ form_end(form) }}
+
+{# ── Styles ── #}
+<style>
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25%      { transform: translateX(-5px); }
+    75%      { transform: translateX(5px); }
+}
+.is-invalid-custom {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.2) !important;
+    animation: shake 0.3s ease-in-out;
+}
+.is-valid-custom {
+    border-color: #20c997 !important;
+    box-shadow: 0 0 0 0.2rem rgba(32,201,151,.15) !important;
+}
+</style>
+
+{# ── Client-side validation (single submit handler, no conflict) ── #}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    var form       = document.getElementById('coachForm');
+    var alertBox   = document.getElementById('validationAlert');
+    var alertTitle = document.getElementById('validationAlertTitle');
+    var errorList  = document.getElementById('validationErrors');
+    var submitBtn  = document.getElementById('submitBtn');
+
+    /* Biographie character counter */
+    var bioField = form.querySelector('[name="coach[biographie]"]');
+    var bioCtrl  = document.getElementById('bioCounter');
+    if (bioField && bioCtrl) {
+        function updateBio() {
+            var len = bioField.value.length;
+            bioCtrl.textContent = len + ' / 2000 caractères';
+            bioCtrl.style.color = len > 1800 ? '#dc3545' : '#9ca3af';
+        }
+        bioField.addEventListener('input', updateBio);
+        updateBio();
+    }
+
+    /* Field definitions */
+    var fields = {
+        'coach[nom]':              { label: 'Nom',                  minLen: 2,  maxLen: 20,  pattern: /^[a-zA-ZÀ-ÿ\s\-]+$/,   msg: 'Entre 2 et 20 lettres uniquement' },
+        'coach[prenom]':           { label: 'Prénom',               minLen: 2,  maxLen: 20,  pattern: /^[a-zA-ZÀ-ÿ\s\-]+$/,   msg: 'Entre 2 et 20 lettres uniquement' },
+        'coach[biographie]':       { label: 'Biographie',           minLen: 10, maxLen: 2000,                                  msg: 'Au moins 10 caractères (max 2000)' },
+        'coach[experienceAnnees]': { label: "Années d'expérience",  numeric: true, min: 0,   max: 60,                          msg: 'Nombre entre 0 et 60' },
+        'coach[tarifHoraire]':     { label: 'Tarif (DT/H)',         numeric: true, min: 0.01, max: 9999.99,                    msg: 'Nombre positif ≤ 9999.99' },
+        'coach[disponibilite]':    { label: 'Disponibilité',        select: true,                                              msg: 'Veuillez sélectionner une option' },
+        'coach[numTel]':           { label: 'Numéro de téléphone',  pattern: /^[0-9]{8}$/,                                    msg: 'Exactement 8 chiffres' },
+        'coach[domaine]':          { label: 'Domaine',              select: true,                                              msg: 'Veuillez sélectionner un domaine' }
+    };
+
+    /* ── Helpers ── */
+    function setFieldState(el, valid) {
+        el.classList.remove('is-invalid-custom', 'is-valid-custom');
+        if (valid)  el.classList.add('is-valid-custom');
+        else        el.classList.add('is-invalid-custom');
+    }
+
+    function setHint(fieldName, msg) {
+        var hint = form.querySelector('.field-hint[data-field="' + fieldName + '"]');
+        if (!hint) return;
+        if (msg) { hint.textContent = '⚠ ' + msg; hint.style.display = 'block'; }
+        else     { hint.textContent = '';          hint.style.display = 'none';  }
+    }
+
+    function validateOne(fieldName, rule) {
+        var el = form.querySelector('[name="' + fieldName + '"]');
+        if (!el) return { ok: true };
+        var val = el.value.trim();
+
+        if (!val) return { ok: false, msg: 'Ce champ est obligatoire' };
+        if (rule.minLen  && val.length < rule.minLen)  return { ok: false, msg: rule.msg };
+        if (rule.maxLen  && val.length > rule.maxLen)  return { ok: false, msg: rule.msg };
+        if (rule.pattern && !rule.pattern.test(val))   return { ok: false, msg: rule.msg };
+
+        if (rule.numeric) {
+            var n = parseFloat(val);
+            if (isNaN(n))                                    return { ok: false, msg: rule.msg };
+            if (rule.min !== undefined && n < rule.min)      return { ok: false, msg: rule.msg };
+            if (rule.max !== undefined && n > rule.max)      return { ok: false, msg: rule.msg };
+        }
+        return { ok: true };
+    }
+
+    /* ── Real-time validation on blur / input ── */
+    Object.keys(fields).forEach(function(name) {
+        var rule = fields[name];
+        var el   = form.querySelector('[name="' + name + '"]');
+        if (!el) return;
+
+        el.addEventListener('blur', function() {
+            var res = validateOne(name, rule);
+            setFieldState(el, res.ok);
+            setHint(name, res.ok ? null : res.msg);
+        });
+
+        el.addEventListener('input', function() {
+            if (el.classList.contains('is-invalid-custom')) {
+                var res = validateOne(name, rule);
+                setFieldState(el, res.ok);
+                setHint(name, res.ok ? null : res.msg);
+            }
+        });
+    });
+
+    /* Phone: digits only, max 8 chars */
+    var phoneEl = form.querySelector('[name="coach[numTel]"]');
+    if (phoneEl) {
+        phoneEl.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 8);
+        });
+    }
+
+    /* ── Single unified submit handler ── */
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var emptyLabels  = [];
+        var invalidLines = [];
+        var firstBad     = null;
+
+        Object.keys(fields).forEach(function(name) {
+            var rule = fields[name];
+            var el   = form.querySelector('[name="' + name + '"]');
+            if (!el) return;
+
+            var val = el.value.trim();
+
+            if (!val) {
+                emptyLabels.push(rule.label);
+                setFieldState(el, false);
+                setHint(name, 'Ce champ est obligatoire');
+                if (!firstBad) firstBad = el;
+                return;
+            }
+
+            var res = validateOne(name, rule);
+            setFieldState(el, res.ok);
+            setHint(name, res.ok ? null : res.msg);
+            if (!res.ok) {
+                invalidLines.push('<strong>' + rule.label + ' :</strong> ' + res.msg);
+                if (!firstBad) firstBad = el;
+            }
+        });
+
+        /* Build final message list */
+        var lines = [];
+        if (emptyLabels.length > 0) {
+            lines.push('Les champs suivants sont vides : <strong>' + emptyLabels.join(', ') + '</strong>');
+        }
+        invalidLines.forEach(function(l) { lines.push(l); });
+
+        if (lines.length > 0) {
+            /* "les champs sont vides" title when some fields are empty */
+            alertTitle.textContent = emptyLabels.length > 0
+                ? '⚠️ Les champs sont vides'
+                : '⚠️ Erreurs de validation';
+
+            errorList.innerHTML = lines.map(function(l) { return '<li>' + l + '</li>'; }).join('');
+            alertBox.style.display  = 'block';
+            alertBox.style.animation = 'none';
+            void alertBox.offsetWidth;             /* reflow to restart animation */
+            alertBox.style.animation = 'slideIn 0.3s ease-out';
+            alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (firstBad) firstBad.focus();
+
+            clearTimeout(alertBox._timer);
+            alertBox._timer = setTimeout(function() { alertBox.style.display = 'none'; }, 8000);
+
+        } else {
+            /* All valid — prevent double-submit then submit */
+            alertBox.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            form.submit();
+        }
+    });
+});
+</script>
