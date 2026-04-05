@@ -1,0 +1,16 @@
+{# Stats #}
+    <div class="stats-bar">
+        <div class="stat-chip">
+            📋 Total <strong>{{ evenements|length }}</strong>
+        </div>
+        {% set totalRevenue = 0 %}
+        {% for e in evenements %}{% set totalRevenue = totalRevenue + e.price %}{% endfor %}
+        <div class="stat-chip">
+            💰 Prix total <strong>{{ totalRevenue|number_format(2) }} DT</strong>
+        </div>
+        {% set totalCapacity = 0 %}
+        {% for e in evenements %}{% set totalCapacity = totalCapacity + e.capacity %}{% endfor %}
+        <div class="stat-chip">
+            👥 Capacité totale <strong>{{ totalCapacity }}</strong>
+        </div>
+    </div>
