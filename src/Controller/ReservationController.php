@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Evenement;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
@@ -14,79 +13,62 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
-    // ── New reservation (from show page) ──────────────────────────
-    #[Route('/reservation/new/{id}', name: 'reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, Evenement $evenement, EntityManagerInterface $em): Response
-    {
-        $reservation = new Reservation();
-        $reservation->setEvenement($evenement);
-        $reservation->setStatut('confirmé');
-
-        $form = $this->createForm(ReservationType::class, $reservation, [
-            'is_edit' => false,
-        ]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($reservation);
-            $em->flush();
-
-            $this->addFlash('success', 'Réservation confirmée !');
-            return $this->redirectToRoute('evenement_show', ['id' => $evenement->getId()]);
-        }
-
-        return $this->render('reservation/form.html.twig', [
-            'evenement'   => $evenement,
-            'reservation' => $reservation,
-            'form'        => $form->createView(),
-        ]);
-    }
-
-    // ── Edit reservation ──────────────────────────────────────────
-    #[Route('/reservation/edit/{id}', name: 'reservation_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Reservation $reservation, EntityManagerInterface $em): Response
-    {
-        $form = $this->createForm(ReservationType::class, $reservation, [
-            'is_edit' => true,
-        ]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
-            $this->addFlash('success', 'Réservation modifiée.');
-            return $this->redirectToRoute('reservation_my');
-        }
-
-        return $this->render('reservation/form.html.twig', [
-            'evenement'   => $reservation->getEvenement(),
-            'reservation' => $reservation,
-            'form'        => $form->createView(),
-        ]);
-    }
-
-    // ── My reservations (front) ───────────────────────────────────
-    #[Route('/reservation/my', name: 'reservation_my', methods: ['GET'])]
+    // ── Front: Mes réservations ──────────────────────────────────────
+    #[Route('/mes-reservations', name: 'reservation_my')]
     public function my(ReservationRepository $repo): Response
     {
+        // For now returns all; replace with ->findBy(['user' => $this->getUser()])
+        // once authentication is set up
+        $reservations = $repo->findAll();
+
         return $this->render('reservation/my.html.twig', [
-            'reservations' => $repo->findAll(),
+            'reservations' => $reservations,
         ]);
     }
 
-    // ── Admin list ────────────────────────────────────────────────
-    #[Route('/reservation/admin', name: 'reservation_index', methods: ['GET'])]
-    public function index(ReservationRepository $repo): Response
-    {
-        return $this->render('reservation/index.html.twig', [
-            'reservations' => $repo->findAll(),
+    // ── Front: Edit ──────────────────────────────────────────────────
+    #[Route('/reservation/{id}/edit', name: 'reservation_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        int $id,
+        ReservationRepository $repo,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+        $reservation = $repo->find($id);
+        if (!$reservation) {
+            throw $this->createNotFoundException('Réservation introuvable.');
+        }
+
+        $evenement = $reservation->getEvenement();
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+if ($form->isSubmitted() && $form->isValid()) {
+    $em->flush();
+    $this->addFlash('success', '✅ Réservation #' . $reservation->getId() . ' modifiée avec succès !');
+    return $this->redirectToRoute('reservation_my');
+}
+
+        return $this->render('reservation/edit.html.twig', [
+            'form'        => $form->createView(),
+            'reservation' => $reservation,
+            'evenement'   => $evenement,
         ]);
     }
-
-    // ── Delete (front) ────────────────────────────────────────────
+    // ── Front: Delete ────────────────────────────────────────────────
     #[Route('/reservation/{id}/delete', name: 'reservation_delete', methods: ['POST'])]
-    public function delete(Request $request, Reservation $reservation, EntityManagerInterface $em): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
+    public function delete(
+        int $id,
+        ReservationRepository $repo,
+        EntityManagerInterface $em,
+        Request $request
+    ): Response {
+        $reservation = $repo->find($id);
+        if (!$reservation) {
+            throw $this->createNotFoundException();
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $id, $request->request->get('_token'))) {
             $em->remove($reservation);
             $em->flush();
             $this->addFlash('success', 'Réservation annulée.');
@@ -95,11 +77,25 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('reservation_my');
     }
 
-    // ── Delete (admin) ────────────────────────────────────────────
-    #[Route('/reservation/{id}/admin-delete', name: 'reservation_admin_delete', methods: ['POST'])]
-    public function adminDelete(Request $request, Reservation $reservation, EntityManagerInterface $em): Response
+    // ── Admin: list ──────────────────────────────────────────────────
+    #[Route('/admin/reservations', name: 'reservation_index')]
+    public function index(ReservationRepository $repo): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
+        return $this->render('reservation/admin_index.html.twig', [
+            'reservations' => $repo->findAll(),
+        ]);
+    }
+
+    // ── Admin: delete ────────────────────────────────────────────────
+    #[Route('/reservation/{id}/admin-delete', name: 'reservation_admin_delete', methods: ['POST'])]
+    public function adminDelete(
+        int $id,
+        ReservationRepository $repo,
+        EntityManagerInterface $em,
+        Request $request
+    ): Response {
+        $reservation = $repo->find($id);
+        if ($reservation && $this->isCsrfTokenValid('delete' . $id, $request->request->get('_token'))) {
             $em->remove($reservation);
             $em->flush();
             $this->addFlash('success', 'Réservation supprimée.');
