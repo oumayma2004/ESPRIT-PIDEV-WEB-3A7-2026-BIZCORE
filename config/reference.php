@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 // This file is auto-generated and is for apps only. Bundles SHOULD NOT rely on its content.
@@ -126,135 +125,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     ...<string, DefinitionType|AliasType|PrototypeType|StackType|ArgumentsType|null>
  * }
  * @psalm-type ExtensionType = array<string, mixed>
-=======
-<?php
-
-// This file is auto-generated and is for apps only. Bundles SHOULD NOT rely on its content.
-
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
-use Symfony\Component\Config\Loader\ParamConfigurator as Param;
-
-/**
- * This class provides array-shapes for configuring the services and bundles of an application.
- *
- * Services declared with the config() method below are autowired and autoconfigured by default.
- *
- * This is for apps only. Bundles SHOULD NOT use it.
- *
- * Example:
- *
- *     ```php
- *     // config/services.php
- *     namespace Symfony\Component\DependencyInjection\Loader\Configurator;
- *
- *     return App::config([
- *         'services' => [
- *             'App\\' => [
- *                 'resource' => '../src/',
- *             ],
- *         ],
- *     ]);
- *     ```
- *
- * @psalm-type ImportsConfig = list<string|array{
- *     resource: string,
- *     type?: string|null,
- *     ignore_errors?: bool,
- * }>
- * @psalm-type ParametersConfig = array<string, scalar|\UnitEnum|array<scalar|\UnitEnum|array<mixed>|Param|null>|Param|null>
- * @psalm-type ArgumentsType = list<mixed>|array<string, mixed>
- * @psalm-type CallType = array<string, ArgumentsType>|array{0:string, 1?:ArgumentsType, 2?:bool}|array{method:string, arguments?:ArgumentsType, returns_clone?:bool}
- * @psalm-type TagsType = list<string|array<string, array<string, mixed>>> // arrays inside the list must have only one element, with the tag name as the key
- * @psalm-type CallbackType = string|array{0:string|ReferenceConfigurator,1:string}|\Closure|ReferenceConfigurator
- * @psalm-type DeprecationType = array{package: string, version: string, message?: string}
- * @psalm-type DefaultsType = array{
- *     public?: bool,
- *     tags?: TagsType,
- *     resource_tags?: TagsType,
- *     autowire?: bool,
- *     autoconfigure?: bool,
- *     bind?: array<string, mixed>,
- * }
- * @psalm-type InstanceofType = array{
- *     shared?: bool,
- *     lazy?: bool|string,
- *     public?: bool,
- *     properties?: array<string, mixed>,
- *     configurator?: CallbackType,
- *     calls?: list<CallType>,
- *     tags?: TagsType,
- *     resource_tags?: TagsType,
- *     autowire?: bool,
- *     bind?: array<string, mixed>,
- *     constructor?: string,
- * }
- * @psalm-type DefinitionType = array{
- *     class?: string,
- *     file?: string,
- *     parent?: string,
- *     shared?: bool,
- *     synthetic?: bool,
- *     lazy?: bool|string,
- *     public?: bool,
- *     abstract?: bool,
- *     deprecated?: DeprecationType,
- *     factory?: CallbackType,
- *     configurator?: CallbackType,
- *     arguments?: ArgumentsType,
- *     properties?: array<string, mixed>,
- *     calls?: list<CallType>,
- *     tags?: TagsType,
- *     resource_tags?: TagsType,
- *     decorates?: string,
- *     decoration_inner_name?: string,
- *     decoration_priority?: int,
- *     decoration_on_invalid?: 'exception'|'ignore'|null,
- *     autowire?: bool,
- *     autoconfigure?: bool,
- *     bind?: array<string, mixed>,
- *     constructor?: string,
- *     from_callable?: CallbackType,
- * }
- * @psalm-type AliasType = string|array{
- *     alias: string,
- *     public?: bool,
- *     deprecated?: DeprecationType,
- * }
- * @psalm-type PrototypeType = array{
- *     resource: string,
- *     namespace?: string,
- *     exclude?: string|list<string>,
- *     parent?: string,
- *     shared?: bool,
- *     lazy?: bool|string,
- *     public?: bool,
- *     abstract?: bool,
- *     deprecated?: DeprecationType,
- *     factory?: CallbackType,
- *     arguments?: ArgumentsType,
- *     properties?: array<string, mixed>,
- *     configurator?: CallbackType,
- *     calls?: list<CallType>,
- *     tags?: TagsType,
- *     resource_tags?: TagsType,
- *     autowire?: bool,
- *     autoconfigure?: bool,
- *     bind?: array<string, mixed>,
- *     constructor?: string,
- * }
- * @psalm-type StackType = array{
- *     stack: list<DefinitionType|AliasType|PrototypeType|array<class-string, ArgumentsType|null>>,
- *     public?: bool,
- *     deprecated?: DeprecationType,
- * }
- * @psalm-type ServicesConfig = array{
- *     _defaults?: DefaultsType,
- *     _instanceof?: InstanceofType,
- *     ...<string, DefinitionType|AliasType|PrototypeType|StackType|ArgumentsType|null>
- * }
- * @psalm-type ExtensionType = array<string, mixed>
->>>>>>> origin/gestion-user
  * @psalm-type FrameworkConfig = array{
  *     secret?: scalar|Param|null,
  *     http_method_override?: bool|Param, // Set true to enable support for the '_method' request parameter to determine the intended HTTP method on POST requests. // Default: false
@@ -413,11 +283,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     asset_mapper?: bool|array{ // Asset Mapper configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         paths?: array<string, scalar|Param|null>,
  *         excluded_patterns?: list<scalar|Param|null>,
  *         exclude_dotfiles?: bool|Param, // If true, any files starting with "." will be excluded from the asset mapper. // Default: true
@@ -436,11 +302,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         },
  *     },
  *     translator?: bool|array{ // Translator configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         fallbacks?: list<scalar|Param|null>,
  *         logging?: bool|Param, // Default: false
  *         formatter?: scalar|Param|null, // Default: "translator.formatter.default"
@@ -490,11 +352,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *     },
  *     serializer?: bool|array{ // Serializer configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         enable_attributes?: bool|Param, // Default: true
  *         name_converter?: scalar|Param|null,
  *         circular_reference_handler?: scalar|Param|null,
@@ -557,11 +415,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         log_channel?: scalar|Param|null, // The channel of log message. Null to let Symfony decide. // Default: null
  *     }>,
  *     web_link?: bool|array{ // Web links configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *     },
  *     lock?: bool|string|array{ // Lock configuration
  *         enabled?: bool|Param, // Default: false
@@ -572,11 +426,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         resources?: array<string, scalar|Param|null>,
  *     },
  *     messenger?: bool|array{ // Messenger configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         routing?: array<string, string|array{ // Default: []
  *             senders?: list<scalar|Param|null>,
  *         }>,
@@ -622,11 +472,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     disallow_search_engine_index?: bool|Param, // Enabled by default when debug is enabled. // Default: true
  *     http_client?: bool|array{ // HTTP Client configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         max_host_connections?: int|Param, // The maximum number of connections to a single host.
  *         default_options?: array{
  *             headers?: array<string, mixed>,
@@ -730,11 +576,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     mailer?: bool|array{ // Mailer configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         message_bus?: scalar|Param|null, // The message bus to use. Defaults to the default bus if the Messenger component is installed. // Default: null
  *         dsn?: scalar|Param|null, // Default: null
  *         transports?: array<string, scalar|Param|null>,
@@ -775,11 +617,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         decryption_env_var?: scalar|Param|null, // Default: "base64:default::SYMFONY_DECRYPTION_SECRET"
  *     },
  *     notifier?: bool|array{ // Notifier configuration
-<<<<<<< HEAD
  *         enabled?: bool|Param, // Default: true
-=======
- *         enabled?: bool|Param, // Default: false
->>>>>>> origin/gestion-user
  *         message_bus?: scalar|Param|null, // The message bus to use. Defaults to the default bus if the Messenger component is installed. // Default: null
  *         chatter_transports?: array<string, scalar|Param|null>,
  *         texter_transports?: array<string, scalar|Param|null>,
@@ -852,14 +690,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *     },
  * }
-<<<<<<< HEAD
-=======
- * @psalm-type MakerConfig = array{
- *     root_namespace?: scalar|Param|null, // Default: "App"
- *     generate_final_classes?: bool|Param, // Default: true
- *     generate_final_entities?: bool|Param, // Default: false
- * }
->>>>>>> origin/gestion-user
  * @psalm-type DoctrineConfig = array{
  *     dbal?: array{
  *         default_connection?: scalar|Param|null,
@@ -1113,7 +943,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     enable_profiler?: bool|Param, // Whether or not to enable the profiler collector to calculate and visualize migration status. This adds some queries overhead. // Default: false
  *     transactional?: bool|Param, // Whether or not to wrap migrations in a single transaction. // Default: true
  * }
-<<<<<<< HEAD
  * @psalm-type DebugConfig = array{
  *     max_items?: int|Param, // Max number of displayed items past the first level, -1 means no limit. // Default: 2500
  *     min_depth?: int|Param, // Minimum tree depth to clone all the items, 1 is default. // Default: 1
@@ -1223,8 +1052,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         ...<mixed>
  *     },
  * }
-=======
->>>>>>> origin/gestion-user
  * @psalm-type SecurityConfig = array{
  *     access_denied_url?: scalar|Param|null, // Default: null
  *     session_fixation_strategy?: "none"|"migrate"|"invalidate"|Param, // Default: "migrate"
@@ -1536,7 +1363,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     role_hierarchy?: array<string, string|list<scalar|Param|null>>,
  * }
-<<<<<<< HEAD
  * @psalm-type MonologConfig = array{
  *     use_microseconds?: scalar|Param|null, // Default: true
  *     channels?: list<scalar|Param|null>,
@@ -1718,127 +1544,10 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
-=======
- * @psalm-type TwigConfig = array{
- *     form_themes?: list<scalar|Param|null>,
- *     globals?: array<string, array{ // Default: []
- *         id?: scalar|Param|null,
- *         type?: scalar|Param|null,
- *         value?: mixed,
- *     }>,
- *     autoescape_service?: scalar|Param|null, // Default: null
- *     autoescape_service_method?: scalar|Param|null, // Default: null
- *     base_template_class?: scalar|Param|null, // Deprecated: The child node "base_template_class" at path "twig.base_template_class" is deprecated.
- *     cache?: scalar|Param|null, // Default: true
- *     charset?: scalar|Param|null, // Default: "%kernel.charset%"
- *     debug?: bool|Param, // Default: "%kernel.debug%"
- *     strict_variables?: bool|Param, // Default: "%kernel.debug%"
- *     auto_reload?: scalar|Param|null,
- *     optimizations?: int|Param,
- *     default_path?: scalar|Param|null, // The default path used to load templates. // Default: "%kernel.project_dir%/templates"
- *     file_name_pattern?: list<scalar|Param|null>,
- *     paths?: array<string, mixed>,
- *     date?: array{ // The default format options used by the date filter.
- *         format?: scalar|Param|null, // Default: "F j, Y H:i"
- *         interval_format?: scalar|Param|null, // Default: "%d days"
- *         timezone?: scalar|Param|null, // The timezone used when formatting dates, when set to null, the timezone returned by date_default_timezone_get() is used. // Default: null
- *     },
- *     number_format?: array{ // The default format options for the number_format filter.
- *         decimals?: int|Param, // Default: 0
- *         decimal_point?: scalar|Param|null, // Default: "."
- *         thousands_separator?: scalar|Param|null, // Default: ","
- *     },
- *     mailer?: array{
- *         html_to_text_converter?: scalar|Param|null, // A service implementing the "Symfony\Component\Mime\HtmlToTextConverter\HtmlToTextConverterInterface". // Default: null
- *     },
- * }
- * @psalm-type TwigExtraConfig = array{
- *     cache?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     html?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     markdown?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     intl?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     cssinliner?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     inky?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     string?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     commonmark?: array{
- *         renderer?: array{ // Array of options for rendering HTML.
- *             block_separator?: scalar|Param|null,
- *             inner_separator?: scalar|Param|null,
- *             soft_break?: scalar|Param|null,
- *         },
- *         html_input?: "strip"|"allow"|"escape"|Param, // How to handle HTML input.
- *         allow_unsafe_links?: bool|Param, // Remove risky link and image URLs by setting this to false. // Default: true
- *         max_nesting_level?: int|Param, // The maximum nesting level for blocks. // Default: 9223372036854775807
- *         max_delimiters_per_line?: int|Param, // The maximum number of strong/emphasis delimiters per line. // Default: 9223372036854775807
- *         slug_normalizer?: array{ // Array of options for configuring how URL-safe slugs are created.
- *             instance?: mixed,
- *             max_length?: int|Param, // Default: 255
- *             unique?: mixed,
- *         },
- *         commonmark?: array{ // Array of options for configuring the CommonMark core extension.
- *             enable_em?: bool|Param, // Default: true
- *             enable_strong?: bool|Param, // Default: true
- *             use_asterisk?: bool|Param, // Default: true
- *             use_underscore?: bool|Param, // Default: true
- *             unordered_list_markers?: list<scalar|Param|null>,
- *         },
- *         ...<string, mixed>
- *     },
- * }
- * @psalm-type WebProfilerConfig = array{
- *     toolbar?: bool|array{ // Profiler toolbar configuration
- *         enabled?: bool|Param, // Default: false
- *         ajax_replace?: bool|Param, // Replace toolbar on AJAX requests // Default: false
- *     },
- *     intercept_redirects?: bool|Param, // Default: false
- *     excluded_ajax_paths?: scalar|Param|null, // Default: "^/((index|app(_[\\w]+)?)\\.php/)?_wdt"
- * }
- * @psalm-type ConfigType = array{
- *     imports?: ImportsConfig,
- *     parameters?: ParametersConfig,
- *     services?: ServicesConfig,
- *     framework?: FrameworkConfig,
- *     doctrine?: DoctrineConfig,
- *     doctrine_migrations?: DoctrineMigrationsConfig,
- *     security?: SecurityConfig,
- *     twig?: TwigConfig,
- *     twig_extra?: TwigExtraConfig,
- *     "when@dev"?: array{
- *         imports?: ImportsConfig,
- *         parameters?: ParametersConfig,
- *         services?: ServicesConfig,
- *         framework?: FrameworkConfig,
- *         maker?: MakerConfig,
- *         doctrine?: DoctrineConfig,
- *         doctrine_migrations?: DoctrineMigrationsConfig,
- *         security?: SecurityConfig,
- *         twig?: TwigConfig,
- *         twig_extra?: TwigExtraConfig,
- *         web_profiler?: WebProfilerConfig,
- *     },
- *     "when@prod"?: array{
- *         imports?: ImportsConfig,
- *         parameters?: ParametersConfig,
->>>>>>> origin/gestion-user
  *         services?: ServicesConfig,
  *         framework?: FrameworkConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
-<<<<<<< HEAD
  *         twig?: TwigConfig,
  *         stimulus?: StimulusConfig,
  *         turbo?: TurboConfig,
@@ -1849,20 +1558,10 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
-=======
- *         security?: SecurityConfig,
- *         twig?: TwigConfig,
- *         twig_extra?: TwigExtraConfig,
- *     },
- *     "when@test"?: array{
- *         imports?: ImportsConfig,
- *         parameters?: ParametersConfig,
->>>>>>> origin/gestion-user
  *         services?: ServicesConfig,
  *         framework?: FrameworkConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
-<<<<<<< HEAD
  *         twig?: TwigConfig,
  *         web_profiler?: WebProfilerConfig,
  *         stimulus?: StimulusConfig,
@@ -1971,110 +1670,3 @@ final class Routes
         return $config;
     }
 }
-=======
- *         security?: SecurityConfig,
- *         twig?: TwigConfig,
- *         twig_extra?: TwigExtraConfig,
- *         web_profiler?: WebProfilerConfig,
- *     },
- *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
- *         imports?: ImportsConfig,
- *         parameters?: ParametersConfig,
- *         services?: ServicesConfig,
- *         ...<string, ExtensionType>,
- *     }>
- * }
- */
-final class App
-{
-    /**
-     * @param ConfigType $config
-     *
-     * @psalm-return ConfigType
-     */
-    public static function config(array $config): array
-    {
-        /** @var ConfigType $config */
-        $config = AppReference::config($config);
-
-        return $config;
-    }
-}
-
-namespace Symfony\Component\Routing\Loader\Configurator;
-
-/**
- * This class provides array-shapes for configuring the routes of an application.
- *
- * Example:
- *
- *     ```php
- *     // config/routes.php
- *     namespace Symfony\Component\Routing\Loader\Configurator;
- *
- *     return Routes::config([
- *         'controllers' => [
- *             'resource' => 'routing.controllers',
- *         ],
- *     ]);
- *     ```
- *
- * @psalm-type RouteConfig = array{
- *     path: string|array<string,string>,
- *     controller?: string,
- *     methods?: string|list<string>,
- *     requirements?: array<string,string>,
- *     defaults?: array<string,mixed>,
- *     options?: array<string,mixed>,
- *     host?: string|array<string,string>,
- *     schemes?: string|list<string>,
- *     condition?: string,
- *     locale?: string,
- *     format?: string,
- *     utf8?: bool,
- *     stateless?: bool,
- * }
- * @psalm-type ImportConfig = array{
- *     resource: string,
- *     type?: string,
- *     exclude?: string|list<string>,
- *     prefix?: string|array<string,string>,
- *     name_prefix?: string,
- *     trailing_slash_on_root?: bool,
- *     controller?: string,
- *     methods?: string|list<string>,
- *     requirements?: array<string,string>,
- *     defaults?: array<string,mixed>,
- *     options?: array<string,mixed>,
- *     host?: string|array<string,string>,
- *     schemes?: string|list<string>,
- *     condition?: string,
- *     locale?: string,
- *     format?: string,
- *     utf8?: bool,
- *     stateless?: bool,
- * }
- * @psalm-type AliasConfig = array{
- *     alias: string,
- *     deprecated?: array{package:string, version:string, message?:string},
- * }
- * @psalm-type RoutesConfig = array{
- *     "when@dev"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
- *     "when@prod"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
- *     "when@test"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
- *     ...<string, RouteConfig|ImportConfig|AliasConfig>
- * }
- */
-final class Routes
-{
-    /**
-     * @param RoutesConfig $config
-     *
-     * @psalm-return RoutesConfig
-     */
-    public static function config(array $config): array
-    {
-        return $config;
-    }
-}
->>>>>>> origin/gestion-user

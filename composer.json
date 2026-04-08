@@ -1,13 +1,8 @@
 {
-<<<<<<< HEAD
     "type": "project",
-    "license": "proprietary",
-=======
     "name": "symfony/skeleton",
-    "type": "project",
     "license": "proprietary",
     "description": "A minimal Symfony project recommended to create bare bones applications",
->>>>>>> origin/gestion-user
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
@@ -17,7 +12,7 @@
         "doctrine/doctrine-bundle": "^2.18",
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/orm": "^3.6",
-<<<<<<< HEAD
+        "dompdf/dompdf": "^3.1",
         "phpdocumentor/reflection-docblock": "^6.0",
         "phpstan/phpdoc-parser": "^2.3",
         "symfony/asset": "7.4.*",
@@ -32,6 +27,7 @@
         "symfony/http-client": "7.4.*",
         "symfony/intl": "7.4.*",
         "symfony/mailer": "7.4.*",
+        "symfony/maker-bundle": "^1.67",
         "symfony/mime": "7.4.*",
         "symfony/monolog-bundle": "^3.0|^4.0",
         "symfony/notifier": "7.4.*",
@@ -48,20 +44,6 @@
         "symfony/ux-turbo": "^2.34",
         "symfony/validator": "7.4.*",
         "symfony/web-link": "7.4.*",
-=======
-        "dompdf/dompdf": "^3.1",
-        "symfony/asset": "7.4.*",
-        "symfony/console": "7.4.*",
-        "symfony/dotenv": "7.4.*",
-        "symfony/flex": "^2",
-        "symfony/form": "7.4.*",
-        "symfony/framework-bundle": "7.4.*",
-        "symfony/maker-bundle": "^1.67",
-        "symfony/runtime": "7.4.*",
-        "symfony/security-bundle": "7.4.*",
-        "symfony/twig-bundle": "7.4.*",
-        "symfony/validator": "7.4.*",
->>>>>>> origin/gestion-user
         "symfony/yaml": "7.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -98,12 +80,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-<<<<<<< HEAD
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
-=======
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
->>>>>>> origin/gestion-user
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -122,14 +100,10 @@
         }
     },
     "require-dev": {
-<<<<<<< HEAD
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "7.4.*",
         "symfony/css-selector": "7.4.*",
         "symfony/debug-bundle": "7.4.*",
-        "symfony/maker-bundle": "^1.0",
-=======
->>>>>>> origin/gestion-user
         "symfony/stopwatch": "7.4.*",
         "symfony/web-profiler-bundle": "7.4.*"
     }

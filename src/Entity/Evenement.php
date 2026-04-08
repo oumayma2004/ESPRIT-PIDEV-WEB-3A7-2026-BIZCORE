@@ -3,79 +3,40 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
-<<<<<<< HEAD
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
-=======
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity(repositoryClass: EvenementRepository::class)]
 #[ORM\Table(name: 'evenement')]
->>>>>>> origin/gestion-user
 class Evenement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-<<<<<<< HEAD
-    #[ORM\Column]
+    #[ORM\Column(name: 'id', type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'title', length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'price', type: Types::FLOAT, nullable: true)]
     private ?float $price = null;
 
-    #[ORM\Column]
-    private ?\DateTime $date = null;
+    #[ORM\Column(name: 'date', type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
-
-    #[ORM\Column]
+    #[ORM\Column(name: 'capacity', type: Types::INTEGER, nullable: true)]
     private ?int $capacity = null;
-=======
-    #[ORM\Column(name: 'id_evenement', type: 'integer')]
-    private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private string $titre = '';
-
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\Column(name: 'date_debut', type: 'datetime')]
-    private \DateTimeInterface $dateDebut;
-
-    #[ORM\Column(name: 'date_fin', type: 'datetime')]
-    private \DateTimeInterface $dateFin;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $lieu = null;
-
-    #[ORM\Column(name: 'capacite_max', type: 'integer', nullable: true)]
-    private ?int $capaciteMax = null;
-
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    private ?string $prix = null;
-
-    #[ORM\Column(name: 'image_url', length: 255, nullable: true)]
-    private ?string $imageUrl = null;
-
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $statut = null;
->>>>>>> origin/gestion-user
+    #[ORM\Column(name: 'image', length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
-<<<<<<< HEAD
 
     public function getTitle(): ?string
     {
@@ -110,25 +71,14 @@ class Evenement
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(?\DateTime $date): static
+    public function setDate(?\DateTimeInterface $date): static
     {
         $this->date = $date;
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
         return $this;
     }
 
@@ -142,6 +92,15 @@ class Evenement
         $this->capacity = $capacity;
         return $this;
     }
-=======
->>>>>>> origin/gestion-user
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+        return $this;
+    }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-<<<<<<< HEAD
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,14 +9,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    // ✅ STEP 1: Homepage (choice page)
+    // Homepage (choice page or redirect if logged in)
     #[Route('/', name: 'home', methods: ['GET'])]
     public function home(): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('home/choice.html.twig');
     }
 
-    // ✅ STEP 2: Frontend blog (user side)
+    // Frontend blog (user side)
     #[Route('/blog', name: 'frontend_blog', methods: ['GET'])]
     public function blog(ArticleRepository $articleRepository): Response
     {
@@ -26,21 +29,5 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'articles' => $articles
         ]);
-=======
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-
-class HomeController extends AbstractController
-{
-    #[Route('/', name: 'home')]
-    public function index(): Response
-    {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('dashboard');
-        }
-
-        return $this->redirectToRoute('app_login');
->>>>>>> origin/gestion-user
     }
 }

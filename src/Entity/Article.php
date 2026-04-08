@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
-<<<<<<< HEAD
 use Doctrine\DBAL\Types\Types;
-=======
->>>>>>> origin/gestion-user
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -15,8 +12,7 @@ class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-<<<<<<< HEAD
-    #[ORM\Column(name: 'id_article')]
+    #[ORM\Column(name: 'id_article', type: Types::INTEGER)]
     private ?int $id_article = null;
 
     #[ORM\Column(name: 'titre', length: 255)]
@@ -28,10 +24,10 @@ class Article
     #[ORM\Column(name: 'image_principale', length: 255, nullable: true)]
     private ?string $image_principale = null;
 
-    #[ORM\Column(name: 'categorie', length: 255, nullable: true)]
+    #[ORM\Column(name: 'categorie', length: 100, nullable: true)]
     private ?string $categorie = null;
 
-    #[ORM\Column(name: 'statut', length: 50, nullable: true)]
+    #[ORM\Column(name: 'statut', length: 20, nullable: true)]
     private ?string $statut = null;
 
     #[ORM\Column(name: 'nombre_vues', type: Types::INTEGER)]
@@ -50,7 +46,6 @@ class Article
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
         return $this;
     }
 
@@ -62,7 +57,6 @@ class Article
     public function setContenu(string $contenu): static
     {
         $this->contenu = $contenu;
-
         return $this;
     }
 
@@ -74,7 +68,6 @@ class Article
     public function setImagePrincipale(?string $image_principale): static
     {
         $this->image_principale = $image_principale;
-
         return $this;
     }
 
@@ -86,7 +79,6 @@ class Article
     public function setCategorie(?string $categorie): static
     {
         $this->categorie = $categorie;
-
         return $this;
     }
 
@@ -98,7 +90,6 @@ class Article
     public function setStatut(?string $statut): static
     {
         $this->statut = $statut;
-
         return $this;
     }
 
@@ -110,35 +101,6 @@ class Article
     public function setNombreVues(int $nombre_vues): static
     {
         $this->nombre_vues = $nombre_vues;
-
         return $this;
     }
 }
-=======
-    #[ORM\Column(name: 'id_article', type: 'integer')]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private string $titre = '';
-
-    #[ORM\Column(type: 'text')]
-    private string $contenu = '';
-
-    #[ORM\Column(name: 'image_principale', length: 255, nullable: true)]
-    private ?string $imagePrincipale = null;
-
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $categorie = null;
-
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $statut = null;
-
-    #[ORM\Column(name: 'nombre_vues', type: 'integer', nullable: true)]
-    private int $nombreVues = 0;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-}
->>>>>>> origin/gestion-user
