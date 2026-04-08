@@ -12,11 +12,21 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\DBAL\Connection;
 
 class CoachType extends AbstractType
 {
+    public function __construct(private Connection $connection)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $domaines = $this->connection->fetchAllAssociative('SELECT nom_domaine FROM domaine_coaching ORDER BY nom_domaine');
+        $domaineChoices = [];
+        foreach ($domaines as $row) {
+            $domaineChoices[$row['nom_domaine']] = $row['nom_domaine'];
+        }
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
@@ -39,13 +49,7 @@ class CoachType extends AbstractType
             ->add('domaine', ChoiceType::class, [
                 'label'       => 'Domaine',
                 'placeholder' => '-- Sélectionnez un domaine --',
-                'choices'     => [
-                    'Branding'    => 'BRANDING',
-                    'E-Commerce'  => 'E_COMMERCE',
-                    'Leadership'  => 'LEADERSHIP',
-                    'Finance'     => 'FINANCE',
-                    'Financement' => 'FUNDING',
-                ],
+                'choices'     => $domaineChoices,
                 'attr'        => ['class' => 'form-select'],
                 'constraints' => [new Assert\NotBlank(['message' => 'Veuillez sélectionner un domaine'])],
             ])

@@ -18,6 +18,9 @@ class Coach
     #[ORM\Column(name: 'id_user', nullable: true)]
     private ?int $idUser = null;
 
+    #[ORM\Column(name: 'id_domaine', type: 'integer', nullable: true)]
+    private ?int $idDomaine = null;
+
     #[ORM\Column(type: 'string', length: 20)]
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide')]
     #[Assert\Length(min: 2, minMessage: 'Le nom doit contenir au minimum 2 caractères')]
@@ -30,7 +33,7 @@ class Coach
     #[Assert\Regex(pattern: '/^[a-zA-ZÀ-ÿ\s]+$/', message: 'Le prénom ne peut contenir que des lettres')]
     private string $prenom = '';
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true, columnDefinition: 'TEXT DEFAULT NULL')]
     #[Assert\NotBlank(message: 'La biographie ne peut pas être vide')]
     #[Assert\Length(min: 10, minMessage: 'La biographie doit contenir au minimum 10 caractères')]
     private ?string $biographie = null;
@@ -52,7 +55,6 @@ class Coach
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     #[Assert\NotBlank(message: 'Le domaine ne peut pas être vide')]
-    #[Assert\Choice(choices: ['BRANDING', 'E_COMMERCE', 'LEADERSHIP', 'FINANCE', 'FUNDING'])]
     private ?string $domaine = null;
 
     #[ORM\Column(name: 'num_tel', type: 'string', length: 20, nullable: true)]
@@ -60,8 +62,8 @@ class Coach
     #[Assert\Regex(pattern: '/^\+[0-9]{8,18}$/', message: 'Le numéro de téléphone n\'est pas valide')]
     private ?string $numTel = null;
 
-    #[ORM\Column(name: 'note_moyenne', type: 'float', nullable: true)]
-    private ?float $noteMoyenne = null;
+    #[ORM\Column(name: 'note_moyenne', type: 'decimal', precision: 3, scale: 2, nullable: true)]
+    private ?string $noteMoyenne = null;
 
     public function getIdCoach(): ?int
     {
@@ -81,6 +83,17 @@ class Coach
     public function setIdUser(?int $idUser): static
     {
         $this->idUser = $idUser;
+        return $this;
+    }
+
+    public function getIdDomaine(): ?int
+    {
+        return $this->idDomaine;
+    }
+
+    public function setIdDomaine(?int $idDomaine): static
+    {
+        $this->idDomaine = $idDomaine;
         return $this;
     }
 
@@ -172,12 +185,12 @@ class Coach
         return $this;
     }
 
-    public function getNoteMoyenne(): ?float
+    public function getNoteMoyenne(): ?string
     {
         return $this->noteMoyenne;
     }
 
-    public function setNoteMoyenne(?float $noteMoyenne): static
+    public function setNoteMoyenne(?string $noteMoyenne): static
     {
         $this->noteMoyenne = $noteMoyenne;
         return $this;
