@@ -137,6 +137,14 @@ class DashboardController extends AbstractController
             ]);
         }
 
+        if ($view === 'events') {
+            return $this->render('evenement/index.html.twig');
+        }
+
+        if ($view === 'article') {
+            return $this->render('article/index.html.twig');
+        }
+
         return new Response('<h2 style="padding:20px;">View not found</h2>', 200);
     }
 
