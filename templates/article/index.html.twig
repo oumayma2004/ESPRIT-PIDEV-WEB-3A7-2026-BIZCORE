@@ -134,7 +134,7 @@
             <div class="sidebar-section">Gestion</div>
             <a href="#" class="nav-item"><span>⊞</span> Dashboard</a>
             <a href="#" class="nav-item"><span>👤</span> Utilisateurs</a>
-            <a href="#" class="nav-item"><span>📅</span> Événements</a>
+            <a href="{{ path('evenement_index') }}" class="nav-item"><span>📅</span> Événements</a>
             <a href="#" class="nav-item"><span>🎯</span> Coaching</a>
             {% if mode == 'admin' %}
                 <a href="{{ path('article_index') }}" class="nav-item active"><span>📝</span> Blog (Admin)</a>
