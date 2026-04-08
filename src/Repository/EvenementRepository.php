@@ -6,9 +6,12 @@ use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+<<<<<<< HEAD
 /**
  * @extends ServiceEntityRepository<Evenement>
  */
+=======
+>>>>>>> origin/gestion-user
 class EvenementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,6 +19,7 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
+<<<<<<< HEAD
     //    /**
     //     * @return Evenement[] Returns an array of Evenement objects
     //     */
@@ -41,3 +45,13 @@ class EvenementRepository extends ServiceEntityRepository
     //        ;
     //    }
 }
+=======
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+}
+>>>>>>> origin/gestion-user

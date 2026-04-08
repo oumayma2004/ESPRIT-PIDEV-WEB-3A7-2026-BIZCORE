@@ -6,9 +6,12 @@ use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+<<<<<<< HEAD
 /**
  * @extends ServiceEntityRepository<Article>
  */
+=======
+>>>>>>> origin/gestion-user
 class ArticleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,6 +19,7 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+<<<<<<< HEAD
     /**
      * Returns articles sorted by an allowed field.
      * Allowed sortBy: titre, nombre_vues, categorie
@@ -46,5 +50,13 @@ class ArticleRepository extends ServiceEntityRepository
             ->orderBy($orderField, strtoupper($sortDir))
             ->getQuery()
             ->getResult();
+=======
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('a')
+            ->select('COUNT(a.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+>>>>>>> origin/gestion-user
     }
 }
