@@ -9,8 +9,15 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'DM Sans', sans-serif; background: #f0f4f8; display: flex; min-height: 100vh; }
 
-    .sidebar { width: 220px; min-height: 100vh; background: #1a1f2e; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; z-index: 100; }
-    .sidebar-brand { padding: 24px 20px 20px; font-size: 22px; font-weight: 700; color: #fff; border-bottom: 1px solid #2a3347; letter-spacing: 0.5px; }
+    .sidebar {
+        width: 220px;
+        min-height: 100vh;
+        background: #1a1f2e;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+    }
+.sidebar-brand { padding: 24px 20px 20px; font-size: 22px; font-weight: 700; color: #fff; border-bottom: 1px solid #2a3347; letter-spacing: 0.5px; }
     .sidebar-section { padding: 16px 16px 6px; font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 1px; }
     .sidebar-nav { flex: 1; padding: 6px 10px; }
     .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.15s; margin-bottom: 2px; }
@@ -26,8 +33,7 @@
     .btn-profile { background: #242a38; color: #94a3b8; }
     .btn-logout  { background: #ef4444; color: #fff; }
 
-    .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
-
+    .main { flex: 1; display: flex; flex-direction: column; min-height: 100vh; min-width: 0; }
     .topbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 0 28px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
     .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #1e293b; }
     .topbar-left .home-icon { color: #22c55e; font-size: 18px; }
@@ -126,7 +132,7 @@
 
 {% set indexRoute = (mode == 'admin') ? 'article_index' : 'frontend_blog_index' %}
 
-<div style="display:flex; min-height:100vh;">
+<div style="display:flex; min-height:100vh; width:100vw;">
 
     <aside class="sidebar">
         <div class="sidebar-brand">Bizcore</div>

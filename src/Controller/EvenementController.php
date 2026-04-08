@@ -66,20 +66,13 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'evenement_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'evenements_show', methods: ['GET'])]
     public function show(Evenement $evenement): Response
-    {
-        $reservation = new Reservation();
-        $reservation->setEvenement($evenement);
-
-        $form = $this->createForm(ReservationType::class, $reservation, ['is_edit' => false]);
-
-        return $this->render('evenement/show.html.twig', [
-            'evenement'   => $evenement,
-            'reservation' => $reservation,
-            'form'        => $form->createView(),
-        ]);
-    }
+{
+    return $this->render('evenement/show.html.twig', [
+        'evenement' => $evenement,
+    ]);
+}
 
     #[Route('/{id}/edit', name: 'evenement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
