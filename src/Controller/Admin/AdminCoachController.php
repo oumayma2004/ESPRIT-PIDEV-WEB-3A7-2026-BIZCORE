@@ -6,8 +6,10 @@ use App\Entity\Coach;
 use App\Form\CoachType;
 use App\Repository\CoachRepository;
 use App\Service\CsvExportService;
+use App\Service\PhoneCountryDetectionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -15,10 +17,12 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/coach', name: 'admin_coach_')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminCoachController extends AbstractController
 {
     public function __construct(
         private CsvExportService $csvExportService,
+        private PhoneCountryDetectionService $phoneDetectionService,
     ) {}
 
     // LIST — équivalent getData() Java
@@ -132,6 +136,28 @@ class AdminCoachController extends AbstractController
     public function statistics(): Response
     {
         return $this->redirectToRoute('admin_statistics_index');
+    }
+
+    // PHONE COUNTRY DETECTION — dynamic IP-based phone widget
+    #[Route('/phone-country-detection', name: 'phone_detection', methods: ['GET'])]
+    public function phoneCountryDetection(Request $request): JsonResponse
+    {
+        // Browser sends its public IP (detected via ipify) as query param
+        $ip = $request->query->get('ip');
+
+        // Validate: only accept plausible IPv4/v6 strings
+        if ($ip && !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            $ip = null;
+        }
+
+        // Fallback to server-side client IP
+        if (!$ip) {
+            $ip = $request->getClientIp();
+        }
+
+        $result = $this->phoneDetectionService->detectFromIp($ip);
+
+        return $this->json($result);
     }
 }
 

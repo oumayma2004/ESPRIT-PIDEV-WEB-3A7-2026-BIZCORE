@@ -22,3 +22,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\TwilioSmsService:
+        arguments:
+            $twilioAccountSid: '%env(TWILIO_ACCOUNT_SID)%'
+            $twilioAuthToken:  '%env(TWILIO_AUTH_TOKEN)%'
+            $twilioFromNumber: '%env(TWILIO_FROM_NUMBER)%'
+            $twilioToNumber:   '%env(TWILIO_TO_NUMBER)%'
+
+    App\Service\ChatbotService:
+        arguments:
+            $aiApiUrl: '%env(AI_API_URL)%'
+            $aiApiKey: '%env(AI_API_KEY)%'
+            $aiModel: '%env(AI_MODEL)%'

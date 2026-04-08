@@ -83,12 +83,12 @@ class CoachType extends AbstractType
             ->add('numTel', TextType::class, [
                 'label'    => 'Numéro de téléphone',
                 'required' => false,
-                'attr'     => ['class' => 'form-control', 'placeholder' => 'ex: +21655123456', 'maxlength' => 20],
+                'attr'     => ['class' => 'form-control', 'maxlength' => 20],
                 'constraints' => [
                     new Assert\NotBlank(['message' => 'Le numéro de téléphone ne peut pas être vide']),
                     new Assert\Regex([
-                        'pattern' => '/^\+?[0-9\s\-]{8,20}$/',
-                        'message' => 'Format invalide (ex: +21655123456, min 8 chiffres)',
+                        'pattern' => '/^\+[0-9]{8,18}$/',
+                        'message' => 'Format invalide (attendu: indicatif + numéro local, ex: +21612345678)',
                     ]),
                 ],
             ])

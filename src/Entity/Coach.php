@@ -57,7 +57,7 @@ class Coach
 
     #[ORM\Column(name: 'num_tel', type: 'string', length: 20, nullable: true)]
     #[Assert\NotBlank(message: 'Le numéro de téléphone ne peut pas être vide')]
-    #[Assert\Regex(pattern: '/^\+?[0-9\s\-]+$/', message: 'Le numéro de téléphone n\'est pas valide')]
+    #[Assert\Regex(pattern: '/^\+[0-9]{8,18}$/', message: 'Le numéro de téléphone n\'est pas valide')]
     private ?string $numTel = null;
 
     #[ORM\Column(name: 'note_moyenne', type: 'float', nullable: true)]

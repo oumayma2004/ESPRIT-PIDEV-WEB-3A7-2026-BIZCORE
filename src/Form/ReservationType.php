@@ -17,7 +17,7 @@ class ReservationType extends AbstractType
         $builder
             ->add('coach', EntityType::class, [
                 'class'        => Coach::class,
-                'choice_label' => 'nomComplet',
+                'choice_label' => 'fullName',
                 'label'        => 'Choisir un coach',
                 'attr'         => ['class' => 'form-select'],
             ])

@@ -423,7 +423,7 @@
             {% endblock %}
         </div>
         <div class="topbar-actions">
-            <button class="topbar-icon-btn"><i class="far fa-bell"></i></button>
+            {{ include('components/_notification_bell.html.twig') }}
             <button class="topbar-icon-btn"><i class="fas fa-cog"></i></button>
             <div class="topbar-avatar">{{ app.user ? app.user.email|slice(0,1)|upper : 'U' }}</div>
         </div>

@@ -40,7 +40,7 @@
 
             <div style="display:flex;gap:10px;justify-content:center;margin-top:4px;">
                 <form method="post" action="{{ path('app_coach_delete', {'id': coach.idCoach}) }}" style="margin:0;">
-                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ coach.idCoach) }}">
                     <button type="submit" style="background:#dc2626;color:#fff;border:none;border-radius:7px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;">
                         <i class="fas fa-trash"></i> Oui, supprimer
                     </button>

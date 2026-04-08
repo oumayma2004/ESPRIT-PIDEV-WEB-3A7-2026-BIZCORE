@@ -124,6 +124,10 @@ class CoachController extends AbstractController
     public function delete(Request $request, Coach $coach): Response
     {
         if ($request->isMethod('POST')) {
+            if (!$this->isCsrfTokenValid('delete'.$coach->getId(), $request->request->get('_token'))) {
+                $this->addFlash('error', 'Token CSRF invalide. Suppression annulée.');
+                return $this->redirectToRoute('app_coach_index');
+            }
             $name = $coach->getFullName();
             $this->coachService->delete($coach);
             $this->addFlash('success', 'Coach « '.$name.' » supprimé avec succès.');
