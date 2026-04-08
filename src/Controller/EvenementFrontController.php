@@ -35,63 +35,29 @@ class EvenementFrontController extends AbstractController
         }
 
         $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-
-        // Initialisation automatique
         $reservation->setStatut('confirmé');
         $reservation->setDateReservation(new \DateTime());
+        $reservation->setEvenement($evenement); // needed for the Callback constraint
 
+        $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $data = $form->getData();
-            $errors = [];
+        if ($form->isSubmitted() && $form->isValid()) {
+            // All constraints passed — save
+            $evenement->setCapacity($evenement->getCapacity() - $reservation->getNombrePlaces());
+            $em->persist($reservation);
+            $em->flush();
 
-            // Nom obligatoire et lettres/espaces seulement
-            if (empty($data->getNom()) || !preg_match("/^[a-zA-ZÀ-ÿ '-]+$/", $data->getNom())) {
-                $errors[] = "Nom invalide (obligatoire, lettres uniquement).";
-            }
+            $this->addFlash('success', '✅ Votre réservation est confirmée !');
 
-            // Email obligatoire et format valide
-            if (empty($data->getEmail()) || !filter_var($data->getEmail(), FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Email invalide.";
-            }
-
-            // Téléphone obligatoire
-            if (empty($data->getTelephone())) {
-                $errors[] = "Téléphone obligatoire.";
-            }
-
-            // Nombre de places >0 et ≤ capacité
-            $nombre_places = $data->getNombrePlaces();
-            $capacity = $evenement->getCapacity();
-            if ($nombre_places <= 0) {
-                $errors[] = "Le nombre de places doit être supérieur à 0.";
-            } elseif ($nombre_places > $capacity) {
-                $errors[] = "Le nombre de places ne peut pas dépasser la capacité de l'événement ($capacity).";
-            }
-
-            if (empty($errors)) {
-                // Tout est valide → enregistrer la réservation
-                $data->setEvenement($evenement);
-                $em->persist($data);
-                $em->flush();
-
-                $this->addFlash('success', '✅ Votre réservation est confirmée !');
-
-                // Redirection pour éviter la soumission multiple
-                return $this->redirectToRoute('evenement_show', ['id' => $id]);
-            } else {
-                // Afficher toutes les erreurs
-                foreach ($errors as $err) {
-                    $this->addFlash('error', $err);
-                }
-            }
+            return $this->redirectToRoute('evenement_show', ['id' => $id]);
         }
 
+        // isSubmitted but NOT isValid → fall through and re-render
+        // Symfony keeps errors attached to form fields automatically
         return $this->render('events/show.html.twig', [
-            'evenement' => $evenement,
-            'form' => $form->createView(),
-        ]);
+        'evenement' => $evenement,
+        'form'      => $form,
+    ]);
     }
 }
