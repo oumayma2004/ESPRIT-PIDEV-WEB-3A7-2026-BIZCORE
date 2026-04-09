@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 09 avr. 2026 à 00:05
+-- Généré le : jeu. 09 avr. 2026 à 06:27
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -45,7 +45,7 @@ INSERT INTO `article` (`id_article`, `titre`, `contenu`, `image_principale`, `ca
 (1, 'How to start training smart', 'Training consistency beats random effort.', 'a1.jpg', 'Fitness', 'published', 145),
 (2, 'The basics of coaching', 'A good coach focuses on goals and progress.', 'a2.jpg', 'Coaching', 'published', 98),
 (3, 'Tech skills for beginners', 'Start with logic, practice, and small projects.', 'a3.jpg', 'Tech', 'draft', 31),
-(4, 'Why routines matter', 'Simple routines create strong results over time.', 'a4.jpg', 'Lifestyle', 'published', 67);
+(4, 'Why routines matter', 'Simple routines create strong results over time.', 'a4.jpg', 'Lifestyle', 'published', 70);
 
 -- --------------------------------------------------------
 
@@ -94,8 +94,27 @@ CREATE TABLE `coach` (
 --
 
 INSERT INTO `coach` (`id_coach`, `id_user`, `id_domaine`, `domaine`, `nom`, `prenom`, `biographie`, `experience_annees`, `tarif_horaire`, `disponibilite`, `note_moyenne`, `num_tel`) VALUES
-(1, 3, 1, NULL, 'Haddad', 'Youssef', 'Fitness coach with a focus on strength and conditioning.', 6, 45.00, 'Disponible', 4.70, NULL),
-(2, 4, 3, NULL, 'Trabelsi', 'Nour', 'Tech mentor specializing in web development and data basics.', 4, 60.00, 'Disponible', 4.90, NULL);
+(1, 3, 1, 'Financement', 'Haddad', 'abelkader', 'Fitness coach with a focus on strength and conditioning.', 6, 45.00, 'Disponible', 4.70, '+21622569987'),
+(4, NULL, 1, 'Branding', 'Ben Ali', 'Sami', 'Expert en branding avec 10 ans dans le marketing digital.', 10, 85.00, 'Disponible', 4.50, '+21650123456'),
+(5, NULL, 2, 'E-Commerce', 'Trabelsi', 'Amira', 'Consultante e-commerce specialisee en marketplace.', 7, 70.00, 'Disponible', 4.20, '+21651234567'),
+(6, NULL, 3, 'Leadership', 'Bouazizi', 'Karim', 'Coach en leadership et gestion des equipes.', 12, 95.00, 'Disponible', 4.80, '+21652345678'),
+(7, NULL, 4, 'Finance', 'Chahed', 'Leila', 'Experte en finance et gestion de portefeuille.', 15, 120.00, 'Disponible', 4.90, '+21653456789'),
+(8, NULL, 5, 'Financement', 'Jebali', 'Mehdi', 'Specialiste en financement de startups et levee de fonds.', 8, 90.00, 'Indisponible', 3.80, '+21654567890'),
+(9, NULL, 1, 'Branding', 'Gharbi', 'Nour', 'Strategiste de marque personnelle et corporate.', 6, 65.00, 'Disponible', 4.10, '+21655678901'),
+(10, NULL, 2, 'E-Commerce', 'Maalej', 'Youssef', 'Developpeur e-commerce et expert Shopify/WooCommerce.', 5, 60.00, 'Disponible', 3.90, '+21656789012'),
+(11, NULL, 3, 'Leadership', 'Khelifi', 'Ines', 'Formatrice en soft skills et communication.', 9, 80.00, 'Disponible', 4.60, '+21657890123'),
+(12, NULL, 4, 'Finance', 'Hammami', 'Omar', 'Analyste financier et conseiller en investissements.', 11, 110.00, 'Indisponible', 4.30, '+21658901234'),
+(13, NULL, 5, 'Financement', 'Saidi', 'Fatma', 'Coach en crowdfunding et subventions.', 4, 55.00, 'Disponible', 3.70, '+21659012345'),
+(14, NULL, 1, 'Branding', 'Riahi', 'Amine', 'Expert en identite visuelle et design thinking.', 8, 75.00, 'Disponible', 4.40, '+21660123456'),
+(15, NULL, 2, 'E-Commerce', 'Ferchichi', 'Salma', 'Consultante Amazon FBA et logistique e-commerce.', 6, 68.00, 'Disponible', 4.00, '+21661234567'),
+(16, NULL, 3, 'Leadership', 'Tej', 'Bilel', 'Coach executif pour dirigeants et managers.', 14, 130.00, 'Disponible', 4.95, '+21662345678'),
+(17, NULL, 4, 'Finance', 'Zarrouk', 'Hiba', 'Experte en comptabilite et optimisation fiscale.', 10, 100.00, 'Indisponible', 4.50, '+21663456789'),
+(18, NULL, 5, 'Financement', 'Brahmi', 'Rami', 'Specialiste en business angels et capital risque.', 7, 85.00, 'Disponible', 4.20, '+21664567890'),
+(19, NULL, 1, 'Branding', 'Mechri', 'Yasmine', 'Coach en storytelling et content marketing.', 5, 58.00, 'Disponible', 3.60, '+21665678901'),
+(20, NULL, 2, 'E-Commerce', 'Daly', 'Anis', 'Expert en SEO et conversion e-commerce.', 9, 88.00, 'Disponible', 4.70, '+21666789012'),
+(21, NULL, 3, 'Leadership', 'Selmi', 'Mariam', 'Coach en intelligence emotionnelle et resilience.', 11, 105.00, 'Disponible', 4.85, '+21667890123'),
+(22, NULL, 4, 'Finance', 'Lakhdhar', 'Tarek', 'Consultant en gestion de tresorerie PME.', 13, 115.00, 'Disponible', 4.60, '+21668901234'),
+(23, NULL, 5, 'Financement', 'Neji', 'Sara', 'Experte en microfinance et inclusion financiere.', 6, 62.00, 'Indisponible', 4.10, '+21669012345');
 
 -- --------------------------------------------------------
 
@@ -172,19 +191,6 @@ INSERT INTO `commentaire_evenement` (`id_commentaire`, `contenu`, `note`, `date_
 -- --------------------------------------------------------
 
 --
--- Structure de la table `disponibilite`
---
-
-CREATE TABLE `disponibilite` (
-  `id_dispo` int(11) NOT NULL,
-  `id_coach` int(11) NOT NULL,
-  `jour` date NOT NULL,
-  `statut` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `domaine_coaching`
 --
 
@@ -199,9 +205,11 @@ CREATE TABLE `domaine_coaching` (
 --
 
 INSERT INTO `domaine_coaching` (`id_domaine`, `nom_domaine`, `description`) VALUES
-(1, 'Fitness', 'Sport and wellness coaching'),
-(2, 'Business', 'Entrepreneurship and management coaching'),
-(3, 'Tech', 'Digital and IT coaching');
+(1, 'Branding', 'Coaching en image de marque et identité visuelle'),
+(2, 'E-Commerce', 'Coaching en vente en ligne et commerce digital'),
+(3, 'Leadership', 'Coaching en management et développement du leadership'),
+(4, 'Finance', 'Coaching en gestion financière personnelle et professionnelle'),
+(5, 'Financement', 'Coaching en levée de fonds et financement de projets');
 
 -- --------------------------------------------------------
 
@@ -246,18 +254,22 @@ CREATE TABLE `inscription_evenement` (
   `id_evenement` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
   `date_inscription` timestamp NOT NULL DEFAULT current_timestamp(),
-  `statut` varchar(20) DEFAULT NULL
+  `statut` varchar(20) DEFAULT NULL,
+  `nom` varchar(100) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `telephone` varchar(20) DEFAULT NULL,
+  `nombre_places` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `inscription_evenement`
 --
 
-INSERT INTO `inscription_evenement` (`id_inscription`, `id_evenement`, `id_user`, `date_inscription`, `statut`) VALUES
-(1, 1, 2, '2026-04-06 23:55:11', 'confirmed'),
-(2, 1, 5, '2026-04-06 23:55:11', 'confirmed'),
-(4, 3, 2, '2026-04-06 23:55:11', 'pending'),
-(5, 4, 5, '2026-04-06 23:55:11', 'confirmed');
+INSERT INTO `inscription_evenement` (`id_inscription`, `id_evenement`, `id_user`, `date_inscription`, `statut`, `nom`, `email`, `telephone`, `nombre_places`) VALUES
+(1, 1, 2, '2026-04-06 23:55:11', 'confirmed', NULL, NULL, NULL, 1),
+(2, 1, 5, '2026-04-06 23:55:11', 'confirmed', NULL, NULL, NULL, 1),
+(4, 3, 2, '2026-04-06 23:55:11', 'pending', NULL, NULL, NULL, 1),
+(5, 4, 5, '2026-04-06 23:55:11', 'confirmed', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -289,6 +301,13 @@ CREATE TABLE `notification` (
   `is_read` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `notification`
+--
+
+INSERT INTO `notification` (`id_notification`, `id_user`, `message`, `type`, `is_read`, `created_at`) VALUES
+(1, 19, 'Votre réservation avec Youssef Haddad pour le 09/04/2026 a bien été confirmée.', 'reservation', 1, '2026-04-09 03:54:56');
 
 -- --------------------------------------------------------
 
@@ -349,6 +368,13 @@ CREATE TABLE `reservation` (
   `date_seance` date DEFAULT NULL,
   `statut` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`id_reservation`, `id_user`, `id_coach`, `date_reservation`, `date_seance`, `statut`) VALUES
+(1, 19, 1, '2026-04-09 03:54:56', '2026-04-09', 'CONFIRMEE');
 
 -- --------------------------------------------------------
 
@@ -464,7 +490,9 @@ INSERT INTO `users` (`id_user`, `nom`, `prenom`, `email`, `password`, `telephone
 (14, 'Haddad', 'Rania', 'rania7@test.com', '$2y$13$REALHASH123456789ABC', '72345678', 'Bizerte', 'actif', '2026-04-08 11:02:10', NULL, 1),
 (15, 'Mejri', 'Omar', 'omar8@test.com', '$2y$13$REALHASH123456789ABC', '82345678', 'Kairouan', 'actif', '2026-04-08 11:02:10', NULL, 2),
 (16, 'Khaled', 'Nour', 'nour9@test.com', '$2y$13$REALHASH123456789ABC', '92345678', 'Zaghouan', 'actif', '2026-04-08 11:02:10', NULL, 1),
-(17, 'Hamdi', 'Firas', 'firas10@test.com', '$2y$13$REALHASH123456789ABC', '10345678', 'Ariana', 'actif', '2026-04-08 11:02:10', NULL, 2);
+(17, 'Hamdi', 'Firas', 'firas10@test.com', '$2y$13$REALHASH123456789ABC', '10345678', 'Ariana', 'actif', '2026-04-08 11:02:10', NULL, 2),
+(18, 'Admin', 'Admin', 'admin@bizcore.tn', '$2y$10$Yj7/6u3hcJEXE2V/a9b5W.ak/Lb6uOSDpscrpWgCwYLoJ9LXb3Rge', NULL, NULL, 'actif', '2026-04-08 22:12:57', NULL, 1),
+(19, 'User', 'User', 'user@bizcore.tn', '$2y$10$Yj7/6u3hcJEXE2V/a9b5W.ak/Lb6uOSDpscrpWgCwYLoJ9LXb3Rge', NULL, NULL, 'actif', '2026-04-08 22:12:57', NULL, 2);
 
 --
 -- Index pour les tables déchargées
@@ -512,13 +540,6 @@ ALTER TABLE `commentaire_evenement`
   ADD PRIMARY KEY (`id_commentaire`),
   ADD KEY `fk_com_event` (`id_evenement`),
   ADD KEY `fk_com_user` (`id_user`);
-
---
--- Index pour la table `disponibilite`
---
-ALTER TABLE `disponibilite`
-  ADD PRIMARY KEY (`id_dispo`),
-  ADD KEY `IDX_2CBACE2FD1DC2CFC` (`id_coach`);
 
 --
 -- Index pour la table `domaine_coaching`
@@ -629,7 +650,7 @@ ALTER TABLE `categorie_evenement`
 -- AUTO_INCREMENT pour la table `coach`
 --
 ALTER TABLE `coach`
-  MODIFY `id_coach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_coach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
@@ -650,16 +671,10 @@ ALTER TABLE `commentaire_evenement`
   MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `disponibilite`
---
-ALTER TABLE `disponibilite`
-  MODIFY `id_dispo` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `domaine_coaching`
 --
 ALTER TABLE `domaine_coaching`
-  MODIFY `id_domaine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_domaine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `evenement`
@@ -683,7 +698,7 @@ ALTER TABLE `ligne_commande`
 -- AUTO_INCREMENT pour la table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id_notification` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_notification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
@@ -701,7 +716,7 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `role`
@@ -719,7 +734,7 @@ ALTER TABLE `sponsor`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Contraintes pour les tables déchargées
@@ -751,12 +766,6 @@ ALTER TABLE `commentaire_blog`
 ALTER TABLE `commentaire_evenement`
   ADD CONSTRAINT `fk_com_event` FOREIGN KEY (`id_evenement`) REFERENCES `evenement` (`id_evenement`),
   ADD CONSTRAINT `fk_com_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `disponibilite`
---
-ALTER TABLE `disponibilite`
-  ADD CONSTRAINT `FK_2CBACE2FD1DC2CFC` FOREIGN KEY (`id_coach`) REFERENCES `coach` (`id_coach`);
 
 --
 -- Contraintes pour la table `evenement`
