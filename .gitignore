@@ -1,0 +1,18 @@
+Set-Content .gitignore ".env
+vendor/
+.env.local
+.env.*.local
+*.mp3
+*.mp4
+*.exe
+*.iso
+*.zip
+*.rar
+*.7z
+*.msi
+*.dll
+*.msix
+*.ova
+*.webp
+desktop.ini"
+.env
