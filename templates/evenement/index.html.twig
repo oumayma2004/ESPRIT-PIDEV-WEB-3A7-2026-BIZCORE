@@ -2,6 +2,8 @@
 
 {% block title %}Gestion des Événements{% endblock %}
 
+{% block page_title %}GESTION ÉVÉNEMENTS{% endblock %}
+
 {% block body %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
@@ -313,54 +315,6 @@
     {% set total_revenue  = total_revenue  + ev.price %}
 {% endfor %}
 
-<div style="display:flex; min-height:100vh; width:100vw;">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-brand">Bizcore</div>
-        <div class="sidebar-nav">
-            <div class="sidebar-section">Gestion</div>
-            <a href="#" class="nav-item"><span class="nav-icon">⊞</span> Dashboard</a>
-            <a href="#" class="nav-item"><span class="nav-icon">👤</span> Utilisateurs</a>
-            <a href="{{ path('evenement_index') }}" class="nav-item active"><span class="nav-icon">📅</span> Événements</a>
-            <a href="#" class="nav-item"><span class="nav-icon">🎯</span> Coaching</a>
-            <a href="{{ path('article_index') }}" class="nav-item"><span class="nav-icon">📝</span> Blog</a>
-            <a href="#" class="nav-item"><span class="nav-icon">🛍</span> Produits/Commandes</a>
-        </div>
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">A</div>
-                <div>
-                    <div class="user-name">Admin</div>
-                    <div class="user-role">Administrateur</div>
-                </div>
-            </div>
-            <div class="footer-btns">
-                <a href="#" class="btn-profile">Profile</a>
-                <a href="#" class="btn-logout">Logout</a>
-            </div>
-        </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="main">
-
-        <!-- TOPBAR (original, inchangé) -->
-        <div class="topbar">
-            <div class="topbar-left">
-                <span class="home-icon">⌂</span>
-                <span class="separator">/</span>
-                <span>GESTION EVENEMENTS</span>
-            </div>
-            <div class="topbar-right">
-                <div class="topbar-icon">🔔</div>
-                <div class="topbar-icon">⚙</div>
-            </div>
-        </div>
-
-        <!-- CONTENT -->
-        <div class="content">
-
             {% for msg in app.flashes('success') %}
                 <div class="flash flash-success">✅ {{ msg }}</div>
             {% endfor %}
@@ -519,10 +473,6 @@
                     Résultats : {{ evenements|length }} événement{{ evenements|length != 1 ? 's' : '' }}
                 </span>
             </div>
-
-        </div>
-    </div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>

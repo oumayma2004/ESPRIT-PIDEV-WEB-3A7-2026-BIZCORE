@@ -4,6 +4,8 @@
   BizCore Dashboard
 {% endblock %}
 
+{% block page_title %}GESTION UTILISATEURS{% endblock %}
+
 {% block body %}
   <style>
     :root {
@@ -17,28 +19,23 @@
       --shadow: 0 26px 70px rgba(17, 24, 39, 0.14);
     }
     
-    * {
+    .dashboard-shell *,
+    .dashboard-shell *::before,
+    .dashboard-shell *::after {
       box-sizing: border-box;
     }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top left, #d7d6ff 0%, #c9caf7 36%, #bebdf0 100%);
-      color: var(--text-main);
-    }
-    a {
+    .dashboard-shell a {
       color: inherit;
       text-decoration: none;
     }
-    .shell {
-      min-height: 100vh;
-      padding: 28px;
+    .dashboard-shell {
+      padding: 16px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
     }
-    .app {
-      width: min(1500px, 100%);
+    .dashboard-app {
+      width: 100%;
       background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
       border-radius: 28px;
       box-shadow: var(--shadow);
@@ -46,12 +43,12 @@
       grid-template-columns: 300px minmax(0, 1fr) 350px;
       overflow: hidden;
     }
-    .sidebar,
-    .main,
-    .rightbar {
+    .dashboard-sidebar,
+    .dashboard-main,
+    .dashboard-rightbar {
       padding: 20px;
     }
-    .main {
+    .dashboard-main {
       border-left: 1px solid var(--line);
       border-right: 1px solid var(--line);
       background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
@@ -330,22 +327,28 @@
       position: fixed;
       inset: 0;
       display: none;
-      z-index: 9999;
+      z-index: 10000;
     }
     .modal.open {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .modal-backdrop {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background: rgba(17, 24, 39, 0.45);
       backdrop-filter: blur(3px);
+      z-index: 10000;
     }
     .modal-card {
-      position: relative;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: min(760px, calc(100% - 24px));
       max-height: calc(100vh - 24px);
-      margin: 12px auto;
+      z-index: 10001;
       background: #fff;
       border-radius: 24px;
       overflow: auto;
@@ -655,10 +658,10 @@
     }
     
     @media (max-width: 1280px) {
-      .app {
+      .dashboard-app {
         grid-template-columns: 1fr;
       }
-      .main {
+      .dashboard-main {
         border-left: 0;
         border-right: 0;
         border-top: 1px solid var(--line);
@@ -669,12 +672,12 @@
       }
     }
     @media (max-width: 720px) {
-      .shell {
+      .dashboard-shell {
         padding: 10px;
       }
-      .sidebar,
-      .main,
-      .rightbar {
+      .dashboard-sidebar,
+      .dashboard-main,
+      .dashboard-rightbar {
         padding: 14px;
       }
       .kpi-grid {
@@ -692,9 +695,9 @@
   {% set avatarLetter = auth ? (auth.prenom ? : auth.nom)|first|upper : 'G' %}
   {% set maxKpi = max([stats.users, stats.products, stats.orders, stats.events, stats.articles, 1]) %}
 
-  <div class="shell">
-    <div class="app">
-      <aside class="sidebar">
+  <div class="dashboard-shell">
+    <div class="dashboard-app">
+      <aside class="dashboard-sidebar">
         <div class="brand">
           <strong>BiZCoRE</strong>
         </div>
@@ -780,7 +783,7 @@
         </section>
       </aside>
 
-      <main class="main">
+      <main class="dashboard-main">
         <div class="topbar card">
           <div class="title">
             <strong>Dashboard</strong>
@@ -838,7 +841,7 @@
         <div id="dynamicContent" class="card" style="padding:20px; margin-top:16px;"></div>
       </main>
 
-      <aside class="rightbar">
+      <aside class="dashboard-rightbar">
         <div class="card" style="padding:18px;">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
             <div class="profile-head">
@@ -1220,7 +1223,8 @@
     
     document.addEventListener('DOMContentLoaded', () => {
       initMenu()
-      toggleView('users')
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('view')) toggleView(params.get('view'))
     
       const container = document.getElementById('dynamicContent')
     

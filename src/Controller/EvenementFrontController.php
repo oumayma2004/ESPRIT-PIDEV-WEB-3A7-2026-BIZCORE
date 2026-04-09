@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
-use App\Form\ReservationType;
+use App\Entity\InscriptionEvenement;
+use App\Form\InscriptionEvenementType;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,17 +34,21 @@ class EvenementFrontController extends AbstractController
             throw $this->createNotFoundException('Événement introuvable.');
         }
 
-        $reservation = new Reservation();
+        $reservation = new InscriptionEvenement();
         $reservation->setStatut('confirmé');
         $reservation->setDateReservation(new \DateTime());
-        $reservation->setEvenement($evenement); // needed for the Callback constraint
+        $reservation->setEvenement($evenement);
 
-        $form = $this->createForm(ReservationType::class, $reservation);
+        if ($this->getUser()) {
+            $reservation->setUser($this->getUser());
+            $reservation->setNom($this->getUser()->getFullName());
+            $reservation->setEmail($this->getUser()->getEmail());
+        }
+
+        $form = $this->createForm(InscriptionEvenementType::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // All constraints passed — save
-            $evenement->setCapacity($evenement->getCapacity() - $reservation->getNombrePlaces());
             $em->persist($reservation);
             $em->flush();
 

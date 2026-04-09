@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ evenement.title }}{% endblock %}
+{% block page_title %}DÉTAIL ÉVÉNEMENT{% endblock %}
 
 {% block body %}
 <style>
@@ -212,19 +213,6 @@
     display: block;
 }
 </style>
-
-<nav class="navbar">
-    <div class="nav-brand">Biz<span>core</span></div>
-    <div class="nav-links">
-        <a href="#">Accueil</a>
-        <a href="{{ path('evenement_front') }}">Événements</a>
-        <a href="#">Coaching</a>
-        <a href="#">Blog</a>
-        <a href="{{ path('reservation_my') }}" class="nav-cta" style="background:#0f172a;">🎟 Mes Réservations</a>
-    
-        <a href="#" class="nav-cta">Se connecter</a>
-    </div>
-</nav>
 
 <div class="breadcrumb-bar">
     <a href="#">Accueil</a> ›

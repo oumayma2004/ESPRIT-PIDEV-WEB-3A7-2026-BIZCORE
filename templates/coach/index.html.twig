@@ -7,17 +7,27 @@
 {% block sidebar_content %}
 <div class="sidebar-section">
     <div class="sidebar-section-label">NAVIGATION</div>
-    <a href="{{ path('app_coach_index') }}" class="active">
-        <i class="fas fa-user-tie"></i> COACHING
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('dashboard') }}"
+       class="{{ app.request.attributes.get('_route') starts with 'dashboard' ? 'active' : '' }}">
+        <i class="fas fa-tachometer-alt"></i> DASHBOARD
     </a>
-    <a href="#" class="">
+    {% endif %}
+    <a href="{{ is_granted('ROLE_ADMIN') ? path('evenement_index') : path('evenement_front') }}"
+       class="{{ app.request.attributes.get('_route') starts with 'evenement' ? 'active' : '' }}">
         <i class="fas fa-calendar-alt"></i> ÉVÉNEMENTS
     </a>
-    <a href="#" class="">
+    <a href="{{ is_granted('ROLE_ADMIN') ? path('admin_coach_index') : path('app_coach_index') }}"
+       class="{{ app.request.attributes.get('_route') starts with 'app_coach' or app.request.attributes.get('_route') starts with 'admin_coach' ? 'active' : '' }}">
+        <i class="fas fa-user-tie"></i> COACHING
+    </a>
+    <a href="{{ is_granted('ROLE_ADMIN') ? path('article_index') : path('frontend_blog_index') }}"
+       class="{{ app.request.attributes.get('_route') starts with 'frontend_blog' or app.request.attributes.get('_route') starts with 'article' ? 'active' : '' }}">
         <i class="fas fa-blog"></i> BLOG
     </a>
-    <a href="#" class="">
-        <i class="fas fa-shopping-bag"></i> PRODUITS
+    <a href="{{ path('profile_index') }}"
+       class="{{ app.request.attributes.get('_route') starts with 'profile' ? 'active' : '' }}">
+        <i class="fas fa-user-circle"></i> PROFIL
     </a>
 </div>
 {% endblock %}

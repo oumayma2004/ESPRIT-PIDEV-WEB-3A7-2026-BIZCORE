@@ -1,171 +1,66 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog — Bizcore </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', sans-serif; background: #f0f4f8; display: flex; min-height: 100vh; }
+{% extends 'base.html.twig' %}
 
-        /* ── Sidebar ── */
-        .sidebar { width: 220px; min-height: 100vh; background: #1a1f2e; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; z-index: 100; }
-        .sidebar-brand { padding: 24px 20px 20px; font-size: 22px; font-weight: 700; color: #fff; border-bottom: 1px solid #2a3347; letter-spacing: 0.5px; }
-        .sidebar-section { padding: 16px 16px 6px; font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 1px; }
-        .sidebar-nav { flex: 1; padding: 6px 10px; }
-        .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.15s; margin-bottom: 2px; }
-        .nav-item:hover { background: #242a38; color: #e2e8f0; }
-        .nav-item.active { background: #242a38; color: #fff; }
-        .sidebar-footer { padding: 16px; border-top: 1px solid #2a3347; }
-        .user-info { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .user-avatar { width: 34px; height: 34px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #0f1117; font-weight: 700; }
-        .user-name { font-size: 13px; font-weight: 600; color: #f1f5f9; }
-        .user-role { font-size: 11px; color: #64748b; }
-        .footer-btns { display: flex; gap: 6px; }
-        .btn-profile { flex: 1; padding: 6px; border-radius: 6px; font-size: 11px; font-weight: 600; font-family: 'DM Sans', sans-serif; text-align: center; cursor: pointer; border: none; text-decoration: none; display: block; background: #242a38; color: #94a3b8; }
+{% block title %}Blog — Bizcore{% endblock %}
 
-        /* ── Main ── */
-        .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+{% block page_title %}BLOG{% endblock %}
 
-        /* ── Topbar ── */
-        .topbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 0 28px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
-        .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #1e293b; }
-        .topbar-left .home-icon { color: #22c55e; font-size: 18px; }
-        .topbar-left .separator { color: #cbd5e1; }
-        .topbar-right { display: flex; align-items: center; gap: 16px; }
-        .topbar-icon { width: 36px; height: 36px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; color: #64748b; cursor: pointer; font-size: 15px; }
+{% block stylesheets %}
+{{ parent() }}
+<style>
+    /* ── Stat pills ── */
+    .stat-pills { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .pill { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 18px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #1e293b; }
+    .pill-num { font-size: 17px; font-weight: 700; }
+    .pill-label { font-size: 12px; color: #64748b; font-weight: 500; }
 
-        /* ── Content ── */
-        .content { padding: 28px; }
+    /* ── Action bar ── */
+    .blog-action-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .blog-search-box { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #e2e8f0; border-radius: 7px; padding: 8px 14px; width: 240px; }
+    .blog-search-box input { border: none; outline: none; font-size: 13px; color: #475569; width: 100%; background: transparent; }
 
-        /* ── Stat pills ── */
-        .stat-pills { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .pill { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 18px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #1e293b; }
-        .pill-num { font-size: 17px; font-weight: 700; }
-        .pill-label { font-size: 12px; color: #64748b; font-weight: 500; }
+    /* ── Cards grid ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 1100px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px)  { .cards-grid { grid-template-columns: 1fr; } }
 
-        /* ── Action bar ── */
-        .action-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-        .spacer { flex: 1; }
-        .search-box { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #e2e8f0; border-radius: 7px; padding: 8px 14px; width: 240px; }
-        .search-box input { border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #475569; width: 100%; background: transparent; }
-        .search-box .search-icon { color: #94a3b8; font-size: 13px; }
+    /* ── Card ── */
+    .article-card {
+        background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 0;
+        display: flex; flex-direction: column; overflow: hidden;
+        transition: transform 0.18s, box-shadow 0.18s; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .article-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.10); }
 
-        /* ── Filter bar ── */
-        .filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .filter-select { background: #fff; border: 1px solid #e2e8f0; border-radius: 7px; padding: 8px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #475569; cursor: pointer; outline: none; }
+    .card-accent { height: 4px; background: #22c55e; }
+    .card-accent.accent-brouillon { background: #f59e0b; }
+    .card-accent.accent-archivé   { background: #94a3b8; }
 
-        /* ── Cards grid ── */
-        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        @media (max-width: 1100px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 700px)  { .cards-grid { grid-template-columns: 1fr; } }
+    .card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .card-badges { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .cat-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; background: #dbeafe; color: #1d4ed8; }
+    .status-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .status-publié    { background: #dcfce7; color: #16a34a; }
+    .status-brouillon { background: #fef9c3; color: #a16207; }
+    .status-archivé   { background: #f1f5f9; color: #64748b; }
 
-        /* ── Card ── */
-        .article-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: transform 0.18s, box-shadow 0.18s;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-        }
-        .article-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(0,0,0,0.10);
-        }
+    .card-title { font-size: 15px; font-weight: 700; color: #1e293b; line-height: 1.35; }
+    .card-excerpt { font-size: 13px; color: #64748b; line-height: 1.6; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-        .card-accent { height: 4px; background: #22c55e; }
-        .card-accent.accent-brouillon { background: #f59e0b; }
-        .card-accent.accent-archivé   { background: #94a3b8; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid #f1f5f9; }
+    .card-views { font-size: 12px; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 5px; }
+    .btn-voir { display: inline-flex; align-items: center; gap: 6px; background: #22c55e; color: #fff; font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 7px; text-decoration: none; transition: background 0.15s; }
+    .btn-voir:hover { background: #16a34a; }
 
-        .card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .empty-state { text-align: center; padding: 80px 20px; color: #94a3b8; }
+    .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .empty-state p { font-size: 15px; }
 
-        .card-badges { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .cat-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; background: #dbeafe; color: #1d4ed8; }
-        .status-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-        .status-publié    { background: #dcfce7; color: #16a34a; }
-        .status-brouillon { background: #fef9c3; color: #a16207; }
-        .status-archivé   { background: #f1f5f9; color: #64748b; }
+    .blog-bottom-bar { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .results-count { font-size: 13px; color: #94a3b8; }
+</style>
+{% endblock %}
 
-        .card-title { font-size: 15px; font-weight: 700; color: #1e293b; line-height: 1.35; }
-
-        .card-excerpt { font-size: 13px; color: #64748b; line-height: 1.6; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-
-        .card-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid #f1f5f9; }
-        .card-views { font-size: 12px; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 5px; }
-        .btn-voir { display: inline-flex; align-items: center; gap: 6px; background: #22c55e; color: #fff; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 7px; text-decoration: none; transition: background 0.15s; }
-        .btn-voir:hover { background: #16a34a; }
-
-        /* ── Empty state ── */
-        .empty-state { text-align: center; padding: 80px 20px; color: #94a3b8; }
-        .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
-        .empty-state p { font-size: 15px; }
-
-        /* ── Pagination bar ── */
-        .bottom-bar { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
-        .results-count { font-size: 13px; color: #94a3b8; }
-
-        /* ── Flash ── */
-        .flash { padding: 11px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
-        .flash-success { background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; }
-        .flash-error   { background: #fee2e2; border: 1px solid #fecaca; color: #dc2626; }
-    </style>
-</head>
-<body>
-
-<aside class="sidebar">
-    <div class="sidebar-brand">Bizcore</div>
-    <div class="sidebar-nav">
-        <div class="sidebar-section">Gestion</div>
-        <a href="#" class="nav-item"><span>⊞</span> Dashboard</a>
-        <a href="#" class="nav-item"><span>👤</span> Utilisateurs</a>
-        <a href="#" class="nav-item"><span>📅</span> Événements</a>
-        <a href="#" class="nav-item"><span>🎯</span> Coaching</a>
-        <a href="{{ path('home') }}" class="nav-item active"><span>📝</span> Blog</a>
-        <a href="#" class="nav-item"><span>🛍</span> Produits/Commandes</a>
-    </div>
-    <div class="sidebar-footer">
-        <div class="user-info">
-            <div class="user-avatar">U</div>
-            <div>
-                <div class="user-name">Visiteur</div>
-                <div class="user-role">Lecture seule</div>
-            </div>
-        </div>
-        <div class="footer-btns">
-            <a href="#" class="btn-profile">Profile</a>
-        </div>
-    </div>
-</aside>
-
-<div class="main">
-
-    <div class="topbar">
-        <div class="topbar-left">
-            <span class="home-icon">⌂</span>
-            <span class="separator">/</span>
-            <span>GESTION BLOG</span>
-        </div>
-        <div class="topbar-right">
-            <div class="topbar-icon">🔔</div>
-            <div class="topbar-icon">⚙</div>
-            <div class="topbar-icon">⛶</div>
-        </div>
-    </div>
-
-    <div class="content">
-
-        {% for msg in app.flashes('success') %}
-            <div class="flash flash-success">✅ {{ msg }}</div>
-        {% endfor %}
-        {% for msg in app.flashes('error') %}
-            <div class="flash flash-error">❌ {{ msg }}</div>
-        {% endfor %}
+{% block body %}
 
         {% if articles is defined and articles|length > 0 %}
             {% set total     = articles|length %}
@@ -188,10 +83,10 @@
             </div>
         {% endif %}
 
-        <div class="action-bar">
-            <div class="spacer"></div>
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
+        <div class="blog-action-bar">
+            <div style="flex:1;"></div>
+            <div class="blog-search-box">
+                <span>🔍</span>
                 <input type="text" id="searchInput" placeholder="Rechercher un article..." onkeyup="filterCards()">
             </div>
         </div>
@@ -228,7 +123,7 @@
                 {% endfor %}
             </div>
 
-            <div class="bottom-bar">
+            <div class="blog-bottom-bar">
                 <span class="results-count">{{ articles|length }} article{{ articles|length != 1 ? 's' : '' }}</span>
             </div>
 
@@ -239,9 +134,10 @@
             </div>
         {% endif %}
 
-    </div>
-</div>
+{% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
 <script>
 function filterCards() {
     const q = document.getElementById('searchInput').value.toLowerCase();
@@ -250,6 +146,4 @@ function filterCards() {
     });
 }
 </script>
-
-</body>
-</html>
+{% endblock %}

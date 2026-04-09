@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Role;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
@@ -43,8 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $statut = 'actif';
 
-    #[ORM\Column(name: 'id_role', nullable: true)]
-    private ?int $idRole = null;
+    #[ORM\ManyToOne(targetEntity: Role::class, fetch: 'EAGER', inversedBy: 'users')]
+    #[ORM\JoinColumn(name: 'id_role', referencedColumnName: 'id_role', nullable: true)]
+    private ?Role $roleEntity = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $dateInscription = null;
@@ -58,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // id_role 1 = ADMIN, 2 = USER (selon ta DB bizcore)
         $roles = ['ROLE_USER']; // Default role
         
-        if ($this->idRole === 1) {
+        if ($this->roleEntity !== null && $this->roleEntity->getId() === 1) {
             $roles[] = 'ROLE_ADMIN';
         }
         
@@ -89,8 +91,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getStatut(): ?string { return $this->statut; }
     public function setStatut(?string $statut): static { $this->statut = $statut; return $this; }
     
-    public function getIdRole(): ?int { return $this->idRole; }
-    public function setIdRole(?int $idRole): static { $this->idRole = $idRole; return $this; }
+    public function getIdRole(): ?int { return $this->roleEntity?->getId(); }
+    public function setIdRole(?int $idRole): static { return $this; }
+    
+    public function getRoleEntity(): ?Role { return $this->roleEntity; }
+    public function setRoleEntity(?Role $roleEntity): static { $this->roleEntity = $roleEntity; return $this; }
     
     public function getDateInscription(): ?\DateTimeInterface { return $this->dateInscription; }
     public function setDateInscription(?\DateTimeInterface $dateInscription): static { $this->dateInscription = $dateInscription; return $this; }
@@ -100,7 +105,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     public function isAdmin(): bool
     {
-        return $this->idRole === 1;
+        return $this->roleEntity !== null && $this->roleEntity->getId() === 1;
     }
 
     public function getFullName(): string

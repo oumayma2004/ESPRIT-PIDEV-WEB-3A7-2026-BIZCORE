@@ -2,6 +2,8 @@
 
 {% block title %}{{ mode == 'admin' ? 'Gestion des Articles' : 'Blog' }}{% endblock %}
 
+{% block page_title %}{{ mode == 'admin' ? 'GESTION ARTICLES' : 'BLOG' }}{% endblock %}
+
 {% block body %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
@@ -134,45 +136,14 @@
 
 <div style="display:flex; min-height:100vh; width:100vw;">
 
-    <aside class="sidebar">
-        <div class="sidebar-brand">Bizcore</div>
-        <div class="sidebar-nav">
-            <div class="sidebar-section">Gestion</div>
-            <a href="#" class="nav-item"><span>⊞</span> Dashboard</a>
-            <a href="#" class="nav-item"><span>👤</span> Utilisateurs</a>
-            <a href="{{ path('evenement_index') }}" class="nav-item"><span>📅</span> Événements</a>
-            <a href="#" class="nav-item"><span>🎯</span> Coaching</a>
-            {% if mode == 'admin' %}
-                <a href="{{ path('article_index') }}" class="nav-item active"><span>📝</span> Blog (Admin)</a>
-                <a href="{{ path('frontend_blog_index') }}" class="nav-item"><span>🌐</span> Blog (Frontend)</a>
-            {% else %}
-                <a href="{{ path('article_index') }}" class="nav-item"><span>📝</span> Blog (Admin)</a>
-                <a href="{{ path('frontend_blog_index') }}" class="nav-item active"><span>🌐</span> Blog (Frontend)</a>
-            {% endif %}
-            <a href="#" class="nav-item"><span>🛍</span> Produits/Commandes</a>
-        </div>
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">{{ mode == 'admin' ? 'A' : 'U' }}</div>
-                <div>
-                    <div class="user-name">{{ mode == 'admin' ? 'Admin' : 'Visiteur' }}</div>
-                    <div class="user-role">{{ mode == 'admin' ? 'Administrateur' : 'Lecture seule' }}</div>
-                </div>
-            </div>
-            <div class="footer-btns">
-                <a href="#" class="btn-profile">Profile</a>
-                {% if mode == 'admin' %}<a href="#" class="btn-logout">Logout</a>{% endif %}
-            </div>
-        </div>
-    </aside>
-
+   
     <div class="main">
 
         <div class="topbar">
             <div class="topbar-left">
                 <span class="home-icon">⌂</span>
                 <span class="separator">/</span>
-                <span>{{ mode == 'admin' ? 'GESTION ARTICLES' : 'BLOG PUBLIC' }}</span>
+                <span>{{ mode == 'admin' ? 'GESTION BLOG' : 'BLOG PUBLIC' }}</span>
             </div>
             <div class="topbar-right">
                 <div class="topbar-icon">🔔</div>

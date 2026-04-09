@@ -12,25 +12,25 @@ class Evenement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'id', type: Types::INTEGER)]
+    #[ORM\Column(name: 'id_evenement', type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'title', length: 255)]
+    #[ORM\Column(name: 'titre', length: 200)]
     private ?string $title = null;
 
     #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(name: 'price', type: Types::FLOAT, nullable: true)]
-    private ?float $price = null;
+    #[ORM\Column(name: 'prix', type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    private ?string $price = null;
 
-    #[ORM\Column(name: 'date', type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(name: 'date_debut', type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(name: 'capacity', type: Types::INTEGER, nullable: true)]
+    #[ORM\Column(name: 'capacite_max', type: Types::INTEGER, nullable: true)]
     private ?int $capacity = null;
 
-    #[ORM\Column(name: 'image', length: 255, nullable: true)]
+    #[ORM\Column(name: 'image_url', length: 500, nullable: true)]
     private ?string $image = null;
 
     public function getId(): ?int
@@ -60,12 +60,12 @@ class Evenement
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(?float $price): static
+    public function setPrice(?string $price): static
     {
         $this->price = $price;
         return $this;

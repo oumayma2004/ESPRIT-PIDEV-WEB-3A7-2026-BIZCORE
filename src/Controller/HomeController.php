@@ -14,20 +14,13 @@ class HomeController extends AbstractController
     public function home(): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('dashboard');
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('dashboard');
+            }
+            return $this->redirectToRoute('app_coach_index');
         }
 
         return $this->render('home/choice.html.twig');
     }
 
-    // Frontend blog (user side)
-    #[Route('/blog', name: 'frontend_blog', methods: ['GET'])]
-    public function blog(ArticleRepository $articleRepository): Response
-    {
-        $articles = $articleRepository->findAll();
-
-        return $this->render('home/index.html.twig', [
-            'articles' => $articles
-        ]);
-    }
 }
