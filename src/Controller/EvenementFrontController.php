@@ -48,6 +48,7 @@ class EvenementFrontController extends AbstractController
 
         $form = $this->createForm(InscriptionEvenementType::class, $reservation);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted()) {
             $errors = [];
@@ -91,11 +92,14 @@ class EvenementFrontController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', '✅ Votre réservation est confirmée !');
-                return $this->redirectToRoute('evenement_show', ['id' => $id]);
-            }
 
-            foreach ($errors as $error) {
-                $this->addFlash('error', $error);
+                // Redirection pour éviter la soumission multiple
+                return $this->redirectToRoute('evenement_show', ['id' => $id]);
+            } else {
+                // Afficher toutes les erreurs
+                foreach ($errors as $err) {
+                    $this->addFlash('error', $err);
+                }
             }
         }
 

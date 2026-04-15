@@ -337,11 +337,14 @@
         {% endfor %}
     </div>
 
-    {{ form_rest(form) }}
+                {{ form_rest(form) }}
+                
 
-    <button type="submit" class="btn-submit">🎟 Réserver maintenant</button>
+                <button type="submit" class="btn-submit" id="reserveBtn">
+                    🎟 Réserver maintenant
+                </button>
 
-{{ form_end(form) }}
+            {{ form_end(form) }}
 
             <div class="reserve-note">🔒 Réservation sécurisée — Annulation gratuite</div>
         </div>
