@@ -642,7 +642,7 @@ class __TwigTemplate_fc69c92a991dc6cd990be6f45208a5ca extends Template
         }
         // line 387
         yield "            <a href=\"";
-        yield (((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_index")) : ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_front")));
+        yield (((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_index")) : ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_index")));
         yield "\"
                class=\"";
         // line 388
@@ -1206,7 +1206,7 @@ class __TwigTemplate_fc69c92a991dc6cd990be6f45208a5ca extends Template
                 <i class=\"fas fa-shopping-cart\"></i> MARKETPLACE
             </a>
             {% endif %}
-            <a href=\"{{ is_granted('ROLE_ADMIN') ? path('evenement_index') : path('evenement_front') }}\"
+            <a href=\"{{ is_granted('ROLE_ADMIN') ? path('evenement_index') : path('evenement_index') }}\"
                class=\"{{ app.request.attributes.get('_route') starts with 'evenement' ? 'active' : '' }}\">
                 <i class=\"fas fa-calendar-alt\"></i> ÉVÉNEMENTS
             </a>
@@ -1281,6 +1281,6 @@ class __TwigTemplate_fc69c92a991dc6cd990be6f45208a5ca extends Template
 {{ include('components/_error_popup.html.twig') }}
 </body>
 </html>
-", "base.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\base.html.twig");
     }
 }

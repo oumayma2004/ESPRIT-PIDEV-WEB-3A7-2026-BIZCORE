@@ -488,7 +488,7 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 330, $this->source); })()), 'rest');
         yield "
 
-                    <button type=\"submit\" class=\"btn-submit\">🎟 Réserver maintenant</button>
+                    <button type=\"submit\" class=\"btn-submit\" id=\"payment-submit-btn\">Passer au paiement</button>
 
                 ";
         // line 334
@@ -571,8 +571,16 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
         yield " DT</span>
             </div>
 
+            <div class=\"summary-total\" style=\"margin-top:10px;\">
+                <span>Total estime</span>
+                <span class=\"total-price\" id=\"reservation-total\">";
+        // line 388
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 388, $this->source); })()), "price", [], "any", false, false, false, 388), "html", null, true);
+        yield " DT</span>
+            </div>
+
             <div class=\"security-note\">
-                🔒 Réservation sécurisée<br>Annulation gratuite avant l'événement
+                Paiement securise via Stripe<br>Le total depend du nombre de places
             </div>
         </div>
     </div>
@@ -582,6 +590,39 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
 <footer class=\"footer\">
     © 2026 <span>Bizcore</span> — Tous droits réservés
 </footer>
+
+<script>
+(function () {
+    const price = parseFloat('";
+        // line 405
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["evenement"] ?? null), "price", [], "any", true, true, false, 405)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 405, $this->source); })()), "price", [], "any", false, false, false, 405), 0)) : (0)), "html", null, true);
+        yield "') || 0;
+    const placesInput = document.getElementById('";
+        // line 406
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 406, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 406), "vars", [], "any", false, false, false, 406), "id", [], "any", false, false, false, 406), "html", null, true);
+        yield "');
+    const totalNode = document.getElementById('reservation-total');
+    const submitBtn = document.getElementById('payment-submit-btn');
+
+    function refreshTotal() {
+        const places = Math.max(parseInt(placesInput?.value || '1', 10) || 1, 1);
+        const total = (price * places).toFixed(2);
+
+        if (totalNode) {
+            totalNode.textContent = total + ' DT';
+        }
+
+        if (submitBtn) {
+            submitBtn.textContent = 'Payer ' + total + ' DT avec Stripe';
+        }
+    }
+
+    if (placesInput) {
+        placesInput.addEventListener('input', refreshTotal);
+        refreshTotal();
+    }
+})();
+</script>
 
 ";
         
@@ -611,7 +652,7 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  570 => 383,  551 => 367,  540 => 359,  531 => 353,  528 => 352,  524 => 350,  516 => 348,  514 => 347,  506 => 342,  495 => 334,  488 => 330,  481 => 326,  477 => 325,  473 => 324,  467 => 321,  463 => 320,  459 => 319,  450 => 313,  446 => 312,  442 => 311,  436 => 308,  432 => 307,  428 => 306,  421 => 302,  400 => 284,  397 => 283,  388 => 281,  383 => 280,  374 => 278,  370 => 277,  360 => 272,  356 => 271,  343 => 261,  86 => 6,  76 => 5,  58 => 3,  41 => 1,);
+        return array (  602 => 406,  598 => 405,  578 => 388,  570 => 383,  551 => 367,  540 => 359,  531 => 353,  528 => 352,  524 => 350,  516 => 348,  514 => 347,  506 => 342,  495 => 334,  488 => 330,  481 => 326,  477 => 325,  473 => 324,  467 => 321,  463 => 320,  459 => 319,  450 => 313,  446 => 312,  442 => 311,  436 => 308,  432 => 307,  428 => 306,  421 => 302,  400 => 284,  397 => 283,  388 => 281,  383 => 280,  374 => 278,  370 => 277,  360 => 272,  356 => 271,  343 => 261,  86 => 6,  76 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -947,7 +988,7 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
 
                     {{ form_rest(form) }}
 
-                    <button type=\"submit\" class=\"btn-submit\">🎟 Réserver maintenant</button>
+                    <button type=\"submit\" class=\"btn-submit\" id=\"payment-submit-btn\">Passer au paiement</button>
 
                 {{ form_end(form) }}
             </div>
@@ -1001,8 +1042,13 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
                 <span class=\"total-price\">{{ evenement.price }} DT</span>
             </div>
 
+            <div class=\"summary-total\" style=\"margin-top:10px;\">
+                <span>Total estime</span>
+                <span class=\"total-price\" id=\"reservation-total\">{{ evenement.price }} DT</span>
+            </div>
+
             <div class=\"security-note\">
-                🔒 Réservation sécurisée<br>Annulation gratuite avant l'événement
+                Paiement securise via Stripe<br>Le total depend du nombre de places
             </div>
         </div>
     </div>
@@ -1013,7 +1059,34 @@ class __TwigTemplate_471b75ea7cab64a1bf4a3cb35ead0097 extends Template
     © 2026 <span>Bizcore</span> — Tous droits réservés
 </footer>
 
+<script>
+(function () {
+    const price = parseFloat('{{ evenement.price|default(0) }}') || 0;
+    const placesInput = document.getElementById('{{ form.nombrePlaces.vars.id }}');
+    const totalNode = document.getElementById('reservation-total');
+    const submitBtn = document.getElementById('payment-submit-btn');
+
+    function refreshTotal() {
+        const places = Math.max(parseInt(placesInput?.value || '1', 10) || 1, 1);
+        const total = (price * places).toFixed(2);
+
+        if (totalNode) {
+            totalNode.textContent = total + ' DT';
+        }
+
+        if (submitBtn) {
+            submitBtn.textContent = 'Payer ' + total + ' DT avec Stripe';
+        }
+    }
+
+    if (placesInput) {
+        placesInput.addEventListener('input', refreshTotal);
+        refreshTotal();
+    }
+})();
+</script>
+
 {% endblock %}
-", "reservation/reservation_new.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\reservation\\reservation_new.html.twig");
+", "reservation/reservation_new.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\reservation\\reservation_new.html.twig");
     }
 }

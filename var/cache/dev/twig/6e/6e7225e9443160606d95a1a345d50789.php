@@ -454,6 +454,6 @@ const b = document.getElementById('biographie'), c = document.getElementById('bi
 if (b && c) { const u = () => { const l = b.value.length; c.textContent = `\${l} / 2000 caractères`; c.style.color = l > 1800 ? '#ef4444' : '#9ca3af'; }; b.addEventListener('input', u); u(); }
 </script>
 {% endblock %}
-", "coach/edit.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\coach\\edit.html.twig");
+", "coach/edit.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\coach\\edit.html.twig");
     }
 }

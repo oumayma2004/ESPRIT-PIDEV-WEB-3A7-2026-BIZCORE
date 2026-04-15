@@ -216,6 +216,6 @@ class __TwigTemplate_e3cac9d0234910dae7683b1b2204dbaf extends Template
         </div>
     </div>
 </body>
-</html>", "dashboard/report.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\dashboard\\report.html.twig");
+</html>", "dashboard/report.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\dashboard\\report.html.twig");
     }
 }

@@ -1147,6 +1147,6 @@ class __TwigTemplate_8724ed602dd774481c0dc5735837cf39 extends Template
 })();
 </script>
 
-{% endblock %}", "reservation/admin_index.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\reservation\\admin_index.html.twig");
+{% endblock %}", "reservation/admin_index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\reservation\\admin_index.html.twig");
     }
 }

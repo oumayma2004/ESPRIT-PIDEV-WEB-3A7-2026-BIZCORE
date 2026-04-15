@@ -1131,7 +1131,7 @@ class __TwigTemplate_d594e34b6a1abe4c8aca588191feaef2 extends Template
                 <span>Orders</span>
               </a>
 
-              <a href=\"#\" class=\"quick-icon\" onclick=\"toggleView('events'); return false;\">
+              <a href=\"/evenement/\" class=\"quick-icon\">
                 <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
                   <rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"3\" />
                   <path d=\"M8 3v4M16 3v4M3 10h18\" />
@@ -2594,7 +2594,7 @@ class __TwigTemplate_d594e34b6a1abe4c8aca588191feaef2 extends Template
                 <span>Orders</span>
               </a>
 
-              <a href=\"#\" class=\"quick-icon\" onclick=\"toggleView('events'); return false;\">
+              <a href=\"/evenement/\" class=\"quick-icon\">
                 <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
                   <rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"3\" />
                   <path d=\"M8 3v4M16 3v4M3 10h18\" />
@@ -3017,6 +3017,6 @@ class __TwigTemplate_d594e34b6a1abe4c8aca588191feaef2 extends Template
     </div>
   </div>
 {% endblock %}
-", "dashboard/index.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\dashboard\\index.html.twig");
+", "dashboard/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\dashboard\\index.html.twig");
     }
 }

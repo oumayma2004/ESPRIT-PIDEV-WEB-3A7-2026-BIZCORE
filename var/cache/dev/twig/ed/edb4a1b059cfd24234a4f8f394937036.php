@@ -1268,6 +1268,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-", "admin/coach/_form.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\admin\\coach\\_form.html.twig");
+", "admin/coach/_form.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\admin\\coach\\_form.html.twig");
     }
 }

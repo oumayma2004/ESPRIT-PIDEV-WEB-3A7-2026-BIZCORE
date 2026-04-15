@@ -88,6 +88,6 @@ class __TwigTemplate_e89417647290bead5dc790f586cda2fb extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ evenement.id) }}\">
     <button class=\"btn\">Delete</button>
 </form>
-", "evenement/_delete_form.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\evenement\\_delete_form.html.twig");
+", "evenement/_delete_form.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\evenement\\_delete_form.html.twig");
     }
 }

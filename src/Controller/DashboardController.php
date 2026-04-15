@@ -56,7 +56,7 @@ class DashboardController extends AbstractController
                 'id_role' => $role->getId(),
                 'nom_role' => $role->getNomRole(),
             ],
-            $roleRepository->findBy([], ['id' => 'ASC'])
+            $roleRepository->findBy([], ['idRole' => 'ASC'])
         );
 
         return $this->render('dashboard/index.html.twig', [
@@ -123,7 +123,7 @@ class DashboardController extends AbstractController
                     'id_role' => $role->getId(),
                     'nom_role' => $role->getNomRole(),
                 ],
-                $roleRepository->findBy([], ['id' => 'ASC'])
+                $roleRepository->findBy([], ['idRole' => 'ASC'])
             );
 
             return $this->render('dashboard/_users.html.twig', [

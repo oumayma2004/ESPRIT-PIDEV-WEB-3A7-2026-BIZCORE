@@ -12,4 +12,9 @@ class InscriptionEvenementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, InscriptionEvenement::class);
     }
+
+    public function findOneByStripeSessionId(string $sessionId): ?InscriptionEvenement
+    {
+        return $this->findOneBy(['stripeSessionId' => $sessionId]);
+    }
 }

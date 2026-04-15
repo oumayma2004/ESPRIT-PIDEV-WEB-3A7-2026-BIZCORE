@@ -405,6 +405,6 @@ class __TwigTemplate_b6014522d7e7135d078506145eaf9a93 extends Template
     </div>
 </div>
 {% endblock %}
-", "admin/coach/edit.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\admin\\coach\\edit.html.twig");
+", "admin/coach/edit.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\admin\\coach\\edit.html.twig");
     }
 }

@@ -743,6 +743,6 @@ class __TwigTemplate_cfe7c716148a41b587bf6aa67d5d5744 extends Template
     }
 </script>
 {% endblock %}
-", "article/new.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\article\\new.html.twig");
+", "article/new.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\article\\new.html.twig");
     }
 }

@@ -329,7 +329,7 @@
 
                     {{ form_rest(form) }}
 
-                    <button type="submit" class="btn-submit">🎟 Réserver maintenant</button>
+                    <button type="submit" class="btn-submit" id="payment-submit-btn">Passer au paiement</button>
 
                 {{ form_end(form) }}
             </div>
@@ -383,8 +383,13 @@
                 <span class="total-price">{{ evenement.price }} DT</span>
             </div>
 
+            <div class="summary-total" style="margin-top:10px;">
+                <span>Total estime</span>
+                <span class="total-price" id="reservation-total">{{ evenement.price }} DT</span>
+            </div>
+
             <div class="security-note">
-                🔒 Réservation sécurisée<br>Annulation gratuite avant l'événement
+                Paiement securise via Stripe<br>Le total depend du nombre de places
             </div>
         </div>
     </div>
@@ -394,5 +399,32 @@
 <footer class="footer">
     © 2026 <span>Bizcore</span> — Tous droits réservés
 </footer>
+
+<script>
+(function () {
+    const price = parseFloat('{{ evenement.price|default(0) }}') || 0;
+    const placesInput = document.getElementById('{{ form.nombrePlaces.vars.id }}');
+    const totalNode = document.getElementById('reservation-total');
+    const submitBtn = document.getElementById('payment-submit-btn');
+
+    function refreshTotal() {
+        const places = Math.max(parseInt(placesInput?.value || '1', 10) || 1, 1);
+        const total = (price * places).toFixed(2);
+
+        if (totalNode) {
+            totalNode.textContent = total + ' DT';
+        }
+
+        if (submitBtn) {
+            submitBtn.textContent = 'Payer ' + total + ' DT avec Stripe';
+        }
+    }
+
+    if (placesInput) {
+        placesInput.addEventListener('input', refreshTotal);
+        refreshTotal();
+    }
+})();
+</script>
 
 {% endblock %}

@@ -554,6 +554,6 @@ $context["product"], "stockDisponible", [], "any", false, false, false, 105) > 0
     </div>
     </div>
 {% endblock %}
-", "admin/product_export_pdf.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\admin\\product_export_pdf.html.twig");
+", "admin/product_export_pdf.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\admin\\product_export_pdf.html.twig");
     }
 }

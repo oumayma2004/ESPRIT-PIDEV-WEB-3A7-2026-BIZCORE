@@ -314,6 +314,6 @@ class __TwigTemplate_f80d653d06f130583015ce8978fad87b extends Template
             <button type=\"button\" class=\"page-btn\" data-page=\"{{ totalPages }}\">Last</button>
         </div>
     {% endif %}
-</div>", "dashboard/_users.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\dashboard\\_users.html.twig");
+</div>", "dashboard/_users.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\dashboard\\_users.html.twig");
     }
 }

@@ -1323,6 +1323,6 @@ function deleteSelected() {
 </script>
 
 {% endblock %}
-", "evenement/index.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\evenement\\index.html.twig");
+", "evenement/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\evenement\\index.html.twig");
     }
 }

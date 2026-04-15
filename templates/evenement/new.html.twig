@@ -78,45 +78,9 @@
 </style>
 
 <div style="display:flex; min-height:100vh; width:100vw;">
-    <aside class="sidebar">
-        <div class="sidebar-brand">Bizcore</div>
-        <div class="sidebar-nav">
-            <div class="sidebar-section">Gestion</div>
-            <a href="#" class="nav-item">⊞ Dashboard</a>
-            <a href="#" class="nav-item">👤 Utilisateurs</a>
-            <a href="{{ path('evenement_index') }}" class="nav-item active">📅 Événements</a>
-            <a href="{{ path('reservation_index') }}" class="nav-item">🎟 Réservations</a>
-            <a href="#" class="nav-item">🎯 Coaching</a>
-            <a href="#" class="nav-item">📝 Blog</a>
-            <a href="#" class="nav-item">🛍 Produits/Commandes</a>
-        </div>
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">A</div>
-                <div>
-                    <div style="font-size:13px; font-weight:600; color:#f1f5f9;">Admin</div>
-                    <div style="font-size:11px; color:#64748b;">Administrateur</div>
-                </div>
-            </div>
-            <div class="footer-btns">
-                <a href="#" class="btn-profile">Profile</a>
-                <a href="#" class="btn-logout">Logout</a>
-            </div>
-        </div>
-    </aside>
+    
 
     <div class="main">
-        <div class="topbar">
-            <div class="topbar-left">
-                <span class="home-icon">⌂</span> /
-                <a href="{{ path('evenement_index') }}">ÉVÉNEMENTS</a> /
-                <span>AJOUTER</span>
-            </div>
-            <div class="topbar-right">
-                <div class="topbar-icon">🔔</div>
-                <div class="topbar-icon">⚙</div>
-            </div>
-        </div>
 
         <div class="content">
             <a href="{{ path('evenement_index') }}" class="back-link">← Retour à la liste</a>

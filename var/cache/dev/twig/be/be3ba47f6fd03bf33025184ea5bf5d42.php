@@ -1312,6 +1312,6 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 {% endblock %}
-", "admin/product_dashboard.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\admin\\product_dashboard.html.twig");
+", "admin/product_dashboard.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\admin\\product_dashboard.html.twig");
     }
 }

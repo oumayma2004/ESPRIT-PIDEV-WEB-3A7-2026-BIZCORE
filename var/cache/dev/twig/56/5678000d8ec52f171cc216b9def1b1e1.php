@@ -220,6 +220,6 @@ document.getElementById('error-overlay').addEventListener('click', function(e) {
 });
 </script>
 {% endif %}
-", "components/_error_popup.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\components\\_error_popup.html.twig");
+", "components/_error_popup.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\components\\_error_popup.html.twig");
     }
 }

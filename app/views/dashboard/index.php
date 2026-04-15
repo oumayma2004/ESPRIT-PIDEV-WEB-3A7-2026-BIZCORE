@@ -1008,7 +1008,7 @@ function icon_svg(string $name): string
                                 <?= icon_svg('order'); ?>
                                 <span>Orders</span>
                             </a>
-                            <a href="#" class="quick-icon" onclick="toggleView('events'); return false;">
+                            <a href="<?= BASE_URL ?>/evenement/" class="quick-icon">
                                 <?= icon_svg('event'); ?>
                                 <span>Events</span>
                             </a>

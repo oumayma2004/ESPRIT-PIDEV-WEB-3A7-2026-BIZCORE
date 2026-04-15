@@ -64,7 +64,7 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Mes Réservations";
+        yield "Mes Reservations";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -100,36 +100,19 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
     .hero p { color: #94a3b8; font-size: 15px; }
 
     .content { max-width: 960px; margin: 40px auto; padding: 0 24px; }
-
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
     .section-title { font-size: 20px; font-weight: 700; color: #0f172a; }
     .btn-browse { display: inline-flex; align-items: center; gap: 7px; background: #22c55e; color: #fff; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: 8px; text-decoration: none; }
     .btn-browse:hover { background: #16a34a; }
 
     .res-list { display: flex; flex-direction: column; gap: 16px; }
-
-    .res-card {
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-        display: flex;
-        transition: box-shadow 0.2s;
-    }
-
+    .res-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); display: flex; transition: box-shadow 0.2s; }
     .res-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
-
-    .res-card-color {
-        width: 6px;
-        flex-shrink: 0;
-    }
-
+    .res-card-color { width: 6px; flex-shrink: 0; }
     .color-green { background: #22c55e; }
-    .color-red { background: #ef4444; }
+    .color-amber { background: #f59e0b; }
 
     .res-card-body { flex: 1; padding: 20px 24px; display: flex; align-items: center; gap: 20px; }
-
     .res-event-img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; flex-shrink: 0; border: 1px solid #e2e8f0; }
     .res-event-placeholder { width: 64px; height: 64px; background: #f1f5f9; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
 
@@ -139,16 +122,16 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
     .res-meta span { font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 5px; }
 
     .res-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
-
     .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
     .badge-green { background: #dcfce7; color: #16a34a; }
-    .badge-red { background: #fee2e2; color: #dc2626; }
+    .badge-amber { background: #fef3c7; color: #b45309; }
 
     .res-actions { display: flex; gap: 8px; }
-
     .btn-sm { padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 600; font-family: 'Inter', sans-serif; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s; }
     .btn-edit-sm { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
     .btn-edit-sm:hover { background: #fde68a; }
+    .btn-pay-sm { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .btn-pay-sm:hover { background: #bfdbfe; }
     .btn-del-sm { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
     .btn-del-sm:hover { background: #fecaca; }
 
@@ -159,6 +142,7 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
 
     .flash { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .flash-success { background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; }
+    .flash-error { background: #fee2e2; border: 1px solid #fecaca; color: #dc2626; }
 
     footer { background: #0f172a; color: #64748b; text-align: center; padding: 24px; font-size: 13px; margin-top: 60px; }
     footer span { color: #22c55e; }
@@ -169,30 +153,30 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
     <div class=\"nav-links\">
         <a href=\"#\">Accueil</a>
         <a href=\"";
-        // line 91
+        // line 75
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_front");
-        yield "\">Événements</a>
+        yield "\">Evenements</a>
         <a href=\"";
-        // line 92
+        // line 76
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_my");
-        yield "\" class=\"active\">Mes Réservations</a>
+        yield "\" class=\"active\">Mes reservations</a>
         <a href=\"#\" class=\"nav-cta\">Se connecter</a>
     </div>
 </nav>
 
 <div class=\"hero\">
-    <h1>🎟 Mes Réservations</h1>
-    <p>Gérez et modifiez vos réservations d'événements.</p>
+    <h1>Mes Reservations</h1>
+    <p>Suivez vos paiements et gerez vos evenements depuis un seul endroit.</p>
 </div>
 
 <div class=\"content\">
     ";
-        // line 103
+        // line 87
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 103, $this->source); })()), "flashes", ["success"], "method", false, false, false, 103));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 87, $this->source); })()), "flashes", ["success"], "method", false, false, false, 87));
         foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-            // line 104
-            yield "        <div class=\"flash flash-success\">✅ ";
+            // line 88
+            yield "        <div class=\"flash flash-success\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
             yield "</div>
     ";
@@ -200,137 +184,210 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 106
+        // line 90
+        yield "    ";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 90, $this->source); })()), "flashes", ["error"], "method", false, false, false, 90));
+        foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
+            // line 91
+            yield "        <div class=\"flash flash-error\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
+            yield "</div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 93
         yield "
-    <div class=\"section-header\">
+    ";
+        // line 95
+        yield "    ";
+        $context["paidReservations"] = Twig\Extension\CoreExtension::filter($this->env, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 95, $this->source); })()), function ($__r__) use ($context, $macros) { $context["r"] = $__r__; return (CoreExtension::getAttribute($this->env, $this->source, (isset($context["r"]) || array_key_exists("r", $context) ? $context["r"] : (function () { throw new RuntimeError('Variable "r" does not exist.', 95, $this->source); })()), "paymentStatus", [], "any", false, false, false, 95) == "paid"); });
+        // line 96
+        yield "    ";
+        $context["pendingReservations"] = Twig\Extension\CoreExtension::filter($this->env, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 96, $this->source); })()), function ($__r__) use ($context, $macros) { $context["r"] = $__r__; return (CoreExtension::getAttribute($this->env, $this->source, (isset($context["r"]) || array_key_exists("r", $context) ? $context["r"] : (function () { throw new RuntimeError('Variable "r" does not exist.', 96, $this->source); })()), "paymentStatus", [], "any", false, false, false, 96) != "paid"); });
+        // line 97
+        yield "
+    ";
+        // line 98
+        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["paidReservations"]) || array_key_exists("paidReservations", $context) ? $context["paidReservations"] : (function () { throw new RuntimeError('Variable "paidReservations" does not exist.', 98, $this->source); })())) > 0)) {
+            // line 99
+            yield "        <div style=\"margin-bottom: 24px;\">
+            <div style=\"font-size:13px; font-weight:700; color:#16a34a; margin-bottom:10px;\">
+                ✅ Réservations payées
+            </div>
+            ";
+            // line 103
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["paidReservations"]) || array_key_exists("paidReservations", $context) ? $context["paidReservations"] : (function () { throw new RuntimeError('Variable "paidReservations" does not exist.', 103, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["r"]) {
+                // line 104
+                yield "                <div style=\"background:#dcfce7; border:1px solid #bbf7d0; border-radius:10px; padding:14px 18px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;\">
+                    <div style=\"display:flex; align-items:center; gap:12px;\">
+                        <span style=\"font-size:20px;\">🎟️</span>
+                        <div>
+                            <div style=\"font-size:14px; font-weight:700; color:#0f172a;\">";
+                // line 108
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 108), "title", [], "any", false, false, false, 108), "html", null, true);
+                yield "</div>
+                            <div style=\"font-size:12px; color:#16a34a;\">
+                                ";
+                // line 110
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nombrePlaces", [], "any", false, false, false, 110), "html", null, true);
+                yield " place(s) · ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "montantTotal", [], "any", false, false, false, 110), "html", null, true);
+                yield " TND · ";
+                yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["r"], "dateReservation", [], "any", false, false, false, 110)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "dateReservation", [], "any", false, false, false, 110), "d/m/Y"), "html", null, true)) : ("-"));
+                yield "
+                            </div>
+                        </div>
+                    </div>
+                    <span class=\"badge badge-green\">✅ Payée</span>
+                </div>
+            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['r'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 117
+            yield "        </div>
+    ";
+        }
+        // line 119
+        yield "
+    ";
+        // line 121
+        yield "    <div class=\"section-header\">
         <div class=\"section-title\">";
-        // line 108
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 108, $this->source); })())), "html", null, true);
+        // line 122
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["pendingReservations"]) || array_key_exists("pendingReservations", $context) ? $context["pendingReservations"] : (function () { throw new RuntimeError('Variable "pendingReservations" does not exist.', 122, $this->source); })())), "html", null, true);
         yield " réservation";
-        yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 108, $this->source); })())) != 1)) ? ("s") : (""));
-        yield "</div>
+        yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["pendingReservations"]) || array_key_exists("pendingReservations", $context) ? $context["pendingReservations"] : (function () { throw new RuntimeError('Variable "pendingReservations" does not exist.', 122, $this->source); })())) != 1)) ? ("s") : (""));
+        yield " en attente</div>
         <a href=\"";
-        // line 109
+        // line 123
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_front");
-        yield "\" class=\"btn-browse\">📅 Voir les événements</a>
+        yield "\" class=\"btn-browse\">Voir les événements</a>
     </div>
 
     <div class=\"res-list\">
         ";
-        // line 113
+        // line 127
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 113, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["pendingReservations"]) || array_key_exists("pendingReservations", $context) ? $context["pendingReservations"] : (function () { throw new RuntimeError('Variable "pendingReservations" does not exist.', 127, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["r"]) {
-            // line 114
-            yield "        <div class=\"res-card\">
-            <div class=\"res-card-color ";
-            // line 115
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["r"], "statut", [], "any", false, false, false, 115) == "confirmé")) ? ("color-green") : ("color-red"));
-            yield "\"></div>
-            <div class=\"res-card-body\">
-
-                ";
-            // line 118
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 118), "image", [], "any", false, false, false, 118)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 119
-                yield "                    <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 119), "image", [], "any", false, false, false, 119))), "html", null, true);
-                yield "\" class=\"res-event-img\" alt=\"\">
-                ";
-            } else {
-                // line 121
-                yield "                    <div class=\"res-event-placeholder\">📅</div>
-                ";
-            }
-            // line 123
-            yield "
-                <div class=\"res-info\">
-                    <div class=\"res-event-title\">";
-            // line 125
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 125), "title", [], "any", false, false, false, 125), "html", null, true);
-            yield "</div>
-                    <div class=\"res-meta\">
-                        <span>👤 ";
-            // line 127
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nom", [], "any", false, false, false, 127), "html", null, true);
-            yield "</span>
-                        <span>✉ ";
             // line 128
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "email", [], "any", false, false, false, 128), "html", null, true);
-            yield "</span>
-                        <span>📞 ";
-            // line 129
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "telephone", [], "any", false, false, false, 129), "html", null, true);
-            yield "</span>
-                        <span>🎫 ";
-            // line 130
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nombrePlaces", [], "any", false, false, false, 130), "html", null, true);
-            yield " place";
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nombrePlaces", [], "any", false, false, false, 130) > 1)) ? ("s") : (""));
-            yield "</span>
-                        <span>📆 ";
+            yield "            <div class=\"res-card\">
+                <div class=\"res-card-color color-amber\"></div>
+                <div class=\"res-card-body\">
+                    ";
             // line 131
-            yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["r"], "dateReservation", [], "any", false, false, false, 131)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "dateReservation", [], "any", false, false, false, 131), "d/m/Y"), "html", null, true)) : ("-"));
-            yield "</span>
-                    </div>
-                </div>
-
-                <div class=\"res-right\">
-                    <span class=\"badge ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 131), "image", [], "any", false, false, false, 131)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 132
+                yield "                        <img src=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 132), "image", [], "any", false, false, false, 132))), "html", null, true);
+                yield "\" class=\"res-event-img\" alt=\"\">
+                    ";
+            } else {
+                // line 134
+                yield "                        <div class=\"res-event-placeholder\">EV</div>
+                    ";
+            }
             // line 136
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["r"], "statut", [], "any", false, false, false, 136) == "confirmé")) ? ("badge-green") : ("badge-red"));
-            yield "\">
-                        ";
-            // line 137
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["r"], "statut", [], "any", false, false, false, 137)), "html", null, true);
             yield "
-                    </span>
-                    <div class=\"res-actions\">
-                        <a href=\"";
+                    <div class=\"res-info\">
+                        <div class=\"res-event-title\">";
+            // line 138
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 138), "title", [], "any", false, false, false, 138), "html", null, true);
+            yield "</div>
+                        <div class=\"res-meta\">
+                            <span>Nom: ";
             // line 140
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 140)]), "html", null, true);
-            yield "\" class=\"btn-sm btn-edit-sm\">✏ Modifier</a>
-                        <form method=\"post\" action=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nom", [], "any", false, false, false, 140), "html", null, true);
+            yield "</span>
+                            <span>Email: ";
             // line 141
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 141)]), "html", null, true);
-            yield "\" style=\"display:inline;\">
-                            <input type=\"hidden\" name=\"_token\" value=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "email", [], "any", false, false, false, 141), "html", null, true);
+            yield "</span>
+                            <span>Tel: ";
             // line 142
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 142))), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "telephone", [], "any", false, false, false, 142), "html", null, true);
+            yield "</span>
+                            <span>Places: ";
+            // line 143
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nombrePlaces", [], "any", false, false, false, 143), "html", null, true);
+            yield "</span>
+                            <span>Date: ";
+            // line 144
+            yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["r"], "dateReservation", [], "any", false, false, false, 144)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "dateReservation", [], "any", false, false, false, 144), "d/m/Y"), "html", null, true)) : ("-"));
+            yield "</span>
+                            <span>Total: ";
+            // line 145
+            yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["r"], "montantTotal", [], "any", false, false, false, 145)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["r"], "montantTotal", [], "any", false, false, false, 145), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["r"], "evenement", [], "any", false, false, false, 145), "price", [], "any", false, false, false, 145) * CoreExtension::getAttribute($this->env, $this->source, $context["r"], "nombrePlaces", [], "any", false, false, false, 145)), "html", null, true)));
+            yield " ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::upper($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["r"], "devise", [], "any", false, false, false, 145)), "html", null, true);
+            yield "</span>
+                        </div>
+                    </div>
+
+                    <div class=\"res-right\">
+                        <span class=\"badge badge-amber\">En attente de paiement</span>
+                        <div class=\"res-actions\">
+                            <a href=\"";
+            // line 152
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 152)]), "html", null, true);
+            yield "\" class=\"btn-sm btn-edit-sm\">Modifier</a>
+                            <form method=\"post\" action=\"";
+            // line 153
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_pay", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 153)]), "html", null, true);
+            yield "\" style=\"display:inline;\">
+                                <input type=\"hidden\" name=\"_token\" value=\"";
+            // line 154
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("pay" . CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 154))), "html", null, true);
             yield "\">
-                            <button class=\"btn-sm btn-del-sm\" onclick=\"return confirm('Annuler cette réservation ?')\">🗑 Annuler</button>
-                        </form>
+                                <button class=\"btn-sm btn-pay-sm\">💳 Payer</button>
+                            </form>
+                            <form method=\"post\" action=\"";
+            // line 157
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 157)]), "html", null, true);
+            yield "\" style=\"display:inline;\">
+                                <input type=\"hidden\" name=\"_token\" value=\"";
+            // line 158
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 158))), "html", null, true);
+            yield "\">
+                                <button class=\"btn-sm btn-del-sm\" onclick=\"return confirm('Annuler cette reservation ?')\">Annuler</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
         ";
             $context['_iterated'] = true;
         }
-        // line 150
+        // line 165
         if (!$context['_iterated']) {
-            // line 151
-            yield "        <div class=\"empty\">
-            <div class=\"empty-icon\">📭</div>
-            <h3>Aucune réservation</h3>
-            <p>Vous n'avez pas encore réservé d'événement.</p>
-            <a href=\"";
-            // line 155
+            // line 166
+            yield "            <div class=\"empty\">
+                <div class=\"empty-icon\">🎟️</div>
+                <h3>Aucune réservation en attente</h3>
+                <p>Toutes vos réservations sont payées ou vous n'avez pas encore réservé.</p>
+                <a href=\"";
+            // line 170
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_front");
-            yield "\" class=\"btn-browse\">📅 Découvrir les événements</a>
-        </div>
+            yield "\" class=\"btn-browse\">Découvrir les événements</a>
+            </div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['r'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 158
+        // line 173
         yield "    </div>
 </div>
 
-<footer>© 2026 <span>Bizcore</span> — Tous droits réservés</footer>
+<footer>© 2026 <span>Bizcore</span> - Tous droits reserves</footer>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -359,13 +416,13 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  330 => 158,  321 => 155,  315 => 151,  313 => 150,  300 => 142,  296 => 141,  292 => 140,  286 => 137,  282 => 136,  274 => 131,  268 => 130,  264 => 129,  260 => 128,  256 => 127,  251 => 125,  247 => 123,  243 => 121,  237 => 119,  235 => 118,  229 => 115,  226 => 114,  221 => 113,  214 => 109,  208 => 108,  204 => 106,  195 => 104,  191 => 103,  177 => 92,  173 => 91,  85 => 5,  75 => 4,  58 => 2,  41 => 1,);
+        return array (  387 => 173,  378 => 170,  372 => 166,  370 => 165,  358 => 158,  354 => 157,  348 => 154,  344 => 153,  340 => 152,  328 => 145,  324 => 144,  320 => 143,  316 => 142,  312 => 141,  308 => 140,  303 => 138,  299 => 136,  295 => 134,  289 => 132,  287 => 131,  282 => 128,  277 => 127,  270 => 123,  264 => 122,  261 => 121,  258 => 119,  254 => 117,  237 => 110,  232 => 108,  226 => 104,  222 => 103,  216 => 99,  214 => 98,  211 => 97,  208 => 96,  205 => 95,  202 => 93,  193 => 91,  188 => 90,  179 => 88,  175 => 87,  161 => 76,  157 => 75,  85 => 5,  75 => 4,  58 => 2,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
-{% block title %}Mes Réservations{% endblock %}
+{% block title %}Mes Reservations{% endblock %}
 
 {% block body %}
 <style>
@@ -386,36 +443,19 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
     .hero p { color: #94a3b8; font-size: 15px; }
 
     .content { max-width: 960px; margin: 40px auto; padding: 0 24px; }
-
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
     .section-title { font-size: 20px; font-weight: 700; color: #0f172a; }
     .btn-browse { display: inline-flex; align-items: center; gap: 7px; background: #22c55e; color: #fff; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: 8px; text-decoration: none; }
     .btn-browse:hover { background: #16a34a; }
 
     .res-list { display: flex; flex-direction: column; gap: 16px; }
-
-    .res-card {
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-        display: flex;
-        transition: box-shadow 0.2s;
-    }
-
+    .res-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); display: flex; transition: box-shadow 0.2s; }
     .res-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
-
-    .res-card-color {
-        width: 6px;
-        flex-shrink: 0;
-    }
-
+    .res-card-color { width: 6px; flex-shrink: 0; }
     .color-green { background: #22c55e; }
-    .color-red { background: #ef4444; }
+    .color-amber { background: #f59e0b; }
 
     .res-card-body { flex: 1; padding: 20px 24px; display: flex; align-items: center; gap: 20px; }
-
     .res-event-img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; flex-shrink: 0; border: 1px solid #e2e8f0; }
     .res-event-placeholder { width: 64px; height: 64px; background: #f1f5f9; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
 
@@ -425,16 +465,16 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
     .res-meta span { font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 5px; }
 
     .res-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
-
     .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
     .badge-green { background: #dcfce7; color: #16a34a; }
-    .badge-red { background: #fee2e2; color: #dc2626; }
+    .badge-amber { background: #fef3c7; color: #b45309; }
 
     .res-actions { display: flex; gap: 8px; }
-
     .btn-sm { padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 600; font-family: 'Inter', sans-serif; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s; }
     .btn-edit-sm { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
     .btn-edit-sm:hover { background: #fde68a; }
+    .btn-pay-sm { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .btn-pay-sm:hover { background: #bfdbfe; }
     .btn-del-sm { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
     .btn-del-sm:hover { background: #fecaca; }
 
@@ -445,6 +485,7 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
 
     .flash { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .flash-success { background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; }
+    .flash-error { background: #fee2e2; border: 1px solid #fecaca; color: #dc2626; }
 
     footer { background: #0f172a; color: #64748b; text-align: center; padding: 24px; font-size: 13px; margin-top: 60px; }
     footer span { color: #22c55e; }
@@ -454,78 +495,109 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
     <div class=\"nav-brand\">Biz<span>core</span></div>
     <div class=\"nav-links\">
         <a href=\"#\">Accueil</a>
-        <a href=\"{{ path('evenement_front') }}\">Événements</a>
-        <a href=\"{{ path('reservation_my') }}\" class=\"active\">Mes Réservations</a>
+        <a href=\"{{ path('evenement_front') }}\">Evenements</a>
+        <a href=\"{{ path('reservation_my') }}\" class=\"active\">Mes reservations</a>
         <a href=\"#\" class=\"nav-cta\">Se connecter</a>
     </div>
 </nav>
 
 <div class=\"hero\">
-    <h1>🎟 Mes Réservations</h1>
-    <p>Gérez et modifiez vos réservations d'événements.</p>
+    <h1>Mes Reservations</h1>
+    <p>Suivez vos paiements et gerez vos evenements depuis un seul endroit.</p>
 </div>
 
 <div class=\"content\">
     {% for msg in app.flashes('success') %}
-        <div class=\"flash flash-success\">✅ {{ msg }}</div>
+        <div class=\"flash flash-success\">{{ msg }}</div>
+    {% endfor %}
+    {% for msg in app.flashes('error') %}
+        <div class=\"flash flash-error\">{{ msg }}</div>
     {% endfor %}
 
+    {# Paid reservations as notifications at the top #}
+    {% set paidReservations = reservations|filter(r => r.paymentStatus == 'paid') %}
+    {% set pendingReservations = reservations|filter(r => r.paymentStatus != 'paid') %}
+
+    {% if paidReservations|length > 0 %}
+        <div style=\"margin-bottom: 24px;\">
+            <div style=\"font-size:13px; font-weight:700; color:#16a34a; margin-bottom:10px;\">
+                ✅ Réservations payées
+            </div>
+            {% for r in paidReservations %}
+                <div style=\"background:#dcfce7; border:1px solid #bbf7d0; border-radius:10px; padding:14px 18px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;\">
+                    <div style=\"display:flex; align-items:center; gap:12px;\">
+                        <span style=\"font-size:20px;\">🎟️</span>
+                        <div>
+                            <div style=\"font-size:14px; font-weight:700; color:#0f172a;\">{{ r.evenement.title }}</div>
+                            <div style=\"font-size:12px; color:#16a34a;\">
+                                {{ r.nombrePlaces }} place(s) · {{ r.montantTotal }} TND · {{ r.dateReservation ? r.dateReservation|date('d/m/Y') : '-' }}
+                            </div>
+                        </div>
+                    </div>
+                    <span class=\"badge badge-green\">✅ Payée</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {# Pending reservations as normal cards #}
     <div class=\"section-header\">
-        <div class=\"section-title\">{{ reservations|length }} réservation{{ reservations|length != 1 ? 's' : '' }}</div>
-        <a href=\"{{ path('evenement_front') }}\" class=\"btn-browse\">📅 Voir les événements</a>
+        <div class=\"section-title\">{{ pendingReservations|length }} réservation{{ pendingReservations|length != 1 ? 's' : '' }} en attente</div>
+        <a href=\"{{ path('evenement_front') }}\" class=\"btn-browse\">Voir les événements</a>
     </div>
 
     <div class=\"res-list\">
-        {% for r in reservations %}
-        <div class=\"res-card\">
-            <div class=\"res-card-color {{ r.statut == 'confirmé' ? 'color-green' : 'color-red' }}\"></div>
-            <div class=\"res-card-body\">
+        {% for r in pendingReservations %}
+            <div class=\"res-card\">
+                <div class=\"res-card-color color-amber\"></div>
+                <div class=\"res-card-body\">
+                    {% if r.evenement.image %}
+                        <img src=\"{{ asset('uploads/' ~ r.evenement.image) }}\" class=\"res-event-img\" alt=\"\">
+                    {% else %}
+                        <div class=\"res-event-placeholder\">EV</div>
+                    {% endif %}
 
-                {% if r.evenement.image %}
-                    <img src=\"{{ asset('uploads/' ~ r.evenement.image) }}\" class=\"res-event-img\" alt=\"\">
-                {% else %}
-                    <div class=\"res-event-placeholder\">📅</div>
-                {% endif %}
+                    <div class=\"res-info\">
+                        <div class=\"res-event-title\">{{ r.evenement.title }}</div>
+                        <div class=\"res-meta\">
+                            <span>Nom: {{ r.nom }}</span>
+                            <span>Email: {{ r.email }}</span>
+                            <span>Tel: {{ r.telephone }}</span>
+                            <span>Places: {{ r.nombrePlaces }}</span>
+                            <span>Date: {{ r.dateReservation ? r.dateReservation|date('d/m/Y') : '-' }}</span>
+                            <span>Total: {{ r.montantTotal ? r.montantTotal : (r.evenement.price * r.nombrePlaces) }} {{ r.devise|upper }}</span>
+                        </div>
+                    </div>
 
-                <div class=\"res-info\">
-                    <div class=\"res-event-title\">{{ r.evenement.title }}</div>
-                    <div class=\"res-meta\">
-                        <span>👤 {{ r.nom }}</span>
-                        <span>✉ {{ r.email }}</span>
-                        <span>📞 {{ r.telephone }}</span>
-                        <span>🎫 {{ r.nombrePlaces }} place{{ r.nombrePlaces > 1 ? 's' : '' }}</span>
-                        <span>📆 {{ r.dateReservation ? r.dateReservation|date('d/m/Y') : '-' }}</span>
+                    <div class=\"res-right\">
+                        <span class=\"badge badge-amber\">En attente de paiement</span>
+                        <div class=\"res-actions\">
+                            <a href=\"{{ path('reservation_edit', {'id': r.id}) }}\" class=\"btn-sm btn-edit-sm\">Modifier</a>
+                            <form method=\"post\" action=\"{{ path('reservation_pay', {'id': r.id}) }}\" style=\"display:inline;\">
+                                <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('pay' ~ r.id) }}\">
+                                <button class=\"btn-sm btn-pay-sm\">💳 Payer</button>
+                            </form>
+                            <form method=\"post\" action=\"{{ path('reservation_delete', {'id': r.id}) }}\" style=\"display:inline;\">
+                                <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ r.id) }}\">
+                                <button class=\"btn-sm btn-del-sm\" onclick=\"return confirm('Annuler cette reservation ?')\">Annuler</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-
-                <div class=\"res-right\">
-                    <span class=\"badge {{ r.statut == 'confirmé' ? 'badge-green' : 'badge-red' }}\">
-                        {{ r.statut|capitalize }}
-                    </span>
-                    <div class=\"res-actions\">
-                        <a href=\"{{ path('reservation_edit', {'id': r.id}) }}\" class=\"btn-sm btn-edit-sm\">✏ Modifier</a>
-                        <form method=\"post\" action=\"{{ path('reservation_delete', {'id': r.id}) }}\" style=\"display:inline;\">
-                            <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ r.id) }}\">
-                            <button class=\"btn-sm btn-del-sm\" onclick=\"return confirm('Annuler cette réservation ?')\">🗑 Annuler</button>
-                        </form>
-                    </div>
-                </div>
-
             </div>
-        </div>
         {% else %}
-        <div class=\"empty\">
-            <div class=\"empty-icon\">📭</div>
-            <h3>Aucune réservation</h3>
-            <p>Vous n'avez pas encore réservé d'événement.</p>
-            <a href=\"{{ path('evenement_front') }}\" class=\"btn-browse\">📅 Découvrir les événements</a>
-        </div>
+            <div class=\"empty\">
+                <div class=\"empty-icon\">🎟️</div>
+                <h3>Aucune réservation en attente</h3>
+                <p>Toutes vos réservations sont payées ou vous n'avez pas encore réservé.</p>
+                <a href=\"{{ path('evenement_front') }}\" class=\"btn-browse\">Découvrir les événements</a>
+            </div>
         {% endfor %}
     </div>
 </div>
 
-<footer>© 2026 <span>Bizcore</span> — Tous droits réservés</footer>
+<footer>© 2026 <span>Bizcore</span> - Tous droits reserves</footer>
 {% endblock %}
-", "reservation/my.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\reservation\\my.html.twig");
+", "reservation/my.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\reservation\\my.html.twig");
     }
 }

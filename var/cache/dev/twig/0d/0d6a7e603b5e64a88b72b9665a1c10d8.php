@@ -324,6 +324,6 @@ document.getElementById('paymentForm').addEventListener('submit', function() {
 });
 </script>
 {% endblock %}
-", "payment/index.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\payment\\index.html.twig");
+", "payment/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\payment\\index.html.twig");
     }
 }

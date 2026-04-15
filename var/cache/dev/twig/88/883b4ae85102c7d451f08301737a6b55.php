@@ -543,6 +543,6 @@ function filterProducts() {
 })();
 </script>
 {% endblock %}
-", "marketplace/index.html.twig", "C:\\Users\\dhiaj_onolvpc\\Downloads\\FINAL\\FINAL\\templates\\marketplace\\index.html.twig");
+", "marketplace/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\marketplace\\index.html.twig");
     }
 }

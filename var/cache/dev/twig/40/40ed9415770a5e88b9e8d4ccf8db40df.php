@@ -330,6 +330,6 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
         Already have an account? <a href=\"{{ path('app_login') }}\">Login</a>
     </div>
 </div>
-{% endblock %}", "security/register.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\security\\register.html.twig");
+{% endblock %}", "security/register.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\security\\register.html.twig");
     }
 }

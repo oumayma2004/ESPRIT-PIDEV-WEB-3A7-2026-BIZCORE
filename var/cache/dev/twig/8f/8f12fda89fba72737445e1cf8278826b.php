@@ -87,6 +87,6 @@ class __TwigTemplate_6cd8e0ddc24eaf8bc33eb68fe6e388a1 extends Template
         return new Source("<h1>Welcome</h1>
 
 <a href=\"{{ path('frontend_blog_index') }}\">Enter Blog (User)</a>
-<a href=\"{{ path('article_index') }}\">Enter Admin</a>", "home/index.html.twig", "C:\\Users\\melek\\Downloads\\wetransfer_esprit-pidev-web-3a7-2026-bizcore-main-zip_2026-04-09_1330\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE-main\\templates\\home\\index.html.twig");
+<a href=\"{{ path('article_index') }}\">Enter Admin</a>", "home/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\home\\index.html.twig");
     }
 }
