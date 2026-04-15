@@ -7,7 +7,14 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'DM Sans', sans-serif; background: #f0f4f8; display: flex; min-height: 100vh; }
 
-    .sidebar { width: 220px; min-height: 100vh; background: #1a1f2e; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; z-index: 100; }
+    .sidebar {
+        width: 220px;
+        min-height: 100vh;
+        background: #1a1f2e;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+    }
     .sidebar-brand { padding: 24px 20px 20px; font-size: 22px; font-weight: 700; color: #fff; border-bottom: 1px solid #2a3347; }
     .sidebar-nav { flex: 1; padding: 6px 10px; }
     .sidebar-section { padding: 16px 16px 6px; font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 1px; }
@@ -21,7 +28,7 @@
     .btn-profile { background: #242a38; color: #94a3b8; }
     .btn-logout { background: #ef4444; color: #fff; }
 
-    .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+    .main { flex: 1; display: flex; flex-direction: column; min-height: 100vh; min-width: 0; }
     .topbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 0 28px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
     .topbar-left { font-size: 15px; font-weight: 600; color: #1e293b; display: flex; align-items: center; gap: 10px; }
     .topbar-left .home-icon { color: #22c55e; }
@@ -74,46 +81,11 @@
     input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 </style>
 
-<div style="display:flex; min-height:100vh;">
-    <aside class="sidebar">
-        <div class="sidebar-brand">Bizcore</div>
-        <div class="sidebar-nav">
-            <div class="sidebar-section">Gestion</div>
-            <a href="#" class="nav-item">⊞ Dashboard</a>
-            <a href="#" class="nav-item">👤 Utilisateurs</a>
-            <a href="{{ path('evenement_index') }}" class="nav-item active">📅 Événements</a>
-            <a href="{{ path('reservation_index') }}" class="nav-item">🎟 Réservations</a>
-            <a href="#" class="nav-item">🎯 Coaching</a>
-            <a href="#" class="nav-item">📝 Blog</a>
-            <a href="#" class="nav-item">🛍 Produits/Commandes</a>
-        </div>
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">A</div>
-                <div>
-                    <div style="font-size:13px; font-weight:600; color:#f1f5f9;">Admin</div>
-                    <div style="font-size:11px; color:#64748b;">Administrateur</div>
-                </div>
-            </div>
-            <div class="footer-btns">
-                <a href="#" class="btn-profile">Profile</a>
-                <a href="#" class="btn-logout">Logout</a>
-            </div>
-        </div>
-    </aside>
+<div style="display:flex; min-height:100vh; width:100vw;">
+    
 
     <div class="main">
-        <div class="topbar">
-            <div class="topbar-left">
-                <span class="home-icon">⌂</span> /
-                <a href="{{ path('evenement_index') }}">ÉVÉNEMENTS</a> /
-                <span>MODIFIER #{{ evenement.id }}</span>
-            </div>
-            <div class="topbar-right">
-                <div class="topbar-icon">🔔</div>
-                <div class="topbar-icon">⚙</div>
-            </div>
-        </div>
+        
 
         <div class="content">
             <a href="{{ path('evenement_index') }}" class="back-link">← Retour à la liste</a>

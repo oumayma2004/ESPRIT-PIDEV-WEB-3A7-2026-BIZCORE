@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ evenement.title }}{% endblock %}
+{% block page_title %}DÉTAIL ÉVÉNEMENT{% endblock %}
 
 {% block body %}
 <style>
@@ -120,15 +121,13 @@
         box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
     }
 
-    .reserve-form ul.form-errors,
-    .reserve-form .form-error { list-style: none; }
-
-    .reserve-form ul.form-errors li,
     .reserve-form .form-error {
         font-size: 11px; color: #dc2626;
         background: #fee2e2; border-radius: 4px;
         padding: 3px 8px; margin-top: 3px; display: block;
     }
+    .form-error { font-size: 12px; font-weight: 600; color: #dc2626; background: #fee2e2; border: 1px solid #fecaca; border-radius: 6px; padding: 7px 11px; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+
 
     .btn-submit {
         width: 100%; padding: 14px;
@@ -144,6 +143,13 @@
     }
 
     .reserve-note { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 12px; }
+    .reserve-form input.is-invalid,
+    .reserve-form input.is-invalid,
+    .reserve-form select.is-invalid,
+    .reserve-form textarea.is-invalid {
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+    }
 
     .back-link {
         display: inline-flex; align-items: center; gap: 6px;
@@ -190,24 +196,27 @@
         .page { grid-template-columns: 1fr; }
         .reserve-card { position: static; }
     }
-</style>
+    /* Add inside your <style> block */
+.reserve-form ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
-<nav class="navbar">
-    <div class="nav-brand">Biz<span>core</span></div>
-    <div class="nav-links">
-        <a href="#">Accueil</a>
-        <a href="{{ path('evenement_index') }}">Événements</a>
-        <a href="#">Coaching</a>
-        <a href="#">Blog</a>
-        <a href="{{ path('reservation_my') }}" class="nav-cta" style="background:#0f172a;">🎟 Mes Réservations</a>
-    
-        <a href="#" class="nav-cta">Se connecter</a>
-    </div>
-</nav>
+.reserve-form ul li {
+    font-size: 11px;
+    color: #dc2626;
+    background: #fee2e2;
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-top: 3px;
+    display: block;
+}
+</style>
 
 <div class="breadcrumb-bar">
     <a href="#">Accueil</a> ›
-    <a href="{{ path('evenement_index') }}">Événements</a> ›
+    <a href="{{ path('evenement_front') }}">Événements</a> ›
     <span class="current">{{ evenement.title }}</span>
 </div>
 
@@ -218,7 +227,7 @@
     {% for msg in app.flashes('error') %}
         <div class="flash flash-error">❌ {{ msg }}</div>
     {% endfor %}
-    <a href="{{ path('evenement_index') }}" class="back-link">← Retour aux événements</a>
+    <a href="{{ path('evenement_front') }}" class="back-link">← Retour aux événements</a>
 </div>
 
 <div class="page">
@@ -292,36 +301,50 @@
 
             {# ── Symfony form — pointe vers reservation_new ── #}
             {{ form_start(form, {
-                    'action': path('evenement_show', {'id': evenement.id}),
-                    'method': 'POST',
-                    'attr': {'id': 'reserveForm', 'class': 'reserve-form'}
-            }) }}
+    'method': 'POST',
+    'attr': {'id': 'reserveForm', 'class': 'reserve-form', 'novalidate': 'novalidate'}
+}) }}
 
-                {% for field in form %}
-    {% if field.vars.name != '_token' %}
-        <div class="form-group">
-            {{ form_label(field) }}
-            {{ form_widget(field) }}
-            {% if field.vars.errors|length > 0 %}
-                <ul class="form-errors">
-                    {% for error in field.vars.errors %}
-                        <li>{{ error.message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-    {% endif %}
-{% endfor %}
+    <div class="form-group">
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom, {'attr': {'class': form.nom.vars.errors|length > 0 ? 'is-invalid' : ''}}) }}
+        {% for error in form.nom.vars.errors %}
+            <div class="form-error">⚠ {{ error.message }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': form.email.vars.errors|length > 0 ? 'is-invalid' : ''}}) }}
+        {% for error in form.email.vars.errors %}
+            <div class="form-error">⚠ {{ error.message }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.telephone) }}
+        {{ form_widget(form.telephone, {'attr': {'class': form.telephone.vars.errors|length > 0 ? 'is-invalid' : ''}}) }}
+        {% for error in form.telephone.vars.errors %}
+            <div class="form-error">⚠ {{ error.message }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.nombrePlaces) }}
+        {{ form_widget(form.nombrePlaces, {'attr': {'class': form.nombrePlaces.vars.errors|length > 0 ? 'is-invalid' : ''}}) }}
+        {% for error in form.nombrePlaces.vars.errors %}
+            <div class="form-error">⚠ {{ error.message }}</div>
+        {% endfor %}
+    </div>
+
+    {{ form_rest(form) }}
+
+    <button type="submit" class="btn-submit" name="action" value="reserver">
+    🎟 Réserver maintenant
+    </button>
 
 
-                {{ form_rest(form) }}
-                
-
-                <button type="submit" class="btn-submit" id="reserveBtn">
-                    🎟 Réserver maintenant
-                </button>
-
-            {{ form_end(form) }}
+{{ form_end(form) }}
 
             <div class="reserve-note">🔒 Réservation sécurisée — Annulation gratuite</div>
         </div>

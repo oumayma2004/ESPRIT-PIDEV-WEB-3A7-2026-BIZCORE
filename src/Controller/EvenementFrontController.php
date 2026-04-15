@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
-use App\Form\ReservationType;
+use App\Entity\InscriptionEvenement;
+use App\Form\InscriptionEvenementType;
 use App\Repository\EvenementRepository;
+use App\Repository\InscriptionEvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,64 +35,162 @@ class EvenementFrontController extends AbstractController
             throw $this->createNotFoundException('Événement introuvable.');
         }
 
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-
-        // Initialisation automatique
+        $reservation = new InscriptionEvenement();
         $reservation->setStatut('confirmé');
         $reservation->setDateReservation(new \DateTime());
+        $reservation->setEvenement($evenement);
 
+        if ($this->getUser()) {
+            $reservation->setUser($this->getUser());
+            $reservation->setNom($this->getUser()->getFullName());
+            $reservation->setEmail($this->getUser()->getEmail());
+        }
+
+        $form = $this->createForm(InscriptionEvenementType::class, $reservation);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted()) {
-            $data = $form->getData();
             $errors = [];
 
-            // Nom obligatoire et lettres/espaces seulement
-            if (empty($data->getNom()) || !preg_match("/^[a-zA-ZÀ-ÿ '-]+$/", $data->getNom())) {
-                $errors[] = "Nom invalide (obligatoire, lettres uniquement).";
+            // Nom
+            $nom = trim($reservation->getNom() ?? '');
+            if (empty($nom)) {
+                $errors[] = 'Le nom est obligatoire.';
+            } elseif (!preg_match("/^[a-zA-ZÀ-ÿ '\-]+$/u", $nom)) {
+                $errors[] = 'Le nom ne doit contenir que des lettres, espaces et tirets.';
+            } elseif (strlen($nom) < 2) {
+                $errors[] = 'Le nom doit contenir au moins 2 caractères.';
             }
 
-            // Email obligatoire et format valide
-            if (empty($data->getEmail()) || !filter_var($data->getEmail(), FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Email invalide.";
+            // Email
+            $email = trim($reservation->getEmail() ?? '');
+            if (empty($email)) {
+                $errors[] = 'L\'email est obligatoire.';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Adresse email invalide.';
             }
 
-            // Téléphone obligatoire
-            if (empty($data->getTelephone())) {
-                $errors[] = "Téléphone obligatoire.";
+            // Téléphone
+            $tel = trim($reservation->getTelephone() ?? '');
+            if (empty($tel)) {
+                $errors[] = 'Le téléphone est obligatoire.';
+            } elseif (!preg_match('/^[0-9+\s\-]{8,15}$/', $tel)) {
+                $errors[] = 'Téléphone invalide (8 à 15 chiffres).';
             }
 
-            // Nombre de places >0 et ≤ capacité
-            $nombre_places = $data->getNombrePlaces();
-            $capacity = $evenement->getCapacity();
-            if ($nombre_places <= 0) {
-                $errors[] = "Le nombre de places doit être supérieur à 0.";
-            } elseif ($nombre_places > $capacity) {
-                $errors[] = "Le nombre de places ne peut pas dépasser la capacité de l'événement ($capacity).";
-            }
+            // Nombre de places
+            $places = $reservation->getNombrePlaces();
+            if (empty($places) || $places <= 0) {
+                $errors[] = 'Le nombre de places doit être supérieur à 0.';
+            } elseif ($places > $evenement->getCapacity()) {
+    $errors[] = 'Maximum ' . $evenement->getCapacity() . ' place(s) disponible(s).';
+}
 
-            if (empty($errors)) {
-                // Tout est valide → enregistrer la réservation
-                $data->setEvenement($evenement);
-                $em->persist($data);
+            if (empty($errors) && $form->isValid()) {
+                $em->persist($reservation);
                 $em->flush();
 
                 $this->addFlash('success', '✅ Votre réservation est confirmée !');
+                return $this->redirectToRoute('reservation_my', ['id' => $id]);
+            }
 
-                // Redirection pour éviter la soumission multiple
-                return $this->redirectToRoute('evenement_show', ['id' => $id]);
-            } else {
-                // Afficher toutes les erreurs
-                foreach ($errors as $err) {
-                    $this->addFlash('error', $err);
-                }
+            foreach ($errors as $error) {
+                $this->addFlash('error', $error);
             }
         }
 
         return $this->render('events/show.html.twig', [
             'evenement' => $evenement,
-            'form' => $form->createView(),
+            'form'      => $form,
+        ]);
+    }
+
+    #[Route('/events/{id}/edit', name: 'reservation_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        int $id,
+        Request $request,
+        EntityManagerInterface $em,
+        InscriptionEvenementRepository $reservationRepo
+    ): Response {
+        $reservation = $reservationRepo->find($id);
+
+        if (!$reservation) {
+            throw $this->createNotFoundException('Réservation introuvable.');
+        }
+
+        $evenement = $reservation->getEvenement();
+        $form = $this->createForm(InscriptionEvenementType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $errors = [];
+
+            // Nom
+            $nom = trim($reservation->getNom() ?? '');
+            if (empty($nom)) {
+                $errors[] = 'Le nom est obligatoire.';
+            } elseif (!preg_match("/^[a-zA-ZÀ-ÿ '\-]+$/u", $nom)) {
+                $errors[] = 'Le nom ne doit contenir que des lettres, espaces et tirets.';
+            } elseif (strlen($nom) < 2) {
+                $errors[] = 'Le nom doit contenir au moins 2 caractères.';
+            }
+
+            // Email
+            $email = trim($reservation->getEmail() ?? '');
+            if (empty($email)) {
+                $errors[] = 'L\'email est obligatoire.';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Adresse email invalide.';
+            }
+
+            // Téléphone
+            $tel = trim($reservation->getTelephone() ?? '');
+            if (empty($tel)) {
+                $errors[] = 'Le téléphone est obligatoire.';
+            } elseif (!preg_match('/^[0-9+\s\-]{8,15}$/', $tel)) {
+                $errors[] = 'Téléphone invalide (8 à 15 chiffres).';
+            }
+
+            // Nombre de places
+            $places = $reservation->getNombrePlaces();
+            if (empty($places) || $places <= 0) {
+                $errors[] = 'Le nombre de places doit être supérieur à 0.';
+            } elseif ($places > $evenement->getCapacity()) {
+    $errors[] = 'Maximum ' . $evenement->getCapacity() . ' place(s) disponible(s).';
+}
+
+            if (empty($errors) && $form->isValid()) {
+                $em->flush();
+                $this->addFlash('success', '✅ Réservation modifiée avec succès.');
+                return $this->redirectToRoute('reservation_my');
+            }
+
+            foreach ($errors as $error) {
+                $this->addFlash('error', $error);
+            }
+        }
+
+        return $this->render('evenement/edit_reservation.html.twig', [
+            'form'        => $form,
+            'reservation' => $reservation,
+            'evenement'   => $evenement,
+        ]);
+    }
+
+    #[Route('/mes-reservations', name: 'reservation_my')]
+    public function myReservations(InscriptionEvenementRepository $reservationRepo): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $reservations = $reservationRepo->findBy(['user' => $user]);
+
+        return $this->render('events/my_reservations.html.twig', [
+            'reservations' => $reservations,
         ]);
     }
 }

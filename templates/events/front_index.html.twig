@@ -322,9 +322,11 @@
     <div class="nav-brand">Biz<span>core</span></div>
     <div class="nav-links">
         <a href="#">Accueil</a>
-        <a href="{{ path('evenement_index') }}" class="active">Événements</a>
+        <a href="{{ path('evenement_front') }}" class="active">Événements</a>
+        <a href="{{ path('reservation_my') }}">Mes Réservations</a>
+    
         <a href="#">Coaching</a>
-        <a href="#">Blog</a>
+        <a href="{{ path('frontend_blog_index') }}">Blog</a>
         <a href="#" class="nav-cta">Se connecter</a>
     </div>
 </nav>

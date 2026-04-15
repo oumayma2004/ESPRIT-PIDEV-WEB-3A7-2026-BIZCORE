@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}Paiement Evenement{% endblock %}
+
+{% block body %}
+<style>
+    #content { padding: 0 !important; background: #f8fafc; }
+    .page { min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+    .card { width: 100%; max-width: 560px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); padding: 40px; text-align: center; }
+    .icon { font-size: 60px; margin-bottom: 16px; }
+    .title { font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .subtitle { color: #64748b; line-height: 1.6; margin-bottom: 24px; }
+    .summary { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px; text-align: left; margin-bottom: 24px; }
+    .row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; font-size: 14px; color: #475569; }
+    .row strong { color: #0f172a; }
+    .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 10px; font-weight: 700; text-decoration: none; border: 1px solid #e2e8f0; }
+    .btn-primary { background: #22c55e; color: #fff; border-color: #22c55e; }
+    .btn-secondary { background: #fff; color: #0f172a; }
+</style>
+
+<div class="page">
+    <div class="card">
+        {% if payment_status == 'paid' %}
+            <div class="icon">OK</div>
+            <div class="title">Paiement confirme</div>
+            <p class="subtitle">Votre reservation pour <strong>{{ reservation.evenement.title }}</strong> est maintenant valide.</p>
+        {% else %}
+            <div class="icon">...</div>
+            <div class="title">Paiement en attente</div>
+            <p class="subtitle">Stripe a bien cree la session, mais le paiement n'est pas encore confirme.</p>
+        {% endif %}
+
+        <div class="summary">
+            <div class="row"><span>Reservation</span><strong>#{{ reservation.id }}</strong></div>
+            <div class="row"><span>Evenement</span><strong>{{ reservation.evenement.title }}</strong></div>
+            <div class="row"><span>Montant</span><strong>{{ amount|number_format(2, '.', ' ') }} {{ reservation.devise|upper }}</strong></div>
+            <div class="row"><span>Email</span><strong>{{ customer_email }}</strong></div>
+            <div class="row"><span>Statut</span><strong>{{ payment_status }}</strong></div>
+            <div class="row"><span>Stripe session</span><strong>{{ stripe_session }}</strong></div>
+        </div>
+
+        <div class="actions">
+            <a href="{{ path('reservation_my') }}" class="btn btn-primary">Mes reservations</a>
+            <a href="{{ path('evenement_front') }}" class="btn btn-secondary">Retour aux evenements</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

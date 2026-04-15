@@ -227,16 +227,9 @@
                 <div class="form-section-title">Statut de la réservation</div>
 
                 <div class="form-group">
-                    {{ form_label(form.statut) }}
-                    {{ form_widget(form.statut) }}
-                    {% if form.statut.vars.errors|length > 0 %}
-                        <ul class="form-errors">
-                            {% for error in form.statut.vars.errors %}
-                                <li>{{ error.message }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
+    <label>Statut</label>
+    <input type="text" value="{{ reservation.statut }}" disabled style="background:#f8fafc; color:#64748b;">
+</div>
 
                 {{ form_rest(form) }}
 
