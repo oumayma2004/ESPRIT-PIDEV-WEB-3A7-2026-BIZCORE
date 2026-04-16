@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\HasLifecycleCallbacks]
 class Notification
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'id_notification')]
-    private ?int $id = null;
+   #[ORM\Id]
+#[ORM\GeneratedValue(strategy: 'AUTO')]
+#[ORM\Column(name: 'id_notification', type: 'integer')]
+private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'id_user', referencedColumnName: 'id_user', nullable: false, onDelete: 'CASCADE')]

@@ -365,6 +365,40 @@ class __TwigTemplate_ecc058c66df9ac9a47512303de3b0b2f extends Template
         // line 233
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 233, $this->source); })()), "description", [], "any", false, false, false, 233), "html", null, true);
         yield "</div>
+                        <div style=\"margin-top: 20px; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0;\">
+                            <iframe
+                                width=\"100%\"
+                                height=\"200\"
+                                style=\"border: 0; display: block;\"
+                                loading=\"lazy\"
+                                referrerpolicy=\"no-referrer-when-downgrade\"
+                                src=\"https://maps.google.com/maps?q=";
+        // line 241
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 241, $this->source); })()), "lieu", [], "any", false, false, false, 241)), "html", null, true);
+        yield "&output=embed\">
+                            </iframe>
+                            <div style=\"padding: 12px 14px; display: flex; align-items: center; gap: 10px; background: #f8fafc; border-top: 1px solid #e2e8f0;\">
+                                <div style=\"flex: 1;\">
+                                    <div style=\"font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;\">LIEU</div>
+                                    <div style=\"font-size: 13px; font-weight: 600; color: #0f172a;\">";
+        // line 246
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 246, $this->source); })()), "lieu", [], "any", false, false, false, 246), "html", null, true);
+        yield "</div>
+                                </div>
+                                <a href=\"https://www.google.com/maps/dir/?api=1&destination=";
+        // line 248
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 248, $this->source); })()), "lieu", [], "any", false, false, false, 248)), "html", null, true);
+        yield "\"
+                                   target=\"_blank\" rel=\"noopener\"
+                                   style=\"display: inline-flex; align-items: center; gap: 6px; background: #22c55e; color: #fff;
+                                          padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 700;
+                                          text-decoration: none; white-space: nowrap;\">
+                                    📍 Itinéraire
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     </div>
                 </div>
 
@@ -398,7 +432,7 @@ class __TwigTemplate_ecc058c66df9ac9a47512303de3b0b2f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  366 => 233,  358 => 228,  351 => 224,  344 => 220,  337 => 216,  329 => 211,  320 => 204,  316 => 202,  308 => 200,  306 => 199,  297 => 193,  294 => 192,  285 => 190,  280 => 189,  271 => 187,  267 => 186,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  390 => 248,  385 => 246,  377 => 241,  366 => 233,  358 => 228,  351 => 224,  344 => 220,  337 => 216,  329 => 211,  320 => 204,  316 => 202,  308 => 200,  306 => 199,  297 => 193,  294 => 192,  285 => 190,  280 => 189,  271 => 187,  267 => 186,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -636,12 +670,37 @@ class __TwigTemplate_ecc058c66df9ac9a47512303de3b0b2f extends Template
 
                         <div class=\"detail-desc-title\">À propos de cet événement</div>
                         <div class=\"detail-desc\">{{ evenement.description }}</div>
+                        <div style=\"margin-top: 20px; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0;\">
+                            <iframe
+                                width=\"100%\"
+                                height=\"200\"
+                                style=\"border: 0; display: block;\"
+                                loading=\"lazy\"
+                                referrerpolicy=\"no-referrer-when-downgrade\"
+                                src=\"https://maps.google.com/maps?q={{ evenement.lieu|url_encode }}&output=embed\">
+                            </iframe>
+                            <div style=\"padding: 12px 14px; display: flex; align-items: center; gap: 10px; background: #f8fafc; border-top: 1px solid #e2e8f0;\">
+                                <div style=\"flex: 1;\">
+                                    <div style=\"font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;\">LIEU</div>
+                                    <div style=\"font-size: 13px; font-weight: 600; color: #0f172a;\">{{ evenement.lieu }}</div>
+                                </div>
+                                <a href=\"https://www.google.com/maps/dir/?api=1&destination={{ evenement.lieu|url_encode }}\"
+                                   target=\"_blank\" rel=\"noopener\"
+                                   style=\"display: inline-flex; align-items: center; gap: 6px; background: #22c55e; color: #fff;
+                                          padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 700;
+                                          text-decoration: none; white-space: nowrap;\">
+                                    📍 Itinéraire
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     </div>
                 </div>
 
 
 
 {% endblock %}
-", "evenement/show.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\evenement\\show.html.twig");
+", "evenement/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\evenement\\show.html.twig");
     }
 }

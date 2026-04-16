@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'evenement')]
 class Evenement
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'id_evenement', type: Types::INTEGER)]
-    private ?int $id = null;
+  #[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column(name: 'id_evenement', type: 'integer')]
+private ?int $id = null;
 
     #[ORM\Column(name: 'titre', length: 200)]
     private ?string $title = null;
@@ -32,6 +32,31 @@ class Evenement
 
     #[ORM\Column(name: 'image_url', length: 500, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+#[Assert\NotBlank(message: 'Le lieu est obligatoire.')]
+#[Assert\Length(
+    min: 5,
+    max: 255,
+    minMessage: 'Le lieu doit contenir au moins {{ limit }} caractères.',
+    maxMessage: 'Le lieu ne peut pas dépasser {{ limit }} caractères.'
+)]
+#[Assert\Regex(
+    pattern: '/^[a-zA-ZÀ-ÿ0-9\s\,\.\-\/]+$/u',
+    message: 'Le lieu contient des caractères non valides.'
+)]
+private ?string $lieu = null;
+
+public function getLieu(): ?string
+{
+    return $this->lieu;
+}
+
+public function setLieu(?string $lieu): static
+{
+    $this->lieu = $lieu;
+    return $this;
+}
 
     public function getId(): ?int
     {

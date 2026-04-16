@@ -325,7 +325,7 @@
             <!-- ACTION BAR -->
             <div class="action-bar">
                 <a href="{{ path('evenement_new') }}" class="btn-add">＋ Ajouter un evenement</a>
-                <button class="btn-export" onclick="window.print()">⬆ EXPORT PDF</button>
+                <button class="btn-export" onclick="exportPDF()">⬆ EXPORT PDF</button>
                 <div class="spacer"></div>
                 <div class="search-box">
                     <span class="search-icon">🔍</span>
@@ -522,16 +522,76 @@ function deleteSelected() {
     const checked = [...document.querySelectorAll('.row-check:checked')];
     if (checked.length === 0) { alert('Sélectionnez au moins un événement.'); return; }
     if (!confirm('Supprimer ' + checked.length + ' événement(s) ?')) return;
-    checked.forEach(c => {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '/evenement/' + c.value + '/delete';
-        const token = document.createElement('input');
-        token.type = 'hidden'; token.name = '_token';
-        form.appendChild(token);
-        document.body.appendChild(form);
-        form.submit();
+
+    let index = 0;
+
+    function deleteNext() {
+        if (index >= checked.length) return;
+        const id = checked[index].value;
+        index++;
+
+        fetch('/evenement/' + id + '/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: '_token=' + encodeURIComponent(
+                document.querySelector(`input[value="${id}"]`)
+                    ?.closest('tr')
+                    ?.querySelector('input[name="_token"]')
+                    ?.value || ''
+            )
+        }).then(() => {
+            // Remove row from DOM
+            const row = document.querySelector(`.row-check[value="${id}"]`)?.closest('tr');
+            if (row) row.remove();
+            deleteNext();
+        }).catch(() => deleteNext());
+    }
+
+    deleteNext();
+}
+
+function exportPDF() {
+    const rows = document.querySelectorAll('#eventsTable tbody tr:not(.empty-row)');
+    
+    let tableHTML = `
+        <html><head><style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            h2 { color: #1e293b; margin-bottom: 16px; }
+            table { width: 100%; border-collapse: collapse; font-size: 13px; }
+            thead tr { background: #1e293b; color: #fff; }
+            th { padding: 10px 12px; text-align: left; }
+            td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; color: #475569; }
+            tr:nth-child(even) td { background: #f8fafc; }
+            .price { background: #dcfce7; color: #16a34a; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
+        </style></head><body>
+        <h2>📋 Gestion des Événements</h2>
+        <table>
+            <thead><tr>
+                <th>ID</th><th>Titre</th><th>Description</th>
+                <th>Prix</th><th>Capacité</th><th>Date</th>
+            </tr></thead>
+            <tbody>
+    `;
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 9) return;
+        tableHTML += `<tr>
+            <td>${cells[1].textContent.trim()}</td>
+            <td>${cells[3].textContent.trim()}</td>
+            <td>${cells[4].textContent.trim()}</td>
+            <td><span class="price">${cells[5].textContent.trim()}</span></td>
+            <td>${cells[6].textContent.trim()}</td>
+            <td>${cells[7].textContent.trim()}</td>
+        </tr>`;
     });
+
+    tableHTML += `</tbody></table></body></html>`;
+
+    const win = window.open('', '_blank');
+    win.document.write(tableHTML);
+    win.document.close();
+    win.print();
 }
 </script>
 

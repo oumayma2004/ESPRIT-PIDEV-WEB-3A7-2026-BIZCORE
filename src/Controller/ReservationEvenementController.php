@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ReservationEvenementController extends AbstractController
 {
@@ -101,7 +102,6 @@ class ReservationEvenementController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/reservations/{id}/edit', name: 'reservation_edit')]
     public function edit(InscriptionEvenement $reservation, Request $request, EntityManagerInterface $em): Response
     {
@@ -136,8 +136,8 @@ class ReservationEvenementController extends AbstractController
 
         return $this->render('reservation/edit.html.twig', [
             'reservation' => $reservation,
-            'form' => $form,
-            'evenement' => $evenement,
+            'form'        => $form,
+            'evenement'   => $evenement,
         ]);
     }
 
@@ -172,7 +172,7 @@ class ReservationEvenementController extends AbstractController
         }
     }
 
-    #[Route('/reservations/payment/success', name: 'reservation_payment_success')]
+       #[Route('/reservations/payment/success', name: 'reservation_payment_success')]
     public function paymentSuccess(
         Request $request,
         InscriptionEvenementRepository $repo,
@@ -338,46 +338,46 @@ class ReservationEvenementController extends AbstractController
     }
 
     private function createStripeCheckoutSession(InscriptionEvenement $reservation): StripeSession
-{
-    $secretKey = $this->getStripeSecretKey();
-    Stripe::setApiKey($secretKey);
+    {
+        $secretKey = $this->getStripeSecretKey();
+        Stripe::setApiKey($secretKey);
 
-    $evenement = $reservation->getEvenement();
-    $currency = 'eur'; // ← only change: TND not supported by Stripe
-    $amount = $reservation->getMontantTotal() ?? $this->calculateReservationTotal($evenement, $reservation);
-    $amountCents = (int) round(((float) $amount) * 100);
+        $evenement = $reservation->getEvenement();
+        $currency = 'eur';
+        $amount = $reservation->getMontantTotal() ?? $this->calculateReservationTotal($evenement, $reservation);
+        $amountCents = (int) round(((float) $amount) * 100);
 
-    $successBase = $this->generateUrl('reservation_payment_success', [], UrlGeneratorInterface::ABSOLUTE_URL);
-    $cancelUrl = $this->generateUrl('reservation_payment_cancel', ['id' => $reservation->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $successBase = $this->generateUrl('reservation_payment_success', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $cancelUrl = $this->generateUrl('reservation_payment_cancel', ['id' => $reservation->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
-    return StripeSession::create([
-        'payment_method_types' => ['card'],
-        'mode' => 'payment',
-        'client_reference_id' => (string) $reservation->getId(),
-        'customer_email' => $reservation->getEmail(),
-        'metadata' => [
-            'reservation_id' => (string) $reservation->getId(),
-            'event_id'       => (string) $evenement?->getId(),
-            'event_title'    => (string) $evenement?->getTitle(),
-        ],
-        'line_items' => [[
-            'price_data' => [
-                'currency' => $currency,
-                'product_data' => [
-                    'name' => 'Reservation evenement - ' . ($evenement?->getTitle() ?? 'BizCore'),
-                ],
-                'unit_amount' => $amountCents,
+        return StripeSession::create([
+            'payment_method_types' => ['card'],
+            'mode'                 => 'payment',
+            'client_reference_id'  => (string) $reservation->getId(),
+            'customer_email'       => $reservation->getEmail(),
+            'metadata'             => [
+                'reservation_id' => (string) $reservation->getId(),
+                'event_id'       => (string) $evenement?->getId(),
+                'event_title'    => (string) $evenement?->getTitle(),
             ],
-            'quantity' => 1,
-        ]],
-        'success_url' => $successBase . '?session_id={CHECKOUT_SESSION_ID}',
-        'cancel_url'  => $cancelUrl,
-    ]);
-}
+            'line_items' => [[
+                'price_data' => [
+                    'currency'     => $currency,
+                    'product_data' => [
+                        'name' => 'Reservation evenement - ' . ($evenement?->getTitle() ?? 'BizCore'),
+                    ],
+                    'unit_amount'  => $amountCents,
+                ],
+                'quantity' => 1,
+            ]],
+            'success_url' => $successBase . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'  => $cancelUrl,
+        ]);
+    }
 
     private function calculateReservationTotal(?Evenement $evenement, InscriptionEvenement $reservation): string
     {
-        $price = (float) ($evenement?->getPrice() ?? 0);
+        $price  = (float) ($evenement?->getPrice() ?? 0);
         $places = (int) ($reservation->getNombrePlaces() ?? 1);
 
         return number_format($price * max(1, $places), 2, '.', '');
@@ -399,25 +399,63 @@ class ReservationEvenementController extends AbstractController
             return;
         }
 
-        $owner = $reservation->getUser();
+        $owner       = $reservation->getUser();
         $currentUser = $this->getUser();
 
         if ($owner !== null && $owner !== $currentUser) {
             throw $this->createAccessDeniedException('Vous ne pouvez pas acceder a cette reservation.');
         }
     }
-    // In any controller, e.g. TicketController.php
-#[Route('/ticket', name: 'ticket_view')]
-public function view(Request $request): Response
-{
-    return $this->render('ticket/view.html.twig', [
-        'id'       => $request->query->get('id'),
-        'customer' => $request->query->get('client'),
-        'event'    => $request->query->get('event'),
-        'seat'     => $request->query->get('seat'),
-        'amount'   => $request->query->get('amount'),
-        'date'     => $request->query->get('date'),
-    ]);
-}
 
+    #[Route('/ticket', name: 'ticket_view')]
+    public function view(Request $request): Response
+    {
+        return $this->render('ticket/view.html.twig', [
+            'id'       => $request->query->get('id'),
+            'customer' => $request->query->get('client'),
+            'event'    => $request->query->get('event'),
+            'seat'     => $request->query->get('seat'),
+            'amount'   => $request->query->get('amount'),
+            'date'     => $request->query->get('date'),
+        ]);
+    }
+
+    #[Route('/reservation/api/notifications', name: 'api_notifications', methods: ['GET'])]
+    public function apiNotifications(InscriptionEvenementRepository $repo): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['success' => false], 401);
+        }
+
+        $reservations = $repo->findBy(
+            ['user' => $user, 'paymentStatus' => 'paid'],
+            ['paidAt' => 'DESC'],
+            20
+        );
+
+        $data = array_map(function ($r) {
+            $paidAt = $r->getPaidAt() ?? new \DateTime();
+            $diff   = (new \DateTime())->diff($paidAt);
+
+            if ($diff->days > 0)       $timeAgo = $diff->days . 'j';
+            elseif ($diff->h > 0)      $timeAgo = $diff->h . 'h';
+            elseif ($diff->i > 0)      $timeAgo = $diff->i . 'min';
+            else                       $timeAgo = "À l'instant";
+
+            return [
+                'id'      => $r->getId(),
+                'message' => '🎟️ Paiement confirmé pour "' . ($r->getEvenement()?->getTitle() ?? 'événement') . '" — ' . $r->getNombrePlaces() . ' place(s) · ' . $r->getMontantTotal() . ' TND',
+                'type'    => 'success',
+                'isRead'  => false,
+                'timeAgo' => $timeAgo,
+            ];
+        }, $reservations);
+
+        return $this->json([
+            'success'       => true,
+            'notifications' => $data,
+            'unreadCount'   => count($data),
+        ]);
+    }
 }

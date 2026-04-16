@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_front.html.twig' %}
 
 {% block title %}Événements{% endblock %}
 
@@ -327,7 +327,16 @@
     
         <a href="#">Coaching</a>
         <a href="{{ path('frontend_blog_index') }}">Blog</a>
-        <a href="#" class="nav-cta">Se connecter</a>
+        {% if app.user %}
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:36px; height:36px; background:#22c55e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:#0f1117;">
+            {{ app.user.prenom is defined ? app.user.prenom|first|upper : app.user.email|first|upper }}
+        </div>
+        <a href="{{ path('app_logout') }}" style="font-size:13px; font-weight:600; color:#64748b; text-decoration:none;">Déconnexion</a>
+    </div>
+{% else %}
+    <a href="{{ path('app_login') }}" class="nav-cta">Se connecter</a>
+{% endif %}
     </div>
 </nav>
 
@@ -358,7 +367,15 @@
                 {% else %}
                     <div class="card-img-placeholder">📅</div>
                 {% endif %}
-                <div class="card-badge">Disponible</div>
+                {% if evenement.isFull %}
+    <span class="card-badge" style="background:#dc2626;">
+        ❌ Complet
+    </span>
+{% else %}
+    <span class="card-badge">
+        ✓ Disponible
+    </span>
+{% endif %}
                 <div class="card-price">{{ evenement.price }} DT</div>
             </div>
 
@@ -372,7 +389,7 @@
                     </div>
                     <div class="meta-row">
                         <div class="dot"></div>
-                        👥 {{ evenement.capacity }} places disponibles
+                        👥 {{ evenement.capacity }} places
                     </div>
                 </div>
             </div>

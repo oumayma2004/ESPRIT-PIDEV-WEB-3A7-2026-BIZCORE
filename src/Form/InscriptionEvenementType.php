@@ -34,6 +34,17 @@ class InscriptionEvenementType extends AbstractType
                 'attr' => ['class' => 'form-control', 'min' => 1],
             ]);
     }
+    public function countTotalPlacesByEvent(Evenement $event): int
+{
+    return (int) $this->createQueryBuilder('i')
+        ->select('SUM(i.nombrePlaces)')
+        ->where('i.evenement = :event')
+        ->andWhere('i.statut = :statut')
+        ->setParameter('event', $event)
+        ->setParameter('statut', 'confirme')
+        ->getQuery()
+        ->getSingleScalarResult() ?? 0;
+}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

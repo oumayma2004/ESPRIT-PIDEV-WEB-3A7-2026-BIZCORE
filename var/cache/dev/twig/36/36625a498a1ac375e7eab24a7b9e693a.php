@@ -1395,6 +1395,6 @@ function cap(str) {
 
 </body>
 </html>
-", "blog/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\blog\\index.html.twig");
+", "blog/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\blog\\index.html.twig");
     }
 }

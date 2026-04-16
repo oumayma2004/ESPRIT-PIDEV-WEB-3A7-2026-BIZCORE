@@ -132,6 +132,11 @@
                             {{ form_widget(form.description, {'attr': {'class': form.description.vars.errors|length > 0 ? 'is-invalid' : '', 'rows': 4}}) }}
                             {% for error in form.description.vars.errors %}<div class="form-error">⚠ {{ error.message }}</div>{% endfor %}
                         </div>
+                        <div class="form-group full">
+    {{ form_label(form.lieu) }}
+    {{ form_widget(form.lieu, {'attr': {'class': form.lieu.vars.errors|length > 0 ? 'is-invalid' : '', 'placeholder': 'Ex: Avenue Habib Bourguiba, Tunis'}}) }}
+    {% for error in form.lieu.vars.errors %}<div class="form-error">⚠ {{ error.message }}</div>{% endfor %}
+</div>
 
                         <div class="form-group full">
                             {{ form_label(form.image) }}

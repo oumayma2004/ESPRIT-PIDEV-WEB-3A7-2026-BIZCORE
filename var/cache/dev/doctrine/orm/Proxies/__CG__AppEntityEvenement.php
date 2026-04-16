@@ -27,6 +27,7 @@ class Evenement extends \App\Entity\Evenement implements \Doctrine\ORM\Proxy\Int
         "\0".parent::class."\0".'description' => [parent::class, 'description', null, 16],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null, 16],
         "\0".parent::class."\0".'image' => [parent::class, 'image', null, 16],
+        "\0".parent::class."\0".'lieu' => [parent::class, 'lieu', null, 16],
         "\0".parent::class."\0".'price' => [parent::class, 'price', null, 16],
         "\0".parent::class."\0".'title' => [parent::class, 'title', null, 16],
         'capacity' => [parent::class, 'capacity', null, 16],
@@ -34,6 +35,7 @@ class Evenement extends \App\Entity\Evenement implements \Doctrine\ORM\Proxy\Int
         'description' => [parent::class, 'description', null, 16],
         'id' => [parent::class, 'id', null, 16],
         'image' => [parent::class, 'image', null, 16],
+        'lieu' => [parent::class, 'lieu', null, 16],
         'price' => [parent::class, 'price', null, 16],
         'title' => [parent::class, 'title', null, 16],
     ];

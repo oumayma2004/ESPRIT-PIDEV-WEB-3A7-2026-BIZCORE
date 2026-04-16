@@ -38,7 +38,7 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
     protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
     {
         // line 1
-        return "base.html.twig";
+        return "base_front.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = []): iterable
@@ -47,7 +47,7 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "events/front_index.html.twig"));
 
-        $this->parent = $this->load("base.html.twig", 1);
+        $this->parent = $this->load("base_front.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -415,8 +415,32 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
         // line 329
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("frontend_blog_index");
         yield "\">Blog</a>
-        <a href=\"#\" class=\"nav-cta\">Se connecter</a>
+        ";
+        // line 330
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 330, $this->source); })()), "user", [], "any", false, false, false, 330)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 331
+            yield "    <div style=\"display:flex; align-items:center; gap:10px;\">
+        <div style=\"width:36px; height:36px; background:#22c55e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:#0f1117;\">
+            ";
+            // line 333
+            yield ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "user", [], "any", false, true, false, 333), "prenom", [], "any", true, true, false, 333)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::upper($this->env->getCharset(), Twig\Extension\CoreExtension::first($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 333, $this->source); })()), "user", [], "any", false, false, false, 333), "prenom", [], "any", false, false, false, 333))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::upper($this->env->getCharset(), Twig\Extension\CoreExtension::first($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 333, $this->source); })()), "user", [], "any", false, false, false, 333), "email", [], "any", false, false, false, 333))), "html", null, true)));
+            yield "
+        </div>
+        <a href=\"";
+            // line 335
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+            yield "\" style=\"font-size:13px; font-weight:600; color:#64748b; text-decoration:none;\">Déconnexion</a>
     </div>
+";
+        } else {
+            // line 338
+            yield "    <a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+            yield "\" class=\"nav-cta\">Se connecter</a>
+";
+        }
+        // line 340
+        yield "    </div>
 </nav>
 
 <!-- HERO -->
@@ -435,71 +459,84 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
     <div class=\"section-header\">
         <div class=\"section-title\">Tous les événements</div>
         <div class=\"section-count\">";
-        // line 349
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["evenements"]) || array_key_exists("evenements", $context) ? $context["evenements"] : (function () { throw new RuntimeError('Variable "evenements" does not exist.', 349, $this->source); })())), "html", null, true);
+        // line 358
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["evenements"]) || array_key_exists("evenements", $context) ? $context["evenements"] : (function () { throw new RuntimeError('Variable "evenements" does not exist.', 358, $this->source); })())), "html", null, true);
         yield " événement";
-        yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["evenements"]) || array_key_exists("evenements", $context) ? $context["evenements"] : (function () { throw new RuntimeError('Variable "evenements" does not exist.', 349, $this->source); })())) != 1)) ? ("s") : (""));
+        yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["evenements"]) || array_key_exists("evenements", $context) ? $context["evenements"] : (function () { throw new RuntimeError('Variable "evenements" does not exist.', 358, $this->source); })())) != 1)) ? ("s") : (""));
         yield "</div>
     </div>
 
     <div class=\"events-grid\" id=\"eventsGrid\">
         ";
-        // line 353
+        // line 362
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["evenements"]) || array_key_exists("evenements", $context) ? $context["evenements"] : (function () { throw new RuntimeError('Variable "evenements" does not exist.', 353, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["evenements"]) || array_key_exists("evenements", $context) ? $context["evenements"] : (function () { throw new RuntimeError('Variable "evenements" does not exist.', 362, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["evenement"]) {
-            // line 354
+            // line 363
             yield "        <div class=\"event-card\" data-title=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "title", [], "any", false, false, false, 354)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "title", [], "any", false, false, false, 363)), "html", null, true);
             yield "\">
             <div class=\"card-img\">
                 ";
-            // line 356
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "image", [], "any", false, false, false, 356)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 357
+            // line 365
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "image", [], "any", false, false, false, 365)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 366
                 yield "                    <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "image", [], "any", false, false, false, 357))), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "image", [], "any", false, false, false, 366))), "html", null, true);
                 yield "\" alt=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "title", [], "any", false, false, false, 357), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "title", [], "any", false, false, false, 366), "html", null, true);
                 yield "\">
                 ";
             } else {
-                // line 359
+                // line 368
                 yield "                    <div class=\"card-img-placeholder\">📅</div>
                 ";
             }
-            // line 361
-            yield "                <div class=\"card-badge\">Disponible</div>
-                <div class=\"card-price\">";
-            // line 362
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "price", [], "any", false, false, false, 362), "html", null, true);
+            // line 370
+            yield "                ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "isFull", [], "any", false, false, false, 370)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 371
+                yield "    <span class=\"card-badge\" style=\"background:#dc2626;\">
+        ❌ Complet
+    </span>
+";
+            } else {
+                // line 375
+                yield "    <span class=\"card-badge\">
+        ✓ Disponible
+    </span>
+";
+            }
+            // line 379
+            yield "                <div class=\"card-price\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "price", [], "any", false, false, false, 379), "html", null, true);
             yield " DT</div>
             </div>
 
             <div class=\"card-body\">
                 <div class=\"card-title\">";
-            // line 366
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "title", [], "any", false, false, false, 366), "html", null, true);
+            // line 383
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "title", [], "any", false, false, false, 383), "html", null, true);
             yield "</div>
                 <div class=\"card-desc\">";
-            // line 367
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((Twig\Extension\CoreExtension::slice($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "description", [], "any", false, false, false, 367), 0, 100) . "..."), "html", null, true);
+            // line 384
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((Twig\Extension\CoreExtension::slice($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "description", [], "any", false, false, false, 384), 0, 100) . "..."), "html", null, true);
             yield "</div>
                 <div class=\"card-meta\">
                     <div class=\"meta-row\">
                         <div class=\"dot\"></div>
                         📆 ";
-            // line 371
-            yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "date", [], "any", false, false, false, 371)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "date", [], "any", false, false, false, 371), "d/m/Y à H:i"), "html", null, true)) : ("Date à confirmer"));
+            // line 388
+            yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "date", [], "any", false, false, false, 388)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "date", [], "any", false, false, false, 388), "d/m/Y à H:i"), "html", null, true)) : ("Date à confirmer"));
             yield "
                     </div>
                     <div class=\"meta-row\">
                         <div class=\"dot\"></div>
                         👥 ";
-            // line 375
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "capacity", [], "any", false, false, false, 375), "html", null, true);
-            yield " places disponibles
+            // line 392
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "capacity", [], "any", false, false, false, 392), "html", null, true);
+            yield " places
                     </div>
                 </div>
             </div>
@@ -507,8 +544,8 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
             <div class=\"card-footer\">
 
                 <a href=\"";
-            // line 382
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "id", [], "any", false, false, false, 382)]), "html", null, true);
+            // line 399
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "id", [], "any", false, false, false, 399)]), "html", null, true);
             yield "\" class=\"btn-reserve\">
     Réserver
 </a> </div>
@@ -516,9 +553,9 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
         ";
             $context['_iterated'] = true;
         }
-        // line 386
+        // line 403
         if (!$context['_iterated']) {
-            // line 387
+            // line 404
             yield "        <div class=\"empty\" style=\"grid-column:1/-1;\">
             <div class=\"empty-icon\">📭</div>
             <h3>Aucun événement disponible</h3>
@@ -529,7 +566,7 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['evenement'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 393
+        // line 410
         yield "    </div>
 </div>
 
@@ -573,12 +610,12 @@ function filterCards() {
      */
     public function getDebugInfo(): array
     {
-        return array (  533 => 393,  522 => 387,  520 => 386,  511 => 382,  501 => 375,  494 => 371,  487 => 367,  483 => 366,  476 => 362,  473 => 361,  469 => 359,  461 => 357,  459 => 356,  453 => 354,  448 => 353,  439 => 349,  416 => 329,  410 => 326,  406 => 325,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  570 => 410,  559 => 404,  557 => 403,  548 => 399,  538 => 392,  531 => 388,  524 => 384,  520 => 383,  512 => 379,  506 => 375,  500 => 371,  497 => 370,  493 => 368,  485 => 366,  483 => 365,  477 => 363,  472 => 362,  463 => 358,  443 => 340,  437 => 338,  431 => 335,  426 => 333,  422 => 331,  420 => 330,  416 => 329,  410 => 326,  406 => 325,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{% extends 'base_front.html.twig' %}
 
 {% block title %}Événements{% endblock %}
 
@@ -907,7 +944,16 @@ function filterCards() {
     
         <a href=\"#\">Coaching</a>
         <a href=\"{{ path('frontend_blog_index') }}\">Blog</a>
-        <a href=\"#\" class=\"nav-cta\">Se connecter</a>
+        {% if app.user %}
+    <div style=\"display:flex; align-items:center; gap:10px;\">
+        <div style=\"width:36px; height:36px; background:#22c55e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:#0f1117;\">
+            {{ app.user.prenom is defined ? app.user.prenom|first|upper : app.user.email|first|upper }}
+        </div>
+        <a href=\"{{ path('app_logout') }}\" style=\"font-size:13px; font-weight:600; color:#64748b; text-decoration:none;\">Déconnexion</a>
+    </div>
+{% else %}
+    <a href=\"{{ path('app_login') }}\" class=\"nav-cta\">Se connecter</a>
+{% endif %}
     </div>
 </nav>
 
@@ -938,7 +984,15 @@ function filterCards() {
                 {% else %}
                     <div class=\"card-img-placeholder\">📅</div>
                 {% endif %}
-                <div class=\"card-badge\">Disponible</div>
+                {% if evenement.isFull %}
+    <span class=\"card-badge\" style=\"background:#dc2626;\">
+        ❌ Complet
+    </span>
+{% else %}
+    <span class=\"card-badge\">
+        ✓ Disponible
+    </span>
+{% endif %}
                 <div class=\"card-price\">{{ evenement.price }} DT</div>
             </div>
 
@@ -952,7 +1006,7 @@ function filterCards() {
                     </div>
                     <div class=\"meta-row\">
                         <div class=\"dot\"></div>
-                        👥 {{ evenement.capacity }} places disponibles
+                        👥 {{ evenement.capacity }} places
                     </div>
                 </div>
             </div>
@@ -986,6 +1040,6 @@ function filterCards() {
 }
 </script>
 {% endblock %}
-", "events/front_index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\events\\front_index.html.twig");
+", "events/front_index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\events\\front_index.html.twig");
     }
 }

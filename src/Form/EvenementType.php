@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EvenementType extends AbstractType
 {
@@ -72,6 +73,29 @@ class EvenementType extends AbstractType
                     new Positive(message: 'La capacité doit être un nombre positif.'),
                 ],
             ])
+            ->add('lieu', TextType::class, [
+    'label'    => 'Lieu / Adresse',
+    'required' => true,
+    'attr'     => [
+        'placeholder' => 'Ex: Avenue Habib Bourguiba, Tunis',
+        'class'       => 'form-control',
+        'minlength'   => 5,
+        'maxlength'   => 255,
+    ],
+    'constraints' => [
+        new NotBlank(message: 'Le lieu est obligatoire.'),
+        new Length([
+            'min'        => 5,
+            'max'        => 255,
+            'minMessage' => 'Le lieu doit contenir au moins {{ limit }} caractères.',
+            'maxMessage' => 'Le lieu ne peut pas dépasser {{ limit }} caractères.',
+        ]),
+        new Regex([
+            'pattern' => '/^[a-zA-ZÀ-ÿ0-9\s\,\.\-\/]+$/u',
+            'message' => 'Le lieu contient des caractères non valides.',
+        ]),
+    ],
+])
             ->add('image', FileType::class, [
                 'label' => 'Image (jpg/png/gif)',
                 'mapped' => false,

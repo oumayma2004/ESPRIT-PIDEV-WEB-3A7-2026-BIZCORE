@@ -97,43 +97,27 @@
 
     {% if paidReservations|length > 0 %}
         <div style="margin-bottom: 24px;">
-            <div style="font-size:13px; font-weight:700; color:#16a34a; margin-bottom:10px;">
-                ✅ Réservations payées
-            </div>
-            {% for r in paidReservations %}
-                <div style="background:#dcfce7; border:1px solid #bbf7d0; border-radius:10px; padding:14px 18px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;">
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <span style="font-size:20px;">🎟️</span>
-                        <div>
-                            <div style="font-size:14px; font-weight:700; color:#0f172a;">{{ r.evenement.title }}</div>
-                            <div style="font-size:12px; color:#16a34a;">
-                                {{ r.nombrePlaces }} place(s) · {{ r.montantTotal }} TND · {{ r.dateReservation ? r.dateReservation|date('d/m/Y') : '-' }}
-                            </div>
-                        </div>
-                    </div>
-                    <span class="badge badge-green">✅ Payée</span>
-                </div>
-            {% endfor %}
+            
+                
         </div>
     {% endif %}
 
     {# Pending reservations as normal cards #}
     <div class="section-header">
-        <div class="section-title">{{ reservations|length }} réservation{{ reservations|length != 1 ? 's' : '' }}</div>
-        <a href="{{ path('evenement_front') }}" class="btn-browse">📅 Voir les événements</a>
+        <div class="section-title">{{ pendingReservations|length }} réservation{{ pendingReservations|length != 1 ? 's' : '' }} en attente</div>
+        <a href="{{ path('evenement_front') }}" class="btn-browse">Voir les événements</a>
     </div>
 
     <div class="res-list">
-        {% for r in reservations %}
-        <div class="res-card">
-            <div class="res-card-color {{ r.statut == 'confirmé' ? 'color-green' : 'color-red' }}"></div>
-            <div class="res-card-body">
-
-                {% if r.evenement.image %}
-                    <img src="{{ asset('uploads/' ~ r.evenement.image) }}" class="res-event-img" alt="">
-                {% else %}
-                    <div class="res-event-placeholder">📅</div>
-                {% endif %}
+        {% for r in pendingReservations %}
+            <div class="res-card">
+                <div class="res-card-color color-amber"></div>
+                <div class="res-card-body">
+                    {% if r.evenement.image %}
+                        <img src="{{ asset('uploads/' ~ r.evenement.image) }}" class="res-event-img" alt="">
+                    {% else %}
+                        <div class="res-event-placeholder">EV</div>
+                    {% endif %}
 
                     <div class="res-info">
                         <div class="res-event-title">{{ r.evenement.title }}</div>
@@ -147,26 +131,29 @@
                         </div>
                     </div>
 
-                <div class="res-right">
-                    <span class="badge {{ r.statut == 'confirmé' ? 'badge-green' : 'badge-red' }}">
-                        {{ r.statut|capitalize }}
-                    </span>
-                    <div class="res-actions">
-                        <a href="{{ path('reservation_edit', {'id': r.id}) }}" class="btn-sm btn-edit-sm">✏ Modifier</a>
-                        <form method="post" action="{{ path('reservation_delete', {'id': r.id}) }}" style="display:inline;">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ r.id) }}">
-                            <button class="btn-sm btn-del-sm" onclick="return confirm('Annuler cette réservation ?')">🗑 Annuler</button>
-                        </form>
+                    <div class="res-right">
+                        <span class="badge badge-amber">En attente de paiement</span>
+                        <div class="res-actions">
+                            <a href="{{ path('reservation_edit', {'id': r.id}) }}" class="btn-sm btn-edit-sm">Modifier</a>
+                            <form method="post" action="{{ path('reservation_pay', {'id': r.id}) }}" style="display:inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('pay' ~ r.id) }}">
+                                <button class="btn-sm btn-pay-sm">💳 Payer</button>
+                            </form>
+                            <form method="post" action="{{ path('reservation_delete', {'id': r.id}) }}" style="display:inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ r.id) }}">
+                                <button class="btn-sm btn-del-sm" onclick="return confirm('Annuler cette reservation ?')">Annuler</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         {% else %}
-        <div class="empty">
-            <div class="empty-icon">📭</div>
-            <h3>Aucune réservation</h3>
-            <p>Vous n'avez pas encore réservé d'événement.</p>
-            <a href="{{ path('evenement_front') }}" class="btn-browse">📅 Découvrir les événements</a>
-        </div>
+            <div class="empty">
+                <div class="empty-icon">🎟️</div>
+                <h3>Aucune réservation en attente</h3>
+                <p>Toutes vos réservations sont payées ou vous n'avez pas encore réservé.</p>
+                <a href="{{ path('evenement_front') }}" class="btn-browse">Découvrir les événements</a>
+            </div>
         {% endfor %}
     </div>
 </div>

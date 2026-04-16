@@ -318,15 +318,39 @@ class __TwigTemplate_df6a3b888e1386b2c33ec4401d4d0035 extends Template
         // line 129
         yield "                        </div>
 
+                            <div class=\"form-group full\">
+    ";
+        // line 132
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 132, $this->source); })()), "lieu", [], "any", false, false, false, 132), 'label');
+        yield "
+    ";
+        // line 133
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 133, $this->source); })()), "lieu", [], "any", false, false, false, 133), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 133, $this->source); })()), "lieu", [], "any", false, false, false, 133), "vars", [], "any", false, false, false, 133), "errors", [], "any", false, false, false, 133)) > 0)) ? ("is-invalid") : ("")), "placeholder" => "Ex: Avenue Habib Bourguiba, Tunis"]]);
+        yield "
+    ";
+        // line 134
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 134, $this->source); })()), "lieu", [], "any", false, false, false, 134), "vars", [], "any", false, false, false, 134), "errors", [], "any", false, false, false, 134));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            yield "<div class=\"form-error\">⚠ ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 134), "html", null, true);
+            yield "</div>";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 135
+        yield "</div>
+
                         <div class=\"form-group full\">
                             ";
-        // line 132
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 132, $this->source); })()), "image", [], "any", false, false, false, 132), 'label');
+        // line 138
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 138, $this->source); })()), "image", [], "any", false, false, false, 138), 'label');
         yield "
                             <div class=\"file-upload-wrapper\">
                                 ";
-        // line 134
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 134, $this->source); })()), "image", [], "any", false, false, false, 134), 'widget');
+        // line 140
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 140, $this->source); })()), "image", [], "any", false, false, false, 140), 'widget');
         yield "
                                 <div class=\"file-upload-box\">
                                     <div style=\"font-size:28px; color:#cbd5e1; margin-bottom:6px;\">📎</div>
@@ -336,33 +360,33 @@ class __TwigTemplate_df6a3b888e1386b2c33ec4401d4d0035 extends Template
                                 </div>
                             </div>
                             ";
-        // line 142
+        // line 148
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 142, $this->source); })()), "image", [], "any", false, false, false, 142), "vars", [], "any", false, false, false, 142), "errors", [], "any", false, false, false, 142));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 148, $this->source); })()), "image", [], "any", false, false, false, 148), "vars", [], "any", false, false, false, 148), "errors", [], "any", false, false, false, 148));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
             yield "<div class=\"form-error\">⚠ ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 142), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 148), "html", null, true);
             yield "</div>";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 143
+        // line 149
         yield "                        </div>
                     </div>
                 </div>
 
                 <div class=\"form-actions\">
                     <a href=\"";
-        // line 148
+        // line 154
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_index");
         yield "\" class=\"btn btn-secondary\">✕ Annuler</a>
                     <button type=\"submit\" class=\"btn btn-success\">＋ Ajouter l'événement</button>
                 </div>
 
             ";
-        // line 152
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 152, $this->source); })()), 'form_end');
+        // line 158
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 158, $this->source); })()), 'form_end');
         yield "
         </div>
     </div>
@@ -408,7 +432,7 @@ class __TwigTemplate_df6a3b888e1386b2c33ec4401d4d0035 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  365 => 152,  358 => 148,  351 => 143,  340 => 142,  329 => 134,  324 => 132,  319 => 129,  308 => 128,  304 => 127,  300 => 126,  295 => 123,  284 => 122,  280 => 121,  276 => 120,  271 => 117,  260 => 116,  256 => 115,  252 => 114,  247 => 111,  236 => 110,  232 => 109,  228 => 108,  223 => 105,  212 => 104,  208 => 103,  204 => 102,  198 => 98,  186 => 97,  184 => 96,  173 => 88,  168 => 86,  85 => 5,  75 => 4,  58 => 2,  41 => 1,);
+        return array (  389 => 158,  382 => 154,  375 => 149,  364 => 148,  353 => 140,  348 => 138,  343 => 135,  332 => 134,  328 => 133,  324 => 132,  319 => 129,  308 => 128,  304 => 127,  300 => 126,  295 => 123,  284 => 122,  280 => 121,  276 => 120,  271 => 117,  260 => 116,  256 => 115,  252 => 114,  247 => 111,  236 => 110,  232 => 109,  228 => 108,  223 => 105,  212 => 104,  208 => 103,  204 => 102,  198 => 98,  186 => 97,  184 => 96,  173 => 88,  168 => 86,  85 => 5,  75 => 4,  58 => 2,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -543,6 +567,12 @@ class __TwigTemplate_df6a3b888e1386b2c33ec4401d4d0035 extends Template
                             {% for error in form.description.vars.errors %}<div class=\"form-error\">⚠ {{ error.message }}</div>{% endfor %}
                         </div>
 
+                            <div class=\"form-group full\">
+    {{ form_label(form.lieu) }}
+    {{ form_widget(form.lieu, {'attr': {'class': form.lieu.vars.errors|length > 0 ? 'is-invalid' : '', 'placeholder': 'Ex: Avenue Habib Bourguiba, Tunis'}}) }}
+    {% for error in form.lieu.vars.errors %}<div class=\"form-error\">⚠ {{ error.message }}</div>{% endfor %}
+</div>
+
                         <div class=\"form-group full\">
                             {{ form_label(form.image) }}
                             <div class=\"file-upload-wrapper\">
@@ -582,6 +612,6 @@ class __TwigTemplate_df6a3b888e1386b2c33ec4401d4d0035 extends Template
     }
 </script>
 {% endblock %}
-", "evenement/new.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\evenement\\new.html.twig");
+", "evenement/new.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\evenement\\new.html.twig");
     }
 }

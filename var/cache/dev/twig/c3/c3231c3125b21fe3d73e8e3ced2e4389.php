@@ -3017,6 +3017,6 @@ class __TwigTemplate_d594e34b6a1abe4c8aca588191feaef2 extends Template
     </div>
   </div>
 {% endblock %}
-", "dashboard/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\dashboard\\index.html.twig");
+", "dashboard/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\dashboard\\index.html.twig");
     }
 }

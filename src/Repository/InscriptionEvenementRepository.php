@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\InscriptionEvenement;
+use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -13,8 +14,15 @@ class InscriptionEvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, InscriptionEvenement::class);
     }
 
-    public function findOneByStripeSessionId(string $sessionId): ?InscriptionEvenement
-    {
-        return $this->findOneBy(['stripeSessionId' => $sessionId]);
-    }
+   public function countTotalPlacesByEvent(Evenement $event): int
+{
+    return (int) $this->createQueryBuilder('i')
+        ->select('COALESCE(SUM(i.nombrePlaces), 0)')
+        ->where('i.evenement = :event')
+        ->andWhere('i.statut = :statut')
+        ->setParameter('event', $event)
+        ->setParameter('statut', 'confirme')
+        ->getQuery()
+        ->getSingleScalarResult();
+}
 }

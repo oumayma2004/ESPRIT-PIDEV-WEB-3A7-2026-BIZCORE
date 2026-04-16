@@ -14,10 +14,10 @@ use App\Entity\Role;
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'id_user', type: 'integer')]
-    private ?int $id = null;
+   #[ORM\Id]
+#[ORM\GeneratedValue(strategy: "AUTO")]
+#[ORM\Column(name: "id_user", type: "integer")]
+private ?int $id = null;
 
     #[ORM\Column(length: 100)]
     private string $nom = '';
