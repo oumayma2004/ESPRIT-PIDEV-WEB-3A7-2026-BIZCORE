@@ -1,0 +1,774 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Coachs — Bizcore{% endblock %}
+
+{% block page_title %}GESTION COACHING{% endblock %}
+
+{% block body %}
+<div class="card-panel">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h2 style="font-size: 20px; font-weight: 700; color: #111827; margin: 0;">
+            <span style="color: #20c997;">Liste des Coachs</span>
+            <span style="color: #d1d5db; margin: 0 10px;">|</span>
+            <a href="{{ path('admin_domaine_index') }}" style="color: #111827; text-decoration: none;">Liste des Domaines</a>
+        </h2>
+        <div class="d-flex align-items-center gap-3">
+            <a href="{{ path('admin_coach_new') }}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Ajouter Coach
+            </a>
+            <a href="{{ path('admin_statistics_index') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-chart-bar"></i> Statistiques
+            </a>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="position-relative" style="width: 280px;">
+            <i class="fas fa-search position-absolute" style="left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 13px;"></i>
+            <input type="text" 
+                   id="searchInput"
+                   class="form-control form-control-sm" 
+                   placeholder="Rechercher par nom..."
+                   style="padding-left: 36px; border-radius: 6px; border-color: #d1d5db; font-size: 13px;">
+        </div>
+        <div>
+            <select class="form-select form-select-sm" id="sortSelect" style="width: 180px; font-size: 13px; border-color: #d1d5db;">
+                <option>Trier: Nom (A→Z)</option>
+                <option>Trier: Nom (Z→A)</option>
+                <option>Trier: Expérience ↑</option>
+                <option>Trier: Expérience ↓</option>
+                <option>Trier: Tarif ↑</option>
+                <option>Trier: Tarif ↓</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Domaine</th>
+                    <th>Expérience</th>
+                    <th>Tarif (DT/H)</th>
+                    <th>Disponibilité</th>
+                    <th>Téléphone</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody id="coachTableBody">
+                {% for coach in coaches %}
+                <tr data-nom="{{ coach.nom|lower }}" data-experience="{{ coach.experienceAnnees }}" data-tarif="{{ coach.tarifHoraire }}">
+                    <td>
+                        <a href="{{ path('admin_coach_show', {'id': coach.id}) }}">
+                            {{ coach.nom }}
+                        </a>
+                    </td>
+                    <td>{{ coach.prenom }}</td>
+                    <td>
+                        {% if coach.domaine %}
+                            <span style="background:#eff6ff;color:#1d4ed8;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">
+                                {{ coach.domaine }}
+                            </span>
+                        {% else %}
+                            <span style="color:#9ca3af;">—</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ coach.experienceAnnees }}</td>
+                    <td>{{ coach.tarifHoraire }}</td>
+                    <td>
+                        {% if coach.disponibilite == 'Disponible' %}
+                            <span class="badge-disponible">Disponible</span>
+                        {% else %}
+                            <span class="badge-indisponible">Indisponible</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ coach.numTel }}</td>
+                    <td>{{ coach.noteMoyenne ?? 'N/A' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" class="text-center" style="padding: 40px; color: #9ca3af;">
+                        <i class="fas fa-users fa-2x mb-2" style="display: block;"></i>
+                        Aucun coach trouvé
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mt-3">
+        <div style="font-size: 13px; color: #6b7280;">
+            <span id="coachCount">{{ coaches|length }}</span> coach(s) trouvé(s)
+        </div>
+        <a href="{{ path('admin_coach_export_csv') }}" class="btn btn-success btn-sm">
+            <i class="fas fa-file-csv"></i> Exporter CSV
+        </a>
+    </div>
+</div>
+
+<!-- Modal Edit Coach -->
+<div class="modal fade" id="editCoachModal" tabindex="-1" aria-labelledby="editCoachModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 20px 60px rgba(0,0,0,0.2);">
+      <div class="modal-header" style="background: linear-gradient(135deg, #1C2B3A, #243447); border-radius: 12px 12px 0 0; padding: 20px 24px;">
+        <h5 class="modal-title" id="editCoachModalLabel" style="color: #fff; font-size: 16px; font-weight: 700; margin: 0;">
+          <i class="fas fa-pencil-alt" style="color: #20c997; margin-right: 8px;"></i>
+          Modifier le coach : <span id="modalCoachName"></span>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body" style="padding: 28px;">
+        <div id="modalFormContainer">
+          <div id="modalLoadingSpinner" style="text-align: center; padding: 40px; color: #9ca3af;">
+            <i class="fas fa-spinner fa-spin fa-2x" style="display: block; margin-bottom: 12px;"></i>
+            Chargement...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modalShake {
+    0%,100% { transform: translateX(0); }
+    25%      { transform: translateX(-5px); }
+    75%      { transform: translateX(5px); }
+}
+.modal-is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.2) !important;
+    animation: modalShake 0.3s ease-in-out;
+}
+.modal-is-valid {
+    border-color: #20c997 !important;
+    box-shadow: 0 0 0 0.2rem rgba(32,201,151,.15) !important;
+}
+#modal-phone-local.phone-valid {
+    border-color: #20c997 !important;
+    box-shadow: 0 0 0 0.2rem rgba(32,201,151,.15) !important;
+}
+#modal-phone-local.phone-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.2) !important;
+}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+// Search functionality
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('#coachTableBody tr');
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const nom = row.getAttribute('data-nom');
+            if (nom && nom.includes(searchTerm)) {
+                row.style.display = '';
+                visibleCount++;
+            } else if (nom) {
+                row.style.display = 'none';
+            }
+        });
+
+        const countEl = document.getElementById('coachCount');
+        if (countEl) countEl.textContent = visibleCount;
+    });
+}
+
+// Sort functionality
+const sortSelect = document.getElementById('sortSelect');
+if (sortSelect) {
+    sortSelect.addEventListener('change', function(e) {
+        const tbody = document.getElementById('coachTableBody');
+        const rows = Array.from(tbody.querySelectorAll('tr')).filter(row => row.getAttribute('data-nom'));
+        const sortType = e.target.value;
+
+        rows.sort((a, b) => {
+            if (sortType.includes('Nom (A→Z)')) {
+                return a.getAttribute('data-nom').localeCompare(b.getAttribute('data-nom'));
+            } else if (sortType.includes('Nom (Z→A)')) {
+                return b.getAttribute('data-nom').localeCompare(a.getAttribute('data-nom'));
+            } else if (sortType.includes('Expérience ↑')) {
+                return parseInt(a.getAttribute('data-experience')) - parseInt(b.getAttribute('data-experience'));
+            } else if (sortType.includes('Expérience ↓')) {
+                return parseInt(b.getAttribute('data-experience')) - parseInt(a.getAttribute('data-experience'));
+            } else if (sortType.includes('Tarif ↑')) {
+                return parseFloat(a.getAttribute('data-tarif')) - parseFloat(b.getAttribute('data-tarif'));
+            } else if (sortType.includes('Tarif ↓')) {
+                return parseFloat(b.getAttribute('data-tarif')) - parseFloat(a.getAttribute('data-tarif'));
+            }
+            return 0;
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+    });
+}
+
+// Export CSV
+function exportCSV() {
+    const rows = Array.from(document.querySelectorAll('#coachTableBody tr')).filter(row => row.style.display !== 'none' && row.getAttribute('data-nom'));
+    let csv = 'Nom,Prénom,Expérience,Tarif,Disponibilité,Téléphone,Note\n';
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length > 1) {
+            const rowData = [
+                cells[0].textContent.trim(),
+                cells[1].textContent.trim(),
+                cells[2].textContent.trim(),
+                cells[3].textContent.trim(),
+                cells[4].textContent.trim(),
+                cells[5].textContent.trim(),
+                cells[6].textContent.trim()
+            ];
+            csv += rowData.join(',') + '\n';
+        }
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'coachs_export.csv';
+    a.click();
+}
+
+// ── Edit Coach Modal with full validation ─────────────────────────────────
+async function openEditModal(coachId) {
+    var modal = new bootstrap.Modal(document.getElementById('editCoachModal'));
+    modal.show();
+
+    var container = document.getElementById('modalFormContainer');
+    document.getElementById('modalLoadingSpinner').style.display = 'block';
+
+    try {
+        var resp = await fetch('/admin/coach/' + coachId + '/modal-data');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        var data = await resp.json();
+
+        document.getElementById('modalCoachName').textContent = data.prenom + ' ' + data.nom;
+
+        // Escape helper to prevent XSS
+        function esc(str) {
+            if (str == null) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        // Build domaine options
+        var domaineOpts = '<option value="">— Choisir un domaine —</option>';
+        if (data.domaineChoices && data.domaineChoices.length) {
+            data.domaineChoices.forEach(function(d) {
+                var sel = (data.domaine === d) ? ' selected' : '';
+                domaineOpts += '<option value="' + esc(d) + '"' + sel + '>' + esc(d) + '</option>';
+            });
+        }
+
+        container.innerHTML =
+        '<div id="modalValidationAlert" role="alert"' +
+        '     style="display:none; margin-bottom:18px; padding:14px 18px; border-radius:10px;' +
+        '            border-left:5px solid #dc3545; background:#fff5f5; color:#b91c1c;' +
+        '            animation: modalSlideIn 0.3s ease-out;">' +
+        '    <div style="display:flex; align-items:flex-start; gap:10px;">' +
+        '        <i class="fas fa-exclamation-circle" style="font-size:20px; margin-top:2px; flex-shrink:0;"></i>' +
+        '        <div>' +
+        '            <strong id="modalAlertTitle" style="font-size:14px;">Les champs sont vides</strong>' +
+        '            <ul id="modalAlertErrors" style="margin:6px 0 0; padding-left:18px; font-size:13px; line-height:1.6;"></ul>' +
+        '        </div>' +
+        '        <button type="button" onclick="document.getElementById(\'modalValidationAlert\').style.display=\'none\'"' +
+        '                style="margin-left:auto; background:none; border:none; color:#b91c1c; font-size:20px; cursor:pointer; line-height:1; padding:0;">&times;</button>' +
+        '    </div>' +
+        '</div>' +
+        '<form id="modalEditForm" novalidate>' +
+        '    <div class="row g-3">' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Nom</label>' +
+        '            <input type="text" name="nom" class="form-control" value="' + esc(data.nom) + '" placeholder="Nom du coach" maxlength="20">' +
+        '            <div class="modal-field-hint" data-field="nom" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>' +
+        '        </div>' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Prénom</label>' +
+        '            <input type="text" name="prenom" class="form-control" value="' + esc(data.prenom) + '" placeholder="Prénom du coach" maxlength="20">' +
+        '            <div class="modal-field-hint" data-field="prenom" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>' +
+        '        </div>' +
+        '        <div class="col-12">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Biographie</label>' +
+        '            <textarea name="biographie" class="form-control" rows="3" placeholder="Description du coach (min 10 caractères)...">' + esc(data.biographie) + '</textarea>' +
+        '            <div style="display:flex;justify-content:space-between;margin-top:3px;">' +
+        '                <div class="modal-field-hint" data-field="biographie" style="display:none;color:#dc3545;font-size:11px;"></div>' +
+        '                <span id="modalBioCounter" style="font-size:11px;color:#9ca3af;margin-left:auto;">0 / 2000 caractères</span>' +
+        '            </div>' +
+        '        </div>' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Expérience (années)</label>' +
+        '            <input type="number" name="experienceAnnees" class="form-control" value="' + esc(data.experienceAnnees) + '" placeholder="Ex: 5">' +
+        '            <div class="modal-field-hint" data-field="experienceAnnees" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>' +
+        '        </div>' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Tarif (DT/H)</label>' +
+        '            <input type="number" name="tarifHoraire" class="form-control" value="' + esc(data.tarifHoraire) + '" step="0.01" placeholder="Ex: 45.00">' +
+        '            <div class="modal-field-hint" data-field="tarifHoraire" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>' +
+        '        </div>' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Disponibilité</label>' +
+        '            <select name="disponibilite" class="form-select">' +
+        '                <option value="">— Choisir —</option>' +
+        '                <option value="Disponible"' + (data.disponibilite === 'Disponible' ? ' selected' : '') + '>Disponible</option>' +
+        '                <option value="Indisponible"' + (data.disponibilite === 'Indisponible' ? ' selected' : '') + '>Indisponible</option>' +
+        '            </select>' +
+        '            <div class="modal-field-hint" data-field="disponibilite" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>' +
+        '        </div>' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Domaine</label>' +
+        '            <select name="domaine" class="form-select">' + domaineOpts + '</select>' +
+        '            <div class="modal-field-hint" data-field="domaine" style="display:none;color:#dc3545;font-size:11px;margin-top:3px;"></div>' +
+        '        </div>' +
+        '        <div class="col-md-6">' +
+        '            <label class="form-label" style="font-size:13px;font-weight:600;color:#374151;">Numéro de téléphone</label>' +
+        '            <input type="hidden" name="numTel" id="modal-phone-hidden" value="' + esc(data.numTel) + '">' +
+        '            <div class="input-group" id="modal-phone-widget">' +
+        '                <span class="input-group-text" style="background:#fff;border-color:#d1d5db;display:flex;align-items:center;gap:8px;padding:6px 12px;min-width:110px;">' +
+        '                    <img id="modal-phone-flag" src="https://flagcdn.com/w40/tn.png" alt="flag" style="width:24px;height:16px;border-radius:2px;object-fit:cover;">' +
+        '                    <span id="modal-phone-prefix" style="color:#374151;font-size:13px;font-weight:600;">+216</span>' +
+        '                    <i class="fas fa-spinner fa-spin" id="modal-phone-loading" style="font-size:11px;color:#9ca3af;display:none;"></i>' +
+        '                </span>' +
+        '                <input type="text" id="modal-phone-local" class="form-control" placeholder="ex: 12345678" maxlength="8" autocomplete="off" style="font-size:14px;">' +
+        '            </div>' +
+        '            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">' +
+        '                <div class="modal-field-hint" data-field="numTel" style="display:none;color:#dc3545;font-size:11px;"></div>' +
+        '                <span id="modal-phone-counter" style="font-size:11px;font-weight:600;color:#9ca3af;margin-left:auto;">0/8</span>' +
+        '            </div>' +
+        '            <div id="modal-phone-status" style="font-size:10px;color:#9ca3af;margin-top:2px;">' +
+        '                <i class="fas fa-globe" style="margin-right:3px;"></i> Détection du pays...' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>' +
+        '    <div class="d-flex gap-2 mt-4">' +
+        '        <button type="submit" class="btn btn-success" id="modalSubmitBtn" style="flex:1;">' +
+        '            <i class="fas fa-check"></i> Enregistrer les modifications' +
+        '        </button>' +
+        '        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">' +
+        '            <i class="fas fa-times"></i> Annuler' +
+        '        </button>' +
+        '    </div>' +
+        '</form>';
+
+        // ── Validation engine for modal ──
+        var mForm    = document.getElementById('modalEditForm');
+        var alertBox = document.getElementById('modalValidationAlert');
+        var alertTitle = document.getElementById('modalAlertTitle');
+        var errorList  = document.getElementById('modalAlertErrors');
+
+        /* ═══════════════════════════════════════════════
+           PHONE WIDGET — IP/VPN-aware country detection
+           ═══════════════════════════════════════════════ */
+        var mPhoneState = {
+            countryCode: 'TN',
+            callingCode: '+216',
+            digits: 8,
+            example: '12345678',
+            flagUrl: 'https://flagcdn.com/w40/tn.png',
+            initialized: false
+        };
+
+        var mPhoneLocal  = document.getElementById('modal-phone-local');
+        var mPhoneHidden = document.getElementById('modal-phone-hidden');
+        var mPhoneFlag   = document.getElementById('modal-phone-flag');
+        var mPhonePrefix = document.getElementById('modal-phone-prefix');
+        var mPhoneCounter= document.getElementById('modal-phone-counter');
+        var mPhoneLoading= document.getElementById('modal-phone-loading');
+        var mPhoneStatus = document.getElementById('modal-phone-status');
+
+        /* Parse existing full number to extract local part */
+        function mParseExisting() {
+            var existing = mPhoneHidden ? mPhoneHidden.value : '';
+            if (!existing || !existing.startsWith('+')) return '';
+            if (existing.startsWith(mPhoneState.callingCode)) {
+                return existing.substring(mPhoneState.callingCode.length);
+            }
+            return existing.replace(/^\+\d{1,4}/, '');
+        }
+
+        /* Apply phone state to widget visuals */
+        function mApplyPhoneState(preserveInput) {
+            mPhoneFlag.src = mPhoneState.flagUrl;
+            mPhoneFlag.alt = mPhoneState.countryCode;
+            mPhonePrefix.textContent = mPhoneState.callingCode;
+            mPhoneLocal.maxLength = mPhoneState.digits;
+            mPhoneLocal.placeholder = 'ex: ' + mPhoneState.example;
+
+            if (!preserveInput && !mPhoneState.initialized) {
+                var localPart = mParseExisting();
+                if (localPart) {
+                    mPhoneLocal.value = localPart.slice(0, mPhoneState.digits);
+                }
+                mPhoneState.initialized = true;
+            }
+
+            if (mPhoneLocal.value.length > mPhoneState.digits) {
+                mPhoneLocal.value = mPhoneLocal.value.slice(0, mPhoneState.digits);
+            }
+
+            mUpdatePhoneValidation();
+        }
+
+        /* Update phone validation state (border + counter + hidden field) */
+        function mUpdatePhoneValidation() {
+            var val = mPhoneLocal.value;
+            var count = val.length;
+            var required = mPhoneState.digits;
+            var isValid = (count === required);
+
+            mPhoneCounter.textContent = count + '/' + required;
+
+            mPhoneLocal.classList.remove('phone-valid', 'phone-invalid');
+            if (count === 0) {
+                mPhoneCounter.style.color = '#9ca3af';
+            } else if (isValid) {
+                mPhoneCounter.style.color = '#20c997';
+                mPhoneLocal.classList.add('phone-valid');
+            } else {
+                mPhoneCounter.style.color = '#dc3545';
+                mPhoneLocal.classList.add('phone-invalid');
+            }
+
+            // Compose full E.164 into hidden field
+            if (count > 0) {
+                mPhoneHidden.value = mPhoneState.callingCode + val;
+            } else {
+                mPhoneHidden.value = '';
+            }
+        }
+
+        /* Restrict to digits only */
+        mPhoneLocal.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, mPhoneState.digits);
+            mUpdatePhoneValidation();
+        });
+        mPhoneLocal.addEventListener('paste', function(e) {
+            var self = this;
+            setTimeout(function() {
+                self.value = self.value.replace(/\D/g, '').slice(0, mPhoneState.digits);
+                mUpdatePhoneValidation();
+            }, 10);
+        });
+
+        /* IP detection */
+        var mLastDetected = null;
+        var mPollTimer = null;
+        var mCachedIp = null;
+
+        function mFetchPublicIp() {
+            return fetch('https://api.ipify.org?format=json')
+                .then(function(r) { return r.json(); })
+                .then(function(d) { mCachedIp = d.ip; return d.ip; })
+                .catch(function() { return mCachedIp || null; });
+        }
+
+        function mFetchPhoneDetection() {
+            mPhoneLoading.style.display = 'inline';
+            mFetchPublicIp().then(function(publicIp) {
+                var url = '/admin/coach/phone-country-detection';
+                if (publicIp) url += '?ip=' + encodeURIComponent(publicIp);
+                return fetch(url);
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                mPhoneLoading.style.display = 'none';
+                if (d && d.countryCode && d.callingCode) {
+                    var countryChanged = (mLastDetected !== null && mLastDetected !== d.countryCode);
+                    mLastDetected = d.countryCode;
+                    mPhoneState.countryCode = d.countryCode;
+                    mPhoneState.callingCode = d.callingCode;
+                    mPhoneState.digits      = d.digits;
+                    mPhoneState.example     = d.example;
+                    mPhoneState.flagUrl     = d.flagUrl;
+
+                    if (countryChanged) {
+                        mPhoneLocal.value = '';
+                        mPhoneStatus.innerHTML = '<i class="fas fa-exchange-alt" style="margin-right:3px;color:#f59e0b;"></i> Pays changé : <strong>' + d.countryCode + '</strong> (' + d.callingCode + ')';
+                    } else {
+                        mPhoneStatus.innerHTML = '<i class="fas fa-check-circle" style="margin-right:3px;color:#20c997;"></i> Pays détecté : <strong>' + d.countryCode + '</strong> (' + d.callingCode + ')' + (mCachedIp ? ' — IP: ' + mCachedIp : '');
+                    }
+                    mApplyPhoneState(!countryChanged);
+                }
+            })
+            .catch(function() {
+                mPhoneLoading.style.display = 'none';
+                mPhoneStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="margin-right:3px;color:#f59e0b;"></i> Détection échouée — défaut : Tunisie';
+                mApplyPhoneState(true);
+            });
+        }
+
+        /* Initial detection + poll every 10s */
+        mFetchPhoneDetection();
+        mPollTimer = setInterval(mFetchPhoneDetection, 10000);
+
+        /* Stop polling when modal closes */
+        document.getElementById('editCoachModal').addEventListener('hidden.bs.modal', function() {
+            clearInterval(mPollTimer);
+        });
+
+        /* Validate phone widget */
+        function mValidatePhone() {
+            var localVal = mPhoneLocal.value;
+            if (!localVal) return { ok: false, msg: 'Ce champ est obligatoire' };
+            if (localVal.length !== mPhoneState.digits) {
+                return { ok: false, msg: 'Exactement ' + mPhoneState.digits + ' chiffres requis (' + localVal.length + '/' + mPhoneState.digits + ')' };
+            }
+            return { ok: true };
+        }
+
+        /* Phone blur validation */
+        mPhoneLocal.addEventListener('blur', function() {
+            var res = mValidatePhone();
+            mSetHint('numTel', res.ok ? null : res.msg);
+        });
+
+        // Bio counter
+        var bioField = mForm.querySelector('[name="biographie"]');
+        var bioCtrl  = document.getElementById('modalBioCounter');
+        if (bioField && bioCtrl) {
+            function updateModalBio() {
+                var len = bioField.value.length;
+                bioCtrl.textContent = len + ' / 2000 caractères';
+                bioCtrl.style.color = len > 1800 ? '#dc3545' : '#9ca3af';
+            }
+            bioField.addEventListener('input', updateModalBio);
+            updateModalBio();
+        }
+
+        // Validation rules (same as _form.html.twig) — phone validated separately via widget
+        var fields = {
+            'nom':              { label: 'Nom',                  minLen: 2,  maxLen: 20,  pattern: /^[a-zA-ZÀ-ÿ\s\-]+$/,   msg: 'Entre 2 et 20 lettres uniquement' },
+            'prenom':           { label: 'Prénom',               minLen: 2,  maxLen: 20,  pattern: /^[a-zA-ZÀ-ÿ\s\-]+$/,   msg: 'Entre 2 et 20 lettres uniquement' },
+            'biographie':       { label: 'Biographie',           minLen: 10, maxLen: 2000,                                  msg: 'Au moins 10 caractères (max 2000)' },
+            'experienceAnnees': { label: "Années d'expérience",  numeric: true, min: 0,   max: 60,                          msg: 'Nombre entre 0 et 60' },
+            'tarifHoraire':     { label: 'Tarif (DT/H)',         numeric: true, min: 0.01, max: 9999.99,                    msg: 'Nombre positif ≤ 9999.99' },
+            'disponibilite':    { label: 'Disponibilité',        select: true,                                              msg: 'Veuillez sélectionner une option' },
+            'domaine':          { label: 'Domaine',              select: true,                                              msg: 'Veuillez sélectionner un domaine' }
+        };
+
+        function mSetFieldState(el, valid) {
+            el.classList.remove('modal-is-invalid', 'modal-is-valid');
+            if (valid) el.classList.add('modal-is-valid');
+            else       el.classList.add('modal-is-invalid');
+        }
+
+        function mSetHint(fieldName, msg) {
+            var hint = mForm.querySelector('.modal-field-hint[data-field="' + fieldName + '"]');
+            if (!hint) return;
+            if (msg) { hint.textContent = '\u26A0 ' + msg; hint.style.display = 'block'; }
+            else     { hint.textContent = '';               hint.style.display = 'none';  }
+        }
+
+        function mValidateOne(fieldName, rule) {
+            var el = mForm.querySelector('[name="' + fieldName + '"]');
+            if (!el) return { ok: true };
+            var val = el.value.trim();
+
+            if (!val) return { ok: false, msg: 'Ce champ est obligatoire' };
+            if (rule.select) return { ok: true };
+            if (rule.minLen && val.length < rule.minLen) return { ok: false, msg: rule.msg };
+            if (rule.maxLen && val.length > rule.maxLen) return { ok: false, msg: rule.msg };
+            if (rule.pattern && !rule.pattern.test(val)) return { ok: false, msg: rule.msg };
+
+            if (rule.numeric) {
+                var n = parseFloat(val);
+                if (isNaN(n))                               return { ok: false, msg: rule.msg };
+                if (rule.min !== undefined && n < rule.min) return { ok: false, msg: rule.msg };
+                if (rule.max !== undefined && n > rule.max) return { ok: false, msg: rule.msg };
+            }
+            return { ok: true };
+        }
+
+        // Real-time validation on blur / input
+        Object.keys(fields).forEach(function(name) {
+            var rule = fields[name];
+            var el   = mForm.querySelector('[name="' + name + '"]');
+            if (!el) return;
+
+            el.addEventListener('blur', function() {
+                var res = mValidateOne(name, rule);
+                mSetFieldState(el, res.ok);
+                mSetHint(name, res.ok ? null : res.msg);
+            });
+
+            el.addEventListener('input', function() {
+                if (el.classList.contains('modal-is-invalid')) {
+                    var res = mValidateOne(name, rule);
+                    mSetFieldState(el, res.ok);
+                    mSetHint(name, res.ok ? null : res.msg);
+                }
+            });
+
+            // Also handle change for selects
+            if (el.tagName === 'SELECT') {
+                el.addEventListener('change', function() {
+                    var res = mValidateOne(name, rule);
+                    mSetFieldState(el, res.ok);
+                    mSetHint(name, res.ok ? null : res.msg);
+                });
+            }
+        });
+
+        // Submit handler with validation
+        mForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            var emptyLabels  = [];
+            var invalidLines = [];
+            var firstBad     = null;
+
+            // Validate all fields
+            Object.keys(fields).forEach(function(name) {
+                var rule = fields[name];
+                var el   = mForm.querySelector('[name="' + name + '"]');
+                if (!el) return;
+                var val = el.value.trim();
+
+                if (!val) {
+                    emptyLabels.push(rule.label);
+                    mSetFieldState(el, false);
+                    mSetHint(name, 'Ce champ est obligatoire');
+                    if (!firstBad) firstBad = el;
+                    return;
+                }
+
+                var res = mValidateOne(name, rule);
+                mSetFieldState(el, res.ok);
+                mSetHint(name, res.ok ? null : res.msg);
+                if (!res.ok) {
+                    invalidLines.push('<strong>' + rule.label + ' :</strong> ' + res.msg);
+                    if (!firstBad) firstBad = el;
+                }
+            });
+
+            // Build final message list
+            var lines = [];
+            if (emptyLabels.length > 0) {
+                lines.push('Les champs suivants sont vides : <strong>' + emptyLabels.join(', ') + '</strong>');
+            }
+            invalidLines.forEach(function(l) { lines.push(l); });
+
+            /* Validate phone widget separately */
+            var phoneRes = mValidatePhone();
+            if (mPhoneLocal.value.trim() === '') {
+                emptyLabels.push('Numéro de téléphone');
+                mPhoneLocal.classList.add('phone-invalid');
+                mSetHint('numTel', 'Ce champ est obligatoire');
+                if (!firstBad) firstBad = mPhoneLocal;
+                // rebuild lines with updated emptyLabels
+                lines = [];
+                if (emptyLabels.length > 0) {
+                    lines.push('Les champs suivants sont vides : <strong>' + emptyLabels.join(', ') + '</strong>');
+                }
+                invalidLines.forEach(function(l) { lines.push(l); });
+            } else if (!phoneRes.ok) {
+                lines.push('<strong>Numéro de téléphone :</strong> ' + phoneRes.msg);
+                mPhoneLocal.classList.add('phone-invalid');
+                mSetHint('numTel', phoneRes.msg);
+                if (!firstBad) firstBad = mPhoneLocal;
+            } else {
+                mPhoneLocal.classList.remove('phone-invalid');
+                mPhoneLocal.classList.add('phone-valid');
+                mSetHint('numTel', null);
+            }
+
+            /* Ensure hidden field is composed before submit */
+            mUpdatePhoneValidation();
+
+            if (lines.length > 0) {
+                alertTitle.textContent = emptyLabels.length > 0
+                    ? '\u26A0\uFE0F Les champs sont vides'
+                    : '\u26A0\uFE0F Erreurs de validation';
+
+                errorList.innerHTML = lines.map(function(l) { return '<li>' + l + '</li>'; }).join('');
+                alertBox.style.display   = 'block';
+                alertBox.style.animation = 'none';
+                void alertBox.offsetWidth;
+                alertBox.style.animation = 'modalSlideIn 0.3s ease-out';
+                alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                if (firstBad) firstBad.focus();
+
+                clearTimeout(alertBox._timer);
+                alertBox._timer = setTimeout(function() { alertBox.style.display = 'none'; }, 8000);
+                return;
+            }
+
+            // All valid — submit via AJAX
+            alertBox.style.display = 'none';
+            var submitBtn = document.getElementById('modalSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+            var formData = new FormData(mForm);
+            var body = Object.fromEntries(formData.entries());
+
+            try {
+                var saveResp = await fetch('/admin/coach/' + coachId + '/modifier', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (saveResp.ok) {
+                    var saveData = await saveResp.json();
+                    if (saveData.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('editCoachModal')).hide();
+                        window.location.reload();
+                    } else {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Enregistrer les modifications';
+                        showModalError(saveData.message || 'Modification impossible.');
+                    }
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Enregistrer les modifications';
+                    showModalError('Erreur serveur lors de la modification.');
+                }
+            } catch(err) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Enregistrer les modifications';
+                showModalError('Erreur réseau : ' + err.message);
+            }
+        });
+
+    } catch(err) {
+        container.innerHTML = '<div class="alert alert-danger">Impossible de charger les données du coach.</div>';
+        console.error(err);
+    }
+}
+
+function showModalError(msg) {
+    var alertEl = document.getElementById('modalEditAlert');
+    if (!alertEl) {
+        alertEl = document.createElement('div');
+        alertEl.id = 'modalEditAlert';
+        alertEl.className = 'alert alert-danger mt-3';
+        alertEl.style.fontSize = '13px';
+        var form = document.getElementById('modalEditForm');
+        if (form) form.appendChild(alertEl);
+    }
+    alertEl.textContent = msg;
+    alertEl.style.display = 'block';
+}
+</script>
+{% endblock %}
