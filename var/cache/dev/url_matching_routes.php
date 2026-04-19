@@ -37,6 +37,7 @@ return [
         '/dashboard/report' => [[['_route' => 'dashboard_report', '_controller' => 'App\\Controller\\DashboardController::report'], null, ['GET' => 0], null, false, false, null]],
         '/evenement' => [[['_route' => 'evenement_index', '_controller' => 'App\\Controller\\EvenementController::index'], null, ['GET' => 0], null, true, false, null]],
         '/evenement/new' => [[['_route' => 'evenement_new', '_controller' => 'App\\Controller\\EvenementController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/evenement/admin/events/analyze-all' => [[['_route' => 'events_analyze_all', '_controller' => 'App\\Controller\\EvenementController::analyzeAll'], null, null, null, false, false, null]],
         '/events' => [[['_route' => 'evenement_front', '_controller' => 'App\\Controller\\EvenementFrontController::index'], null, null, null, false, false, null]],
         '/blog' => [[['_route' => 'frontend_blog_index', '_controller' => 'App\\Controller\\FrontendBlogController::index'], null, ['GET' => 0], null, false, false, null]],
         '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::home'], null, ['GET' => 0], null, false, false, null]],
@@ -88,69 +89,80 @@ return [
                             .'|rate(*:265)'
                             .'|all(*:276)'
                         .')'
-                        .'|events/([^/]++)/waitlist/(?'
-                            .'|join(*:317)'
-                            .'|status(*:331)'
-                        .')'
                     .')'
                     .'|rticle/([^/]++)(?'
-                        .'|(*:359)'
+                        .'|(*:304)'
                         .'|/(?'
-                            .'|edit(*:375)'
-                            .'|delete(*:389)'
+                            .'|edit(*:320)'
+                            .'|delete(*:334)'
                         .')'
                     .')'
                 .')'
                 .'|/c(?'
                     .'|art/(?'
-                        .'|add/(\\d+)(*:421)'
-                        .'|update/(\\d+)(*:441)'
-                        .'|remove/(\\d+)(*:461)'
+                        .'|add/(\\d+)(*:366)'
+                        .'|update/(\\d+)(*:386)'
+                        .'|remove/(\\d+)(*:406)'
                     .')'
                     .'|oach/(?'
-                        .'|(\\d+)(*:483)'
-                        .'|(\\d+)/edit(*:501)'
-                        .'|(\\d+)/delete(*:521)'
+                        .'|(\\d+)(*:428)'
+                        .'|(\\d+)/edit(*:446)'
+                        .'|(\\d+)/delete(*:466)'
                     .')'
                 .')'
                 .'|/even(?'
-                    .'|ement/([^/]++)(?'
-                        .'|(*:556)'
-                        .'|/(?'
-                            .'|edit(*:572)'
-                            .'|delete(*:586)'
+                    .'|ement/(?'
+                        .'|([^/]++)(?'
+                            .'|(*:504)'
+                            .'|/(?'
+                                .'|edit(*:520)'
+                                .'|delete(*:534)'
+                            .')'
+                        .')'
+                        .'|events/([^/]++)/analyze(*:567)'
+                        .'|([^/]++)/waitlist(?'
+                            .'|(*:595)'
+                            .'|/promote(*:611)'
                         .')'
                     .')'
-                    .'|ts/([^/]++)(*:607)'
+                    .'|ts/([^/]++)(?'
+                        .'|(*:635)'
+                        .'|/(?'
+                            .'|commentaire(*:658)'
+                            .'|waitlist/join(*:679)'
+                        .')'
+                    .')'
                 .')'
-                .'|/blog/([^/]++)(*:630)'
+                .'|/blog/([^/]++)(*:704)'
                 .'|/reservation(?'
                     .'|/api/(?'
                         .'|c(?'
                             .'|oach/([^/]++)/(?'
                                 .'|availability(?'
-                                    .'|(*:697)'
+                                    .'|(*:771)'
                                 .')'
-                                .'|reservations(*:718)'
+                                .'|reservations(*:792)'
                             .')'
-                            .'|ancel/([^/]++)(*:741)'
+                            .'|ancel/([^/]++)(*:815)'
                         .')'
-                        .'|notifications/([^/]++)/read(*:777)'
+                        .'|notifications/([^/]++)/read(*:851)'
                     .')'
                     .'|s/(?'
-                        .'|new/([^/]++)(*:803)'
+                        .'|new/([^/]++)(*:877)'
                         .'|([^/]++)/(?'
-                            .'|edit(*:827)'
-                            .'|pay(*:838)'
+                            .'|edit(*:901)'
+                            .'|pay(*:912)'
                         .')'
-                        .'|payment/cancel/([^/]++)(*:870)'
+                        .'|payment/cancel/([^/]++)(*:944)'
                         .'|([^/]++)/(?'
-                            .'|delete(*:896)'
-                            .'|admin\\-delete(*:917)'
+                            .'|delete(*:970)'
+                            .'|admin\\-delete(*:991)'
+                            .'|cancel(*:1005)'
                         .')'
                     .')'
                 .')'
-                .'|/user/delete/(\\d+)(*:946)'
+                .'|/user/delete/(\\d+)(*:1035)'
+                .'|/waitlist/([^/]++)/remove(*:1069)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -165,37 +177,42 @@ return [
         253 => [[['_route' => 'api_coach_rating_stats', '_controller' => 'App\\Controller\\RatingController::getCoachStats'], ['id'], ['GET' => 0], null, false, false, null]],
         265 => [[['_route' => 'api_coach_rate', '_controller' => 'App\\Controller\\RatingController::rateCoach'], ['id'], ['POST' => 0], null, false, false, null]],
         276 => [[['_route' => 'api_coach_ratings_list', '_controller' => 'App\\Controller\\RatingController::getCoachRatings'], ['id'], ['GET' => 0], null, false, false, null]],
-        317 => [[['_route' => 'app_waitlistapi_join', '_controller' => 'App\\Controller\\WaitlistApiController::join'], ['id'], ['POST' => 0], null, false, false, null]],
-        331 => [[['_route' => 'app_waitlistapi_status', '_controller' => 'App\\Controller\\WaitlistApiController::status'], ['id'], ['GET' => 0], null, false, false, null]],
-        359 => [[['_route' => 'article_show', '_controller' => 'App\\Controller\\ArticleController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        375 => [[['_route' => 'article_edit', '_controller' => 'App\\Controller\\ArticleController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        389 => [[['_route' => 'article_delete', '_controller' => 'App\\Controller\\ArticleController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        421 => [[['_route' => 'cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], ['POST' => 0], null, false, true, null]],
-        441 => [[['_route' => 'cart_update', '_controller' => 'App\\Controller\\CartController::update'], ['id'], ['POST' => 0], null, false, true, null]],
-        461 => [[['_route' => 'cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], ['POST' => 0], null, false, true, null]],
-        483 => [[['_route' => 'app_coach_show', '_controller' => 'App\\Controller\\CoachController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        501 => [[['_route' => 'app_coach_edit', '_controller' => 'App\\Controller\\CoachController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        521 => [[['_route' => 'app_coach_delete', '_controller' => 'App\\Controller\\CoachController::delete'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        556 => [[['_route' => 'evenements_show', '_controller' => 'App\\Controller\\EvenementController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        572 => [[['_route' => 'evenement_edit', '_controller' => 'App\\Controller\\EvenementController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        586 => [[['_route' => 'evenement_delete', '_controller' => 'App\\Controller\\EvenementController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        607 => [[['_route' => 'evenement_show', '_controller' => 'App\\Controller\\EvenementFrontController::show'], ['id'], null, null, false, true, null]],
-        630 => [[['_route' => 'frontend_blog_show', '_controller' => 'App\\Controller\\FrontendBlogController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        697 => [
+        304 => [[['_route' => 'article_show', '_controller' => 'App\\Controller\\ArticleController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        320 => [[['_route' => 'article_edit', '_controller' => 'App\\Controller\\ArticleController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        334 => [[['_route' => 'article_delete', '_controller' => 'App\\Controller\\ArticleController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        366 => [[['_route' => 'cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], ['POST' => 0], null, false, true, null]],
+        386 => [[['_route' => 'cart_update', '_controller' => 'App\\Controller\\CartController::update'], ['id'], ['POST' => 0], null, false, true, null]],
+        406 => [[['_route' => 'cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], ['POST' => 0], null, false, true, null]],
+        428 => [[['_route' => 'app_coach_show', '_controller' => 'App\\Controller\\CoachController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        446 => [[['_route' => 'app_coach_edit', '_controller' => 'App\\Controller\\CoachController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        466 => [[['_route' => 'app_coach_delete', '_controller' => 'App\\Controller\\CoachController::delete'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        504 => [[['_route' => 'evenements_show', '_controller' => 'App\\Controller\\EvenementController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        520 => [[['_route' => 'evenement_edit', '_controller' => 'App\\Controller\\EvenementController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        534 => [[['_route' => 'evenement_delete', '_controller' => 'App\\Controller\\EvenementController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        567 => [[['_route' => 'event_analyze', '_controller' => 'App\\Controller\\EvenementController::analyze'], ['id'], null, null, false, false, null]],
+        595 => [[['_route' => 'admin_waitlist', '_controller' => 'App\\Controller\\Waitlistcontroller::adminWaitlist'], ['id'], ['GET' => 0], null, false, false, null]],
+        611 => [[['_route' => 'admin_waitlist_promote', '_controller' => 'App\\Controller\\Waitlistcontroller::promote'], ['id'], ['POST' => 0], null, false, false, null]],
+        635 => [[['_route' => 'evenement_show', '_controller' => 'App\\Controller\\EvenementFrontController::show'], ['id'], null, null, false, true, null]],
+        658 => [[['_route' => 'evenement_add_commentaire', '_controller' => 'App\\Controller\\EvenementFrontController::addCommentaire'], ['id'], ['POST' => 0], null, false, false, null]],
+        679 => [[['_route' => 'waitlist_join', '_controller' => 'App\\Controller\\Waitlistcontroller::join'], ['id'], ['POST' => 0], null, false, false, null]],
+        704 => [[['_route' => 'frontend_blog_show', '_controller' => 'App\\Controller\\FrontendBlogController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        771 => [
             [['_route' => 'api_coach_availability', '_controller' => 'App\\Controller\\ReservationController::getCoachAvailability'], ['id'], ['GET' => 0], null, false, false, null],
             [['_route' => 'api_coach_set_availability', '_controller' => 'App\\Controller\\ReservationController::setAvailability'], ['id'], ['POST' => 0], null, false, false, null],
         ],
-        718 => [[['_route' => 'api_coach_reservations', '_controller' => 'App\\Controller\\ReservationController::getCoachReservations'], ['id'], ['GET' => 0], null, false, false, null]],
-        741 => [[['_route' => 'api_cancel_reservation', '_controller' => 'App\\Controller\\ReservationController::cancelReservation'], ['id'], ['POST' => 0], null, false, true, null]],
-        777 => [[['_route' => 'api_notification_read', '_controller' => 'App\\Controller\\ReservationController::markNotificationRead'], ['id'], ['POST' => 0], null, false, false, null]],
-        803 => [[['_route' => 'reservation_new', '_controller' => 'App\\Controller\\ReservationEvenementController::new'], ['id'], null, null, false, true, null]],
-        827 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationEvenementController::edit'], ['id'], null, null, false, false, null]],
-        838 => [[['_route' => 'reservation_pay', '_controller' => 'App\\Controller\\ReservationEvenementController::pay'], ['id'], ['POST' => 0], null, false, false, null]],
-        870 => [[['_route' => 'reservation_payment_cancel', '_controller' => 'App\\Controller\\ReservationEvenementController::paymentCancel'], ['id'], null, null, false, true, null]],
-        896 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationEvenementController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        917 => [[['_route' => 'reservation_admin_delete', '_controller' => 'App\\Controller\\ReservationEvenementController::adminDelete'], ['id'], ['POST' => 0], null, false, false, null]],
-        946 => [
-            [['_route' => 'user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['GET' => 0], null, false, true, null],
+        792 => [[['_route' => 'api_coach_reservations', '_controller' => 'App\\Controller\\ReservationController::getCoachReservations'], ['id'], ['GET' => 0], null, false, false, null]],
+        815 => [[['_route' => 'api_cancel_reservation', '_controller' => 'App\\Controller\\ReservationController::cancelReservation'], ['id'], ['POST' => 0], null, false, true, null]],
+        851 => [[['_route' => 'api_notification_read', '_controller' => 'App\\Controller\\ReservationController::markNotificationRead'], ['id'], ['POST' => 0], null, false, false, null]],
+        877 => [[['_route' => 'reservation_new', '_controller' => 'App\\Controller\\ReservationEvenementController::new'], ['id'], null, null, false, true, null]],
+        901 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationEvenementController::edit'], ['id'], null, null, false, false, null]],
+        912 => [[['_route' => 'reservation_pay', '_controller' => 'App\\Controller\\ReservationEvenementController::pay'], ['id'], ['POST' => 0], null, false, false, null]],
+        944 => [[['_route' => 'reservation_payment_cancel', '_controller' => 'App\\Controller\\ReservationEvenementController::paymentCancel'], ['id'], null, null, false, true, null]],
+        970 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationEvenementController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        991 => [[['_route' => 'reservation_admin_delete', '_controller' => 'App\\Controller\\ReservationEvenementController::adminDelete'], ['id'], ['POST' => 0], null, false, false, null]],
+        1005 => [[['_route' => 'reservation_cancel', '_controller' => 'App\\Controller\\Waitlistcontroller::cancel'], ['id'], ['POST' => 0], null, false, false, null]],
+        1035 => [[['_route' => 'user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
+        1069 => [
+            [['_route' => 'admin_waitlist_remove', '_controller' => 'App\\Controller\\Waitlistcontroller::remove'], ['id'], ['POST' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

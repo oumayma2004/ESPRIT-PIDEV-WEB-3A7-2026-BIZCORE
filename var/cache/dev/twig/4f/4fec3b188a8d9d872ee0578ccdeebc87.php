@@ -773,6 +773,6 @@ class __TwigTemplate_d5071a487886fe59c8c3766cfd884344 extends Template
 
 <footer>© 2026 <span>Bizcore</span> — Tous droits réservés</footer>
 {% endblock %}
-", "reservation/reservation_form.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\reservation\\reservation_form.html.twig");
+", "reservation/reservation_form.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\reservation\\reservation_form.html.twig");
     }
 }

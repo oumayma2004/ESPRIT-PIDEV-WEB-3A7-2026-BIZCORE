@@ -1040,6 +1040,6 @@ function deleteSelected() {
 {% endif %}
 </script>
 {% endblock %}
-", "article/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\article\\index.html.twig");
+", "article/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\index.html.twig");
     }
 }

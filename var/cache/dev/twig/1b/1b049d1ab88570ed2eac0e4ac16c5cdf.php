@@ -216,6 +216,6 @@ class __TwigTemplate_e3cac9d0234910dae7683b1b2204dbaf extends Template
         </div>
     </div>
 </body>
-</html>", "dashboard/report.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\dashboard\\report.html.twig");
+</html>", "dashboard/report.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\dashboard\\report.html.twig");
     }
 }

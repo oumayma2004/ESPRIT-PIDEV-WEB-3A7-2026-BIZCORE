@@ -22,7 +22,13 @@ class Evenement extends \App\Entity\Evenement implements \Doctrine\ORM\Proxy\Int
     
 
     private const LAZY_OBJECT_PROPERTY_SCOPES = [
+        "\0".parent::class."\0".'aiNegative' => [parent::class, 'aiNegative', null, 16],
+        "\0".parent::class."\0".'aiNeutral' => [parent::class, 'aiNeutral', null, 16],
+        "\0".parent::class."\0".'aiPositive' => [parent::class, 'aiPositive', null, 16],
+        "\0".parent::class."\0".'aiRating' => [parent::class, 'aiRating', null, 16],
+        "\0".parent::class."\0".'aiSummary' => [parent::class, 'aiSummary', null, 16],
         "\0".parent::class."\0".'capacity' => [parent::class, 'capacity', null, 16],
+        "\0".parent::class."\0".'commentaires' => [parent::class, 'commentaires', null, 16],
         "\0".parent::class."\0".'date' => [parent::class, 'date', null, 16],
         "\0".parent::class."\0".'description' => [parent::class, 'description', null, 16],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null, 16],
@@ -30,7 +36,13 @@ class Evenement extends \App\Entity\Evenement implements \Doctrine\ORM\Proxy\Int
         "\0".parent::class."\0".'lieu' => [parent::class, 'lieu', null, 16],
         "\0".parent::class."\0".'price' => [parent::class, 'price', null, 16],
         "\0".parent::class."\0".'title' => [parent::class, 'title', null, 16],
+        'aiNegative' => [parent::class, 'aiNegative', null, 16],
+        'aiNeutral' => [parent::class, 'aiNeutral', null, 16],
+        'aiPositive' => [parent::class, 'aiPositive', null, 16],
+        'aiRating' => [parent::class, 'aiRating', null, 16],
+        'aiSummary' => [parent::class, 'aiSummary', null, 16],
         'capacity' => [parent::class, 'capacity', null, 16],
+        'commentaires' => [parent::class, 'commentaires', null, 16],
         'date' => [parent::class, 'date', null, 16],
         'description' => [parent::class, 'description', null, 16],
         'id' => [parent::class, 'id', null, 16],

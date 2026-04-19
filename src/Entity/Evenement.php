@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 #[ORM\Table(name: 'evenement')]
@@ -45,7 +47,47 @@ private ?int $id = null;
     pattern: '/^[a-zA-ZÀ-ÿ0-9\s\,\.\-\/]+$/u',
     message: 'Le lieu contient des caractères non valides.'
 )]
+
 private ?string $lieu = null;
+
+#[ORM\OneToMany(mappedBy: 'evenement', targetEntity: CommentaireEvenement::class)]
+private Collection $commentaires;
+#[ORM\Column(nullable: true)]
+private ?float $aiRating = null;
+
+#[ORM\Column(type: 'float', nullable: true)]
+private ?float $aiPositive = null;
+
+#[ORM\Column(type: 'float', nullable: true)]
+private ?float $aiNeutral = null;
+
+#[ORM\Column(type: 'float', nullable: true)]
+private ?float $aiNegative = null;
+
+#[ORM\Column(type: 'text', nullable: true)]
+private ?string $aiSummary = null;
+public function getAiRating(): ?float { return $this->aiRating; }
+public function setAiRating(?float $v): static { $this->aiRating = $v; return $this; }
+
+public function getAiPositive(): ?float { return $this->aiPositive; }
+public function setAiPositive(?float $v): static { $this->aiPositive = $v; return $this; }
+
+public function getAiNeutral(): ?float { return $this->aiNeutral; }
+public function setAiNeutral(?float $v): static { $this->aiNeutral = $v; return $this; }
+
+public function getAiNegative(): ?float { return $this->aiNegative; }
+public function setAiNegative(?float $v): static { $this->aiNegative = $v; return $this; }
+
+public function getAiSummary(): ?string { return $this->aiSummary; }
+public function setAiSummary(?string $v): static { $this->aiSummary = $v; return $this; }
+public function __construct()
+{
+    $this->commentaires = new ArrayCollection();
+}
+public function getCommentaires(): Collection
+{
+    return $this->commentaires;
+}
 
 public function getLieu(): ?string
 {

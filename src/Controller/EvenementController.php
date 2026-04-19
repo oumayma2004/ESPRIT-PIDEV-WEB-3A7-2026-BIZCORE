@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use App\Entity\Reservation;
 use App\Form\EvenementType;
 use App\Form\ReservationType;
+use App\Service\AIAnalyzerService;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,8 +22,16 @@ class EvenementController extends AbstractController
     #[Route('/', name: 'evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
     {
+        $evenements = $evenementRepository->findAll();
+
+        $aiRatings = [];
+        foreach ($evenements as $e) {
+            $aiRatings[$e->getId()] = $e->getAiRating();
+        }
+
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'evenements' => $evenements,
+            'aiRatings'  => $aiRatings,
         ]);
     }
 
@@ -122,4 +131,67 @@ class EvenementController extends AbstractController
 
         return $this->redirectToRoute('evenement_index', [], Response::HTTP_SEE_OTHER);
     }
+
+#[Route('/events/{id}/analyze', name: 'event_analyze')]
+public function analyze(Evenement $event, AIAnalyzerService $ai, EntityManagerInterface $em)
+{
+    $commentsText = [];
+
+    foreach ($event->getCommentaires() as $c) {
+        if ($c->getContenu()) {
+            $commentsText[] = $c->getContenu();
+        }
+    }
+
+    // DEBUG: show comment count
+    $this->addFlash('info', '🔍 ' . count($commentsText) . ' commentaire(s) trouvé(s) pour analyse.');
+
+    $result = $ai->analyzeComments($commentsText);
+
+    // DEBUG: show AI result
+    $this->addFlash('info', '🤖 Résultat IA: rating=' . $result['rating'] . ' | summary=' . $result['summary']);
+
+    // Only save if rating > 0 (meaning AI succeeded)
+    if ($result['rating'] > 0) {
+        $event->setAiRating($result['rating']);
+        $event->setAiPositive($result['positive']);
+        $event->setAiNeutral($result['neutral']);
+        $event->setAiNegative($result['negative']);
+        $event->setAiSummary($result['summary']);
+        $em->flush();
+        $this->addFlash('success', '✅ Analyse IA sauvegardée !');
+    } else {
+        $this->addFlash('error', '❌ Échec analyse IA: ' . $result['summary']);
+    }
+
+    return $this->redirectToRoute('evenement_index');
+}
+#[Route('/admin/events/analyze-all', name: 'events_analyze_all')]
+public function analyzeAll(EvenementRepository $repo, AIAnalyzerService $ai, EntityManagerInterface $em)
+{
+    $events = $repo->findAll();
+
+    foreach ($events as $event) {
+
+        $commentsText = [];
+
+        foreach ($event->getCommentaires() as $c) {
+            $commentsText[] = $c->getContenu();
+        }
+
+        if (!empty($commentsText)) {
+            $result = $ai->analyzeComments($commentsText);
+
+            $event->setAiRating($result['rating']);
+            $event->setAiPositive($result['positive']);
+            $event->setAiNeutral($result['neutral']);
+            $event->setAiNegative($result['negative']);
+            $event->setAiSummary($result['summary']);
+        }
+    }
+
+    $em->flush();
+
+    return $this->redirectToRoute('evenement_index');
+}
 }

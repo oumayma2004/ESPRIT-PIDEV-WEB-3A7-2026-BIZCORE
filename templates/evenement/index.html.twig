@@ -274,7 +274,7 @@
         padding: 3px 9px; border-radius: 20px;
     }
 
-    .action-btns { display: flex; gap: 6px; }
+    .action-btns { display: flex; gap: 6px; align-items: center; }
 
     .btn-icon {
         width: 32px; height: 32px; border-radius: 7px; border: none;
@@ -283,9 +283,12 @@
     }
 
     .btn-icon:hover { opacity: 0.8; }
-    .btn-view-ic { background: #0ea5e9; color: #fff; }
-    .btn-edit-ic { background: #f59e0b; color: #fff; }
-    .btn-del-ic  { background: #ef4444; color: #fff; }
+    .btn-view-ic     { background: #0ea5e9; color: #fff; }
+    .btn-edit-ic     { background: #f59e0b; color: #fff; }
+    .btn-del-ic      { background: #ef4444; color: #fff; }
+    .btn-ai-ic       { background: #f59e0b; color: #fff; }
+    /* ✅ Waitlist button - purple, same size as other icons */
+    .btn-waitlist-ic { background: #8b5cf6; color: #fff; }
 
     input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-color: #22c55e; }
 
@@ -321,11 +324,18 @@
             {% for msg in app.flashes('error') %}
                 <div class="flash flash-error">❌ {{ msg }}</div>
             {% endfor %}
+            {% for msg in app.flashes('info') %}
+                <div class="flash" style="background:#dbeafe;border:1px solid #bfdbfe;color:#1d4ed8;padding:12px 16px;border-radius:8px;font-size:13px;margin-bottom:8px;">ℹ️ {{ msg }}</div>
+            {% endfor %}
 
             <!-- ACTION BAR -->
             <div class="action-bar">
                 <a href="{{ path('evenement_new') }}" class="btn-add">＋ Ajouter un evenement</a>
                 <button class="btn-export" onclick="exportPDF()">⬆ EXPORT PDF</button>
+                <a href="{{ path('events_analyze_all') }}" class="btn btn-warning">
+    🤖 Analyze All Comments
+</a>
+
                 <div class="spacer"></div>
                 <div class="search-box">
                     <span class="search-icon">🔍</span>
@@ -334,7 +344,7 @@
                 
             </div>
 
-            <!-- ===== STAT CARDS (juste au-dessus du tableau) ===== -->
+            <!-- ===== STAT CARDS ===== -->
             <div class="stat-row">
 
                 <!-- Événements -->
@@ -412,7 +422,6 @@
                 </div>
 
             </div>
-            <!-- /STAT CARDS -->
 
             <!-- TABLE -->
             <div class="table-card">
@@ -427,6 +436,7 @@
                             <th>Prix</th>
                             <th>Capacité</th>
                             <th>Date</th>
+                            <th>Note IA</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -447,10 +457,22 @@
                             <td><span class="price-tag">{{ evenement.price }} DT</span></td>
                             <td>{{ evenement.capacity }}</td>
                             <td>{{ evenement.date ? evenement.date|date('d/m/Y') : '-' }}</td>
+
+                            <td>
+                                {% if evenement.aiRating %}
+                                    {% for i in 1..5 %}{{ i <= evenement.aiRating|round ? '⭐' : '☆' }}{% endfor %}
+                                    <span style="font-size:11px;color:#64748b;">({{ evenement.aiRating|number_format(1) }})</span>
+                                {% else %}
+                                    <span style="color:#94a3b8;font-size:12px;">— non analysé</span>
+                                {% endif %}
+                            </td>
                             <td>
                                 <div class="action-btns">
                                     <a href="{{ path('evenements_show', {'id': evenement.id}) }}" class="btn-icon btn-view-ic" title="Voir">👁</a>
                                     <a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn-icon btn-edit-ic" title="Modifier">✏</a>
+                                    <a href="{{ path('event_analyze', {'id': evenement.id}) }}" class="btn-icon btn-ai-ic" title="Analyse IA">🤖</a>
+                                    {# ✅ Waitlist button - purple icon, same style as others #}
+                                    <a href="{{ path('admin_waitlist', {'id': evenement.id}) }}" class="btn-icon btn-waitlist-ic" title="Liste d'attente">⏳</a>
                                     <form method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" style="display:inline;">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
                                         <button class="btn-icon btn-del-ic" title="Supprimer" onclick="return confirm('Supprimer ?')">🗑</button>
@@ -540,7 +562,6 @@ function deleteSelected() {
                     ?.value || ''
             )
         }).then(() => {
-            // Remove row from DOM
             const row = document.querySelector(`.row-check[value="${id}"]`)?.closest('tr');
             if (row) row.remove();
             deleteNext();

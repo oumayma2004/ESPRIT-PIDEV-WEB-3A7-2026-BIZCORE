@@ -414,6 +414,6 @@ class __TwigTemplate_21319e65c265c5043969c1a0f204c981 extends Template
         <a class=\"secondary\" href=\"{{ path('app_logout') }}\">Logout</a>
     </div>
 </div>
-{% endblock %}", "profile/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\profile\\index.html.twig");
+{% endblock %}", "profile/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\profile\\index.html.twig");
     }
 }

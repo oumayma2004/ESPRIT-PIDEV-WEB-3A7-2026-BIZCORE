@@ -909,6 +909,6 @@ $context["stat"], "tendance", [], "any", false, false, false, 222) < 100)) {
     }
 </style>
 {% endblock %}
-", "admin/statistics/index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\admin\\statistics\\index.html.twig");
+", "admin/statistics/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\admin\\statistics\\index.html.twig");
     }
 }

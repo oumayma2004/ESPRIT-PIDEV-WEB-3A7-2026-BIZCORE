@@ -210,6 +210,6 @@ class __TwigTemplate_fde0052887364f3fa6edd3ae264b9b98 extends Template
         </div>
     </div>
 {% endif %}
-", "@KnpPaginator/Pagination/tailwindcss_pagination.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\tailwindcss_pagination.html.twig");
+", "@KnpPaginator/Pagination/tailwindcss_pagination.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\tailwindcss_pagination.html.twig");
     }
 }

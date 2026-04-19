@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\InscriptionEvenement;
+use App\Entity\CommentaireEvenement;
 use App\Form\InscriptionEvenementType;
+use App\Form\CommentaireEvenementType;
 use App\Service\WaitlistService;
 use App\Repository\EvenementRepository;
 use App\Repository\InscriptionEvenementRepository;
@@ -129,12 +131,69 @@ public function show(
         }
     }
 
+    // ===============================
+    // COMMENTAIRE FORM
+    // ===============================
+    $commentaire = new CommentaireEvenement();
+    $commentaire->setEvenement($evenement);
+    $commentaireForm = $this->createForm(CommentaireEvenementType::class, $commentaire, [
+        'action' => $this->generateUrl('evenement_add_commentaire', ['id' => $id]),
+    ]);
+
+    // ===============================
+    // WAITLIST POSITION
+    // ===============================
+    $waitlistPosition = 0;
+    if ($this->getUser() && $availablePlaces <= 0) {
+        $existing = $em->getRepository(\App\Entity\InscriptionEvenement::class)->findOneBy([
+            'evenement' => $evenement,
+            'user'      => $this->getUser(),
+            'statut'    => 'waitlist',
+        ]);
+        if ($existing) {
+            $waitlistPosition = $waitlistService->getWaitlistPosition($evenement, $existing);
+        }
+    }
+
     return $this->render('events/show.html.twig', [
-        'evenement' => $evenement,
-        'form' => $form,
-        'availablePlaces' => $availablePlaces,
+        'evenement'        => $evenement,
+        'form'             => $form,
+        'availablePlaces'  => $availablePlaces,
+        'commentaireForm'  => $commentaireForm,
+        'commentaires'     => $evenement->getCommentaires(),
+        'waitlistPosition' => $waitlistPosition,
     ]);
 }
+    #[Route('/events/{id}/commentaire', name: 'evenement_add_commentaire', methods: ['POST'])]
+    public function addCommentaire(
+        int $id,
+        Request $request,
+        EvenementRepository $repo,
+        EntityManagerInterface $em
+    ): Response {
+        $evenement = $repo->find($id);
+        if (!$evenement) {
+            throw $this->createNotFoundException('Événement introuvable.');
+        }
+
+        $commentaire = new CommentaireEvenement();
+        $commentaire->setEvenement($evenement);
+        $commentaire->setDateCreation(new \DateTime());
+
+        $form = $this->createForm(CommentaireEvenementType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($commentaire);
+            $em->flush();
+            $this->addFlash('success', '💬 Commentaire ajouté avec succès !');
+        } else {
+            $this->addFlash('error', '❌ Commentaire invalide, vérifiez les champs.');
+        }
+
+        return $this->redirectToRoute('evenement_show', ['id' => $id]);
+    }
+
     #[Route('/events/{id}/edit', name: 'reservation_edit', methods: ['GET', 'POST'])]
     public function edit(
         int $id,

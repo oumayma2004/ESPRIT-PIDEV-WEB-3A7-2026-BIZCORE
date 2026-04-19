@@ -590,6 +590,6 @@ function deleteSelected() {
 }
 </script>
 {% endblock %}
-", "reservation/reservation_index.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\reservation\\reservation_index.html.twig");
+", "reservation/reservation_index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\reservation\\reservation_index.html.twig");
     }
 }

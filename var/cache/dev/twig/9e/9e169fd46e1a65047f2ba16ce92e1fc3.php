@@ -743,6 +743,6 @@ class __TwigTemplate_cfe7c716148a41b587bf6aa67d5d5744 extends Template
     }
 </script>
 {% endblock %}
-", "article/new.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\article\\new.html.twig");
+", "article/new.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\new.html.twig");
     }
 }

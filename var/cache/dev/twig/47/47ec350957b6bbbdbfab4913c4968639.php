@@ -638,6 +638,6 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
     </div>
 </div>
 {% endblock %}
-", "article/show.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\article\\show.html.twig");
+", "article/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\show.html.twig");
     }
 }

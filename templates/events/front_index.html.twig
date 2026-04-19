@@ -392,6 +392,19 @@
                         👥 {{ evenement.capacity }} places
                     </div>
                 </div>
+                {% if evenement.aiRating %}
+    ⭐ {{ evenement.aiRating }}/5 <br>
+
+    <small>
+        👍 {{ evenement.aiPositive }}%
+        😐 {{ evenement.aiNeutral }}%
+        👎 {{ evenement.aiNegative }}%
+    </small>
+
+    <p>{{ evenement.aiSummary }}</p>
+{% else %}
+    <span class="text-muted">Not rated yet</span>
+{% endif %}
             </div>
 
             <div class="card-footer">

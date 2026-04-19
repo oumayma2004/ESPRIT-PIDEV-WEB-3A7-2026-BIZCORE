@@ -539,13 +539,47 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
             yield " places
                     </div>
                 </div>
-            </div>
+                ";
+            // line 395
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "aiRating", [], "any", false, false, false, 395)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 396
+                yield "    ⭐ ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "aiRating", [], "any", false, false, false, 396), "html", null, true);
+                yield "/5 <br>
+
+    <small>
+        👍 ";
+                // line 399
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "aiPositive", [], "any", false, false, false, 399), "html", null, true);
+                yield "%
+        😐 ";
+                // line 400
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "aiNeutral", [], "any", false, false, false, 400), "html", null, true);
+                yield "%
+        👎 ";
+                // line 401
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "aiNegative", [], "any", false, false, false, 401), "html", null, true);
+                yield "%
+    </small>
+
+    <p>";
+                // line 404
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "aiSummary", [], "any", false, false, false, 404), "html", null, true);
+                yield "</p>
+";
+            } else {
+                // line 406
+                yield "    <span class=\"text-muted\">Not rated yet</span>
+";
+            }
+            // line 408
+            yield "            </div>
 
             <div class=\"card-footer\">
 
                 <a href=\"";
-            // line 399
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "id", [], "any", false, false, false, 399)]), "html", null, true);
+            // line 412
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "id", [], "any", false, false, false, 412)]), "html", null, true);
             yield "\" class=\"btn-reserve\">
     Réserver
 </a> </div>
@@ -553,9 +587,9 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
         ";
             $context['_iterated'] = true;
         }
-        // line 403
+        // line 416
         if (!$context['_iterated']) {
-            // line 404
+            // line 417
             yield "        <div class=\"empty\" style=\"grid-column:1/-1;\">
             <div class=\"empty-icon\">📭</div>
             <h3>Aucun événement disponible</h3>
@@ -566,7 +600,7 @@ class __TwigTemplate_6cdf8d04e5fd05838e013b28c8247c6a extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['evenement'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 410
+        // line 423
         yield "    </div>
 </div>
 
@@ -610,7 +644,7 @@ function filterCards() {
      */
     public function getDebugInfo(): array
     {
-        return array (  570 => 410,  559 => 404,  557 => 403,  548 => 399,  538 => 392,  531 => 388,  524 => 384,  520 => 383,  512 => 379,  506 => 375,  500 => 371,  497 => 370,  493 => 368,  485 => 366,  483 => 365,  477 => 363,  472 => 362,  463 => 358,  443 => 340,  437 => 338,  431 => 335,  426 => 333,  422 => 331,  420 => 330,  416 => 329,  410 => 326,  406 => 325,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  604 => 423,  593 => 417,  591 => 416,  582 => 412,  576 => 408,  572 => 406,  567 => 404,  561 => 401,  557 => 400,  553 => 399,  546 => 396,  544 => 395,  538 => 392,  531 => 388,  524 => 384,  520 => 383,  512 => 379,  506 => 375,  500 => 371,  497 => 370,  493 => 368,  485 => 366,  483 => 365,  477 => 363,  472 => 362,  463 => 358,  443 => 340,  437 => 338,  431 => 335,  426 => 333,  422 => 331,  420 => 330,  416 => 329,  410 => 326,  406 => 325,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -1009,6 +1043,19 @@ function filterCards() {
                         👥 {{ evenement.capacity }} places
                     </div>
                 </div>
+                {% if evenement.aiRating %}
+    ⭐ {{ evenement.aiRating }}/5 <br>
+
+    <small>
+        👍 {{ evenement.aiPositive }}%
+        😐 {{ evenement.aiNeutral }}%
+        👎 {{ evenement.aiNegative }}%
+    </small>
+
+    <p>{{ evenement.aiSummary }}</p>
+{% else %}
+    <span class=\"text-muted\">Not rated yet</span>
+{% endif %}
             </div>
 
             <div class=\"card-footer\">

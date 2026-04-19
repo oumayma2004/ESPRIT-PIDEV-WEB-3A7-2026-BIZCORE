@@ -312,6 +312,71 @@
                         <strong>{{ availablePlaces }} places</strong>
                     </div>
                 </div>
+                {# ===== AI RATING DISPLAY ===== #}
+{% if evenement.aiRating %}
+<div style="max-width:1100px;margin:24px auto;padding:0 24px;">
+    <div style="background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+        <div style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:12px;">🤖 Analyse IA des commentaires</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:32px;">
+                {% for i in 1..5 %}{{ i <= evenement.aiRating|round ? '⭐' : '☆' }}{% endfor %}
+            </span>
+            <span style="font-size:22px;font-weight:800;color:#0f172a;">{{ evenement.aiRating|number_format(1) }}/5</span>
+        </div>
+        {% if evenement.aiSummary %}
+            <p style="font-size:14px;color:#475569;font-style:italic;">"{{ evenement.aiSummary }}"</p>
+        {% endif %}
+        <div style="display:flex;gap:16px;margin-top:12px;">
+            <span style="background:#dcfce7;color:#166534;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">👍 {{ evenement.aiPositive }}% positifs</span>
+            <span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">😐 {{ evenement.aiNeutral }}% neutres</span>
+            <span style="background:#fee2e2;color:#991b1b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">👎 {{ evenement.aiNegative }}% négatifs</span>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{# ===== COMMENTAIRES SECTION ===== #}
+<div style="max-width:1100px;margin:0 auto 40px;padding:0 24px;">
+    <div style="background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:20px;">💬 Commentaires ({{ commentaires|length }})</h2>
+
+        {# List existing comments #}
+        {% for c in commentaires %}
+        <div style="border-bottom:1px solid #f1f5f9;padding:14px 0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="font-size:12px;color:#94a3b8;">{{ c.dateCreation|date('d/m/Y à H:i') }}</span>
+                {% if c.note %}
+                    <span>{% for i in 1..5 %}{{ i <= c.note ? '⭐' : '☆' }}{% endfor %}</span>
+                {% endif %}
+            </div>
+            <p style="font-size:14px;color:#475569;margin:0;">{{ c.contenu }}</p>
+        </div>
+        {% else %}
+        <p style="color:#94a3b8;font-size:14px;">Aucun commentaire pour le moment. Soyez le premier !</p>
+        {% endfor %}
+
+        {# Add comment form #}
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid #e2e8f0;">
+            <h3 style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:16px;">✍️ Laisser un commentaire</h3>
+            {{ form_start(commentaireForm, {'attr': {'style': 'display:flex;flex-direction:column;gap:12px;'}}) }}
+                <div>
+                    {{ form_label(commentaireForm.contenu, null, {'label_attr': {'style': 'font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;'}}) }}
+                    {{ form_widget(commentaireForm.contenu, {'attr': {'style': 'width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;resize:vertical;'}}) }}
+                    {% for error in commentaireForm.contenu.vars.errors %}
+                        <div style="font-size:12px;color:#dc2626;background:#fee2e2;border-radius:4px;padding:4px 8px;margin-top:3px;">⚠ {{ error.message }}</div>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form_label(commentaireForm.note, null, {'label_attr': {'style': 'font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;'}}) }}
+                    {{ form_widget(commentaireForm.note, {'attr': {'style': 'width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;'}}) }}
+                </div>
+                <button type="submit" style="background:#22c55e;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;align-self:flex-start;">
+                    💬 Publier le commentaire
+                </button>
+            {{ form_end(commentaireForm) }}
+        </div>
+    </div>
+</div>
             </div>
  {# Google Maps embed — FREE, no API key needed #}
 <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;">

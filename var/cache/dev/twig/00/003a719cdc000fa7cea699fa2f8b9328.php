@@ -277,6 +277,6 @@ class __TwigTemplate_01f20ce06526ec1721cd80b27de1ba29 extends Template
     {% set attr = attr|merge({class: (attr.class|default('') ~ ' button')|trim}) %}
     {{- parent() -}}
 {%- endblock button_widget %}
-", "foundation_6_layout.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\foundation_6_layout.html.twig");
+", "foundation_6_layout.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\foundation_6_layout.html.twig");
     }
 }

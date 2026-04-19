@@ -487,9 +487,178 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
         yield " places</strong>
                     </div>
                 </div>
+                ";
+        // line 316
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 316, $this->source); })()), "aiRating", [], "any", false, false, false, 316)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 317
+            yield "<div style=\"max-width:1100px;margin:24px auto;padding:0 24px;\">
+    <div style=\"background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.05);\">
+        <div style=\"font-size:16px;font-weight:700;color:#0f172a;margin-bottom:12px;\">🤖 Analyse IA des commentaires</div>
+        <div style=\"display:flex;align-items:center;gap:12px;margin-bottom:12px;\">
+            <span style=\"font-size:32px;\">
+                ";
+            // line 322
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable(range(1, 5));
+            foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+                yield ((($context["i"] <= Twig\Extension\CoreExtension::round(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 322, $this->source); })()), "aiRating", [], "any", false, false, false, 322)))) ? ("⭐") : ("☆"));
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 323
+            yield "            </span>
+            <span style=\"font-size:22px;font-weight:800;color:#0f172a;\">";
+            // line 324
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 324, $this->source); })()), "aiRating", [], "any", false, false, false, 324), 1), "html", null, true);
+            yield "/5</span>
+        </div>
+        ";
+            // line 326
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 326, $this->source); })()), "aiSummary", [], "any", false, false, false, 326)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 327
+                yield "            <p style=\"font-size:14px;color:#475569;font-style:italic;\">\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 327, $this->source); })()), "aiSummary", [], "any", false, false, false, 327), "html", null, true);
+                yield "\"</p>
+        ";
+            }
+            // line 329
+            yield "        <div style=\"display:flex;gap:16px;margin-top:12px;\">
+            <span style=\"background:#dcfce7;color:#166534;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;\">👍 ";
+            // line 330
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 330, $this->source); })()), "aiPositive", [], "any", false, false, false, 330), "html", null, true);
+            yield "% positifs</span>
+            <span style=\"background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;\">😐 ";
+            // line 331
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 331, $this->source); })()), "aiNeutral", [], "any", false, false, false, 331), "html", null, true);
+            yield "% neutres</span>
+            <span style=\"background:#fee2e2;color:#991b1b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;\">👎 ";
+            // line 332
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 332, $this->source); })()), "aiNegative", [], "any", false, false, false, 332), "html", null, true);
+            yield "% négatifs</span>
+        </div>
+    </div>
+</div>
+";
+        }
+        // line 337
+        yield "
+";
+        // line 339
+        yield "<div style=\"max-width:1100px;margin:0 auto 40px;padding:0 24px;\">
+    <div style=\"background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.05);\">
+        <h2 style=\"font-size:18px;font-weight:700;color:#0f172a;margin-bottom:20px;\">💬 Commentaires (";
+        // line 341
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["commentaires"]) || array_key_exists("commentaires", $context) ? $context["commentaires"] : (function () { throw new RuntimeError('Variable "commentaires" does not exist.', 341, $this->source); })())), "html", null, true);
+        yield ")</h2>
+
+        ";
+        // line 344
+        yield "        ";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["commentaires"]) || array_key_exists("commentaires", $context) ? $context["commentaires"] : (function () { throw new RuntimeError('Variable "commentaires" does not exist.', 344, $this->source); })()));
+        $context['_iterated'] = false;
+        foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
+            // line 345
+            yield "        <div style=\"border-bottom:1px solid #f1f5f9;padding:14px 0;\">
+            <div style=\"display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;\">
+                <span style=\"font-size:12px;color:#94a3b8;\">";
+            // line 347
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "dateCreation", [], "any", false, false, false, 347), "d/m/Y à H:i"), "html", null, true);
+            yield "</span>
+                ";
+            // line 348
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["c"], "note", [], "any", false, false, false, 348)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 349
+                yield "                    <span>";
+                $context['_parent'] = $context;
+                $context['_seq'] = CoreExtension::ensureTraversable(range(1, 5));
+                foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+                    yield ((($context["i"] <= CoreExtension::getAttribute($this->env, $this->source, $context["c"], "note", [], "any", false, false, false, 349))) ? ("⭐") : ("☆"));
+                }
+                $_parent = $context['_parent'];
+                unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
+                $context = array_intersect_key($context, $_parent) + $_parent;
+                yield "</span>
+                ";
+            }
+            // line 351
+            yield "            </div>
+            <p style=\"font-size:14px;color:#475569;margin:0;\">";
+            // line 352
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "contenu", [], "any", false, false, false, 352), "html", null, true);
+            yield "</p>
+        </div>
+        ";
+            $context['_iterated'] = true;
+        }
+        // line 354
+        if (!$context['_iterated']) {
+            // line 355
+            yield "        <p style=\"color:#94a3b8;font-size:14px;\">Aucun commentaire pour le moment. Soyez le premier !</p>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['c'], $context['_parent'], $context['_iterated']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 357
+        yield "
+        ";
+        // line 359
+        yield "        <div style=\"margin-top:24px;padding-top:20px;border-top:1px solid #e2e8f0;\">
+            <h3 style=\"font-size:15px;font-weight:700;color:#0f172a;margin-bottom:16px;\">✍️ Laisser un commentaire</h3>
+            ";
+        // line 361
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 361, $this->source); })()), 'form_start', ["attr" => ["style" => "display:flex;flex-direction:column;gap:12px;"]]);
+        yield "
+                <div>
+                    ";
+        // line 363
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 363, $this->source); })()), "contenu", [], "any", false, false, false, 363), 'label', ["label_attr" => ["style" => "font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;"]]);
+        yield "
+                    ";
+        // line 364
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 364, $this->source); })()), "contenu", [], "any", false, false, false, 364), 'widget', ["attr" => ["style" => "width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;resize:vertical;"]]);
+        yield "
+                    ";
+        // line 365
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 365, $this->source); })()), "contenu", [], "any", false, false, false, 365), "vars", [], "any", false, false, false, 365), "errors", [], "any", false, false, false, 365));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 366
+            yield "                        <div style=\"font-size:12px;color:#dc2626;background:#fee2e2;border-radius:4px;padding:4px 8px;margin-top:3px;\">⚠ ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 366), "html", null, true);
+            yield "</div>
+                    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 368
+        yield "                </div>
+                <div>
+                    ";
+        // line 370
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 370, $this->source); })()), "note", [], "any", false, false, false, 370), 'label', ["label_attr" => ["style" => "font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;"]]);
+        yield "
+                    ";
+        // line 371
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 371, $this->source); })()), "note", [], "any", false, false, false, 371), 'widget', ["attr" => ["style" => "width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;"]]);
+        yield "
+                </div>
+                <button type=\"submit\" style=\"background:#22c55e;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;align-self:flex-start;\">
+                    💬 Publier le commentaire
+                </button>
+            ";
+        // line 376
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["commentaireForm"]) || array_key_exists("commentaireForm", $context) ? $context["commentaireForm"] : (function () { throw new RuntimeError('Variable "commentaireForm" does not exist.', 376, $this->source); })()), 'form_end');
+        yield "
+        </div>
+    </div>
+</div>
             </div>
  ";
-        // line 317
+        // line 382
         yield "<div style=\"margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;\">
 
     <iframe
@@ -499,8 +668,8 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
         loading=\"lazy\"
         referrerpolicy=\"no-referrer-when-downgrade\"
         src=\"https://maps.google.com/maps?q=";
-        // line 325
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 325, $this->source); })()), "lieu", [], "any", false, false, false, 325)), "html", null, true);
+        // line 390
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 390, $this->source); })()), "lieu", [], "any", false, false, false, 390)), "html", null, true);
         yield "&output=embed\">
     </iframe>
 
@@ -508,13 +677,13 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
         <div style=\"flex: 1;\">
             <div style=\"font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;\">LIEU</div>
             <div style=\"font-size: 13px; font-weight: 600; color: #0f172a;\">";
-        // line 331
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 331, $this->source); })()), "lieu", [], "any", false, false, false, 331), "html", null, true);
+        // line 396
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 396, $this->source); })()), "lieu", [], "any", false, false, false, 396), "html", null, true);
         yield "</div>
         </div>
         <a href=\"https://www.google.com/maps/dir/?api=1&destination=";
-        // line 333
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 333, $this->source); })()), "lieu", [], "any", false, false, false, 333)), "html", null, true);
+        // line 398
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["evenement"]) || array_key_exists("evenement", $context) ? $context["evenement"] : (function () { throw new RuntimeError('Variable "evenement" does not exist.', 398, $this->source); })()), "lieu", [], "any", false, false, false, 398)), "html", null, true);
         yield "\"
            target=\"_blank\"
            rel=\"noopener\"
@@ -526,119 +695,119 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
     </div>
 </div>
             ";
-        // line 344
+        // line 409
         yield "            ";
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 344, $this->source); })()), 'form_start', ["method" => "POST", "attr" => ["id" => "reserveForm", "class" => "reserve-form", "novalidate" => "novalidate"]]);
-        // line 347
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 409, $this->source); })()), 'form_start', ["method" => "POST", "attr" => ["id" => "reserveForm", "class" => "reserve-form", "novalidate" => "novalidate"]]);
+        // line 412
         yield "
 
     <div class=\"form-group\">
         ";
-        // line 350
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 350, $this->source); })()), "nom", [], "any", false, false, false, 350), 'label');
+        // line 415
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 415, $this->source); })()), "nom", [], "any", false, false, false, 415), 'label');
         yield "
         ";
-        // line 351
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 351, $this->source); })()), "nom", [], "any", false, false, false, 351), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 351, $this->source); })()), "nom", [], "any", false, false, false, 351), "vars", [], "any", false, false, false, 351), "errors", [], "any", false, false, false, 351)) > 0)) ? ("is-invalid") : (""))]]);
+        // line 416
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 416, $this->source); })()), "nom", [], "any", false, false, false, 416), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 416, $this->source); })()), "nom", [], "any", false, false, false, 416), "vars", [], "any", false, false, false, 416), "errors", [], "any", false, false, false, 416)) > 0)) ? ("is-invalid") : (""))]]);
         yield "
         ";
-        // line 352
+        // line 417
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 352, $this->source); })()), "nom", [], "any", false, false, false, 352), "vars", [], "any", false, false, false, 352), "errors", [], "any", false, false, false, 352));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 417, $this->source); })()), "nom", [], "any", false, false, false, 417), "vars", [], "any", false, false, false, 417), "errors", [], "any", false, false, false, 417));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 353
+            // line 418
             yield "            <div class=\"form-error\">⚠ ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 353), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 418), "html", null, true);
             yield "</div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 355
+        // line 420
         yield "    </div>
 
     <div class=\"form-group\">
         ";
-        // line 358
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 358, $this->source); })()), "email", [], "any", false, false, false, 358), 'label');
+        // line 423
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 423, $this->source); })()), "email", [], "any", false, false, false, 423), 'label');
         yield "
         ";
-        // line 359
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 359, $this->source); })()), "email", [], "any", false, false, false, 359), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 359, $this->source); })()), "email", [], "any", false, false, false, 359), "vars", [], "any", false, false, false, 359), "errors", [], "any", false, false, false, 359)) > 0)) ? ("is-invalid") : (""))]]);
+        // line 424
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 424, $this->source); })()), "email", [], "any", false, false, false, 424), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 424, $this->source); })()), "email", [], "any", false, false, false, 424), "vars", [], "any", false, false, false, 424), "errors", [], "any", false, false, false, 424)) > 0)) ? ("is-invalid") : (""))]]);
         yield "
         ";
-        // line 360
+        // line 425
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 360, $this->source); })()), "email", [], "any", false, false, false, 360), "vars", [], "any", false, false, false, 360), "errors", [], "any", false, false, false, 360));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 425, $this->source); })()), "email", [], "any", false, false, false, 425), "vars", [], "any", false, false, false, 425), "errors", [], "any", false, false, false, 425));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 361
+            // line 426
             yield "            <div class=\"form-error\">⚠ ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 361), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 426), "html", null, true);
             yield "</div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 363
+        // line 428
         yield "    </div>
 
     <div class=\"form-group\">
         ";
-        // line 366
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 366, $this->source); })()), "telephone", [], "any", false, false, false, 366), 'label');
+        // line 431
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 431, $this->source); })()), "telephone", [], "any", false, false, false, 431), 'label');
         yield "
         ";
-        // line 367
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 367, $this->source); })()), "telephone", [], "any", false, false, false, 367), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 367, $this->source); })()), "telephone", [], "any", false, false, false, 367), "vars", [], "any", false, false, false, 367), "errors", [], "any", false, false, false, 367)) > 0)) ? ("is-invalid") : (""))]]);
+        // line 432
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 432, $this->source); })()), "telephone", [], "any", false, false, false, 432), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 432, $this->source); })()), "telephone", [], "any", false, false, false, 432), "vars", [], "any", false, false, false, 432), "errors", [], "any", false, false, false, 432)) > 0)) ? ("is-invalid") : (""))]]);
         yield "
         ";
-        // line 368
+        // line 433
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 368, $this->source); })()), "telephone", [], "any", false, false, false, 368), "vars", [], "any", false, false, false, 368), "errors", [], "any", false, false, false, 368));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 433, $this->source); })()), "telephone", [], "any", false, false, false, 433), "vars", [], "any", false, false, false, 433), "errors", [], "any", false, false, false, 433));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 369
+            // line 434
             yield "            <div class=\"form-error\">⚠ ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 369), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 434), "html", null, true);
             yield "</div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 371
+        // line 436
         yield "    </div>
 
     <div class=\"form-group\">
         ";
-        // line 374
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 374, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 374), 'label');
+        // line 439
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 439, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 439), 'label');
         yield "
         ";
-        // line 375
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 375, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 375), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 375, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 375), "vars", [], "any", false, false, false, 375), "errors", [], "any", false, false, false, 375)) > 0)) ? ("is-invalid") : (""))]]);
+        // line 440
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 440, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 440), 'widget', ["attr" => ["class" => (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 440, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 440), "vars", [], "any", false, false, false, 440), "errors", [], "any", false, false, false, 440)) > 0)) ? ("is-invalid") : (""))]]);
         yield "
         ";
-        // line 376
+        // line 441
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 376, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 376), "vars", [], "any", false, false, false, 376), "errors", [], "any", false, false, false, 376));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 441, $this->source); })()), "nombrePlaces", [], "any", false, false, false, 441), "vars", [], "any", false, false, false, 441), "errors", [], "any", false, false, false, 441));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 377
+            // line 442
             yield "            <div class=\"form-error\">⚠ ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 377), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["error"], "message", [], "any", false, false, false, 442), "html", null, true);
             yield "</div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['error'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 379
+        // line 444
         yield "    </div>
 
                 ";
-        // line 381
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 381, $this->source); })()), 'rest');
+        // line 446
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 446, $this->source); })()), 'rest');
         yield "
                 
 
@@ -647,8 +816,8 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
                 </button>
 
             ";
-        // line 388
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 388, $this->source); })()), 'form_end');
+        // line 453
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 453, $this->source); })()), 'form_end');
         yield "
 
             <div class=\"reserve-note\">🔒 Réservation sécurisée — Annulation gratuite</div>
@@ -696,7 +865,7 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  651 => 388,  641 => 381,  637 => 379,  628 => 377,  624 => 376,  620 => 375,  616 => 374,  611 => 371,  602 => 369,  598 => 368,  594 => 367,  590 => 366,  585 => 363,  576 => 361,  572 => 360,  568 => 359,  564 => 358,  559 => 355,  550 => 353,  546 => 352,  542 => 351,  538 => 350,  533 => 347,  530 => 344,  517 => 333,  512 => 331,  503 => 325,  493 => 317,  486 => 312,  476 => 305,  463 => 295,  452 => 287,  444 => 282,  437 => 278,  430 => 274,  423 => 270,  416 => 266,  408 => 261,  403 => 258,  399 => 256,  395 => 254,  393 => 253,  388 => 250,  384 => 248,  376 => 246,  374 => 245,  362 => 237,  353 => 235,  348 => 234,  339 => 232,  335 => 231,  328 => 227,  324 => 226,  103 => 7,  93 => 6,  76 => 4,  59 => 3,  42 => 1,);
+        return array (  820 => 453,  810 => 446,  806 => 444,  797 => 442,  793 => 441,  789 => 440,  785 => 439,  780 => 436,  771 => 434,  767 => 433,  763 => 432,  759 => 431,  754 => 428,  745 => 426,  741 => 425,  737 => 424,  733 => 423,  728 => 420,  719 => 418,  715 => 417,  711 => 416,  707 => 415,  702 => 412,  699 => 409,  686 => 398,  681 => 396,  672 => 390,  662 => 382,  654 => 376,  646 => 371,  642 => 370,  638 => 368,  629 => 366,  625 => 365,  621 => 364,  617 => 363,  612 => 361,  608 => 359,  605 => 357,  598 => 355,  596 => 354,  589 => 352,  586 => 351,  573 => 349,  571 => 348,  567 => 347,  563 => 345,  557 => 344,  552 => 341,  548 => 339,  545 => 337,  537 => 332,  533 => 331,  529 => 330,  526 => 329,  520 => 327,  518 => 326,  513 => 324,  510 => 323,  501 => 322,  494 => 317,  492 => 316,  486 => 312,  476 => 305,  463 => 295,  452 => 287,  444 => 282,  437 => 278,  430 => 274,  423 => 270,  416 => 266,  408 => 261,  403 => 258,  399 => 256,  395 => 254,  393 => 253,  388 => 250,  384 => 248,  376 => 246,  374 => 245,  362 => 237,  353 => 235,  348 => 234,  339 => 232,  335 => 231,  328 => 227,  324 => 226,  103 => 7,  93 => 6,  76 => 4,  59 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -1015,6 +1184,71 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
                         <strong>{{ availablePlaces }} places</strong>
                     </div>
                 </div>
+                {# ===== AI RATING DISPLAY ===== #}
+{% if evenement.aiRating %}
+<div style=\"max-width:1100px;margin:24px auto;padding:0 24px;\">
+    <div style=\"background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.05);\">
+        <div style=\"font-size:16px;font-weight:700;color:#0f172a;margin-bottom:12px;\">🤖 Analyse IA des commentaires</div>
+        <div style=\"display:flex;align-items:center;gap:12px;margin-bottom:12px;\">
+            <span style=\"font-size:32px;\">
+                {% for i in 1..5 %}{{ i <= evenement.aiRating|round ? '⭐' : '☆' }}{% endfor %}
+            </span>
+            <span style=\"font-size:22px;font-weight:800;color:#0f172a;\">{{ evenement.aiRating|number_format(1) }}/5</span>
+        </div>
+        {% if evenement.aiSummary %}
+            <p style=\"font-size:14px;color:#475569;font-style:italic;\">\"{{ evenement.aiSummary }}\"</p>
+        {% endif %}
+        <div style=\"display:flex;gap:16px;margin-top:12px;\">
+            <span style=\"background:#dcfce7;color:#166534;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;\">👍 {{ evenement.aiPositive }}% positifs</span>
+            <span style=\"background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;\">😐 {{ evenement.aiNeutral }}% neutres</span>
+            <span style=\"background:#fee2e2;color:#991b1b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;\">👎 {{ evenement.aiNegative }}% négatifs</span>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{# ===== COMMENTAIRES SECTION ===== #}
+<div style=\"max-width:1100px;margin:0 auto 40px;padding:0 24px;\">
+    <div style=\"background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.05);\">
+        <h2 style=\"font-size:18px;font-weight:700;color:#0f172a;margin-bottom:20px;\">💬 Commentaires ({{ commentaires|length }})</h2>
+
+        {# List existing comments #}
+        {% for c in commentaires %}
+        <div style=\"border-bottom:1px solid #f1f5f9;padding:14px 0;\">
+            <div style=\"display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;\">
+                <span style=\"font-size:12px;color:#94a3b8;\">{{ c.dateCreation|date('d/m/Y à H:i') }}</span>
+                {% if c.note %}
+                    <span>{% for i in 1..5 %}{{ i <= c.note ? '⭐' : '☆' }}{% endfor %}</span>
+                {% endif %}
+            </div>
+            <p style=\"font-size:14px;color:#475569;margin:0;\">{{ c.contenu }}</p>
+        </div>
+        {% else %}
+        <p style=\"color:#94a3b8;font-size:14px;\">Aucun commentaire pour le moment. Soyez le premier !</p>
+        {% endfor %}
+
+        {# Add comment form #}
+        <div style=\"margin-top:24px;padding-top:20px;border-top:1px solid #e2e8f0;\">
+            <h3 style=\"font-size:15px;font-weight:700;color:#0f172a;margin-bottom:16px;\">✍️ Laisser un commentaire</h3>
+            {{ form_start(commentaireForm, {'attr': {'style': 'display:flex;flex-direction:column;gap:12px;'}}) }}
+                <div>
+                    {{ form_label(commentaireForm.contenu, null, {'label_attr': {'style': 'font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;'}}) }}
+                    {{ form_widget(commentaireForm.contenu, {'attr': {'style': 'width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;resize:vertical;'}}) }}
+                    {% for error in commentaireForm.contenu.vars.errors %}
+                        <div style=\"font-size:12px;color:#dc2626;background:#fee2e2;border-radius:4px;padding:4px 8px;margin-top:3px;\">⚠ {{ error.message }}</div>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form_label(commentaireForm.note, null, {'label_attr': {'style': 'font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;'}}) }}
+                    {{ form_widget(commentaireForm.note, {'attr': {'style': 'width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;'}}) }}
+                </div>
+                <button type=\"submit\" style=\"background:#22c55e;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;align-self:flex-start;\">
+                    💬 Publier le commentaire
+                </button>
+            {{ form_end(commentaireForm) }}
+        </div>
+    </div>
+</div>
             </div>
  {# Google Maps embed — FREE, no API key needed #}
 <div style=\"margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;\">

@@ -415,6 +415,6 @@ class __TwigTemplate_d45ce340b8ed16b687693a095b1be41f extends Template
         {% for error in form.contenu.vars.errors %}<div class=\"form-error\">⚠ {{ error.message }}</div>{% endfor %}
     </div>
 
-</div>", "article/_form.html.twig", "C:\\Users\\MSI\\Desktop\\bizcore\\templates\\article\\_form.html.twig");
+</div>", "article/_form.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\_form.html.twig");
     }
 }
