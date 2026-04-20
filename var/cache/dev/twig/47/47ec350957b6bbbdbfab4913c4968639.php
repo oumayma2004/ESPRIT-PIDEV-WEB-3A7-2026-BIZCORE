@@ -120,7 +120,8 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; text-decoration: none; font-size: 13px; font-weight: 500; margin-bottom: 20px; transition: color 0.15s; }
     .back-link:hover { color: #22c55e; }
 
-    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); max-width: 860px; }
+    /* ── ARTICLE CARD ──────────────────────────────────────────── */
+    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); max-width: 900px; }
     .detail-header { background: #1e293b; padding: 24px 28px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
     .detail-header-left { display: flex; flex-direction: column; gap: 8px; }
 
@@ -148,13 +149,58 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
 
     .detail-body { padding: 28px; }
 
-    .content-section-title { font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+    .section-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
     .content-text { font-size: 14px; color: #475569; line-height: 1.9; white-space: pre-wrap; }
 
     .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #f1f5f9; }
     .meta-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px; padding: 12px 16px; }
     .meta-box .label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .meta-box .value { font-size: 13px; font-weight: 600; color: #1e293b; }
+
+    /* ── REACTIONS ADMIN BLOCK ─────────────────────────────────── */
+    .reactions-block {
+        margin-top: 28px; padding-top: 28px;
+        border-top: 1px solid #f1f5f9;
+    }
+    .reactions-block-title {
+        font-size: 11px; font-weight: 700; color: #94a3b8;
+        text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px;
+        display: flex; align-items: center; gap: 8px;
+    }
+
+    /* KPI row */
+    .reaction-kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 24px; }
+    .reaction-kpi { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; text-align: center; }
+    .reaction-kpi .kpi-icon { font-size: 20px; margin-bottom: 4px; }
+    .reaction-kpi .kpi-val { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1; margin-bottom: 4px; }
+    .reaction-kpi .kpi-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: .4px; }
+
+    /* Avis admin table */
+    .avis-admin-table-wrap { overflow-x: auto; }
+    .avis-admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .avis-admin-table th { text-align: left; padding: 9px 12px; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+    .avis-admin-table td { padding: 11px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
+    .avis-admin-table tr:last-child td { border-bottom: none; }
+    .avis-admin-table tr:hover td { background: #f8fafc; }
+
+    .tbl-avatar { width: 30px; height: 30px; border-radius: 50%; background: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .tbl-avatar.anon { background: #94a3b8; }
+    .author-cell { display: flex; align-items: center; gap: 8px; }
+    .author-name { font-weight: 600; color: #1e293b; }
+
+    .type-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+    .type-like     { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    .type-helpful  { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+    .type-bookmark { background: #faf5ff; color: #7c3aed; border-color: #ddd6fe; }
+    .type-share    { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+
+    .stars-cell { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+    .avis-cell  { color: #475569; font-style: italic; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .anon-tag   { display: inline-block; background: #f1f5f9; color: #94a3b8; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 4px; }
+    .date-cell  { font-size: 12px; color: #94a3b8; white-space: nowrap; }
+
+    .table-empty { text-align: center; padding: 28px; color: #94a3b8; font-size: 13px; }
+    .table-loading { text-align: center; padding: 28px; color: #94a3b8; font-size: 13px; }
 
     .flash { padding: 11px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .flash-success { background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; }
@@ -170,16 +216,16 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
             <a href=\"#\" class=\"nav-item\"><span>⊞</span> Dashboard</a>
             <a href=\"#\" class=\"nav-item\"><span>👤</span> Utilisateurs</a>
             <a href=\"";
-        // line 93
+        // line 139
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_index");
         yield "\" class=\"nav-item\"><span>📅</span> Événements</a>
             <a href=\"#\" class=\"nav-item\"><span>🎯</span> Coaching</a>
             <a href=\"";
-        // line 95
+        // line 141
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("frontend_blog_index");
         yield "\" class=\"nav-item\"><span>📝</span> Blog</a>
             <a href=\"";
-        // line 96
+        // line 142
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_index");
         yield "\" class=\"nav-item active\"><span>📰</span> Articles</a>
             <a href=\"#\" class=\"nav-item\"><span>🛍</span> Produits/Commandes</a>
@@ -206,14 +252,14 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
                 <span class=\"home-icon\">⌂</span>
                 <span class=\"separator\">/</span>
                 <a href=\"";
-        // line 120
+        // line 166
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_index");
         yield "\">ARTICLES</a>
                 <span class=\"separator\">/</span>
                 <span>";
-        // line 122
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::slice($this->env->getCharset(), Twig\Extension\CoreExtension::upper($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 122, $this->source); })()), "titre", [], "any", false, false, false, 122)), 0, 40), "html", null, true);
-        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 122, $this->source); })()), "titre", [], "any", false, false, false, 122)) > 40)) {
+        // line 168
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::slice($this->env->getCharset(), Twig\Extension\CoreExtension::upper($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 168, $this->source); })()), "titre", [], "any", false, false, false, 168)), 0, 40), "html", null, true);
+        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 168, $this->source); })()), "titre", [], "any", false, false, false, 168)) > 40)) {
             yield "…";
         }
         yield "</span>
@@ -227,11 +273,11 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
         <div class=\"content\">
 
             ";
-        // line 132
+        // line 178
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 132, $this->source); })()), "flashes", ["success"], "method", false, false, false, 132));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 178, $this->source); })()), "flashes", ["success"], "method", false, false, false, 178));
         foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-            // line 133
+            // line 179
             yield "                <div class=\"flash flash-success\">✅ ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
             yield "</div>
@@ -240,12 +286,12 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 135
+        // line 181
         yield "            ";
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 135, $this->source); })()), "flashes", ["error"], "method", false, false, false, 135));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 181, $this->source); })()), "flashes", ["error"], "method", false, false, false, 181));
         foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-            // line 136
+            // line 182
             yield "                <div class=\"flash flash-error\">❌ ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
             yield "</div>
@@ -254,83 +300,86 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 138
+        // line 184
         yield "
             <a href=\"";
-        // line 139
+        // line 185
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_index");
         yield "\" class=\"back-link\">← Retour aux articles</a>
 
             <div class=\"detail-card\">
-                <div class=\"detail-header\">
+
+                ";
+        // line 190
+        yield "                <div class=\"detail-header\">
                     <div class=\"detail-header-left\">
                         <div class=\"detail-tags\">
                             ";
-        // line 145
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 145, $this->source); })()), "statut", [], "any", false, false, false, 145) == "publié")) {
-            // line 146
+        // line 193
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 193, $this->source); })()), "statut", [], "any", false, false, false, 193) == "publié")) {
+            // line 194
             yield "                                <span class=\"tag tag-green\">✓ Publié</span>
                             ";
-        } elseif ((CoreExtension::getAttribute($this->env, $this->source,         // line 147
-(isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 147, $this->source); })()), "statut", [], "any", false, false, false, 147) == "brouillon")) {
-            // line 148
+        } elseif ((CoreExtension::getAttribute($this->env, $this->source,         // line 195
+(isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 195, $this->source); })()), "statut", [], "any", false, false, false, 195) == "brouillon")) {
+            // line 196
             yield "                                <span class=\"tag tag-yellow\">✎ Brouillon</span>
                             ";
-        } elseif ((($tmp = CoreExtension::getAttribute($this->env, $this->source,         // line 149
-(isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 149, $this->source); })()), "statut", [], "any", false, false, false, 149)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 150
+        } elseif ((($tmp = CoreExtension::getAttribute($this->env, $this->source,         // line 197
+(isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 197, $this->source); })()), "statut", [], "any", false, false, false, 197)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 198
             yield "                                <span class=\"tag tag-grey\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 150, $this->source); })()), "statut", [], "any", false, false, false, 150)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 198, $this->source); })()), "statut", [], "any", false, false, false, 198)), "html", null, true);
             yield "</span>
                             ";
         }
-        // line 152
+        // line 200
         yield "                            ";
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 152, $this->source); })()), "categorie", [], "any", false, false, false, 152)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 153
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 200, $this->source); })()), "categorie", [], "any", false, false, false, 200)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 201
             yield "                                <span class=\"tag tag-blue\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 153, $this->source); })()), "categorie", [], "any", false, false, false, 153), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 201, $this->source); })()), "categorie", [], "any", false, false, false, 201), "html", null, true);
             yield "</span>
                             ";
         }
-        // line 155
+        // line 203
         yield "                            <span class=\"tag tag-grey\">📰 Article #";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 155, $this->source); })()), "idArticle", [], "any", false, false, false, 155), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 203, $this->source); })()), "idArticle", [], "any", false, false, false, 203), "html", null, true);
         yield "</span>
                         </div>
                         <div class=\"detail-title\">";
-        // line 157
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 157, $this->source); })()), "titre", [], "any", false, false, false, 157), "html", null, true);
+        // line 205
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 205, $this->source); })()), "titre", [], "any", false, false, false, 205), "html", null, true);
         yield "</div>
                         <div class=\"detail-meta-row\">
                             <span class=\"meta-item\"><strong>Vues :</strong> 👁 ";
-        // line 159
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 159, $this->source); })()), "nombreVues", [], "any", false, false, false, 159), "html", null, true);
+        // line 207
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 207, $this->source); })()), "nombreVues", [], "any", false, false, false, 207), "html", null, true);
         yield "</span>
                             ";
-        // line 160
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 160, $this->source); })()), "categorie", [], "any", false, false, false, 160)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 161
+        // line 208
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 208, $this->source); })()), "categorie", [], "any", false, false, false, 208)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 209
             yield "                                <span class=\"meta-item\"><strong>Catégorie :</strong> ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 161, $this->source); })()), "categorie", [], "any", false, false, false, 161), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 209, $this->source); })()), "categorie", [], "any", false, false, false, 209), "html", null, true);
             yield "</span>
                             ";
         }
-        // line 163
+        // line 211
         yield "                        </div>
                     </div>
                     <div class=\"action-btns-header\">
                         <a href=\"";
-        // line 166
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 166, $this->source); })()), "idArticle", [], "any", false, false, false, 166)]), "html", null, true);
+        // line 214
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 214, $this->source); })()), "idArticle", [], "any", false, false, false, 214)]), "html", null, true);
         yield "\" class=\"btn-edit-h\">✏ Modifier</a>
                         <form method=\"post\" action=\"";
-        // line 167
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 167, $this->source); })()), "idArticle", [], "any", false, false, false, 167)]), "html", null, true);
+        // line 215
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 215, $this->source); })()), "idArticle", [], "any", false, false, false, 215)]), "html", null, true);
         yield "\" style=\"display:inline;\">
                             <input type=\"hidden\" name=\"_token\" value=\"";
-        // line 168
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 168, $this->source); })()), "idArticle", [], "any", false, false, false, 168))), "html", null, true);
+        // line 216
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 216, $this->source); })()), "idArticle", [], "any", false, false, false, 216))), "html", null, true);
         yield "\">
                             <button class=\"btn-del-h\" onclick=\"return confirm('Supprimer cet article ?')\">🗑 Supprimer</button>
                         </form>
@@ -338,65 +387,207 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
                 </div>
 
                 ";
-        // line 174
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 174, $this->source); })()), "imagePrincipale", [], "any", false, false, false, 174)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 175
+        // line 223
+        yield "                ";
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 223, $this->source); })()), "imagePrincipale", [], "any", false, false, false, 223)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 224
             yield "                    <img src=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 175, $this->source); })()), "imagePrincipale", [], "any", false, false, false, 175))), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 224, $this->source); })()), "imagePrincipale", [], "any", false, false, false, 224))), "html", null, true);
             yield "\" class=\"detail-img\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 175, $this->source); })()), "titre", [], "any", false, false, false, 175), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 224, $this->source); })()), "titre", [], "any", false, false, false, 224), "html", null, true);
             yield "\">
                 ";
         } else {
-            // line 177
+            // line 226
             yield "                    <div class=\"detail-img-placeholder\">📰</div>
                 ";
         }
-        // line 179
+        // line 228
         yield "
                 <div class=\"detail-body\">
-                    <div class=\"content-section-title\">Contenu de l'article</div>
+
+                    ";
+        // line 232
+        yield "                    <div class=\"section-label\">Contenu de l'article</div>
                     <div class=\"content-text\">";
-        // line 182
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 182, $this->source); })()), "contenu", [], "any", false, false, false, 182), "html", null, true);
+        // line 233
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 233, $this->source); })()), "contenu", [], "any", false, false, false, 233), "html", null, true);
         yield "</div>
 
-                    <div class=\"meta-grid\">
+                    ";
+        // line 236
+        yield "                    <div class=\"meta-grid\">
                         <div class=\"meta-box\">
                             <div class=\"label\">Catégorie</div>
                             <div class=\"value\">";
-        // line 187
-        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["article"] ?? null), "categorie", [], "any", true, true, false, 187) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 187, $this->source); })()), "categorie", [], "any", false, false, false, 187)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 187, $this->source); })()), "categorie", [], "any", false, false, false, 187), "html", null, true)) : ("—"));
+        // line 239
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["article"] ?? null), "categorie", [], "any", true, true, false, 239) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 239, $this->source); })()), "categorie", [], "any", false, false, false, 239)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 239, $this->source); })()), "categorie", [], "any", false, false, false, 239), "html", null, true)) : ("—"));
         yield "</div>
                         </div>
                         <div class=\"meta-box\">
                             <div class=\"label\">Statut</div>
                             <div class=\"value\">";
-        // line 191
-        yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 191, $this->source); })()), "statut", [], "any", false, false, false, 191)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 191, $this->source); })()), "statut", [], "any", false, false, false, 191)), "html", null, true)) : ("—"));
+        // line 243
+        yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 243, $this->source); })()), "statut", [], "any", false, false, false, 243)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 243, $this->source); })()), "statut", [], "any", false, false, false, 243)), "html", null, true)) : ("—"));
         yield "</div>
                         </div>
                         <div class=\"meta-box\">
                             <div class=\"label\">Nombre de vues</div>
                             <div class=\"value\">👁 ";
-        // line 195
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 195, $this->source); })()), "nombreVues", [], "any", false, false, false, 195), "html", null, true);
+        // line 247
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 247, $this->source); })()), "nombreVues", [], "any", false, false, false, 247), "html", null, true);
         yield "</div>
                         </div>
                         <div class=\"meta-box\">
                             <div class=\"label\">Identifiant</div>
                             <div class=\"value\">#";
-        // line 199
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 199, $this->source); })()), "idArticle", [], "any", false, false, false, 199), "html", null, true);
+        // line 251
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 251, $this->source); })()), "idArticle", [], "any", false, false, false, 251), "html", null, true);
         yield "</div>
                         </div>
                     </div>
-                </div>
-            </div>
 
+                    ";
+        // line 259
+        yield "                    <div class=\"reactions-block\">
+
+                        <div class=\"reactions-block-title\">
+                            📊 Engagement des lecteurs
+                        </div>
+
+                        ";
+        // line 266
+        yield "                        <div class=\"reaction-kpi-row\" id=\"adminKpiRow\">
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">👍</div><div class=\"kpi-val\" id=\"kpi-like\">—</div><div class=\"kpi-label\">J'aime</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">✅</div><div class=\"kpi-val\" id=\"kpi-helpful\">—</div><div class=\"kpi-label\">Utile</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">🔖</div><div class=\"kpi-val\" id=\"kpi-bookmark\">—</div><div class=\"kpi-label\">Sauvegardé</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">📤</div><div class=\"kpi-val\" id=\"kpi-share\">—</div><div class=\"kpi-label\">Partagé</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">⭐</div><div class=\"kpi-val\" id=\"kpi-note\" style=\"color:#f59e0b\">—</div><div class=\"kpi-label\">Note moy.</div></div>
+                        </div>
+
+                        ";
+        // line 275
+        yield "                        <div class=\"section-label\" style=\"margin-bottom:12px\">Avis soumis par les utilisateurs</div>
+                        <div class=\"avis-admin-table-wrap\">
+                            <table class=\"avis-admin-table\">
+                                <thead>
+                                    <tr>
+                                        <th>Utilisateur</th>
+                                        <th>Type</th>
+                                        <th>Note</th>
+                                        <th>Avis</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id=\"adminAvisBody\">
+                                    <tr><td colspan=\"5\" class=\"table-loading\">⏳ Chargement…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>";
+        // line 294
+        yield "
+                </div>";
+        // line 296
+        yield "            </div>";
+        // line 297
+        yield "
         </div>
     </div>
 </div>
+
+<script>
+const ARTICLE_ID = ";
+        // line 303
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["article"]) || array_key_exists("article", $context) ? $context["article"] : (function () { throw new RuntimeError('Variable "article" does not exist.', 303, $this->source); })()), "idArticle", [], "any", false, false, false, 303), "html", null, true);
+        yield ";
+const AVIS_URL   = `/blog/\${ARTICLE_ID}/avis`;
+
+const TYPE_LABELS = { like:'👍 J\\'aime', helpful:'✅ Utile', bookmark:'🔖 Sauvegardé', share:'📤 Partagé' };
+const TYPE_CLASS  = { like:'type-like', helpful:'type-helpful', bookmark:'type-bookmark', share:'type-share' };
+
+function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');
+}
+
+async function loadAdminReactions() {
+    try {
+        const res  = await fetch(AVIS_URL);
+        const json = await res.json();
+
+        if (!json.success) return;
+
+        const data = json.data;
+
+        // ── Update KPI counters ──────────────────────────────────
+        const counts = { like: 0, helpful: 0, bookmark: 0, share: 0 };
+        let notesSum = 0, notesCount = 0;
+
+        data.forEach(item => {
+            if (counts[item.type_reaction] !== undefined) counts[item.type_reaction]++;
+            if (item.note) { notesSum += item.note; notesCount++; }
+        });
+
+        document.getElementById('kpi-like').textContent     = counts.like;
+        document.getElementById('kpi-helpful').textContent  = counts.helpful;
+        document.getElementById('kpi-bookmark').textContent = counts.bookmark;
+        document.getElementById('kpi-share').textContent    = counts.share;
+        document.getElementById('kpi-note').textContent     = notesCount > 0
+            ? (notesSum / notesCount).toFixed(1) + '/5'
+            : '—';
+
+        // ── Render avis table ────────────────────────────────────
+        const tbody = document.getElementById('adminAvisBody');
+
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan=\"5\" class=\"table-empty\">Aucune réaction pour cet article.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = data.map(item => {
+            const initials   = item.is_anonymous ? '?' : (item.nom ? item.nom.charAt(0).toUpperCase() : '?');
+            const authorName = item.is_anonymous ? 'Anonyme' : (item.nom ?? 'Utilisateur');
+            const avatarCls  = item.is_anonymous ? 'tbl-avatar anon' : 'tbl-avatar';
+            const anonTag    = item.is_anonymous ? '<span class=\"anon-tag\">anonyme</span>' : '';
+
+            const starsHtml = item.note
+                ? `<span class=\"stars-cell\">\${'★'.repeat(item.note)}\${'☆'.repeat(5 - item.note)}</span>`
+                : '<span style=\"color:#cbd5e1\">—</span>';
+
+            const avisHtml = item.avis
+                ? `<span class=\"avis-cell\" title=\"\${escHtml(item.avis)}\">\${escHtml(item.avis)}</span>`
+                : '<span style=\"color:#cbd5e1\">—</span>';
+
+            const date    = new Date(item.date_reaction);
+            const dateStr = date.toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' })
+                          + ' ' + date.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+
+            return `
+            <tr>
+                <td>
+                    <div class=\"author-cell\">
+                        <div class=\"\${avatarCls}\">\${initials}</div>
+                        <span class=\"author-name\">\${escHtml(authorName)}\${anonTag}</span>
+                    </div>
+                </td>
+                <td><span class=\"type-pill \${TYPE_CLASS[item.type_reaction] ?? ''}\">\${TYPE_LABELS[item.type_reaction] ?? item.type_reaction}</span></td>
+                <td>\${starsHtml}</td>
+                <td>\${avisHtml}</td>
+                <td class=\"date-cell\">\${dateStr}</td>
+            </tr>`;
+        }).join('');
+
+    } catch (err) {
+        document.getElementById('adminAvisBody').innerHTML =
+            '<tr><td colspan=\"5\" class=\"table-empty\">⚠️ Erreur de chargement.</td></tr>';
+    }
+}
+
+loadAdminReactions();
+</script>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -425,7 +616,7 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  390 => 199,  383 => 195,  376 => 191,  369 => 187,  361 => 182,  356 => 179,  352 => 177,  344 => 175,  342 => 174,  333 => 168,  329 => 167,  325 => 166,  320 => 163,  314 => 161,  312 => 160,  308 => 159,  303 => 157,  297 => 155,  291 => 153,  288 => 152,  282 => 150,  280 => 149,  277 => 148,  275 => 147,  272 => 146,  270 => 145,  261 => 139,  258 => 138,  249 => 136,  244 => 135,  235 => 133,  231 => 132,  215 => 122,  210 => 120,  183 => 96,  179 => 95,  174 => 93,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  503 => 303,  495 => 297,  493 => 296,  490 => 294,  470 => 275,  460 => 266,  452 => 259,  445 => 251,  438 => 247,  431 => 243,  424 => 239,  419 => 236,  414 => 233,  411 => 232,  406 => 228,  402 => 226,  394 => 224,  391 => 223,  382 => 216,  378 => 215,  374 => 214,  369 => 211,  363 => 209,  361 => 208,  357 => 207,  352 => 205,  346 => 203,  340 => 201,  337 => 200,  331 => 198,  329 => 197,  326 => 196,  324 => 195,  321 => 194,  319 => 193,  314 => 190,  307 => 185,  304 => 184,  295 => 182,  290 => 181,  281 => 179,  277 => 178,  261 => 168,  256 => 166,  229 => 142,  225 => 141,  220 => 139,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -473,7 +664,8 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; text-decoration: none; font-size: 13px; font-weight: 500; margin-bottom: 20px; transition: color 0.15s; }
     .back-link:hover { color: #22c55e; }
 
-    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); max-width: 860px; }
+    /* ── ARTICLE CARD ──────────────────────────────────────────── */
+    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); max-width: 900px; }
     .detail-header { background: #1e293b; padding: 24px 28px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
     .detail-header-left { display: flex; flex-direction: column; gap: 8px; }
 
@@ -501,13 +693,58 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
 
     .detail-body { padding: 28px; }
 
-    .content-section-title { font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+    .section-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
     .content-text { font-size: 14px; color: #475569; line-height: 1.9; white-space: pre-wrap; }
 
     .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #f1f5f9; }
     .meta-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px; padding: 12px 16px; }
     .meta-box .label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .meta-box .value { font-size: 13px; font-weight: 600; color: #1e293b; }
+
+    /* ── REACTIONS ADMIN BLOCK ─────────────────────────────────── */
+    .reactions-block {
+        margin-top: 28px; padding-top: 28px;
+        border-top: 1px solid #f1f5f9;
+    }
+    .reactions-block-title {
+        font-size: 11px; font-weight: 700; color: #94a3b8;
+        text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px;
+        display: flex; align-items: center; gap: 8px;
+    }
+
+    /* KPI row */
+    .reaction-kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 24px; }
+    .reaction-kpi { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; text-align: center; }
+    .reaction-kpi .kpi-icon { font-size: 20px; margin-bottom: 4px; }
+    .reaction-kpi .kpi-val { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1; margin-bottom: 4px; }
+    .reaction-kpi .kpi-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: .4px; }
+
+    /* Avis admin table */
+    .avis-admin-table-wrap { overflow-x: auto; }
+    .avis-admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .avis-admin-table th { text-align: left; padding: 9px 12px; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+    .avis-admin-table td { padding: 11px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
+    .avis-admin-table tr:last-child td { border-bottom: none; }
+    .avis-admin-table tr:hover td { background: #f8fafc; }
+
+    .tbl-avatar { width: 30px; height: 30px; border-radius: 50%; background: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .tbl-avatar.anon { background: #94a3b8; }
+    .author-cell { display: flex; align-items: center; gap: 8px; }
+    .author-name { font-weight: 600; color: #1e293b; }
+
+    .type-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+    .type-like     { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    .type-helpful  { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+    .type-bookmark { background: #faf5ff; color: #7c3aed; border-color: #ddd6fe; }
+    .type-share    { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+
+    .stars-cell { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+    .avis-cell  { color: #475569; font-style: italic; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .anon-tag   { display: inline-block; background: #f1f5f9; color: #94a3b8; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 4px; }
+    .date-cell  { font-size: 12px; color: #94a3b8; white-space: nowrap; }
+
+    .table-empty { text-align: center; padding: 28px; color: #94a3b8; font-size: 13px; }
+    .table-loading { text-align: center; padding: 28px; color: #94a3b8; font-size: 13px; }
 
     .flash { padding: 11px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .flash-success { background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; }
@@ -571,6 +808,8 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
             <a href=\"{{ path('article_index') }}\" class=\"back-link\">← Retour aux articles</a>
 
             <div class=\"detail-card\">
+
+                {# ── Header ── #}
                 <div class=\"detail-header\">
                     <div class=\"detail-header-left\">
                         <div class=\"detail-tags\">
@@ -603,6 +842,7 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
                     </div>
                 </div>
 
+                {# ── Image ── #}
                 {% if article.imagePrincipale %}
                     <img src=\"{{ asset('uploads/' ~ article.imagePrincipale) }}\" class=\"detail-img\" alt=\"{{ article.titre }}\">
                 {% else %}
@@ -610,9 +850,12 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
                 {% endif %}
 
                 <div class=\"detail-body\">
-                    <div class=\"content-section-title\">Contenu de l'article</div>
+
+                    {# ── Content ── #}
+                    <div class=\"section-label\">Contenu de l'article</div>
                     <div class=\"content-text\">{{ article.contenu }}</div>
 
+                    {# ── Meta grid ── #}
                     <div class=\"meta-grid\">
                         <div class=\"meta-box\">
                             <div class=\"label\">Catégorie</div>
@@ -631,13 +874,142 @@ class __TwigTemplate_d638711f562019b0ea2ee34a560900b1 extends Template
                             <div class=\"value\">#{{ article.idArticle }}</div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    {# ══════════════════════════════════════════════════
+                       REACTIONS ADMIN BLOCK
+                       Shows engagement KPIs + full avis table
+                    ══════════════════════════════════════════════════ #}
+                    <div class=\"reactions-block\">
+
+                        <div class=\"reactions-block-title\">
+                            📊 Engagement des lecteurs
+                        </div>
+
+                        {# KPI row — loaded by JS #}
+                        <div class=\"reaction-kpi-row\" id=\"adminKpiRow\">
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">👍</div><div class=\"kpi-val\" id=\"kpi-like\">—</div><div class=\"kpi-label\">J'aime</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">✅</div><div class=\"kpi-val\" id=\"kpi-helpful\">—</div><div class=\"kpi-label\">Utile</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">🔖</div><div class=\"kpi-val\" id=\"kpi-bookmark\">—</div><div class=\"kpi-label\">Sauvegardé</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">📤</div><div class=\"kpi-val\" id=\"kpi-share\">—</div><div class=\"kpi-label\">Partagé</div></div>
+                            <div class=\"reaction-kpi\"><div class=\"kpi-icon\">⭐</div><div class=\"kpi-val\" id=\"kpi-note\" style=\"color:#f59e0b\">—</div><div class=\"kpi-label\">Note moy.</div></div>
+                        </div>
+
+                        {# Avis table — loaded by JS #}
+                        <div class=\"section-label\" style=\"margin-bottom:12px\">Avis soumis par les utilisateurs</div>
+                        <div class=\"avis-admin-table-wrap\">
+                            <table class=\"avis-admin-table\">
+                                <thead>
+                                    <tr>
+                                        <th>Utilisateur</th>
+                                        <th>Type</th>
+                                        <th>Note</th>
+                                        <th>Avis</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id=\"adminAvisBody\">
+                                    <tr><td colspan=\"5\" class=\"table-loading\">⏳ Chargement…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>{# /reactions-block #}
+
+                </div>{# /detail-body #}
+            </div>{# /detail-card #}
 
         </div>
     </div>
 </div>
-{% endblock %}
-", "article/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\show.html.twig");
+
+<script>
+const ARTICLE_ID = {{ article.idArticle }};
+const AVIS_URL   = `/blog/\${ARTICLE_ID}/avis`;
+
+const TYPE_LABELS = { like:'👍 J\\'aime', helpful:'✅ Utile', bookmark:'🔖 Sauvegardé', share:'📤 Partagé' };
+const TYPE_CLASS  = { like:'type-like', helpful:'type-helpful', bookmark:'type-bookmark', share:'type-share' };
+
+function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');
+}
+
+async function loadAdminReactions() {
+    try {
+        const res  = await fetch(AVIS_URL);
+        const json = await res.json();
+
+        if (!json.success) return;
+
+        const data = json.data;
+
+        // ── Update KPI counters ──────────────────────────────────
+        const counts = { like: 0, helpful: 0, bookmark: 0, share: 0 };
+        let notesSum = 0, notesCount = 0;
+
+        data.forEach(item => {
+            if (counts[item.type_reaction] !== undefined) counts[item.type_reaction]++;
+            if (item.note) { notesSum += item.note; notesCount++; }
+        });
+
+        document.getElementById('kpi-like').textContent     = counts.like;
+        document.getElementById('kpi-helpful').textContent  = counts.helpful;
+        document.getElementById('kpi-bookmark').textContent = counts.bookmark;
+        document.getElementById('kpi-share').textContent    = counts.share;
+        document.getElementById('kpi-note').textContent     = notesCount > 0
+            ? (notesSum / notesCount).toFixed(1) + '/5'
+            : '—';
+
+        // ── Render avis table ────────────────────────────────────
+        const tbody = document.getElementById('adminAvisBody');
+
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan=\"5\" class=\"table-empty\">Aucune réaction pour cet article.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = data.map(item => {
+            const initials   = item.is_anonymous ? '?' : (item.nom ? item.nom.charAt(0).toUpperCase() : '?');
+            const authorName = item.is_anonymous ? 'Anonyme' : (item.nom ?? 'Utilisateur');
+            const avatarCls  = item.is_anonymous ? 'tbl-avatar anon' : 'tbl-avatar';
+            const anonTag    = item.is_anonymous ? '<span class=\"anon-tag\">anonyme</span>' : '';
+
+            const starsHtml = item.note
+                ? `<span class=\"stars-cell\">\${'★'.repeat(item.note)}\${'☆'.repeat(5 - item.note)}</span>`
+                : '<span style=\"color:#cbd5e1\">—</span>';
+
+            const avisHtml = item.avis
+                ? `<span class=\"avis-cell\" title=\"\${escHtml(item.avis)}\">\${escHtml(item.avis)}</span>`
+                : '<span style=\"color:#cbd5e1\">—</span>';
+
+            const date    = new Date(item.date_reaction);
+            const dateStr = date.toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' })
+                          + ' ' + date.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+
+            return `
+            <tr>
+                <td>
+                    <div class=\"author-cell\">
+                        <div class=\"\${avatarCls}\">\${initials}</div>
+                        <span class=\"author-name\">\${escHtml(authorName)}\${anonTag}</span>
+                    </div>
+                </td>
+                <td><span class=\"type-pill \${TYPE_CLASS[item.type_reaction] ?? ''}\">\${TYPE_LABELS[item.type_reaction] ?? item.type_reaction}</span></td>
+                <td>\${starsHtml}</td>
+                <td>\${avisHtml}</td>
+                <td class=\"date-cell\">\${dateStr}</td>
+            </tr>`;
+        }).join('');
+
+    } catch (err) {
+        document.getElementById('adminAvisBody').innerHTML =
+            '<tr><td colspan=\"5\" class=\"table-empty\">⚠️ Erreur de chargement.</td></tr>';
+    }
+}
+
+loadAdminReactions();
+</script>
+
+{% endblock %}", "article/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\show.html.twig");
     }
 }

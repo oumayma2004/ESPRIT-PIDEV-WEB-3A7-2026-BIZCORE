@@ -247,6 +247,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Admin\AdminCoachStatisticsController"/>
       </call>
     </service>
+    <service id="App\Controller\Admin\AdminDomaineController" class="App\Controller\Admin\AdminDomaineController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\Admin\AdminDomaineController"/>
+      </call>
+    </service>
     <service id="App\Controller\ArticleApiController" class="App\Controller\ArticleApiController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -259,13 +266,6 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ArticleController"/>
-      </call>
-    </service>
-    <service id="App\Controller\BlogController" class="App\Controller\BlogController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\BlogController"/>
       </call>
     </service>
     <service id="App\Controller\CartController" class="App\Controller\CartController" public="true" autowire="true" autoconfigure="true">
@@ -392,6 +392,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SecurityController"/>
       </call>
     </service>
+    <service id="App\Controller\SignalementArticleController" class="App\Controller\SignalementArticleController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SignalementArticleController"/>
+      </call>
+    </service>
     <service id="App\Controller\StripeWebhookController" class="App\Controller\StripeWebhookController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -426,6 +433,9 @@
     <service id="App\Form\DisponibiliteType" class="App\Form\DisponibiliteType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\DomaineCoachingType" class="App\Form\DomaineCoachingType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\EvenementType" class="App\Form\EvenementType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -434,6 +444,13 @@
     </service>
     <service id="App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+    </service>
+    <service id="App\Form\SignalementArticleType" class="App\Form\SignalementArticleType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Repository\ArticleReactionRepository" class="App\Repository\ArticleReactionRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -452,6 +469,10 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\DisponibiliteRepository" class="App\Repository\DisponibiliteRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\DomaineCoachingRepository" class="App\Repository\DomaineCoachingRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -484,6 +505,10 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\RoleRepository" class="App\Repository\RoleRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\SignalementArticleRepository" class="App\Repository\SignalementArticleRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -530,6 +555,7 @@
       <argument type="service" id="doctrine.dbal.default_connection"/>
     </service>
     <service id="App\Service\QrCodeService" class="App\Service\QrCodeService" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\ReadabilityService" class="App\Service\ReadabilityService" autowire="true" autoconfigure="true"/>
     <service id="App\Service\ReservationService" class="App\Service\ReservationService" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Repository\ReservationRepository"/>
@@ -538,6 +564,11 @@
       <argument type="service" id="App\Service\NotificationService"/>
       <argument type="service" id="App\Service\TwilioSmsService"/>
       <argument type="service" id="logger"/>
+    </service>
+    <service id="App\Service\TrendingService" class="App\Service\TrendingService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Repository\ArticleRepository"/>
+      <argument type="service" id="App\Repository\ArticleReactionRepository"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Service\TwilioSmsService" class="App\Service\TwilioSmsService" autowire="true" autoconfigure="true">
       <argument type="service" id="http_client.uri_template"/>
@@ -574,7 +605,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.Q5U7M9k"/>
+      <argument type="service" id=".service_locator.sqwhlEK"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1178,9 +1209,11 @@
         <argument>App\Form\CoachType</argument>
         <argument>App\Form\CommentaireEvenementType</argument>
         <argument>App\Form\DisponibiliteType</argument>
+        <argument>App\Form\DomaineCoachingType</argument>
         <argument>App\Form\EvenementType</argument>
         <argument>App\Form\InscriptionEvenementType</argument>
         <argument>App\Form\ReservationType</argument>
+        <argument>App\Form\SignalementArticleType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
@@ -2096,7 +2129,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.Q5U7M9k"/>
+      <argument type="service" id=".service_locator.sqwhlEK"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -2403,7 +2436,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.QgY8RGE"/>
+      <argument type="service" id=".service_locator.lrP3T4c"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3074,7 +3107,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator._ta8Ffx"/>
+      <argument type="service" id=".service_locator.pdS1d8z"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4928,15 +4961,15 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminCoachStatisticsController" class="App\Controller\Admin\AdminCoachStatisticsController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminCoachStatisticsController" class="App\Controller\Admin\AdminCoachStatisticsController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\AdminCoachStatisticsController" class="App\Controller\Admin\AdminCoachStatisticsController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminDomaineController" class="App\Controller\Admin\AdminDomaineController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminDomaineController" class="App\Controller\Admin\AdminDomaineController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\AdminDomaineController" class="App\Controller\Admin\AdminDomaineController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ArticleApiController" class="App\Controller\ArticleApiController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ArticleApiController" class="App\Controller\ArticleApiController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ArticleApiController" class="App\Controller\ArticleApiController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ArticleController" class="App\Controller\ArticleController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ArticleController" class="App\Controller\ArticleController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ArticleController" class="App\Controller\ArticleController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BlogController" class="App\Controller\BlogController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BlogController" class="App\Controller\BlogController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\BlogController" class="App\Controller\BlogController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CartController" class="App\Controller\CartController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CartController" class="App\Controller\CartController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CartController" class="App\Controller\CartController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4982,6 +5015,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SignalementArticleController" class="App\Controller\SignalementArticleController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SignalementArticleController" class="App\Controller\SignalementArticleController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SignalementArticleController" class="App\Controller\SignalementArticleController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\StripeWebhookController" class="App\Controller\StripeWebhookController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\StripeWebhookController" class="App\Controller\StripeWebhookController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\StripeWebhookController" class="App\Controller\StripeWebhookController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4999,12 +5035,18 @@
     <service id=".abstract.instanceof.App\Form\CommentaireEvenementType" class="App\Form\CommentaireEvenementType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\DisponibiliteType" class="App\Form\DisponibiliteType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\DisponibiliteType" class="App\Form\DisponibiliteType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\DomaineCoachingType" class="App\Form\DomaineCoachingType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\DomaineCoachingType" class="App\Form\DomaineCoachingType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EvenementType" class="App\Form\EvenementType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\EvenementType" class="App\Form\EvenementType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\InscriptionEvenementType" class="App\Form\InscriptionEvenementType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\InscriptionEvenementType" class="App\Form\InscriptionEvenementType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SignalementArticleType" class="App\Form\SignalementArticleType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\SignalementArticleType" class="App\Form\SignalementArticleType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ArticleReactionRepository" class="App\Repository\ArticleReactionRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ArticleReactionRepository" class="App\Repository\ArticleReactionRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CoachRepository" class="App\Repository\CoachRepository" autowire="true" abstract="true"/>
@@ -5015,6 +5057,8 @@
     <service id=".abstract.instanceof.App\Repository\CommentaireEvenementRepository" class="App\Repository\CommentaireEvenementRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\DisponibiliteRepository" class="App\Repository\DisponibiliteRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\DisponibiliteRepository" class="App\Repository\DisponibiliteRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\DomaineCoachingRepository" class="App\Repository\DomaineCoachingRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\DomaineCoachingRepository" class="App\Repository\DomaineCoachingRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\EvenementRepository" class="App\Repository\EvenementRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\EvenementRepository" class="App\Repository\EvenementRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\InscriptionEvenementRepository" class="App\Repository\InscriptionEvenementRepository" autowire="true" abstract="true"/>
@@ -5031,6 +5075,8 @@
     <service id=".abstract.instanceof.App\Repository\ReservationRepository" class="App\Repository\ReservationRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RoleRepository" class="App\Repository\RoleRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\RoleRepository" class="App\Repository\RoleRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SignalementArticleRepository" class="App\Repository\SignalementArticleRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\SignalementArticleRepository" class="App\Repository\SignalementArticleRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.w7.f4fT" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -5490,16 +5536,48 @@
         <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+    <service id=".service_locator.egSGoIC" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service_closure" id="App\Repository\DomaineCoachingRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.9kKwU2t" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.IevKdaG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="domaine" type="service_closure" id=".errored..service_locator.IevKdaG.App\Entity\DomaineCoaching"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.fpD7nIw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="repo" type="service_closure" id="App\Repository\ArticleRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.ZBIOtFf" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="trendingService" type="service_closure" id="App\Service\TrendingService"/>
+      </argument>
+    </service>
     <service id=".service_locator.UR5mIDt" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service_closure" id="App\Repository\ArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.usc9m3j" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="readability" type="service_closure" id="App\Service\ReadabilityService"/>
         <argument key="repo" type="service_closure" id="App\Repository\ArticleRepository"/>
       </argument>
     </service>
@@ -5627,6 +5705,35 @@
         <argument key="reservationRepo" type="service_closure" id="App\Repository\InscriptionEvenementRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.WiSXdyh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="reactionRepository" type="service_closure" id="App\Repository\ArticleReactionRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.5TsV8fN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="reactionRepository" type="service_closure" id="App\Repository\ArticleReactionRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.cKLLbsQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="reactionRepository" type="service_closure" id="App\Repository\ArticleReactionRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.BuQvOyB" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="reactionRepository" type="service_closure" id="App\Repository\ArticleReactionRepository"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.kPUOGb8" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5696,6 +5803,36 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
+    <service id=".service_locator.OM_NMsG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepo" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="repo" type="service_closure" id="App\Repository\SignalementArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.ZbxsEIc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepo" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service_closure" id="App\Repository\SignalementArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.FrYDLzj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepo" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service_closure" id="App\Repository\SignalementArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.QLxfK13" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repo" type="service_closure" id="App\Repository\SignalementArticleRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.rPn9qhZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5749,7 +5886,7 @@
         <argument key="inscriptionRepo" type="service_closure" id="App\Repository\InscriptionEvenementRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.Q5U7M9k" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.sqwhlEK" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminCoachController::delete" type="service_closure" id=".service_locator.ObEkA1Q"/>
@@ -5757,17 +5894,27 @@
         <argument key="App\Controller\Admin\AdminCoachController::index" type="service_closure" id=".service_locator.oE5kDTW"/>
         <argument key="App\Controller\Admin\AdminCoachController::new" type="service_closure" id=".service_locator.AhfkAy."/>
         <argument key="App\Controller\Admin\AdminCoachController::show" type="service_closure" id=".service_locator.BTDSyFE"/>
+        <argument key="App\Controller\Admin\AdminDomaineController::delete" type="service_closure" id=".service_locator.IevKdaG"/>
+        <argument key="App\Controller\Admin\AdminDomaineController::edit" type="service_closure" id=".service_locator.IevKdaG"/>
+        <argument key="App\Controller\Admin\AdminDomaineController::exportCsv" type="service_closure" id=".service_locator.egSGoIC"/>
+        <argument key="App\Controller\Admin\AdminDomaineController::index" type="service_closure" id=".service_locator.egSGoIC"/>
+        <argument key="App\Controller\Admin\AdminDomaineController::new" type="service_closure" id=".service_locator.9kKwU2t"/>
+        <argument key="App\Controller\Admin\AdminDomaineController::show" type="service_closure" id=".service_locator.IevKdaG"/>
+        <argument key="App\Controller\ArticleApiController::aiAnalyze" type="service_closure" id=".service_locator.UR5mIDt"/>
+        <argument key="App\Controller\ArticleApiController::callAi" type="service_closure" id=".service_locator.fpD7nIw"/>
         <argument key="App\Controller\ArticleApiController::categories" type="service_closure" id=".service_locator.fpD7nIw"/>
         <argument key="App\Controller\ArticleApiController::incrementView" type="service_closure" id=".service_locator.UR5mIDt"/>
         <argument key="App\Controller\ArticleApiController::list" type="service_closure" id=".service_locator.fpD7nIw"/>
+        <argument key="App\Controller\ArticleApiController::readability" type="service_closure" id=".service_locator.usc9m3j"/>
+        <argument key="App\Controller\ArticleApiController::refreshTrending" type="service_closure" id=".service_locator.ZBIOtFf"/>
         <argument key="App\Controller\ArticleApiController::show" type="service_closure" id=".service_locator.fpD7nIw"/>
         <argument key="App\Controller\ArticleApiController::stats" type="service_closure" id=".service_locator.fpD7nIw"/>
+        <argument key="App\Controller\ArticleApiController::trending" type="service_closure" id=".service_locator.ZBIOtFf"/>
         <argument key="App\Controller\ArticleController::delete" type="service_closure" id=".service_locator.6xBERtV"/>
         <argument key="App\Controller\ArticleController::edit" type="service_closure" id=".service_locator.TPxSRdB"/>
         <argument key="App\Controller\ArticleController::index" type="service_closure" id=".service_locator.b12wXHr"/>
         <argument key="App\Controller\ArticleController::new" type="service_closure" id=".service_locator.LNwsF6h"/>
         <argument key="App\Controller\ArticleController::show" type="service_closure" id=".service_locator.6xBERtV"/>
-        <argument key="App\Controller\BlogController::index" type="service_closure" id=".service_locator.b12wXHr"/>
         <argument key="App\Controller\CoachController::delete" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController::edit" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController::show" type="service_closure" id=".service_locator.BTDSyFE"/>
@@ -5786,8 +5933,11 @@
         <argument key="App\Controller\EvenementFrontController::index" type="service_closure" id=".service_locator.sEfUhFi"/>
         <argument key="App\Controller\EvenementFrontController::myReservations" type="service_closure" id=".service_locator.uJ3SrbP"/>
         <argument key="App\Controller\EvenementFrontController::show" type="service_closure" id=".service_locator.Mq_YF9W"/>
+        <argument key="App\Controller\FrontendBlogController::avis" type="service_closure" id=".service_locator.BuQvOyB"/>
         <argument key="App\Controller\FrontendBlogController::index" type="service_closure" id=".service_locator.b12wXHr"/>
-        <argument key="App\Controller\FrontendBlogController::show" type="service_closure" id=".service_locator.6xBERtV"/>
+        <argument key="App\Controller\FrontendBlogController::react" type="service_closure" id=".service_locator.5TsV8fN"/>
+        <argument key="App\Controller\FrontendBlogController::reactions" type="service_closure" id=".service_locator.cKLLbsQ"/>
+        <argument key="App\Controller\FrontendBlogController::show" type="service_closure" id=".service_locator.WiSXdyh"/>
         <argument key="App\Controller\ProfileController::index" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Controller\ProfileController::update" type="service_closure" id=".service_locator.Sdv8.rP"/>
         <argument key="App\Controller\RatingController::getCoachRatings" type="service_closure" id=".service_locator.BTDSyFE"/>
@@ -5810,6 +5960,11 @@
         <argument key="App\Controller\ReservationEvenementController::paymentSuccess" type="service_closure" id=".service_locator.vrj3pfZ"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
         <argument key="App\Controller\SecurityController::register" type="service_closure" id=".service_locator.D9HX7Oy"/>
+        <argument key="App\Controller\SignalementArticleController::delete" type="service_closure" id=".service_locator.QLxfK13"/>
+        <argument key="App\Controller\SignalementArticleController::edit" type="service_closure" id=".service_locator.FrYDLzj"/>
+        <argument key="App\Controller\SignalementArticleController::index" type="service_closure" id=".service_locator.OM_NMsG"/>
+        <argument key="App\Controller\SignalementArticleController::new" type="service_closure" id=".service_locator.ZbxsEIc"/>
+        <argument key="App\Controller\SignalementArticleController::show" type="service_closure" id=".service_locator.OM_NMsG"/>
         <argument key="App\Controller\StripeWebhookController::handle" type="service_closure" id=".service_locator.rPn9qhZ"/>
         <argument key="App\Controller\UserController::delete" type="service_closure" id=".service_locator.djBiB42"/>
         <argument key="App\Controller\UserController::store" type="service_closure" id=".service_locator.D9HX7Oy"/>
@@ -5828,17 +5983,27 @@
         <argument key="App\Controller\Admin\AdminCoachController:index" type="service_closure" id=".service_locator.oE5kDTW"/>
         <argument key="App\Controller\Admin\AdminCoachController:new" type="service_closure" id=".service_locator.AhfkAy."/>
         <argument key="App\Controller\Admin\AdminCoachController:show" type="service_closure" id=".service_locator.BTDSyFE"/>
+        <argument key="App\Controller\Admin\AdminDomaineController:delete" type="service_closure" id=".service_locator.IevKdaG"/>
+        <argument key="App\Controller\Admin\AdminDomaineController:edit" type="service_closure" id=".service_locator.IevKdaG"/>
+        <argument key="App\Controller\Admin\AdminDomaineController:exportCsv" type="service_closure" id=".service_locator.egSGoIC"/>
+        <argument key="App\Controller\Admin\AdminDomaineController:index" type="service_closure" id=".service_locator.egSGoIC"/>
+        <argument key="App\Controller\Admin\AdminDomaineController:new" type="service_closure" id=".service_locator.9kKwU2t"/>
+        <argument key="App\Controller\Admin\AdminDomaineController:show" type="service_closure" id=".service_locator.IevKdaG"/>
+        <argument key="App\Controller\ArticleApiController:aiAnalyze" type="service_closure" id=".service_locator.UR5mIDt"/>
+        <argument key="App\Controller\ArticleApiController:callAi" type="service_closure" id=".service_locator.fpD7nIw"/>
         <argument key="App\Controller\ArticleApiController:categories" type="service_closure" id=".service_locator.fpD7nIw"/>
         <argument key="App\Controller\ArticleApiController:incrementView" type="service_closure" id=".service_locator.UR5mIDt"/>
         <argument key="App\Controller\ArticleApiController:list" type="service_closure" id=".service_locator.fpD7nIw"/>
+        <argument key="App\Controller\ArticleApiController:readability" type="service_closure" id=".service_locator.usc9m3j"/>
+        <argument key="App\Controller\ArticleApiController:refreshTrending" type="service_closure" id=".service_locator.ZBIOtFf"/>
         <argument key="App\Controller\ArticleApiController:show" type="service_closure" id=".service_locator.fpD7nIw"/>
         <argument key="App\Controller\ArticleApiController:stats" type="service_closure" id=".service_locator.fpD7nIw"/>
+        <argument key="App\Controller\ArticleApiController:trending" type="service_closure" id=".service_locator.ZBIOtFf"/>
         <argument key="App\Controller\ArticleController:delete" type="service_closure" id=".service_locator.6xBERtV"/>
         <argument key="App\Controller\ArticleController:edit" type="service_closure" id=".service_locator.TPxSRdB"/>
         <argument key="App\Controller\ArticleController:index" type="service_closure" id=".service_locator.b12wXHr"/>
         <argument key="App\Controller\ArticleController:new" type="service_closure" id=".service_locator.LNwsF6h"/>
         <argument key="App\Controller\ArticleController:show" type="service_closure" id=".service_locator.6xBERtV"/>
-        <argument key="App\Controller\BlogController:index" type="service_closure" id=".service_locator.b12wXHr"/>
         <argument key="App\Controller\CoachController:delete" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController:edit" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController:show" type="service_closure" id=".service_locator.BTDSyFE"/>
@@ -5857,8 +6022,11 @@
         <argument key="App\Controller\EvenementFrontController:index" type="service_closure" id=".service_locator.sEfUhFi"/>
         <argument key="App\Controller\EvenementFrontController:myReservations" type="service_closure" id=".service_locator.uJ3SrbP"/>
         <argument key="App\Controller\EvenementFrontController:show" type="service_closure" id=".service_locator.Mq_YF9W"/>
+        <argument key="App\Controller\FrontendBlogController:avis" type="service_closure" id=".service_locator.BuQvOyB"/>
         <argument key="App\Controller\FrontendBlogController:index" type="service_closure" id=".service_locator.b12wXHr"/>
-        <argument key="App\Controller\FrontendBlogController:show" type="service_closure" id=".service_locator.6xBERtV"/>
+        <argument key="App\Controller\FrontendBlogController:react" type="service_closure" id=".service_locator.5TsV8fN"/>
+        <argument key="App\Controller\FrontendBlogController:reactions" type="service_closure" id=".service_locator.cKLLbsQ"/>
+        <argument key="App\Controller\FrontendBlogController:show" type="service_closure" id=".service_locator.WiSXdyh"/>
         <argument key="App\Controller\ProfileController:index" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Controller\ProfileController:update" type="service_closure" id=".service_locator.Sdv8.rP"/>
         <argument key="App\Controller\RatingController:getCoachRatings" type="service_closure" id=".service_locator.BTDSyFE"/>
@@ -5881,6 +6049,11 @@
         <argument key="App\Controller\ReservationEvenementController:paymentSuccess" type="service_closure" id=".service_locator.vrj3pfZ"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
         <argument key="App\Controller\SecurityController:register" type="service_closure" id=".service_locator.D9HX7Oy"/>
+        <argument key="App\Controller\SignalementArticleController:delete" type="service_closure" id=".service_locator.QLxfK13"/>
+        <argument key="App\Controller\SignalementArticleController:edit" type="service_closure" id=".service_locator.FrYDLzj"/>
+        <argument key="App\Controller\SignalementArticleController:index" type="service_closure" id=".service_locator.OM_NMsG"/>
+        <argument key="App\Controller\SignalementArticleController:new" type="service_closure" id=".service_locator.ZbxsEIc"/>
+        <argument key="App\Controller\SignalementArticleController:show" type="service_closure" id=".service_locator.OM_NMsG"/>
         <argument key="App\Controller\StripeWebhookController:handle" type="service_closure" id=".service_locator.rPn9qhZ"/>
         <argument key="App\Controller\UserController:delete" type="service_closure" id=".service_locator.djBiB42"/>
         <argument key="App\Controller\UserController:store" type="service_closure" id=".service_locator.D9HX7Oy"/>
@@ -5971,16 +6144,18 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.QgY8RGE" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.lrP3T4c" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ArticleType" type="service_closure" id="App\Form\ArticleType"/>
         <argument key="App\Form\CoachType" type="service_closure" id="App\Form\CoachType"/>
         <argument key="App\Form\CommentaireEvenementType" type="service_closure" id="App\Form\CommentaireEvenementType"/>
         <argument key="App\Form\DisponibiliteType" type="service_closure" id="App\Form\DisponibiliteType"/>
+        <argument key="App\Form\DomaineCoachingType" type="service_closure" id="App\Form\DomaineCoachingType"/>
         <argument key="App\Form\EvenementType" type="service_closure" id="App\Form\EvenementType"/>
         <argument key="App\Form\InscriptionEvenementType" type="service_closure" id="App\Form\InscriptionEvenementType"/>
         <argument key="App\Form\ReservationType" type="service_closure" id="App\Form\ReservationType"/>
+        <argument key="App\Form\SignalementArticleType" type="service_closure" id="App\Form\SignalementArticleType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service_closure" id="form.type.color"/>
@@ -5998,14 +6173,16 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
       </argument>
     </service>
-    <service id=".service_locator._ta8Ffx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.pdS1d8z" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\ArticleReactionRepository" type="service_closure" id="App\Repository\ArticleReactionRepository"/>
         <argument key="App\Repository\ArticleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
         <argument key="App\Repository\CoachRepository" type="service_closure" id="App\Repository\CoachRepository"/>
         <argument key="App\Repository\CommandeRepository" type="service_closure" id="App\Repository\CommandeRepository"/>
         <argument key="App\Repository\CommentaireEvenementRepository" type="service_closure" id="App\Repository\CommentaireEvenementRepository"/>
         <argument key="App\Repository\DisponibiliteRepository" type="service_closure" id="App\Repository\DisponibiliteRepository"/>
+        <argument key="App\Repository\DomaineCoachingRepository" type="service_closure" id="App\Repository\DomaineCoachingRepository"/>
         <argument key="App\Repository\EvenementRepository" type="service_closure" id="App\Repository\EvenementRepository"/>
         <argument key="App\Repository\InscriptionEvenementRepository" type="service_closure" id="App\Repository\InscriptionEvenementRepository"/>
         <argument key="App\Repository\NotificationRepository" type="service_closure" id="App\Repository\NotificationRepository"/>
@@ -6014,6 +6191,7 @@
         <argument key="App\Repository\RatingRepository" type="service_closure" id="App\Repository\RatingRepository"/>
         <argument key="App\Repository\ReservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
         <argument key="App\Repository\RoleRepository" type="service_closure" id="App\Repository\RoleRepository"/>
+        <argument key="App\Repository\SignalementArticleRepository" type="service_closure" id="App\Repository\SignalementArticleRepository"/>
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
@@ -6195,6 +6373,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\Admin\AdminDomaineController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\AdminDomaineController"/>
+      <argument>App\Controller\Admin\AdminDomaineController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\ArticleApiController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ArticleApiController"/>
       <argument>App\Controller\ArticleApiController</argument>
@@ -6204,12 +6388,6 @@
     <service id=".service_locator.O2p6Lk7.App\Controller\ArticleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ArticleController"/>
       <argument>App\Controller\ArticleController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
-    </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\BlogController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\BlogController"/>
-      <argument>App\Controller\BlogController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -6300,6 +6478,12 @@
     <service id=".service_locator.O2p6Lk7.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
       <argument>App\Controller\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\SignalementArticleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\SignalementArticleController"/>
+      <argument>App\Controller\SignalementArticleController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -6455,9 +6639,9 @@
           <argument>App\Controller\AdminProductDashboardController</argument>
           <argument>App\Controller\Admin\AdminCoachController</argument>
           <argument>App\Controller\Admin\AdminCoachStatisticsController</argument>
+          <argument>App\Controller\Admin\AdminDomaineController</argument>
           <argument>App\Controller\ArticleApiController</argument>
           <argument>App\Controller\ArticleController</argument>
-          <argument>App\Controller\BlogController</argument>
           <argument>App\Controller\CartController</argument>
           <argument>App\Controller\ChatbotController</argument>
           <argument>App\Controller\CoachController</argument>
@@ -6473,6 +6657,7 @@
           <argument>App\Controller\ReservationController</argument>
           <argument>App\Controller\ReservationEvenementController</argument>
           <argument>App\Controller\SecurityController</argument>
+          <argument>App\Controller\SignalementArticleController</argument>
           <argument>App\Controller\StripeWebhookController</argument>
           <argument>App\Controller\UserController</argument>
           <argument>App\Controller\Waitlistcontroller</argument>
@@ -6533,6 +6718,9 @@
     </service>
     <service id=".errored..service_locator.ObEkA1Q.App\Entity\Coach" class="App\Entity\Coach">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.ObEkA1Q&quot;: it needs an instance of &quot;App\Entity\Coach&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.IevKdaG.App\Entity\DomaineCoaching" class="App\Entity\DomaineCoaching">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.IevKdaG&quot;: it needs an instance of &quot;App\Entity\DomaineCoaching&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.td4zu.o.App\Entity\Evenement" class="App\Entity\Evenement">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.td4zu.o&quot;: it needs an instance of &quot;App\Entity\Evenement&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -7397,12 +7585,13 @@
     <service id="Symfony\Component\Mime\BodyRendererInterface" alias="twig.mime_body_renderer"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.Q5U7M9k"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.sqwhlEK"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
     <service id=".service_locator.HdkQc2q" alias=".service_locator.UR5mIDt"/>
+    <service id=".service_locator.RAoa6Zf" alias=".service_locator.usc9m3j"/>
     <service id=".service_locator.a5Isp2C" alias=".service_locator.L.ywsIz"/>
     <service id=".service_locator.iUcMZiF" alias=".service_locator.ENIOKQD"/>
     <service id=".service_locator.uEoXP7v" alias=".service_locator.B5Iixs8"/>
@@ -7411,17 +7600,22 @@
     <service id=".service_locator.5J.ljeP" alias=".service_locator.9rCMqDY"/>
     <service id=".service_locator._9ZbeG2" alias=".service_locator.Mq_YF9W"/>
     <service id=".service_locator.geqIUX2" alias=".service_locator.vMMKL1C"/>
+    <service id=".service_locator.j3iot4_" alias=".service_locator.WiSXdyh"/>
+    <service id=".service_locator.jjMYmKW" alias=".service_locator.5TsV8fN"/>
     <service id=".service_locator.PR0b0lT" alias=".service_locator.D9HX7Oy"/>
     <service id=".service_locator.MyxchtP" alias=".service_locator.yEZCaI7"/>
     <service id=".service_locator.nUoQ8Q9" alias=".service_locator.Yg0NnMz"/>
     <service id=".service_locator.tKk5yXr" alias=".service_locator.vrj3pfZ"/>
+    <service id=".service_locator.nKnyQi4" alias=".service_locator.OM_NMsG"/>
+    <service id=".service_locator.IlFYEKP" alias=".service_locator.FrYDLzj"/>
+    <service id=".service_locator.a9h1lpD" alias=".service_locator.QLxfK13"/>
     <service id=".service_locator.5OlBSRp" alias=".service_locator.rPn9qhZ"/>
     <service id=".service_locator.r272G_y" alias=".service_locator.1.UI1k5"/>
     <service id=".service_locator.efJYHqM" alias=".service_locator.oEGgv3J"/>
     <service id=".service_locator.8bRuz8R" alias=".service_locator.TTN9XEl"/>
-    <service id=".service_locator.NgQss9O" alias=".service_locator.Q5U7M9k"/>
+    <service id=".service_locator.6Vko7hy" alias=".service_locator.sqwhlEK"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
-    <service id=".service_locator.fIeR7w7" alias=".service_locator.QgY8RGE"/>
+    <service id=".service_locator.kZ_psUc" alias=".service_locator.lrP3T4c"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="http_client" alias="http_client.uri_template"/>
@@ -7440,8 +7634,13 @@
     <service id=".service_locator.ipmWNPB" alias=".service_locator.BTDSyFE"/>
     <service id=".service_locator.a4wD3YC" alias=".service_locator.r80to_s"/>
     <service id=".service_locator.LnCn0hh" alias=".service_locator.ObEkA1Q"/>
+    <service id=".service_locator.HhMXquX" alias=".service_locator.egSGoIC"/>
+    <service id=".service_locator.gaTSUXr" alias=".service_locator.9kKwU2t"/>
+    <service id=".service_locator.eeoBFsO" alias=".service_locator.IevKdaG"/>
     <service id=".service_locator..zxpbA4" alias=".service_locator.fpD7nIw"/>
+    <service id=".service_locator.4D1KZZc" alias=".service_locator.ZBIOtFf"/>
     <service id=".service_locator.T2TO1mz" alias=".service_locator.UR5mIDt"/>
+    <service id=".service_locator.k9yJjxB" alias=".service_locator.usc9m3j"/>
     <service id=".service_locator.XqClUT3" alias=".service_locator.b12wXHr"/>
     <service id=".service_locator.lUJI3Z8" alias=".service_locator.LNwsF6h"/>
     <service id=".service_locator.pffOTdY" alias=".service_locator.6xBERtV"/>
@@ -7459,6 +7658,10 @@
     <service id=".service_locator.1r0wZv4" alias=".service_locator.vMMKL1C"/>
     <service id=".service_locator.OqbZk4g" alias=".service_locator.HWl6qyL"/>
     <service id=".service_locator.WyIAejR" alias=".service_locator.uJ3SrbP"/>
+    <service id=".service_locator.O0VQ8RC" alias=".service_locator.WiSXdyh"/>
+    <service id=".service_locator.RReTHqI" alias=".service_locator.5TsV8fN"/>
+    <service id=".service_locator.w7z2jcK" alias=".service_locator.cKLLbsQ"/>
+    <service id=".service_locator.5nt9TJw" alias=".service_locator.BuQvOyB"/>
     <service id=".service_locator.025Wi8b" alias=".service_locator.kPUOGb8"/>
     <service id=".service_locator.T9Pr16x" alias=".service_locator.D9HX7Oy"/>
     <service id=".service_locator.bRbdH2p" alias=".service_locator.h9c0uBq"/>
@@ -7469,6 +7672,9 @@
     <service id=".service_locator.PlUpFJQ" alias=".service_locator.vrj3pfZ"/>
     <service id=".service_locator.ijnNh7z" alias=".service_locator.oQXGYC2"/>
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>
+    <service id=".service_locator.W3Oi6xB" alias=".service_locator.OM_NMsG"/>
+    <service id=".service_locator.AasltC3" alias=".service_locator.FrYDLzj"/>
+    <service id=".service_locator.Y3qjxK9" alias=".service_locator.QLxfK13"/>
     <service id=".service_locator.DMy3KCZ" alias=".service_locator.rPn9qhZ"/>
     <service id=".service_locator.mYUNP96" alias=".service_locator.djBiB42"/>
     <service id=".service_locator.PJOPJjI" alias=".service_locator.1.UI1k5"/>

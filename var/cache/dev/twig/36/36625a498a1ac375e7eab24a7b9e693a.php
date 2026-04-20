@@ -131,6 +131,29 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
         .btn-voir { flex:1; padding:10px; text-align:center; border-radius:8px; font-size:13px; font-weight:700; font-family:'Inter',sans-serif; text-decoration:none; background:#22c55e; color:#fff; border:none; cursor:pointer; transition:all .15s; }
         .btn-voir:hover { background:#16a34a; }
 
+        /* REACTION BADGE */
+        .reaction-badge { display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+        .rbadge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; background:#f0fdf4; color:#16a34a; padding:3px 9px; border-radius:20px; border:1px solid #bbf7d0; }
+
+        /* TRENDING BADGE */
+        .trending-badge { position:absolute; top:14px; left:50%; transform:translateX(-50%); display:inline-flex; align-items:center; gap:4px; background:linear-gradient(135deg,#f97316,#ef4444); color:#fff; font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px; white-space:nowrap; animation:pulse 2s infinite; z-index:2; }
+        @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.75} }
+        .card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+        .card-tag { background:#ede9fe; color:#5b21b6; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; }
+        .trending-section { margin-bottom:36px; }
+        .trending-title { font-size:16px; font-weight:800; color:#0f172a; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+        .trending-scroll { display:flex; gap:16px; overflow-x:auto; padding-bottom:8px; }
+        .trending-scroll::-webkit-scrollbar { height:4px; }
+        .trending-scroll::-webkit-scrollbar-thumb { background:#e2e8f0; border-radius:4px; }
+        .trending-card { flex-shrink:0; width:260px; background:#fff; border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.05); cursor:pointer; transition:transform .2s,box-shadow .2s; }
+        .trending-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.1); }
+        .trending-img { height:130px; overflow:hidden; background:#f1f5f9; }
+        .trending-img img { width:100%; height:100%; object-fit:cover; }
+        .trending-img-ph { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:36px; background:linear-gradient(135deg,#fef9c3,#fff7ed); }
+        .trending-body { padding:12px 14px; }
+        .trending-card-title { font-size:13px; font-weight:700; color:#0f172a; line-height:1.3; margin-bottom:6px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+        .trending-meta { display:flex; align-items:center; justify-content:space-between; font-size:11px; color:#94a3b8; }
+
         /* EMPTY / LOADING */
         .empty { text-align:center; padding:80px 20px; color:#94a3b8; grid-column:1 / -1; }
         .empty .empty-icon { font-size:56px; margin-bottom:16px; }
@@ -209,18 +232,18 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
 <body>
 
 ";
-        // line 168
+        // line 191
         yield "<nav class=\"navbar\">
     <div class=\"nav-brand\">Biz<span>core</span></div>
     <div class=\"nav-links\">
         <a href=\"#\">Accueil</a>
         <a href=\"";
-        // line 172
+        // line 195
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_front");
         yield "\">Événements</a>
         <a href=\"#\">Coaching</a>
         <a href=\"";
-        // line 174
+        // line 197
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("frontend_blog_index");
         yield "\" class=\"active\">Blog</a>
         <a href=\"#\" class=\"nav-cta\">Se connecter</a>
@@ -228,7 +251,7 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
 </nav>
 
 ";
-        // line 180
+        // line 203
         yield "<section class=\"hero\">
     <div class=\"hero-tag\">📝 Blog</div>
     <h1>Découvrez nos<br>articles</h1>
@@ -240,14 +263,14 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
 </section>
 
 ";
-        // line 191
+        // line 214
         yield "<div class=\"flash-wrap\">
     ";
-        // line 192
+        // line 215
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 192, $this->source); })()), "flashes", ["success"], "method", false, false, false, 192));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 215, $this->source); })()), "flashes", ["success"], "method", false, false, false, 215));
         foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-            // line 193
+            // line 216
             yield "        <div class=\"flash flash-success\">✅ ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
             yield "</div>
@@ -256,12 +279,12 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 195
+        // line 218
         yield "    ";
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 195, $this->source); })()), "flashes", ["error"], "method", false, false, false, 195));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 218, $this->source); })()), "flashes", ["error"], "method", false, false, false, 218));
         foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-            // line 196
+            // line 219
             yield "        <div class=\"flash flash-error\">❌ ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
             yield "</div>
@@ -270,15 +293,15 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 198
+        // line 221
         yield "</div>
 
 ";
-        // line 201
+        // line 224
         yield "<div class=\"content\">
 
     ";
-        // line 204
+        // line 227
         yield "    <div class=\"stat-pills\" id=\"statPills\">
         <div class=\"pill\"><span class=\"pill-num skeleton\" style=\"width:30px;height:20px;display:inline-block;\">  </span><span class=\"pill-label\">Articles</span></div>
         <div class=\"pill\"><span class=\"pill-num skeleton\" style=\"width:30px;height:20px;display:inline-block;\">  </span><span class=\"pill-label\">Publiés</span></div>
@@ -287,13 +310,13 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
     </div>
 
     ";
-        // line 212
+        // line 235
         yield "    <div class=\"filter-tabs\" id=\"filterTabs\">
         <button class=\"tab-btn active\" data-cat=\"\" onclick=\"filterByCategory(this)\">Toutes</button>
     </div>
 
     ";
-        // line 217
+        // line 240
         yield "    <div class=\"section-header\">
         <div class=\"section-title\">Tous les articles</div>
         <div class=\"section-right\">
@@ -311,15 +334,22 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
     </div>
 
     ";
-        // line 234
+        // line 257
+        yield "    <div class=\"trending-section\" id=\"trendingSection\" style=\"display:none\">
+        <div class=\"trending-title\">🔥 Articles en Tendance</div>
+        <div class=\"trending-scroll\" id=\"trendingScroll\"></div>
+    </div>
+
+    ";
+        // line 263
         yield "    <div class=\"cards-grid\" id=\"cardsGrid\">
         ";
-        // line 236
+        // line 265
         yield "        ";
         $context['_parent'] = $context;
         $context['_seq'] = CoreExtension::ensureTraversable(range(1, 6));
         foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 237
+            // line 266
             yield "        <div class=\"skeleton-card\">
             <div class=\"skeleton-img skeleton\"></div>
             <div class=\"skeleton-body\">
@@ -333,23 +363,23 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 246
+        // line 275
         yield "    </div>
 
     ";
-        // line 249
+        // line 278
         yield "    <div class=\"pagination\" id=\"pagination\"></div>
 
 </div>
 
 ";
-        // line 254
+        // line 283
         yield "<footer class=\"footer\">
     © 2026 <span>Bizcore</span> — Tous droits réservés
 </footer>
 
 ";
-        // line 259
+        // line 288
         yield "<div class=\"modal-overlay\" id=\"statsModal\" onclick=\"handleOverlayClick(event)\">
     <div class=\"modal\">
         <div class=\"modal-header\">
@@ -363,11 +393,11 @@ class __TwigTemplate_6bb852517e69b70adee05626316680cf extends Template
 </div>
 
 ";
-        // line 272
+        // line 301
         yield "<div class=\"toast\" id=\"toast\"></div>
 
 ";
-        // line 277
+        // line 306
         yield "<script>
 // ────────────────────────────────────────────────────────────────
 // STATE
@@ -462,12 +492,17 @@ function renderArticles(articles) {
                 \${imgHtml}
                 \${a.statut ? `<div class=\"card-badge badge-\${a.statut}\">\${cap(a.statut)}</div>` : ''}
                 \${a.categorie ? `<div class=\"card-cat\">\${escHtml(a.categorie)}</div>` : ''}
+                \${a.is_trending ? `<span class=\"trending-badge\">🔥 Trending</span>` : ''}
             </div>
             <div class=\"card-body\">
                 <div class=\"card-title\">\${escHtml(a.titre)}</div>
-                <div class=\"card-desc\">\${escHtml(a.contenu_extrait)}</div>
+                <div class=\"card-desc\">\${escHtml(a.resume_ia || a.contenu_extrait)}</div>
+                \${a.mots_cles && a.mots_cles.length ? `<div class=\"card-tags\">\${a.mots_cles.slice(0,3).map(t=>`<span class=\"card-tag\">\${escHtml(t)}</span>`).join('')}</div>` : ''}
                 <div class=\"card-meta\">
-                    <div class=\"meta-row\"><div class=\"dot\"></div> 👁 \${a.nombre_vues} vue\${a.nombre_vues !== 1 ? 's' : ''}</div>
+                    <div class=\"meta-row\"><div class=\"dot\"></div> 👁 \${a.nombre_vues} vue\${a.nombre_vues !== 1 ? 's' : ''} · ⏱ \${a.reading_minutes ?? '?'} min</div>
+                    <div class=\"reaction-badge\" id=\"rb-\${a.id}\">
+                        <span class=\"rbadge\">⏳</span>
+                    </div>
                 </div>
             </div>
             <div class=\"card-footer\">
@@ -714,6 +749,55 @@ function cap(str) {
 }
 
 // ────────────────────────────────────────────────────────────────
+// LOAD REACTION BADGES ON CARDS
+// ────────────────────────────────────────────────────────────────
+async function loadReactionBadges(articles) {
+    await Promise.all(articles.map(async (a) => {
+        const el = document.getElementById('rb-' + a.id);
+        if (!el) return;
+        try {
+            const res  = await fetch(`/blog/\${a.id}/reactions`);
+            const json = await res.json();
+            if (!json.success) { el.innerHTML = ''; return; }
+            const c = json.counts;
+            const total = c.like + c.helpful + c.bookmark + c.share;
+            if (total === 0) { el.innerHTML = ''; return; }
+            let html = '';
+            if (c.like     > 0) html += `<span class=\"rbadge\">👍 \${c.like}</span>`;
+            if (c.helpful  > 0) html += `<span class=\"rbadge\">✅ \${c.helpful}</span>`;
+            if (c.bookmark > 0) html += `<span class=\"rbadge\">🔖 \${c.bookmark}</span>`;
+            if (c.share    > 0) html += `<span class=\"rbadge\">📤 \${c.share}</span>`;
+            if (json.avg_note) html += `<span class=\"rbadge\">⭐ \${json.avg_note}</span>`;
+            el.innerHTML = html;
+        } catch (_) { el.innerHTML = ''; }
+    }));
+}
+
+// ────────────────────────────────────────────────────────────────
+// TRENDING
+// ────────────────────────────────────────────────────────────────
+async function loadTrending() {
+    try {
+        const res  = await fetch(`\${API_BASE}/trending?limit=8`);
+        const json = await res.json();
+        if (!json.success || !json.data.articles.length) return;
+        const scroll = document.getElementById('trendingScroll');
+        scroll.innerHTML = json.data.articles.map(a => {
+            const imgH = a.image_principale
+                ? `<img src=\"/uploads/\${a.image_principale}\" loading=\"lazy\" alt=\"\">`
+                : `<div class=\"trending-img-ph\">📝</div>`;
+            return `<div class=\"trending-card\" onclick=\"window.location='\${BLOG_BASE}/\${a.id}'\">
+                <div class=\"trending-img\">\${imgH}</div>
+                <div class=\"trending-body\">
+                    <div class=\"trending-card-title\">\${escHtml(a.titre)}</div>
+                    <div class=\"trending-meta\"><span>👁 \${a.nombre_vues}</span><span>⏱ \${a.reading_minutes ?? '?'} min</span></div>
+                </div></div>`;
+        }).join('');
+        document.getElementById('trendingSection').style.display = '';
+    } catch(_) {}
+}
+
+// ────────────────────────────────────────────────────────────────
 // INIT — load everything on page ready
 // ────────────────────────────────────────────────────────────────
 (async () => {
@@ -721,6 +805,7 @@ function cap(str) {
         loadStatPills(),
         loadCategories(),
         fetchArticles(),
+        loadTrending(),
     ]);
 })();
 </script>
@@ -755,7 +840,7 @@ function cap(str) {
      */
     public function getDebugInfo(): array
     {
-        return array (  371 => 277,  367 => 272,  353 => 259,  347 => 254,  341 => 249,  337 => 246,  323 => 237,  318 => 236,  315 => 234,  297 => 217,  291 => 212,  282 => 204,  278 => 201,  274 => 198,  265 => 196,  260 => 195,  251 => 193,  247 => 192,  244 => 191,  232 => 180,  224 => 174,  219 => 172,  213 => 168,  45 => 1,);
+        return array (  401 => 306,  397 => 301,  383 => 288,  377 => 283,  371 => 278,  367 => 275,  353 => 266,  348 => 265,  345 => 263,  338 => 257,  320 => 240,  314 => 235,  305 => 227,  301 => 224,  297 => 221,  288 => 219,  283 => 218,  274 => 216,  270 => 215,  267 => 214,  255 => 203,  247 => 197,  242 => 195,  236 => 191,  45 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -848,6 +933,29 @@ function cap(str) {
         .card-footer { padding:16px 20px; border-top:1px solid #f1f5f9; display:flex; gap:10px; }
         .btn-voir { flex:1; padding:10px; text-align:center; border-radius:8px; font-size:13px; font-weight:700; font-family:'Inter',sans-serif; text-decoration:none; background:#22c55e; color:#fff; border:none; cursor:pointer; transition:all .15s; }
         .btn-voir:hover { background:#16a34a; }
+
+        /* REACTION BADGE */
+        .reaction-badge { display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+        .rbadge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; background:#f0fdf4; color:#16a34a; padding:3px 9px; border-radius:20px; border:1px solid #bbf7d0; }
+
+        /* TRENDING BADGE */
+        .trending-badge { position:absolute; top:14px; left:50%; transform:translateX(-50%); display:inline-flex; align-items:center; gap:4px; background:linear-gradient(135deg,#f97316,#ef4444); color:#fff; font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px; white-space:nowrap; animation:pulse 2s infinite; z-index:2; }
+        @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.75} }
+        .card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+        .card-tag { background:#ede9fe; color:#5b21b6; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; }
+        .trending-section { margin-bottom:36px; }
+        .trending-title { font-size:16px; font-weight:800; color:#0f172a; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+        .trending-scroll { display:flex; gap:16px; overflow-x:auto; padding-bottom:8px; }
+        .trending-scroll::-webkit-scrollbar { height:4px; }
+        .trending-scroll::-webkit-scrollbar-thumb { background:#e2e8f0; border-radius:4px; }
+        .trending-card { flex-shrink:0; width:260px; background:#fff; border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.05); cursor:pointer; transition:transform .2s,box-shadow .2s; }
+        .trending-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.1); }
+        .trending-img { height:130px; overflow:hidden; background:#f1f5f9; }
+        .trending-img img { width:100%; height:100%; object-fit:cover; }
+        .trending-img-ph { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:36px; background:linear-gradient(135deg,#fef9c3,#fff7ed); }
+        .trending-body { padding:12px 14px; }
+        .trending-card-title { font-size:13px; font-weight:700; color:#0f172a; line-height:1.3; margin-bottom:6px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+        .trending-meta { display:flex; align-items:center; justify-content:space-between; font-size:11px; color:#94a3b8; }
 
         /* EMPTY / LOADING */
         .empty { text-align:center; padding:80px 20px; color:#94a3b8; grid-column:1 / -1; }
@@ -992,6 +1100,12 @@ function cap(str) {
         </div>
     </div>
 
+    {# Trending section #}
+    <div class=\"trending-section\" id=\"trendingSection\" style=\"display:none\">
+        <div class=\"trending-title\">🔥 Articles en Tendance</div>
+        <div class=\"trending-scroll\" id=\"trendingScroll\"></div>
+    </div>
+
     {# Cards grid #}
     <div class=\"cards-grid\" id=\"cardsGrid\">
         {# Skeleton placeholders while loading #}
@@ -1130,12 +1244,17 @@ function renderArticles(articles) {
                 \${imgHtml}
                 \${a.statut ? `<div class=\"card-badge badge-\${a.statut}\">\${cap(a.statut)}</div>` : ''}
                 \${a.categorie ? `<div class=\"card-cat\">\${escHtml(a.categorie)}</div>` : ''}
+                \${a.is_trending ? `<span class=\"trending-badge\">🔥 Trending</span>` : ''}
             </div>
             <div class=\"card-body\">
                 <div class=\"card-title\">\${escHtml(a.titre)}</div>
-                <div class=\"card-desc\">\${escHtml(a.contenu_extrait)}</div>
+                <div class=\"card-desc\">\${escHtml(a.resume_ia || a.contenu_extrait)}</div>
+                \${a.mots_cles && a.mots_cles.length ? `<div class=\"card-tags\">\${a.mots_cles.slice(0,3).map(t=>`<span class=\"card-tag\">\${escHtml(t)}</span>`).join('')}</div>` : ''}
                 <div class=\"card-meta\">
-                    <div class=\"meta-row\"><div class=\"dot\"></div> 👁 \${a.nombre_vues} vue\${a.nombre_vues !== 1 ? 's' : ''}</div>
+                    <div class=\"meta-row\"><div class=\"dot\"></div> 👁 \${a.nombre_vues} vue\${a.nombre_vues !== 1 ? 's' : ''} · ⏱ \${a.reading_minutes ?? '?'} min</div>
+                    <div class=\"reaction-badge\" id=\"rb-\${a.id}\">
+                        <span class=\"rbadge\">⏳</span>
+                    </div>
                 </div>
             </div>
             <div class=\"card-footer\">
@@ -1382,6 +1501,55 @@ function cap(str) {
 }
 
 // ────────────────────────────────────────────────────────────────
+// LOAD REACTION BADGES ON CARDS
+// ────────────────────────────────────────────────────────────────
+async function loadReactionBadges(articles) {
+    await Promise.all(articles.map(async (a) => {
+        const el = document.getElementById('rb-' + a.id);
+        if (!el) return;
+        try {
+            const res  = await fetch(`/blog/\${a.id}/reactions`);
+            const json = await res.json();
+            if (!json.success) { el.innerHTML = ''; return; }
+            const c = json.counts;
+            const total = c.like + c.helpful + c.bookmark + c.share;
+            if (total === 0) { el.innerHTML = ''; return; }
+            let html = '';
+            if (c.like     > 0) html += `<span class=\"rbadge\">👍 \${c.like}</span>`;
+            if (c.helpful  > 0) html += `<span class=\"rbadge\">✅ \${c.helpful}</span>`;
+            if (c.bookmark > 0) html += `<span class=\"rbadge\">🔖 \${c.bookmark}</span>`;
+            if (c.share    > 0) html += `<span class=\"rbadge\">📤 \${c.share}</span>`;
+            if (json.avg_note) html += `<span class=\"rbadge\">⭐ \${json.avg_note}</span>`;
+            el.innerHTML = html;
+        } catch (_) { el.innerHTML = ''; }
+    }));
+}
+
+// ────────────────────────────────────────────────────────────────
+// TRENDING
+// ────────────────────────────────────────────────────────────────
+async function loadTrending() {
+    try {
+        const res  = await fetch(`\${API_BASE}/trending?limit=8`);
+        const json = await res.json();
+        if (!json.success || !json.data.articles.length) return;
+        const scroll = document.getElementById('trendingScroll');
+        scroll.innerHTML = json.data.articles.map(a => {
+            const imgH = a.image_principale
+                ? `<img src=\"/uploads/\${a.image_principale}\" loading=\"lazy\" alt=\"\">`
+                : `<div class=\"trending-img-ph\">📝</div>`;
+            return `<div class=\"trending-card\" onclick=\"window.location='\${BLOG_BASE}/\${a.id}'\">
+                <div class=\"trending-img\">\${imgH}</div>
+                <div class=\"trending-body\">
+                    <div class=\"trending-card-title\">\${escHtml(a.titre)}</div>
+                    <div class=\"trending-meta\"><span>👁 \${a.nombre_vues}</span><span>⏱ \${a.reading_minutes ?? '?'} min</span></div>
+                </div></div>`;
+        }).join('');
+        document.getElementById('trendingSection').style.display = '';
+    } catch(_) {}
+}
+
+// ────────────────────────────────────────────────────────────────
 // INIT — load everything on page ready
 // ────────────────────────────────────────────────────────────────
 (async () => {
@@ -1389,6 +1557,7 @@ function cap(str) {
         loadStatPills(),
         loadCategories(),
         fetchArticles(),
+        loadTrending(),
     ]);
 })();
 </script>

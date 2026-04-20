@@ -39,7 +39,7 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
     protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
     {
         // line 1
-        return "base.html.twig";
+        return "base_front.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = []): iterable
@@ -48,7 +48,7 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "events/show.html.twig"));
 
-        $this->parent = $this->load("base.html.twig", 1);
+        $this->parent = $this->load("base_front.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -870,7 +870,7 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
 
     public function getSourceContext(): Source
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{% extends 'base_front.html.twig' %}
 
 {% block title %}{{ evenement.title }}{% endblock %}
 {% block page_title %}DÉTAIL ÉVÉNEMENT{% endblock %}

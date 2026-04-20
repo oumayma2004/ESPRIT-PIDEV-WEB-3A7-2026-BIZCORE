@@ -41,7 +41,8 @@
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; text-decoration: none; font-size: 13px; font-weight: 500; margin-bottom: 20px; transition: color 0.15s; }
     .back-link:hover { color: #22c55e; }
 
-    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); max-width: 860px; }
+    /* ── ARTICLE CARD ──────────────────────────────────────────── */
+    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); max-width: 900px; }
     .detail-header { background: #1e293b; padding: 24px 28px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
     .detail-header-left { display: flex; flex-direction: column; gap: 8px; }
 
@@ -69,13 +70,58 @@
 
     .detail-body { padding: 28px; }
 
-    .content-section-title { font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+    .section-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
     .content-text { font-size: 14px; color: #475569; line-height: 1.9; white-space: pre-wrap; }
 
     .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #f1f5f9; }
     .meta-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px; padding: 12px 16px; }
     .meta-box .label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .meta-box .value { font-size: 13px; font-weight: 600; color: #1e293b; }
+
+    /* ── REACTIONS ADMIN BLOCK ─────────────────────────────────── */
+    .reactions-block {
+        margin-top: 28px; padding-top: 28px;
+        border-top: 1px solid #f1f5f9;
+    }
+    .reactions-block-title {
+        font-size: 11px; font-weight: 700; color: #94a3b8;
+        text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px;
+        display: flex; align-items: center; gap: 8px;
+    }
+
+    /* KPI row */
+    .reaction-kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 24px; }
+    .reaction-kpi { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; text-align: center; }
+    .reaction-kpi .kpi-icon { font-size: 20px; margin-bottom: 4px; }
+    .reaction-kpi .kpi-val { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1; margin-bottom: 4px; }
+    .reaction-kpi .kpi-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: .4px; }
+
+    /* Avis admin table */
+    .avis-admin-table-wrap { overflow-x: auto; }
+    .avis-admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .avis-admin-table th { text-align: left; padding: 9px 12px; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+    .avis-admin-table td { padding: 11px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
+    .avis-admin-table tr:last-child td { border-bottom: none; }
+    .avis-admin-table tr:hover td { background: #f8fafc; }
+
+    .tbl-avatar { width: 30px; height: 30px; border-radius: 50%; background: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .tbl-avatar.anon { background: #94a3b8; }
+    .author-cell { display: flex; align-items: center; gap: 8px; }
+    .author-name { font-weight: 600; color: #1e293b; }
+
+    .type-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+    .type-like     { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    .type-helpful  { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+    .type-bookmark { background: #faf5ff; color: #7c3aed; border-color: #ddd6fe; }
+    .type-share    { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+
+    .stars-cell { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+    .avis-cell  { color: #475569; font-style: italic; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .anon-tag   { display: inline-block; background: #f1f5f9; color: #94a3b8; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 4px; }
+    .date-cell  { font-size: 12px; color: #94a3b8; white-space: nowrap; }
+
+    .table-empty { text-align: center; padding: 28px; color: #94a3b8; font-size: 13px; }
+    .table-loading { text-align: center; padding: 28px; color: #94a3b8; font-size: 13px; }
 
     .flash { padding: 11px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .flash-success { background: #dcfce7; border: 1px solid #bbf7d0; color: #15803d; }
@@ -139,6 +185,8 @@
             <a href="{{ path('article_index') }}" class="back-link">← Retour aux articles</a>
 
             <div class="detail-card">
+
+                {# ── Header ── #}
                 <div class="detail-header">
                     <div class="detail-header-left">
                         <div class="detail-tags">
@@ -171,6 +219,7 @@
                     </div>
                 </div>
 
+                {# ── Image ── #}
                 {% if article.imagePrincipale %}
                     <img src="{{ asset('uploads/' ~ article.imagePrincipale) }}" class="detail-img" alt="{{ article.titre }}">
                 {% else %}
@@ -178,9 +227,12 @@
                 {% endif %}
 
                 <div class="detail-body">
-                    <div class="content-section-title">Contenu de l'article</div>
+
+                    {# ── Content ── #}
+                    <div class="section-label">Contenu de l'article</div>
                     <div class="content-text">{{ article.contenu }}</div>
 
+                    {# ── Meta grid ── #}
                     <div class="meta-grid">
                         <div class="meta-box">
                             <div class="label">Catégorie</div>
@@ -199,10 +251,140 @@
                             <div class="value">#{{ article.idArticle }}</div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    {# ══════════════════════════════════════════════════
+                       REACTIONS ADMIN BLOCK
+                       Shows engagement KPIs + full avis table
+                    ══════════════════════════════════════════════════ #}
+                    <div class="reactions-block">
+
+                        <div class="reactions-block-title">
+                            📊 Engagement des lecteurs
+                        </div>
+
+                        {# KPI row — loaded by JS #}
+                        <div class="reaction-kpi-row" id="adminKpiRow">
+                            <div class="reaction-kpi"><div class="kpi-icon">👍</div><div class="kpi-val" id="kpi-like">—</div><div class="kpi-label">J'aime</div></div>
+                            <div class="reaction-kpi"><div class="kpi-icon">✅</div><div class="kpi-val" id="kpi-helpful">—</div><div class="kpi-label">Utile</div></div>
+                            <div class="reaction-kpi"><div class="kpi-icon">🔖</div><div class="kpi-val" id="kpi-bookmark">—</div><div class="kpi-label">Sauvegardé</div></div>
+                            <div class="reaction-kpi"><div class="kpi-icon">📤</div><div class="kpi-val" id="kpi-share">—</div><div class="kpi-label">Partagé</div></div>
+                            <div class="reaction-kpi"><div class="kpi-icon">⭐</div><div class="kpi-val" id="kpi-note" style="color:#f59e0b">—</div><div class="kpi-label">Note moy.</div></div>
+                        </div>
+
+                        {# Avis table — loaded by JS #}
+                        <div class="section-label" style="margin-bottom:12px">Avis soumis par les utilisateurs</div>
+                        <div class="avis-admin-table-wrap">
+                            <table class="avis-admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Utilisateur</th>
+                                        <th>Type</th>
+                                        <th>Note</th>
+                                        <th>Avis</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminAvisBody">
+                                    <tr><td colspan="5" class="table-loading">⏳ Chargement…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>{# /reactions-block #}
+
+                </div>{# /detail-body #}
+            </div>{# /detail-card #}
 
         </div>
     </div>
 </div>
+
+<script>
+const ARTICLE_ID = {{ article.idArticle }};
+const AVIS_URL   = `/blog/${ARTICLE_ID}/avis`;
+
+const TYPE_LABELS = { like:'👍 J\'aime', helpful:'✅ Utile', bookmark:'🔖 Sauvegardé', share:'📤 Partagé' };
+const TYPE_CLASS  = { like:'type-like', helpful:'type-helpful', bookmark:'type-bookmark', share:'type-share' };
+
+function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function loadAdminReactions() {
+    try {
+        const res  = await fetch(AVIS_URL);
+        const json = await res.json();
+
+        if (!json.success) return;
+
+        const data = json.data;
+
+        // ── Update KPI counters ──────────────────────────────────
+        const counts = { like: 0, helpful: 0, bookmark: 0, share: 0 };
+        let notesSum = 0, notesCount = 0;
+
+        data.forEach(item => {
+            if (counts[item.type_reaction] !== undefined) counts[item.type_reaction]++;
+            if (item.note) { notesSum += item.note; notesCount++; }
+        });
+
+        document.getElementById('kpi-like').textContent     = counts.like;
+        document.getElementById('kpi-helpful').textContent  = counts.helpful;
+        document.getElementById('kpi-bookmark').textContent = counts.bookmark;
+        document.getElementById('kpi-share').textContent    = counts.share;
+        document.getElementById('kpi-note').textContent     = notesCount > 0
+            ? (notesSum / notesCount).toFixed(1) + '/5'
+            : '—';
+
+        // ── Render avis table ────────────────────────────────────
+        const tbody = document.getElementById('adminAvisBody');
+
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="5" class="table-empty">Aucune réaction pour cet article.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = data.map(item => {
+            const initials   = item.is_anonymous ? '?' : (item.nom ? item.nom.charAt(0).toUpperCase() : '?');
+            const authorName = item.is_anonymous ? 'Anonyme' : (item.nom ?? 'Utilisateur');
+            const avatarCls  = item.is_anonymous ? 'tbl-avatar anon' : 'tbl-avatar';
+            const anonTag    = item.is_anonymous ? '<span class="anon-tag">anonyme</span>' : '';
+
+            const starsHtml = item.note
+                ? `<span class="stars-cell">${'★'.repeat(item.note)}${'☆'.repeat(5 - item.note)}</span>`
+                : '<span style="color:#cbd5e1">—</span>';
+
+            const avisHtml = item.avis
+                ? `<span class="avis-cell" title="${escHtml(item.avis)}">${escHtml(item.avis)}</span>`
+                : '<span style="color:#cbd5e1">—</span>';
+
+            const date    = new Date(item.date_reaction);
+            const dateStr = date.toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' })
+                          + ' ' + date.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+
+            return `
+            <tr>
+                <td>
+                    <div class="author-cell">
+                        <div class="${avatarCls}">${initials}</div>
+                        <span class="author-name">${escHtml(authorName)}${anonTag}</span>
+                    </div>
+                </td>
+                <td><span class="type-pill ${TYPE_CLASS[item.type_reaction] ?? ''}">${TYPE_LABELS[item.type_reaction] ?? item.type_reaction}</span></td>
+                <td>${starsHtml}</td>
+                <td>${avisHtml}</td>
+                <td class="date-cell">${dateStr}</td>
+            </tr>`;
+        }).join('');
+
+    } catch (err) {
+        document.getElementById('adminAvisBody').innerHTML =
+            '<tr><td colspan="5" class="table-empty">⚠️ Erreur de chargement.</td></tr>';
+    }
+}
+
+loadAdminReactions();
+</script>
+
 {% endblock %}
