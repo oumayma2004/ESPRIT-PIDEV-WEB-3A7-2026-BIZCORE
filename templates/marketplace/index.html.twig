@@ -1,0 +1,936 @@
+{% extends 'base.html.twig' %}
+{% block title %}Marketplace{% endblock %}
+
+{% block body %}
+<style>#content { padding: 0 !important; background: var(--bc-bg); }</style>
+    {# ── MAIN ── #}
+    <div class="bc-main" style="border-radius: 8px; border: 1px solid var(--bc-border);">
+
+        {# Top bar #}
+        <style>
+            .mk-topbar {
+                display: flex; flex-direction: column; align-items: center; gap: 24px;
+                padding: 32px 20px 24px 20px; background: #fff; border-bottom: 1px solid #e2e8f0; border-radius: 8px 8px 0 0;
+            }
+            .mk-header-left { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; gap: 8px; }
+            .mk-header-title { font-size: 32px; font-weight: 800; color: #1e293b; margin: 0; line-height: 1.1; letter-spacing: -0.8px; }
+            .mk-header-subtitle { font-size: 15px; color: #64748b; margin: 0; max-width: 600px; }
+            
+            .mk-actions-group { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; width: 100%; }
+            
+            .mk-search-wrapper {
+                display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0;
+                border-radius: 8px; padding: 0 16px; height: 42px; transition: all 0.2s ease;
+                flex: 1; min-width: 300px; max-width: 600px;
+            }
+            .mk-search-wrapper:focus-within {
+                border-color: #0d9488; background: #fff; box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+            }
+            .mk-search-input {
+                border: none; background: transparent; outline: none; font-size: 14px; color: #334155; width: 100%; flex: 1;
+            }
+            .mk-search-input::placeholder { color: #94a3b8; }
+            .mk-search-select {
+                border: none; background: transparent; outline: none; font-size: 13px; color: #64748b;
+                cursor: pointer; border-left: 1px solid #e2e8f0; padding-left: 12px; margin-left: 10px; height: 24px;
+            }
+            
+            .mk-btn {
+                display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px;
+                padding: 0 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer;
+                text-decoration: none; transition: all 0.2s ease; white-space: nowrap; border: 1px solid transparent;
+            }
+            .mk-btn-primary { background: #0d9488; color: #fff; box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2); }
+            .mk-btn-primary:hover { background: #0f766e; transform: translateY(-1px); box-shadow: 0 4px 6px rgba(13, 148, 136, 0.25); color: white; }
+            .mk-btn-outline { background: #fff; border-color: #e2e8f0; color: #475569; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+            .mk-btn-outline:hover { background: #f8fafc; border-color: #cbd5e1; color: #1e293b; }
+            
+            .mk-badge {
+                display:flex; align-items:center; justify-content:center; height: 22px; min-width: 22px;
+                padding: 0 6px; border-radius: 11px; font-size: 12px; font-weight: 700; line-height: 1;
+            }
+            .mk-badge-red { background: #fee2e2; color: #ef4444; }
+            .mk-badge-dark { background: #1e293b; color: #fff; }
+        </style>
+
+        <header class="mk-topbar">
+            <button class="btn-icon" id="sidebar-toggle" style="display:none;">☰</button>
+            <div class="mk-header-left">
+                <h1 class="mk-header-title">Marketplace</h1>
+                <p class="mk-header-subtitle">Découvrez nos meilleurs produits et formations</p>
+            </div>
+
+            <div class="mk-actions-group">
+                {# Search + filter in top bar #}
+                <div class="mk-search-wrapper">
+                    <i class="fas fa-search" style="color:#94a3b8; font-size:13px; margin-right:8px;"></i>
+                    <input type="text" id="searchInput" class="mk-search-input" placeholder="Rechercher..." oninput="filterProducts()">
+                    <select id="catFilter" class="mk-search-select" onchange="filterProducts()">
+                        <option value="">Toutes catégories</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat }}">{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+
+                <button id="open-ranking-modal" class="mk-btn mk-btn-primary" style="margin-left: 8px;">
+                    🏪 Top boutiques
+                </button>
+
+                <a href="{{ path('marketplace_favorites') }}" class="mk-btn mk-btn-outline" style="padding-right: 8px;">
+                    <i class="fas fa-heart" style="color:#ef4444; font-size:14px;"></i> Favoris
+                    <span id="fav-count-top" class="mk-badge mk-badge-red">{{ favorites|length }}</span>
+                </a>
+
+                <a href="{{ path('cart_index') }}" class="mk-btn mk-btn-outline" id="cart-btn" style="padding-right: 8px;">
+                    <i class="fas fa-shopping-cart" style="color:#475569; font-size:14px;"></i> Panier
+                    <span id="cart-count-top" class="mk-badge mk-badge-dark">{{ cart_count|default(0) }}</span>
+                </a>
+
+                {# ── Bouton traduction ── #}
+                <div style="position:relative; flex-shrink:0; margin-left:8px;" id="translate-widget">
+                    <button id="translate-btn" title="Changer de langue" class="mk-btn mk-btn-outline">
+                        <i class="fas fa-language" style="font-size: 16px; color: #0d9488;"></i>
+                        <span id="translate-label">Français</span>
+                        <i class="fas fa-chevron-down" style="font-size: 10px; opacity: 0.6; margin-left: 2px;"></i>
+                    </button>
+                    <div id="translate-dropdown"
+                         style="display:none; position:absolute; right:0; top:calc(100% + 8px); background:white; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); width:340px; z-index:9999; overflow:hidden;">
+                        <div style="padding:12px 16px; font-size:12px; font-weight:700; color:#475569; border-bottom:1px solid #f1f5f9; background:#f8fafc; display:flex; align-items:center; gap:8px;">
+                            <i class="fas fa-globe-americas" style="color:#0d9488;"></i> SÉLECTION DE LA LANGUE
+                        </div>
+                        
+                        <ul id="lang-list" class="premium-scroll" style="list-style:none; margin:0; padding:12px; display:grid; grid-template-columns:1fr 1fr; gap:6px; max-height:300px; overflow-y:auto;">
+                            <li data-lang="fr" data-label="Français" class="lang-item lang-active" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇫🇷</span> Français</li>
+                            <li data-lang="en" data-label="English"   class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇬🇧</span> English</li>
+                            <li data-lang="es" data-label="Español"   class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇪🇸</span> Español</li>
+                            <li data-lang="de" data-label="Deutsch"   class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇩🇪</span> Deutsch</li>
+                            <li data-lang="it" data-label="Italiano"  class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇮🇹</span> Italiano</li>
+                            <li data-lang="pt" data-label="Português" class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇵🇹</span> Português</li>
+                            <li data-lang="nl" data-label="Nederlands" class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇳🇱</span> Nederlands</li>
+                            <li data-lang="sv" data-label="Svenska"   class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇸🇪</span> Svenska</li>
+                            <li data-lang="ru" data-label="Русский"   class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇷🇺</span> Русский</li>
+                            <li data-lang="ar" data-label="العربية"   class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇸🇦</span> العربية</li>
+                            <li data-lang="zh" data-label="中文"      class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇨🇳</span> 中文</li>
+                            <li data-lang="ja" data-label="日本語"    class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇯🇵</span> 日本語</li>
+                            <li data-lang="ko" data-label="한국어"    class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇰🇷</span> 한국어</li>
+                            <li data-lang="tr" data-label="Türkçe"    class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇹🇷</span> Türkçe</li>
+                            <li data-lang="hi" data-label="हिन्दी"      class="lang-item" style="display:flex; align-items:center; gap:10px; border-radius:8px;"><span style="font-size:18px;">🇮🇳</span> हिन्दी</li>
+                        </ul>
+                    </div>
+                </div>
+
+                {# ── Bouton devise ── #}
+                <div style="position:relative; flex-shrink:0;" id="currency-widget">
+                    <button id="currency-btn" title="Changer de devise" class="mk-btn mk-btn-outline">
+                        <span id="currency-flag" style="font-size: 16px; line-height: 1;">🇪🇺</span>
+                        <span id="currency-label">EUR (€)</span>
+                        <i class="fas fa-chevron-down" style="font-size: 10px; opacity: 0.6; margin-left: 2px;"></i>
+                    </button>
+                    <div id="currency-dropdown"
+                         style="display:none; position:absolute; right:0; top:calc(100% + 8px); background:white; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1); width:280px; z-index:9999; overflow:hidden;">
+                        <div style="padding:12px 16px; font-size:12px; font-weight:700; color:#475569; border-bottom:1px solid #f1f5f9; background:#f8fafc; display:flex; align-items:center; gap:8px;">
+                            <i class="fas fa-wallet" style="color:#f59e0b;"></i> DEVISE DU PRIX
+                        </div>
+                        <ul id="currency-list" class="premium-scroll" style="list-style:none; margin:0; padding:12px; display:grid; grid-template-columns:1fr 1fr; gap:6px; max-height:250px; overflow-y:auto;">
+                            <li data-currency="EUR" data-symbol="€" data-flag="🇪🇺" class="currency-item currency-active" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇪🇺</span> EUR (€)</li>
+                            <li data-currency="USD" data-symbol="$" data-flag="🇺🇸" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇺🇸</span> USD ($)</li>
+                            <li data-currency="GBP" data-symbol="£" data-flag="🇬🇧" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇬🇧</span> GBP (£)</li>
+                            <li data-currency="CAD" data-symbol="C$" data-flag="🇨🇦" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇨🇦</span> CAD ($)</li>
+                            <li data-currency="CHF" data-symbol="CHF" data-flag="🇨🇭" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇨🇭</span> CHF</li>
+                            <li data-currency="TND" data-symbol="DT" data-flag="🇹🇳" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇹🇳</span> TND (DT)</li>
+                            <li data-currency="MAD" data-symbol="DH" data-flag="🇲🇦" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇲🇦</span> MAD (DH)</li>
+                            <li data-currency="JPY" data-symbol="¥" data-flag="🇯🇵" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇯🇵</span> JPY (¥)</li>
+                            <li data-currency="CNY" data-symbol="¥" data-flag="🇨🇳" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇨🇳</span> CNY (¥)</li>
+                            <li data-currency="SAR" data-symbol="﷼" data-flag="🇸🇦" class="currency-item" style="display:flex; align-items:center; gap:10px; border-radius:8px; cursor:pointer;"><span style="font-size:18px;">🇸🇦</span> SAR</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <style>
+            /* Custom scrollbar for dropdown */
+            .premium-scroll::-webkit-scrollbar { width: 6px; }
+            .premium-scroll::-webkit-scrollbar-track { background: transparent; }
+            .premium-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+            .premium-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+            .currency-item { padding: 8px; transition: background 0.2s; }
+            .currency-item:hover { background: #f1f5f9; }
+            .currency-item.currency-active { background: #fef3c7; font-weight: bold; color: #d97706; }
+        </style>
+
+        {# Flash messages #}
+        <div style="padding:0 28px;">
+            {% for msg in app.flashes('success') %}
+                <div class="alert alert-success">✅ {{ msg }} <button class="alert-close">×</button></div>
+            {% endfor %}
+            {% for msg in app.flashes('error') %}
+                <div class="alert alert-danger">⚠ {{ msg }} <button class="alert-close">×</button></div>
+            {% endfor %}
+        </div>
+
+        {# Content #}
+        <div class="bc-content">
+            <div style="display: flex; justify-content: center; margin-bottom: 24px;">
+                <a href="{{ path('marketplace_sell') }}" class="mk-btn mk-btn-primary" style="background: #3b82f6; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); padding: 10px 24px; font-size: 14px; border-radius: 8px; font-weight: bold; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-plus" style="color:#fff; font-size:14px; margin-right:8px;"></i> Vendre un produit
+                </a>
+            </div>
+
+            {% if products is empty %}
+                <div class="bc-empty">
+                    <div class="bc-empty-icon">📦</div>
+                    <h3>Aucun produit disponible</h3>
+                    <p>Les produits seront affichés ici dès qu'ils seront publiés.</p>
+                </div>
+            {% else %}
+                <div class="products-grid" id="productsGrid">
+                    {% for product in products %}
+                    <div class="product-card"
+                         data-name="{{ product.nomProduit|lower }}"
+                         data-cat="{{ product.categorie|lower }}"
+                         data-desc="{{ product.description|lower }}">
+
+                        <div class="product-card-img" style="position:relative;">
+                            <button onclick="toggleFavorite({{ product.idProduit }}, this)"
+                                    style="position:absolute; top:8px; left:8px; background:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; color:{% if product.idProduit in favorites %}#ef4444{% else %}#9ca3af{% endif %}; font-size:18px; transition: color 0.2s; z-index:10;">
+                                ♥
+                            </button>
+                            {% if product.imageUrl %}
+                                <img src="{{ product.imageUrl }}" alt="{{ product.nomProduit }}" loading="lazy">
+                            {% else %}
+                                <div class="no-img">📦</div>
+                            {% endif %}
+                            {% if product.categorie %}
+                                <span class="product-cat-badge">{{ product.categorie }}</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="product-card-body">
+                            <div class="product-card-header">
+                                <div class="product-card-name">{{ product.nomProduit }}</div>
+                                <div class="product-price-block" data-product-id="{{ product.idProduit }}" data-price-eur="{{ product.prix }}" data-vendor-id="{{ product.vendeur ? product.vendeur.id : '' }}">
+                                    {# Prix normal — masqué quand promo active #}
+                                    <div class="product-card-price price-normal" data-price-eur="{{ product.prix }}">{{ product.prix }} €</div>
+                                    {# Bloc promo — visible seulement quand promo active #}
+                                    <div class="promo-price-block" style="display:none;">
+                                        <span class="price-original-crossed"></span>
+                                        <span class="price-discounted"></span>
+                                        <span class="promo-pct-badge"></span>
+                                    </div>
+                                    {# Countdown global de la promo #}
+                                    <div class="promo-countdown" style="display:none;"></div>
+                                </div>
+                            </div>
+                            <div class="product-card-desc">{{ product.description }}</div>
+
+                            {% if product.vendeur %}
+                                <div style="font-size: 11px; color: #64748b; margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px;">
+                                    <div>
+                                        <span style="font-size: 14px;">🏪</span> Vendu par :
+                                        <strong style="color: var(--bc-teal);">{{ product.vendeur.nom }}</strong>
+                                        {% if product.vendeur.statut == 'actif' %}
+                                            <span style="background:#d1fae5; color:#065f46; padding:2px 6px; border-radius:10px; font-size:9px; font-weight:bold; margin-left:4px;">ACTIF</span>
+                                        {% else %}
+                                            <span style="background:#fee2e2; color:#991b1b; padding:2px 6px; border-radius:10px; font-size:9px; font-weight:bold; margin-left:4px; text-transform:uppercase;">{{ product.vendeur.statut }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 8px;">
+                                <div style="font-size: 11px;">
+                                    <span style="color: #facc15; font-weight: bold;">
+                                        {{ product.rating|default(0)|number_format(1) }} ⭐ ({{ product.ratingCount|default(0) }} avis)
+                                    </span>
+                                    <form method="post" action="{{ path('marketplace_rate_product', {id: product.idProduit}) }}" style="display:flex; align-items:center; gap:4px; margin-top:2px;">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('rate_product_' ~ product.idProduit) }}">
+                                        <select name="rating" style="font-size:11px; padding:2px; border:1px solid var(--bc-border); border-radius:4px;">
+                                            <option value="5">⭐⭐⭐⭐⭐ 5</option>
+                                            <option value="4">⭐⭐⭐⭐ 4</option>
+                                            <option value="3">⭐⭐⭐ 3</option>
+                                            <option value="2">⭐⭐ 2</option>
+                                            <option value="1">⭐ 1</option>
+                                        </select>
+                                        <button type="submit" style="font-size:10px; padding:2px 6px; background:var(--bc-teal); border:none; color:white; border-radius:4px; cursor:pointer;">Évaluer ce produit</button>
+                                    </form>
+                                </div>
+                                {% if app.user and product.vendeur and product.vendeur.email == (app.user.email | default(app.user.userIdentifier | default(''))) %}
+                                    <div style="position:relative; margin-left:8px;" class="product-dropdown-container">
+                                        <button onclick="let m = document.getElementById('product-menu-{{ product.idProduit }}'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; event.stopPropagation();" style="background:none; border:none; color:#64748b; cursor:pointer; font-size:18px; line-height:1; padding:0 6px; font-weight:bold; transition: color 0.2s;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">
+                                            ⋮
+                                        </button>
+                                        <div id="product-menu-{{ product.idProduit }}" style="display:none; position:absolute; right:0; top:20px; background:white; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1); width:130px; z-index:50;">
+                                            <a href="{{ path('marketplace_edit_product', {id: product.idProduit}) }}" style="display:block; padding:8px 12px; font-size:13px; color:#475569; text-decoration:none; border-bottom:1px solid #f1f5f9;">✏️ Modifier</a>
+                                            <form method="post" action="{{ path('marketplace_delete_product', {id: product.idProduit}) }}" style="margin:0;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_product_' ~ product.idProduit) }}">
+                                                <button type="submit" style="display:block; width:100%; text-align:left; background:none; border:none; padding:8px 12px; font-size:13px; color:#ef4444; cursor:pointer;">🗑️ Supprimer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="product-card-stock">
+                                {% if product.stockDisponible > 0 %}
+                                    <span style="color:var(--bc-teal);">✔</span> {{ product.stockDisponible }} en stock
+                                {% else %}
+                                    <span style="color:var(--bc-danger);">✖</span> Rupture de stock
+                                {% endif %}
+                            </div>
+
+                            {% if product.stockDisponible > 0 %}
+                                <form method="post" action="{{ path('cart_add', {id: product.idProduit}) }}" style="margin-bottom:8px;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('cart_add_' ~ product.idProduit) }}">
+                                    <button type="submit" class="btn-add-cart">
+                                        🛒 Ajouter au panier
+                                    </button>
+                                </form>
+                            {% else %}
+                                <button class="btn-add-cart" disabled style="background:#CBD5E1;cursor:not-allowed; margin-bottom:8px;">
+                                    Indisponible
+                                </button>
+                            {% endif %}
+
+                            <a href="{{ path('product_social_reviews', {id: product.idProduit}) }}" target="_blank" class="btn-social-reviews mk-btn mk-btn-outline" style="width: 100%; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px; font-size: 13px; font-weight: bold; background: white; cursor: pointer; color: #475569; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); text-decoration: none;">
+                                🌍 Avis Sociaux
+                            </a>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <p id="noResults" style="display:none;text-align:center;padding:40px;color:var(--bc-text-light);">
+                    🔍 Aucun produit trouvé pour cette recherche.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- AI Ranking Modal -->
+    <div id="ai-ranking-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:white; padding:24px; border-radius:12px; width:90%; max-width:650px; max-height:85vh; overflow-y:auto; position:relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
+            <button onclick="document.getElementById('ai-ranking-modal').style.display='none'" style="position:absolute; right:16px; top:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#6b7280;">&times;</button>
+            <h2 style="margin-top:0; color:var(--bc-teal); font-size: 20px; border-bottom: 2px solid var(--bc-bg); padding-bottom: 12px; margin-bottom: 16px;">🏆 Classement des Boutiques & Analyse IA</h2>
+            <div id="ranking-container">
+                <div style="text-align:center; padding:40px; color:#6b7280;"><span style="font-size: 24px; display: inline-block; animation: spin 1s linear infinite;">⏳</span><br><br>Génération de l'analyse IA en cours...</div>
+            </div>
+        </div>
+    </div>
+
+    {# ── Overlay traduction ── #}
+    <div id="translate-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:99999; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:16px; padding:32px 40px; box-shadow:0 20px 40px rgba(0,0,0,.2); text-align:center; min-width:280px;">
+            <div style="font-size:36px; display:inline-block; animation:spin 1.2s linear infinite;">🌐</div>
+            <p style="margin:16px 0 0; font-weight:700; color:#111827; font-size:16px;">Traduction en cours…</p>
+            <p id="translate-progress" style="margin:6px 0 0; font-size:12px; color:#9ca3af;"></p>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .lang-item {
+            padding: 9px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background .15s;
+            display: block;
+        }
+        .lang-item:hover { background: #f9fafb; }
+        .lang-item.lang-active { font-weight: 700; color: var(--bc-teal, #0d9488); background: #f0fdfa; }
+        #translate-btn:hover { background: #f9fafb; border-color: #9ca3af; }
+
+        /* ── Flash Promo styles (product cards) ── */
+        .product-price-block { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .price-normal { transition: opacity .3s; }
+        .promo-price-block { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .price-original-crossed {
+            font-size: 11px; color: #9ca3af;
+            text-decoration: line-through; font-weight: 500;
+        }
+        .price-discounted {
+            font-size: 17px; font-weight: 800;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .promo-pct-badge {
+            display: inline-block; background: #ef4444; color: #fff;
+            border-radius: 6px; padding: 1px 6px; font-size: 10px; font-weight: 800;
+        }
+        .promo-countdown {
+            font-size: 10px; font-weight: 700; color: #ef4444;
+            display: flex; align-items: center; gap: 3px;
+            animation: blink-cd 1s step-start infinite;
+        }
+        @keyframes blink-cd { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+
+        /* Bannière globale flash promo */
+        #flash-promo-banner {
+            display: none;
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #111827, #1f2937);
+            color: #fff; border-radius: 16px;
+            padding: 14px 28px; z-index: 8888;
+            box-shadow: 0 20px 40px rgba(0,0,0,.4);
+            min-width: 320px; text-align: center;
+            animation: banner-in .4s cubic-bezier(.34,1.56,.64,1);
+            border: 1px solid rgba(239,68,68,.3);
+        }
+        @keyframes banner-in {
+            from { transform: translateX(-50%) translateY(80px); opacity: 0; }
+            to   { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        #flash-promo-banner .banner-emoji { font-size: 22px; }
+        #flash-promo-banner .banner-text  { font-size: 14px; font-weight: 700; color: #fff; }
+        #flash-promo-banner .banner-cd    { font-size: 13px; color: #fde68a; font-weight: 800; margin-top: 2px; }
+
+        /* Carte en mode promo → bordure animée */
+        .product-card.promo-active {
+            border: 2px solid #f59e0b !important;
+            box-shadow: 0 0 20px rgba(245,158,11,.2);
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+/* ═══════════════════════════ Filtrage ═══════════════════════════ */
+function filterProducts() {
+    var q   = document.getElementById('searchInput').value.toLowerCase().trim();
+    var cat = document.getElementById('catFilter').value.toLowerCase();
+    var cards = document.querySelectorAll('.product-card');
+    var visible = 0;
+
+    cards.forEach(function(card) {
+        var name = card.dataset.name || '';
+        var c    = card.dataset.cat  || '';
+        var desc = card.dataset.desc || '';
+        var matchQ   = !q   || name.includes(q) || desc.includes(q);
+        var matchCat = !cat || c.includes(cat);
+        if (matchQ && matchCat) {
+            card.style.display = '';
+            visible++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    var noRes = document.getElementById('noResults');
+    if (noRes) noRes.style.display = visible === 0 ? 'block' : 'none';
+}
+
+/* ═══════════════════════════ Cart badge ═══════════════════════════ */
+(function() {
+    var count = parseInt('{{ cart_count|default(0) }}');
+    var badge = document.getElementById('cart-count-badge');
+    if (badge && count > 0) { badge.style.display = 'inline'; badge.textContent = count; }
+})();
+
+/* ═══════════════════════════ Ranking Modal ═══════════════════════════ */
+document.getElementById('open-ranking-modal').addEventListener('click', function() {
+    document.getElementById('ai-ranking-modal').style.display = 'flex';
+    document.getElementById('ranking-container').innerHTML = '<div style="text-align:center; padding:40px; color:#6b7280;"><span style="font-size: 24px; display: inline-block; animation: spin 1s linear infinite;">⏳</span><br><br>Génération de l\'analyse IA en cours...</div>';
+
+    fetch('{{ path("marketplace_api_shops_ranking") }}')
+        .then(r => r.json())
+        .then(data => {
+            if(data.success) {
+                let html = '';
+                if(data.shops.length === 0) {
+                    html = '<div style="text-align:center; padding:20px; color:#9ca3af;">Aucune boutique disponible.</div>';
+                }
+                data.shops.forEach(function(shop, index) {
+                    let trophy = '';
+                    if (index === 0) trophy = '🥇';
+                    else if (index === 1) trophy = '🥈';
+                    else if (index === 2) trophy = '🥉';
+
+                    let accentColor = index === 0 ? '#fbbf24' : (index === 1 ? '#9ca3af' : (index === 2 ? '#b45309' : '#3b82f6'));
+                    let glow = index < 3 ? `box-shadow: 0 0 10px ${accentColor}40; border-color: ${accentColor};` : 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-color: #e5e7eb;';
+                    let metricRel = shop.metrics ? shop.metrics.reliability : 0;
+                    let metricDel = shop.metrics ? shop.metrics.delivery : 0;
+
+                    html += `
+                        <div style="border: 2px solid; border-radius: 12px; padding: 20px; margin-bottom: 20px; background: #ffffff; ${glow} transition: transform 0.2s;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <div>
+                                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: ${accentColor}; font-weight: 800; margin-bottom: 4px;">RANK #${index+1} ${trophy}</div>
+                                    <strong style="font-size: 18px; color: #111827; letter-spacing: -0.5px;">${shop.nom}</strong>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span style="display: inline-flex; align-items: center; gap: 4px; background: #111827; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">
+                                        <span style="color: #fbbf24;">★</span> ${shop.rating}
+                                    </span>
+                                    <div style="font-size: 11px; color: #6b7280; margin-top: 4px; font-weight: 500;">Basé sur ${shop.ratingCount} avis</div>
+                                </div>
+                            </div>
+                            <div style="font-size: 13px; color: #374151; margin-bottom: 20px; background: #f9fafb; padding: 12px 16px; border-radius: 8px; border-left: 4px solid ${accentColor}; font-weight: 500; line-height: 1.5;">
+                                ${shop.ai_insight}
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #4b5563; margin-bottom: 6px;">
+                                        <span>Fiabilité Boutique</span><span>${metricRel}%</span>
+                                    </div>
+                                    <div style="height: 6px; background: #f3f4f6; border-radius: 3px; overflow: hidden;">
+                                        <div style="height: 100%; width: ${metricRel}%; background: ${metricRel > 80 ? '#10b981' : (metricRel > 50 ? '#f59e0b' : '#ef4444')}; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #4b5563; margin-bottom: 6px;">
+                                        <span>Taux de satisfaction</span><span>${metricDel}%</span>
+                                    </div>
+                                    <div style="height: 6px; background: #f3f4f6; border-radius: 3px; overflow: hidden;">
+                                        <div style="height: 100%; width: ${metricDel}%; background: ${metricDel > 80 ? '#3b82f6' : (metricDel > 50 ? '#f59e0b' : '#ef4444')}; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('ranking-container').innerHTML = html;
+            } else {
+                document.getElementById('ranking-container').innerHTML = '<div style="color:red; text-align:center;">Erreur lors du chargement des données.</div>';
+            }
+        });
+});
+
+window.rateShop = function(id) {
+    var score = document.getElementById('rating-shop-'+id).value;
+    fetch('/marketplace/api/shops/' + id + '/rate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rating: score })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if(data.success) {
+            alert('✅ Évaluation enregistrée ! La nouvelle note de la boutique est de ' + data.newRating + '⭐');
+            document.getElementById('open-ranking-modal').click();
+        } else {
+            alert('❌ Erreur: ' + (data.message || 'Impossible d\'évaluer'));
+        }
+    });
+}
+
+window.toggleFavorite = function(id, btnElement) {
+    fetch('/marketplace/api/favorites/toggle/' + id, {method: 'POST'})
+    .then(r => r.json())
+    .then(data => {
+        if(data.success) {
+            btnElement.style.color = data.isFavorite ? '#ef4444' : '#9ca3af';
+            document.getElementById('fav-count-top').textContent = data.count;
+        }
+    });
+}
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   FLASH PROMO — Polling temps réel (toutes les 2 secondes)
+   L'API backend est la seule source de vérité.
+   Le frontend n'effectue aucun calcul de prix — c'est le serveur
+   qui retourne les données vérifiées.
+════════════════════════════════════════════════════════════════════ */
+(function () {
+    'use strict';
+
+    /* Bannière globale #flash-promo-banner injectée dans le DOM */
+    let bannerEl = null;
+    function ensureBanner() {
+        if (!bannerEl) {
+            bannerEl = document.createElement('div');
+            bannerEl.id = 'flash-promo-banner';
+            bannerEl.innerHTML = `
+                <div class="banner-emoji">⚡</div>
+                <div class="banner-text" id="fp-banner-text">Promotion flash en cours !</div>
+                <div class="banner-cd" id="fp-banner-cd"></div>
+            `;
+            document.body.appendChild(bannerEl);
+        }
+        return bannerEl;
+    }
+
+    let lastPromos = {};          // cache : { vendorId: { discountPercent, expiresAt, ... } }
+    let bannerCdInt = null;
+    let bannerVendors = new Set();
+
+    /* ── Applique ou retire la promo sur toutes les cartes produit ── */
+    function applyPromos(promos) {
+        document.querySelectorAll('.product-price-block').forEach(block => {
+            const vendorId     = block.dataset.vendorId;
+            const originalPrice= parseFloat(block.dataset.priceEur);
+            const promo        = promos[vendorId];
+            const card         = block.closest('.product-card');
+
+            const normalDiv    = block.querySelector('.price-normal');
+            const promoDiv     = block.querySelector('.promo-price-block');
+            const countdownDiv = block.querySelector('.promo-countdown');
+            const crossedEl    = block.querySelector('.price-original-crossed');
+            const discountedEl = block.querySelector('.price-discounted');
+            const pctBadgeEl   = block.querySelector('.promo-pct-badge');
+
+            if (promo && promo.remainingSeconds > 0 && !isNaN(originalPrice)) {
+                /* ── Promo active sur ce vendeur ── */
+                const pct           = promo.discountPercent;
+                // Prix calculé côté serveur via remainingSeconds/discountPercent reçu
+                // On recalcule localement uniquement l'affichage (le backend valide)
+                const discounted    = Math.round(originalPrice * (1 - pct / 100) * 100) / 100;
+
+                if (normalDiv)    normalDiv.style.display    = 'none';
+                if (promoDiv)     promoDiv.style.display     = 'flex';
+                if (countdownDiv) countdownDiv.style.display = 'flex';
+
+                if (crossedEl)    crossedEl.textContent   = originalPrice.toFixed(2) + ' €';
+                if (discountedEl) discountedEl.textContent = discounted.toFixed(2) + ' €';
+                if (pctBadgeEl)   pctBadgeEl.textContent   = '-' + pct + '%';
+
+                countdownDiv.innerHTML = '⏱ ' + promo.remainingSeconds + ' s';
+
+                if (card) card.classList.add('promo-active');
+
+                /* Aussi mettre à jour le data-price-eur pour la devise */
+                const priceNormal = block.querySelector('.price-normal');
+                if (priceNormal) priceNormal.setAttribute('data-price-eur', originalPrice);
+
+            } else {
+                /* ── Pas de promo (ou expirée) ── */
+                if (normalDiv)    normalDiv.style.display    = '';
+                if (promoDiv)     promoDiv.style.display     = 'none';
+                if (countdownDiv) countdownDiv.style.display = 'none';
+                if (card)         card.classList.remove('promo-active');
+            }
+        });
+
+        /* Bannière globale */
+        bannerVendors = new Set(Object.keys(promos));
+        if (bannerVendors.size > 0) {
+            showBanner(promos);
+        } else {
+            hideBanner();
+        }
+    }
+
+    /* ── Décrémentation locale du compteur (entre 2 polls) ── */
+    function tickLocalCountdowns() {
+        document.querySelectorAll('.promo-countdown').forEach(el => {
+            const match = el.textContent.match(/(\d+)\ss/);
+            if (!match) return;
+            let s = parseInt(match[1]) - 1;
+            if (s <= 0) {
+                // La prochaine synchro serveur vidangera la promo
+                el.style.display = 'none';
+                const block = el.closest('.product-price-block');
+                if (block) {
+                    const norm = block.querySelector('.price-normal');
+                    const prm  = block.querySelector('.promo-price-block');
+                    if (norm) norm.style.display = '';
+                    if (prm)  prm.style.display  = 'none';
+                    const card = el.closest('.product-card');
+                    if (card) card.classList.remove('promo-active');
+                }
+            } else {
+                el.innerHTML = '⏱ ' + s + ' s';
+            }
+        });
+    }
+
+    /* ── Bannière globale ── */
+    function showBanner(promos) {
+        const b = ensureBanner();
+        b.style.display = 'block';
+
+        let maxRemaining = 0;
+        let vendorNames  = [];
+        Object.values(promos).forEach(p => {
+            if (p.remainingSeconds > maxRemaining) maxRemaining = p.remainingSeconds;
+            vendorNames.push(p.vendorName);
+        });
+
+        const textEl = document.getElementById('fp-banner-text');
+        const cdEl   = document.getElementById('fp-banner-cd');
+        if (textEl) textEl.textContent = '⚡ Flash Promo : ' + vendorNames.join(', ');
+        if (cdEl)   cdEl.textContent   = 'Expire dans ' + maxRemaining + ' s';
+
+        clearInterval(bannerCdInt);
+        let rem = maxRemaining;
+        bannerCdInt = setInterval(() => {
+            rem--;
+            if (rem <= 0) {
+                clearInterval(bannerCdInt);
+                hideBanner();
+            } else if (cdEl) {
+                cdEl.textContent = 'Expire dans ' + rem + ' s';
+            }
+        }, 1000);
+    }
+
+    function hideBanner() {
+        if (bannerEl) bannerEl.style.display = 'none';
+        clearInterval(bannerCdInt);
+    }
+
+    /* ── Polling toutes les 2 secondes ── */
+    async function poll() {
+        try {
+            const r    = await fetch('/marketplace/api/flash-promos');
+            const data = await r.json();
+            lastPromos = data.promos || {};
+            applyPromos(lastPromos);
+        } catch (e) {
+            /* réseau indisponible — on ne touche pas à l'affichage existant */
+        }
+    }
+
+    /* Démarrage immédiat + tick local 1 s + poll serveur 2 s */
+    poll();
+    setInterval(tickLocalCountdowns, 1000);
+    setInterval(poll, 2000);
+
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   TRADUCTION MARKETPLACE — MyMemory API (appel direct navigateur)
+   GET https://api.mymemory.translated.net/get?q=TEXT&langpair=fr|en
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+    'use strict';
+
+    let currentLang = 'fr';
+
+    /* Sélecteurs des textes à traduire */
+    const SELECTORS = [
+        '.product-card-name',
+        '.product-card-desc',
+        '.product-cat-badge',
+        '.product-card-stock',
+        '.bc-empty h3',
+        '.bc-empty p',
+        '#noResults',
+    ];
+
+    /* ── Toggle dropdown ── */
+    const btn      = document.getElementById('translate-btn');
+    const dropdown = document.getElementById('translate-dropdown');
+
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    });
+    document.addEventListener('click', function () {
+        dropdown.style.display = 'none';
+    });
+
+    /* ── Sélection de langue ── */
+    document.querySelectorAll('.lang-item').forEach(function (item) {
+        item.addEventListener('click', function () {
+            const lang  = this.dataset.lang;
+            const label = this.dataset.label;
+            dropdown.style.display = 'none';
+            if (lang === currentLang) return;
+            applyTranslation(lang, label);
+        });
+    });
+
+    /* ── Collecte les nœuds texte directs des éléments ciblés ── */
+    function collectNodes() {
+        const seen  = new Set();
+        const nodes = [];
+        SELECTORS.forEach(function (sel) {
+            document.querySelectorAll(sel).forEach(function (el) {
+                el.childNodes.forEach(function (child) {
+                    if (child.nodeType === Node.TEXT_NODE
+                        && child.textContent.trim().length > 0
+                        && !seen.has(child)) {
+                        seen.add(child);
+                        nodes.push(child);
+                    }
+                });
+            });
+        });
+        return nodes;
+    }
+
+    /* ── Overlay de chargement ── */
+    const overlay  = document.getElementById('translate-overlay');
+    const progress = document.getElementById('translate-progress');
+
+    function showOverlay(msg) {
+        overlay.style.display = 'flex';
+        progress.textContent  = msg || '';
+    }
+    function hideOverlay() {
+        overlay.style.display = 'none';
+    }
+
+    /* ── Traduit un tableau de textes via API PHP interne ── */
+    async function translateBatch(textsArray, sourceLang, targetLang) {
+        if (!textsArray || textsArray.length === 0) return [];
+        
+        try {
+            const resp = await fetch('/marketplace/api/translate-batch', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ texts: textsArray, source_lang: sourceLang, target_lang: targetLang })
+            });
+
+            if (!resp.ok) return textsArray;
+            const json = await resp.json();
+            
+            return json.translatedTexts || textsArray;
+        } catch (e) {
+            console.error('Translation batch error:', e);
+            return textsArray;
+        }
+    }
+
+    /* ── Applique la traduction sur toute la page en parallèle ── */
+    async function applyTranslation(targetLang, label) {
+        const nodes = collectNodes();
+        if (!nodes.length) return;
+
+        /* Sauvegarder les originaux une seule fois */
+        nodes.forEach(function (n) {
+            if (!n._origText) n._origText = n.textContent;
+        });
+
+        /* Retour au français → restauration immédiate, sans appel API */
+        if (targetLang === 'fr') {
+            nodes.forEach(function (n) { n.textContent = n._origText; });
+            document.documentElement.dir = 'ltr';
+            setActive(targetLang, label);
+            currentLang = 'fr';
+            return;
+        }
+
+        showOverlay('Traduction ultra-rapide en cours…');
+
+        try {
+            // Requêtes en lot pour être beaucoup plus rapide
+            const batchSize = 40; // On peut envoyer plus de textes d'un coup
+            let translatedCount = 0;
+
+            for (let i = 0; i < nodes.length; i += batchSize) {
+                const batchNodes = nodes.slice(i, i + batchSize);
+                const originalTexts = batchNodes.map(n => n._origText);
+                
+                const translatedTexts = await translateBatch(originalTexts, 'fr', targetLang);
+                
+                batchNodes.forEach((n, index) => {
+                    if(translatedTexts[index]) {
+                        n.textContent = translatedTexts[index];
+                    }
+                });
+                
+                translatedCount += batchNodes.length;
+                progress.textContent = translatedCount + ' / ' + nodes.length + ' éléments traduits…';
+            }
+
+            document.documentElement.dir = (targetLang === 'ar') ? 'rtl' : 'ltr';
+            setActive(targetLang, label);
+            currentLang = targetLang;
+
+        } catch (err) {
+            console.error('Traduction échouée :', err);
+        } finally {
+            hideOverlay();
+        }
+    }
+
+    /* ── Met à jour le bouton & l'item actif ── */
+    function setActive(lang, label) {
+        document.getElementById('translate-label').textContent = label || lang;
+        document.querySelectorAll('.lang-item').forEach(function (li) {
+            li.classList.toggle('lang-active', li.dataset.lang === lang);
+        });
+    }
+
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   CONVERTISSEUR DE DEVISES API
+   ══════════════════════════════════════════════════════════════ */
+(function() {
+    const curBtn      = document.getElementById('currency-btn');
+    const curDropdown = document.getElementById('currency-dropdown');
+    let rates = null;
+    let currentCurrency = 'EUR';
+
+    if(!curBtn) return;
+
+    curBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        curDropdown.style.display = curDropdown.style.display === 'none' ? 'block' : 'none';
+        document.getElementById('translate-dropdown').style.display = 'none'; // Close other drop
+    });
+    
+    document.addEventListener('click', () => { curDropdown.style.display = 'none'; });
+
+    async function fetchRates() {
+        if(rates) return rates;
+        try {
+            // Appeler l'API PHP interne
+            const response = await fetch('/marketplace/api/currency-rates');
+            const data = await response.json();
+            if(data && data.rates) rates = data.rates;
+        } catch(e) {
+            console.error('Erreur API Devises PHP', e);
+        }
+        return rates;
+    }
+
+    document.querySelectorAll('.currency-item').forEach(item => {
+        item.addEventListener('click', async function() {
+            const targetCurrency = this.dataset.currency;
+            const symbol = this.dataset.symbol;
+            const flag = this.dataset.flag;
+            
+            curDropdown.style.display = 'none';
+            if (targetCurrency === currentCurrency) return;
+
+            document.querySelectorAll('.currency-item').forEach(li => li.classList.remove('currency-active'));
+            this.classList.add('currency-active');
+            
+            document.getElementById('currency-label').textContent = `${targetCurrency} (${symbol})`;
+            document.getElementById('currency-flag').textContent = flag;
+
+            const fetchedRates = await fetchRates();
+            if (!fetchedRates) {
+                alert("Impossible de charger les taux de change.");
+                return;
+            }
+
+            const rate = fetchedRates[targetCurrency] || 1;
+            
+            // Mise à jour de tous les prix
+            document.querySelectorAll('.product-card-price').forEach(priceEl => {
+                const basePriceEur = parseFloat(priceEl.getAttribute('data-price-eur'));
+                if (!isNaN(basePriceEur)) {
+                    let newPrice = basePriceEur * rate;
+                    // Format joli: max 2 decimales
+                    newPrice = newPrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                    
+                    // Format position du symbole selon devise (dt/dh devant, €/$/£ après ou avant)
+                    if(['USD', 'GBP', 'CAD', 'JPY', 'CNY', 'SAR'].includes(targetCurrency)) {
+                        priceEl.textContent = `${symbol} ${newPrice}`;
+                    } else {
+                        priceEl.textContent = `${newPrice} ${symbol}`;
+                    }
+                }
+            });
+
+            currentCurrency = targetCurrency;
+        });
+    });
+})();
+</script>
+{% endblock %}
