@@ -2139,6 +2139,6 @@ window.addEventListener('scroll', function() {
 
 </body>
 </html>
-", "blog/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\blog\\show.html.twig");
+", "blog/show.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\blog\\show.html.twig");
     }
 }

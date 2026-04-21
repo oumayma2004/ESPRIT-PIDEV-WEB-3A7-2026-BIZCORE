@@ -548,6 +548,6 @@ class __TwigTemplate_852c01f144e60cd2353040d88e0bd78c extends Template
 
 <footer>© 2026 <span>Bizcore</span> - Tous droits reserves</footer>
 {% endblock %}
-", "reservation/my.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\reservation\\my.html.twig");
+", "reservation/my.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\reservation\\my.html.twig");
     }
 }

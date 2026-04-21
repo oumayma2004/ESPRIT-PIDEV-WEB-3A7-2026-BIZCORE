@@ -528,6 +528,6 @@ class __TwigTemplate_7c190da108773a39fa2814dbd72fd1a5 extends Template
 
 </div>
 {% endblock %}
-", "evenement/waitlist.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\evenement\\waitlist.html.twig");
+", "evenement/waitlist.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\evenement\\waitlist.html.twig");
     }
 }

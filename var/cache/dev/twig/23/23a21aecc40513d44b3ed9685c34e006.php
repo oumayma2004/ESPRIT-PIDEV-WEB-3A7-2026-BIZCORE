@@ -173,6 +173,6 @@ class __TwigTemplate_483e6bda9d0ab86b181a3aa91e360f29 extends Template
     {% block body %}{% endblock %}
     {% block javascripts %}{% endblock %}
 </body>
-</html>", "base_front.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\base_front.html.twig");
+</html>", "base_front.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\base_front.html.twig");
     }
 }

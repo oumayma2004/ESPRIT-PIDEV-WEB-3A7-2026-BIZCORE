@@ -1082,6 +1082,6 @@ class __TwigTemplate_980dfeac245b10ec0b44942b39a7fb21 extends Template
 })();
 </script>
 
-{% endblock %}", "reservation/edit.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\reservation\\edit.html.twig");
+{% endblock %}", "reservation/edit.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\reservation\\edit.html.twig");
     }
 }

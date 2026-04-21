@@ -129,6 +129,6 @@ class __TwigTemplate_6ba720bdebe19425601542d8462833fd extends Template
 
 <a href=\"{{ path('admin_events') }}\" class=\"btn btn-secondary mt-3\">
     ⬅ Back
-</a>", "evenement/event_analysis.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\evenement\\event_analysis.html.twig");
+</a>", "evenement/event_analysis.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\evenement\\event_analysis.html.twig");
     }
 }

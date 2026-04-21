@@ -128,35 +128,38 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
 <div class=\"card\">
     <h1>Create account</h1>
     <p>Register a BizCore user account.</p>
+    <div id=\"captchaStatus\" style=\"display:none; margin-bottom:14px; padding:10px 12px; border-radius:12px; font-size:14px; font-weight:700;\"></div>
 
     ";
-        // line 53
-        if ((($tmp = (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 53, $this->source); })())) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 54
+        // line 54
+        if ((($tmp = (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 54, $this->source); })())) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 55
             yield "        <div class=\"error\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 54, $this->source); })()), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 55, $this->source); })()), "html", null, true);
             yield "</div>
     ";
         }
-        // line 56
+        // line 57
         yield "
     <form method=\"post\" action=\"";
-        // line 57
+        // line 58
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
-        yield "\">
+        yield "\" id=\"registerForm\">
+        <input type=\"hidden\" name=\"recaptcha_token\" id=\"recaptcha_token\">
+
         <div class=\"grid\">
             <div class=\"field\">
                 <label>First name</label>
                 <input type=\"text\" name=\"prenom\" value=\"";
-        // line 61
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 61, $this->source); })()), "prenom", [], "any", false, false, false, 61), "html", null, true);
+        // line 64
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 64, $this->source); })()), "prenom", [], "any", false, false, false, 64), "html", null, true);
         yield "\" required minlength=\"2\" maxlength=\"50\" autocomplete=\"given-name\">
             </div>
             <div class=\"field\">
                 <label>Last name</label>
                 <input type=\"text\" name=\"nom\" value=\"";
-        // line 65
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 65, $this->source); })()), "nom", [], "any", false, false, false, 65), "html", null, true);
+        // line 68
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 68, $this->source); })()), "nom", [], "any", false, false, false, 68), "html", null, true);
         yield "\" required minlength=\"2\" maxlength=\"50\" autocomplete=\"family-name\">
             </div>
         </div>
@@ -164,8 +167,8 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
         <div class=\"field\">
             <label>Email</label>
             <input type=\"email\" name=\"email\" value=\"";
-        // line 71
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 71, $this->source); })()), "email", [], "any", false, false, false, 71), "html", null, true);
+        // line 74
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 74, $this->source); })()), "email", [], "any", false, false, false, 74), "html", null, true);
         yield "\" required maxlength=\"100\" autocomplete=\"email\">
         </div>
 
@@ -177,8 +180,8 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
             <div class=\"field\">
                 <label>Phone</label>
                 <input type=\"tel\" name=\"telephone\" value=\"";
-        // line 81
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 81, $this->source); })()), "telephone", [], "any", false, false, false, 81), "html", null, true);
+        // line 84
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 84, $this->source); })()), "telephone", [], "any", false, false, false, 84), "html", null, true);
         yield "\" maxlength=\"20\" autocomplete=\"tel\">
             </div>
         </div>
@@ -186,8 +189,8 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
         <div class=\"field\">
             <label>Address</label>
             <input type=\"text\" name=\"adresse\" value=\"";
-        // line 87
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 87, $this->source); })()), "adresse", [], "any", false, false, false, 87), "html", null, true);
+        // line 90
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["old"]) || array_key_exists("old", $context) ? $context["old"] : (function () { throw new RuntimeError('Variable "old" does not exist.', 90, $this->source); })()), "adresse", [], "any", false, false, false, 90), "html", null, true);
         yield "\" maxlength=\"255\" autocomplete=\"street-address\">
         </div>
 
@@ -196,11 +199,55 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
 
     <div class=\"bottom\">
         Already have an account? <a href=\"";
-        // line 94
+        // line 97
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
         yield "\">Login</a>
     </div>
 </div>
+
+<script src=\"https://www.google.com/recaptcha/api.js?render=";
+        // line 101
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["recaptchaSiteKey"]) || array_key_exists("recaptchaSiteKey", $context) ? $context["recaptchaSiteKey"] : (function () { throw new RuntimeError('Variable "recaptchaSiteKey" does not exist.', 101, $this->source); })()), "html", null, true);
+        yield "\"></script>
+<script>
+    const form = document.getElementById('registerForm');
+    const tokenInput = document.getElementById('recaptcha_token');
+    const statusBox = document.getElementById('captchaStatus');
+
+    function showStatus(message, ok) {
+        statusBox.style.display = 'block';
+        statusBox.textContent = message;
+        statusBox.style.background = ok ? '#dcfce7' : '#fee2e2';
+        statusBox.style.color = ok ? '#166534' : '#991b1b';
+    }
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (typeof grecaptcha === 'undefined') {
+            showStatus('Captcha not loaded. Please refresh the page.', false);
+            return;
+        }
+
+        grecaptcha.ready(function () {
+            grecaptcha.execute('";
+        // line 123
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["recaptchaSiteKey"]) || array_key_exists("recaptchaSiteKey", $context) ? $context["recaptchaSiteKey"] : (function () { throw new RuntimeError('Variable "recaptchaSiteKey" does not exist.', 123, $this->source); })()), "html", null, true);
+        yield "', { action: 'register' })
+                .then(function (token) {
+                    tokenInput.value = token;
+                    showStatus('Captcha verified ✓', true);
+
+                    setTimeout(function () {
+                        form.submit();
+                    }, 500);
+                })
+                .catch(function () {
+                    showStatus('Captcha verification failed. Please try again.', false);
+                });
+        });
+    });
+</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -229,7 +276,7 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  200 => 94,  190 => 87,  181 => 81,  168 => 71,  159 => 65,  152 => 61,  145 => 57,  142 => 56,  136 => 54,  134 => 53,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  235 => 123,  210 => 101,  203 => 97,  193 => 90,  184 => 84,  171 => 74,  162 => 68,  155 => 64,  146 => 58,  143 => 57,  137 => 55,  135 => 54,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -285,12 +332,15 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
 <div class=\"card\">
     <h1>Create account</h1>
     <p>Register a BizCore user account.</p>
+    <div id=\"captchaStatus\" style=\"display:none; margin-bottom:14px; padding:10px 12px; border-radius:12px; font-size:14px; font-weight:700;\"></div>
 
     {% if error %}
         <div class=\"error\">{{ error }}</div>
     {% endif %}
 
-    <form method=\"post\" action=\"{{ path('app_register') }}\">
+    <form method=\"post\" action=\"{{ path('app_register') }}\" id=\"registerForm\">
+        <input type=\"hidden\" name=\"recaptcha_token\" id=\"recaptcha_token\">
+
         <div class=\"grid\">
             <div class=\"field\">
                 <label>First name</label>
@@ -330,6 +380,44 @@ class __TwigTemplate_5345ddb89c20212ee59ae7c57be8a128 extends Template
         Already have an account? <a href=\"{{ path('app_login') }}\">Login</a>
     </div>
 </div>
-{% endblock %}", "security/register.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\security\\register.html.twig");
+
+<script src=\"https://www.google.com/recaptcha/api.js?render={{ recaptchaSiteKey }}\"></script>
+<script>
+    const form = document.getElementById('registerForm');
+    const tokenInput = document.getElementById('recaptcha_token');
+    const statusBox = document.getElementById('captchaStatus');
+
+    function showStatus(message, ok) {
+        statusBox.style.display = 'block';
+        statusBox.textContent = message;
+        statusBox.style.background = ok ? '#dcfce7' : '#fee2e2';
+        statusBox.style.color = ok ? '#166534' : '#991b1b';
+    }
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (typeof grecaptcha === 'undefined') {
+            showStatus('Captcha not loaded. Please refresh the page.', false);
+            return;
+        }
+
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ recaptchaSiteKey }}', { action: 'register' })
+                .then(function (token) {
+                    tokenInput.value = token;
+                    showStatus('Captcha verified ✓', true);
+
+                    setTimeout(function () {
+                        form.submit();
+                    }, 500);
+                })
+                .catch(function () {
+                    showStatus('Captcha verification failed. Please try again.', false);
+                });
+        });
+    });
+</script>
+{% endblock %}", "security/register.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\security\\register.html.twig");
     }
 }

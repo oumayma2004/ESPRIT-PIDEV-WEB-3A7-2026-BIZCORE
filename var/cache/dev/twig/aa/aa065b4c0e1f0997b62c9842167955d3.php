@@ -165,6 +165,6 @@ class __TwigTemplate_5499e727d9d9235af8b999e7c4d0aa95 extends Template
     </a>
 </div>
 </body>
-</html>", "home/choice.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\home\\choice.html.twig");
+</html>", "home/choice.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\home\\choice.html.twig");
     }
 }

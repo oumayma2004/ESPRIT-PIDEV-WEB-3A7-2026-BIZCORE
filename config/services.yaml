@@ -5,6 +5,13 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     uploads_directory: '%kernel.project_dir%/public/uploads'
+    
+    recaptcha_secret: '%env(RECAPTCHA_SECRET)%'
+    recaptcha_site_key: '%env(RECAPTCHA_SITE_KEY)%'
+    app_url: '%env(APP_URL)%'
+
+    gemini_api_key: '%env(GEMINI_API_KEY)%'
+    gemini_model: '%env(GEMINI_MODEL)%'
 
 services:
     # default configuration for services in *this* file
@@ -36,3 +43,16 @@ services:
             $aiApiUrl: '%env(AI_API_URL)%'
             $aiApiKey: '%env(AI_API_KEY)%'
             $aiModel: '%env(AI_MODEL)%'
+
+    App\Service\RecaptchaVerifier:
+        arguments:
+            $recaptchaSecret: '%recaptcha_secret%'
+
+    App\Service\RegistrationMailService:
+        arguments:
+            $appUrl: '%app_url%'
+
+    App\Service\GeminiChatService:
+        arguments:
+            $apiKey: '%gemini_api_key%'
+            $model: '%gemini_model%'

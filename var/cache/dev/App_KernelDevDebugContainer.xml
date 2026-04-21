@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kernel.project_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore</parameter>
+    <parameter key="kernel.project_dir">C:\xampp\htdocs\bizcore-main</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.runtime_mode">%env(query_string:default:container.runtime_mode:APP_RUNTIME_MODE)%</parameter>
@@ -9,9 +9,9 @@
     <parameter key="kernel.runtime_mode.cli">%env(not:default:kernel.runtime_mode.web:)%</parameter>
     <parameter key="kernel.runtime_mode.worker">%env(bool:default::key:worker:default:kernel.runtime_mode:)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev</parameter>
-    <parameter key="kernel.cache_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev</parameter>
-    <parameter key="kernel.logs_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\log</parameter>
+    <parameter key="kernel.build_dir">C:/xampp/htdocs/bizcore-main/var/cache/dev</parameter>
+    <parameter key="kernel.cache_dir">C:/xampp/htdocs/bizcore-main/var/cache/dev</parameter>
+    <parameter key="kernel.logs_dir">C:\xampp\htdocs\bizcore-main\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
@@ -24,41 +24,46 @@
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\framework-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\symfony\framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
       <parameter key="KnpPaginatorBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\knplabs\knp-paginator-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\knplabs\knp-paginator-bundle</parameter>
         <parameter key="namespace">Knp\Bundle\PaginatorBundle</parameter>
       </parameter>
       <parameter key="DoctrineBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\doctrine\doctrine-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\doctrine\doctrine-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\DoctrineBundle</parameter>
       </parameter>
       <parameter key="DoctrineMigrationsBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\doctrine\doctrine-migrations-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\doctrine\doctrine-migrations-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\MigrationsBundle</parameter>
       </parameter>
       <parameter key="SecurityBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\security-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\symfony\security-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\SecurityBundle</parameter>
       </parameter>
       <parameter key="TwigBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\twig-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\symfony\twig-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
       </parameter>
       <parameter key="TwigExtraBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\twig\extra-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\twig\extra-bundle</parameter>
         <parameter key="namespace">Twig\Extra\TwigExtraBundle</parameter>
       </parameter>
       <parameter key="MakerBundle" type="collection">
-        <parameter key="path">C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\maker-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\bizcore-main\vendor\symfony\maker-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
-    <parameter key="uploads_directory">C:\Users\MSI\Desktop\payment +qrcode\bizcore/public/uploads</parameter>
+    <parameter key="uploads_directory">C:\xampp\htdocs\bizcore-main/public/uploads</parameter>
+    <parameter key="recaptcha_secret">%env(RECAPTCHA_SECRET)%</parameter>
+    <parameter key="recaptcha_site_key">%env(RECAPTCHA_SITE_KEY)%</parameter>
+    <parameter key="app_url">%env(APP_URL)%</parameter>
+    <parameter key="gemini_api_key">%env(GEMINI_API_KEY)%</parameter>
+    <parameter key="gemini_model">%env(GEMINI_MODEL)%</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -94,15 +99,15 @@
     <parameter key="asset.request_context.base_path">null</parameter>
     <parameter key="asset.request_context.secure">null</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:/xampp/htdocs/bizcore-main/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
-    <parameter key="router.cache_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev</parameter>
+    <parameter key="router.cache_dir">C:/xampp/htdocs/bizcore-main/var/cache/dev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
-    <parameter key="cache.prefix.seed">_C:\Users\MSI\Desktop\payment +qrcode\bizcore.App_KernelDevDebugContainer</parameter>
+    <parameter key="cache.prefix.seed">_C:\xampp\htdocs\bizcore-main.App_KernelDevDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
       <parameter key="cache_limiter" type="string">0</parameter>
@@ -116,7 +121,7 @@
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
-    <parameter key="validator.mapping.cache.file">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/validation.php</parameter>
+    <parameter key="validator.mapping.cache.file">C:/xampp/htdocs/bizcore-main/var/cache/dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="data_collector.templates" type="collection"/>
     <parameter key="knp_paginator.template.pagination">@KnpPaginator/Pagination/sliding.html.twig</parameter>
@@ -193,7 +198,7 @@
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.enable_lazy_ghost_objects">true</parameter>
     <parameter key="doctrine.orm.enable_native_lazy_objects">false</parameter>
-    <parameter key="doctrine.orm.proxy_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">C:/xampp/htdocs/bizcore-main/var/cache/dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -210,7 +215,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
-    <parameter key="twig.default_path">C:\Users\MSI\Desktop\payment +qrcode\bizcore/templates</parameter>
+    <parameter key="twig.default_path">C:\xampp\htdocs\bizcore-main/templates</parameter>
     <parameter key="console.command.ids" type="collection"/>
   </parameters>
   <services>
@@ -540,6 +545,11 @@
     <service id="App\Service\CsvExportService" class="App\Service\CsvExportService" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Repository\CoachRepository"/>
     </service>
+    <service id="App\Service\GeminiChatService" class="App\Service\GeminiChatService" autowire="true" autoconfigure="true">
+      <argument type="service" id="http_client.uri_template"/>
+      <argument>%env(GEMINI_API_KEY)%</argument>
+      <argument>%env(GEMINI_MODEL)%</argument>
+    </service>
     <service id="App\Service\MailerService" class="App\Service\MailerService" autowire="true" autoconfigure="true">
       <argument type="service" id="mailer.mailer"/>
     </service>
@@ -556,6 +566,14 @@
     </service>
     <service id="App\Service\QrCodeService" class="App\Service\QrCodeService" autowire="true" autoconfigure="true"/>
     <service id="App\Service\ReadabilityService" class="App\Service\ReadabilityService" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\RecaptchaVerifier" class="App\Service\RecaptchaVerifier" autowire="true" autoconfigure="true">
+      <argument type="service" id="http_client.uri_template"/>
+      <argument>%env(RECAPTCHA_SECRET)%</argument>
+    </service>
+    <service id="App\Service\RegistrationMailService" class="App\Service\RegistrationMailService" autowire="true" autoconfigure="true">
+      <argument type="service" id="mailer.mailer"/>
+      <argument>%env(APP_URL)%</argument>
+    </service>
     <service id="App\Service\ReservationService" class="App\Service\ReservationService" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Repository\ReservationRepository"/>
@@ -605,7 +623,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.sqwhlEK"/>
+      <argument type="service" id=".service_locator.fjaViLl"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -688,7 +706,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/http_cache</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -698,7 +716,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
@@ -914,7 +932,7 @@
       </argument>
       <argument>UTF-8</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <argument type="service">
         <service>
           <argument type="service" id="request_stack"/>
@@ -950,7 +968,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="filesystem"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <call method="setName">
         <argument>assets:install</argument>
       </call>
@@ -1131,7 +1149,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument>dev</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <call method="setName">
         <argument>debug:dotenv</argument>
       </call>
@@ -1327,9 +1345,9 @@
     <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
       <tag name="cache.pool" pruneable="1"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>uf8hEDM6aE</argument>
+      <argument>RhprbZEN0r</argument>
       <argument>0</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/app</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -1342,50 +1360,50 @@
     <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>IcPTTZXmeq</argument>
+      <argument>oDTI-hx90r</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>lMmmw68Kuv</argument>
+      <argument>5yn+EbGT7K</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>lqHQgV+oe3</argument>
+      <argument>-YutRUHV7a</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.annotations" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>kovp3QEE2d</argument>
+      <argument>Q94P56pw+T</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.property_info" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>Z66qGI-sO7</argument>
+      <argument>YYm273-sTS</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1395,7 +1413,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1414,7 +1432,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/app</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -2129,7 +2147,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.sqwhlEK"/>
+      <argument type="service" id=".service_locator.fjaViLl"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -2224,7 +2242,7 @@
       <argument type="service" id=".service_locator.PvoQzFT.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev</argument>
+        <argument key="cache_dir">C:/xampp/htdocs/bizcore-main/var/cache/dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -2262,7 +2280,7 @@
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="logger" on-invalid="ignore"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
@@ -2290,7 +2308,7 @@
     </service>
     <service id="secrets.vault" class="Symfony\Bundle\FrameworkBundle\Secrets\SodiumVault">
       <tag name="container.env_var_loader"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
+      <argument>C:\xampp\htdocs\bizcore-main/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
       <argument type="service" id="secrets.decryption_key" on-invalid="ignore"/>
     </service>
     <service id="secrets.decryption_key" class="Symfony\Component\String\LazyString" constructor="fromCallable">
@@ -2298,7 +2316,7 @@
       <argument>base64:default::SYMFONY_DECRYPTION_SECRET</argument>
     </service>
     <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/.env.dev.local</argument>
+      <argument>C:\xampp\htdocs\bizcore-main/.env.dev.local</argument>
     </service>
     <service id="property_info" class="Symfony\Component\PropertyInfo\PropertyInfoExtractor">
       <argument type="iterator">
@@ -2372,7 +2390,7 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/sessions</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -2541,7 +2559,7 @@
       </call>
       <call method="addXmlMappings">
         <argument type="collection">
-          <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\form/Resources/config/validation.xml</argument>
+          <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\form/Resources/config/validation.xml</argument>
         </argument>
       </call>
       <call method="enableAttributeMapping">
@@ -2566,10 +2584,10 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/validation.php</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" constructor="create">
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/validation.php</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/validation.php</argument>
       <argument type="service" id="cache.validator"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
@@ -2829,10 +2847,10 @@
     <service id="cache.validator_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>1RFegDf0t2</argument>
+      <argument>IDZZ-VqKR7</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -3304,7 +3322,7 @@
         <argument type="service" id=".doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/doctrine/orm/Proxies</argument>
+        <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -3345,7 +3363,7 @@
     </service>
     <service id="doctrine.orm.default_attribute_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AttributeDriver">
       <argument type="collection">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\src\Entity</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\src\Entity</argument>
       </argument>
       <argument>true</argument>
     </service>
@@ -3407,7 +3425,7 @@
     <service id="doctrine.migrations.configuration" class="Doctrine\Migrations\Configuration\Configuration">
       <call method="addMigrationsDirectory">
         <argument>DoctrineMigrations</argument>
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/migrations</argument>
+        <argument>C:\xampp\htdocs\bizcore-main/migrations</argument>
       </call>
       <call method="setAllOrNothing">
         <argument>false</argument>
@@ -3733,10 +3751,10 @@
     <service id="cache.security_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>ki0ezTfqq0</argument>
+      <argument>eU+VmPfnoc</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -3749,10 +3767,10 @@
     <service id="cache.security_is_granted_attribute_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool" pruneable=""/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>k+q2l9+lvN</argument>
+      <argument>xUzo02eBS-</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/pools/system</argument>
+      <argument>C:/xampp/htdocs/bizcore-main/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -3812,6 +3830,13 @@
       </call>
       <call method="add">
         <argument type="service" id=".security.request_matcher.mW6fTTo"/>
+        <argument type="collection">
+          <argument>PUBLIC_ACCESS</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.zSeAz0F"/>
         <argument type="collection">
           <argument>PUBLIC_ACCESS</argument>
         </argument>
@@ -4374,6 +4399,14 @@
         <argument type="service" id=".security.request_matcher.hU_ow0l"/>
       </argument>
     </service>
+    <service id=".security.request_matcher.kkVlV_Z" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/auth/verify-email</argument>
+    </service>
+    <service id=".security.request_matcher.zSeAz0F" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.kkVlV_Z"/>
+      </argument>
+    </service>
     <service id=".security.request_matcher.o_b8F95" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
       <argument>^/auth/logout</argument>
     </service>
@@ -4434,7 +4467,7 @@
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
         <argument key="autoescape">name</argument>
-        <argument key="cache">C:\Users\MSI\Desktop\payment +qrcode\bizcore\var\cache\dev/twig</argument>
+        <argument key="cache">C:/xampp/htdocs/bizcore-main/var/cache/dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -4534,10 +4567,10 @@
     <service id="twig.template_iterator" class="Symfony\Bundle\TwigBundle\TemplateIterator">
       <argument type="service" id="kernel"/>
       <argument type="collection">
-        <argument key="C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
-        <argument key="C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
+        <argument key="C:\xampp\htdocs\bizcore-main\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
+        <argument key="C:\xampp\htdocs\bizcore-main\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
       </argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/templates</argument>
+      <argument>C:\xampp\htdocs\bizcore-main/templates</argument>
       <argument type="collection">
         <argument>*.twig</argument>
       </argument>
@@ -4551,60 +4584,60 @@
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader">
       <tag name="twig.loader"/>
       <argument type="collection"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\knplabs\knp-paginator-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\knplabs\knp-paginator-bundle/templates</argument>
         <argument>KnpPaginator</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\knplabs\knp-paginator-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\knplabs\knp-paginator-bundle/templates</argument>
         <argument>!KnpPaginator</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\doctrine\doctrine-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\doctrine\doctrine-bundle/templates</argument>
         <argument>Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\doctrine\doctrine-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\doctrine\doctrine-bundle/templates</argument>
         <argument>!Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
         <argument>DoctrineMigrations</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
         <argument>!DoctrineMigrations</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\security-bundle/Resources/views</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\security-bundle/Resources/views</argument>
         <argument>Security</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\security-bundle/Resources/views</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\security-bundle/Resources/views</argument>
         <argument>!Security</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\maker-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\maker-bundle/templates</argument>
         <argument>Maker</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\maker-bundle/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\maker-bundle/templates</argument>
         <argument>!Maker</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/templates</argument>
+        <argument>C:\xampp\htdocs\bizcore-main/templates</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>email</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>!email</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+        <argument>C:\xampp\htdocs\bizcore-main\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </call>
     </service>
     <service id="twig.loader.chain" class="Twig\Loader\ChainLoader"/>
@@ -4630,7 +4663,7 @@
     <service id="twig.extension.code" class="Symfony\Bridge\Twig\Extension\CodeExtension">
       <tag name="twig.extension"/>
       <argument type="service" id="debug.file_link_formatter" on-invalid="ignore"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <argument>UTF-8</argument>
     </service>
     <service id="twig.extension.routing" class="Symfony\Bridge\Twig\Extension\RoutingExtension">
@@ -4714,9 +4747,9 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="twig"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <argument>%kernel.bundles_metadata%</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/templates</argument>
+      <argument>C:\xampp\htdocs\bizcore-main/templates</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
       <call method="setName">
         <argument>debug:twig</argument>
@@ -4752,8 +4785,8 @@
       <argument type="service" id="filesystem"/>
       <argument type="service" id="maker.autoloader_util"/>
       <argument type="service" id="maker.file_link_formatter"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore/templates</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
+      <argument>C:\xampp\htdocs\bizcore-main/templates</argument>
     </service>
     <service id="maker.autoloader_finder" class="Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder">
       <argument>App</argument>
@@ -4930,7 +4963,7 @@
     </service>
     <service id="maker.maker.make_migration" class="Symfony\Bundle\MakerBundle\Maker\MakeMigration">
       <tag name="maker.command"/>
-      <argument>C:\Users\MSI\Desktop\payment +qrcode\bizcore</argument>
+      <argument>C:\xampp\htdocs\bizcore-main</argument>
       <argument type="service" id="maker.file_link_formatter"/>
     </service>
     <service id="maker.maker.make_stimulus_controller" class="Symfony\Bundle\MakerBundle\Maker\MakeStimulusController">
@@ -5627,6 +5660,17 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.27PMShu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="commandeRepository" type="service_closure" id="App\Repository\CommandeRepository"/>
+        <argument key="evenementRepository" type="service_closure" id="App\Repository\EvenementRepository"/>
+        <argument key="geminiChatService" type="service_closure" id="App\Service\GeminiChatService"/>
+        <argument key="productRepository" type="service_closure" id="App\Repository\ProductRepository"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.pX4JUuC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5803,6 +5847,22 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
+    <service id=".service_locator.UA1lN8S" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="mailService" type="service_closure" id="App\Service\RegistrationMailService"/>
+        <argument key="recaptchaVerifier" type="service_closure" id="App\Service\RecaptchaVerifier"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.kxuXL68" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="passwordHasher" type="service_closure" id="security.user_password_hasher"/>
+        <argument key="roleRepository" type="service_closure" id="App\Repository\RoleRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.OM_NMsG" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5886,7 +5946,7 @@
         <argument key="inscriptionRepo" type="service_closure" id="App\Repository\InscriptionEvenementRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.sqwhlEK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.fjaViLl" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminCoachController::delete" type="service_closure" id=".service_locator.ObEkA1Q"/>
@@ -5918,6 +5978,7 @@
         <argument key="App\Controller\CoachController::delete" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController::edit" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController::show" type="service_closure" id=".service_locator.BTDSyFE"/>
+        <argument key="App\Controller\DashboardController::assistant" type="service_closure" id=".service_locator.27PMShu"/>
         <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.L.ywsIz"/>
         <argument key="App\Controller\DashboardController::load" type="service_closure" id=".service_locator.ENIOKQD"/>
         <argument key="App\Controller\DashboardController::report" type="service_closure" id=".service_locator.L.ywsIz"/>
@@ -5959,7 +6020,8 @@
         <argument key="App\Controller\ReservationEvenementController::paymentCancel" type="service_closure" id=".service_locator.oQXGYC2"/>
         <argument key="App\Controller\ReservationEvenementController::paymentSuccess" type="service_closure" id=".service_locator.vrj3pfZ"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\SecurityController::register" type="service_closure" id=".service_locator.D9HX7Oy"/>
+        <argument key="App\Controller\SecurityController::register" type="service_closure" id=".service_locator.UA1lN8S"/>
+        <argument key="App\Controller\SecurityController::verifyEmail" type="service_closure" id=".service_locator.kxuXL68"/>
         <argument key="App\Controller\SignalementArticleController::delete" type="service_closure" id=".service_locator.QLxfK13"/>
         <argument key="App\Controller\SignalementArticleController::edit" type="service_closure" id=".service_locator.FrYDLzj"/>
         <argument key="App\Controller\SignalementArticleController::index" type="service_closure" id=".service_locator.OM_NMsG"/>
@@ -6007,6 +6069,7 @@
         <argument key="App\Controller\CoachController:delete" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController:edit" type="service_closure" id=".service_locator.BTDSyFE"/>
         <argument key="App\Controller\CoachController:show" type="service_closure" id=".service_locator.BTDSyFE"/>
+        <argument key="App\Controller\DashboardController:assistant" type="service_closure" id=".service_locator.27PMShu"/>
         <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.L.ywsIz"/>
         <argument key="App\Controller\DashboardController:load" type="service_closure" id=".service_locator.ENIOKQD"/>
         <argument key="App\Controller\DashboardController:report" type="service_closure" id=".service_locator.L.ywsIz"/>
@@ -6048,7 +6111,8 @@
         <argument key="App\Controller\ReservationEvenementController:paymentCancel" type="service_closure" id=".service_locator.oQXGYC2"/>
         <argument key="App\Controller\ReservationEvenementController:paymentSuccess" type="service_closure" id=".service_locator.vrj3pfZ"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\SecurityController:register" type="service_closure" id=".service_locator.D9HX7Oy"/>
+        <argument key="App\Controller\SecurityController:register" type="service_closure" id=".service_locator.UA1lN8S"/>
+        <argument key="App\Controller\SecurityController:verifyEmail" type="service_closure" id=".service_locator.kxuXL68"/>
         <argument key="App\Controller\SignalementArticleController:delete" type="service_closure" id=".service_locator.QLxfK13"/>
         <argument key="App\Controller\SignalementArticleController:edit" type="service_closure" id=".service_locator.FrYDLzj"/>
         <argument key="App\Controller\SignalementArticleController:index" type="service_closure" id=".service_locator.OM_NMsG"/>
@@ -7585,7 +7649,7 @@
     <service id="Symfony\Component\Mime\BodyRendererInterface" alias="twig.mime_body_renderer"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.sqwhlEK"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.fjaViLl"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -7594,6 +7658,7 @@
     <service id=".service_locator.RAoa6Zf" alias=".service_locator.usc9m3j"/>
     <service id=".service_locator.a5Isp2C" alias=".service_locator.L.ywsIz"/>
     <service id=".service_locator.iUcMZiF" alias=".service_locator.ENIOKQD"/>
+    <service id=".service_locator.bgBnUkU" alias=".service_locator.27PMShu"/>
     <service id=".service_locator.uEoXP7v" alias=".service_locator.B5Iixs8"/>
     <service id=".service_locator.HuHdp3s" alias=".service_locator.JFCU_Ej"/>
     <service id=".service_locator.SrPtst6" alias=".service_locator.nWL8b6E"/>
@@ -7606,6 +7671,7 @@
     <service id=".service_locator.MyxchtP" alias=".service_locator.yEZCaI7"/>
     <service id=".service_locator.nUoQ8Q9" alias=".service_locator.Yg0NnMz"/>
     <service id=".service_locator.tKk5yXr" alias=".service_locator.vrj3pfZ"/>
+    <service id=".service_locator.Z8k5xXD" alias=".service_locator.UA1lN8S"/>
     <service id=".service_locator.nKnyQi4" alias=".service_locator.OM_NMsG"/>
     <service id=".service_locator.IlFYEKP" alias=".service_locator.FrYDLzj"/>
     <service id=".service_locator.a9h1lpD" alias=".service_locator.QLxfK13"/>
@@ -7613,7 +7679,7 @@
     <service id=".service_locator.r272G_y" alias=".service_locator.1.UI1k5"/>
     <service id=".service_locator.efJYHqM" alias=".service_locator.oEGgv3J"/>
     <service id=".service_locator.8bRuz8R" alias=".service_locator.TTN9XEl"/>
-    <service id=".service_locator.6Vko7hy" alias=".service_locator.sqwhlEK"/>
+    <service id=".service_locator.MUWrTBq" alias=".service_locator.fjaViLl"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.kZ_psUc" alias=".service_locator.lrP3T4c"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
@@ -7647,6 +7713,7 @@
     <service id=".service_locator.mwFHKWQ" alias=".service_locator.TPxSRdB"/>
     <service id=".service_locator.1wSJdhP" alias=".service_locator.L.ywsIz"/>
     <service id=".service_locator.OM1dqyt" alias=".service_locator.ENIOKQD"/>
+    <service id=".service_locator.hsdU3vn" alias=".service_locator.27PMShu"/>
     <service id=".service_locator.ooaZ1p9" alias=".service_locator.pX4JUuC"/>
     <service id=".service_locator.cHidRdS" alias=".service_locator.td4zu.o"/>
     <service id=".service_locator.4Q_LXix" alias=".service_locator.B5Iixs8"/>
@@ -7672,6 +7739,8 @@
     <service id=".service_locator.PlUpFJQ" alias=".service_locator.vrj3pfZ"/>
     <service id=".service_locator.ijnNh7z" alias=".service_locator.oQXGYC2"/>
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>
+    <service id=".service_locator.iTRZpHU" alias=".service_locator.UA1lN8S"/>
+    <service id=".service_locator.nz8pcQd" alias=".service_locator.kxuXL68"/>
     <service id=".service_locator.W3Oi6xB" alias=".service_locator.OM_NMsG"/>
     <service id=".service_locator.AasltC3" alias=".service_locator.FrYDLzj"/>
     <service id=".service_locator.Y3qjxK9" alias=".service_locator.QLxfK13"/>

@@ -312,6 +312,6 @@ class __TwigTemplate_ba06e92b7aee1887591ade95111e747a extends Template
 
 <footer>© 2026 <span>Bizcore</span> — Tous droits réservés</footer>
 </body>
-</html>", "signalement/edit.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\signalement\\edit.html.twig");
+</html>", "signalement/edit.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\signalement\\edit.html.twig");
     }
 }

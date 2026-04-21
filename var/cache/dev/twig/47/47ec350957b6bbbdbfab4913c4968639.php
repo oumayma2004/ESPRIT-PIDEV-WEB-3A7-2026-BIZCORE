@@ -1010,6 +1010,6 @@ async function loadAdminReactions() {
 loadAdminReactions();
 </script>
 
-{% endblock %}", "article/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\show.html.twig");
+{% endblock %}", "article/show.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\article\\show.html.twig");
     }
 }

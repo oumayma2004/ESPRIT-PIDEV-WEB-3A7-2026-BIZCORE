@@ -217,6 +217,6 @@ document.getElementById('success-overlay').addEventListener('click', function(e)
 });
 </script>
 {% endif %}
-", "components/_success_popup.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\components\\_success_popup.html.twig");
+", "components/_success_popup.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\components\\_success_popup.html.twig");
     }
 }

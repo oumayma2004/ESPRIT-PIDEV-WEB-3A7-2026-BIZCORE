@@ -594,6 +594,6 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
 });
 </script>
 {% endblock %}
-", "admin/product_form.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\admin\\product_form.html.twig");
+", "admin/product_form.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\admin\\product_form.html.twig");
     }
 }

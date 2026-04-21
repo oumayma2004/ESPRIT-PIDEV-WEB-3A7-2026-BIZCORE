@@ -6,6 +6,8 @@ use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommandeRepository;
+use App\Service\GeminiChatService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\EvenementRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,7 +58,7 @@ class DashboardController extends AbstractController
                 'id_role' => $role->getId(),
                 'nom_role' => $role->getNomRole(),
             ],
-            $roleRepository->findBy([], ['id' => 'ASC'])
+            $roleRepository->findBy([], ['idRole' => 'ASC'])
         );
 
         return $this->render('dashboard/index.html.twig', [
@@ -123,7 +125,7 @@ class DashboardController extends AbstractController
                     'id_role' => $role->getId(),
                     'nom_role' => $role->getNomRole(),
                 ],
-                $roleRepository->findBy([], ['id' => 'ASC'])
+                $roleRepository->findBy([], ['idRole' => 'ASC'])
             );
 
             return $this->render('dashboard/_users.html.twig', [
@@ -196,5 +198,50 @@ class DashboardController extends AbstractController
                 'Content-Disposition' => 'inline; filename="bizcore-report.pdf"',
             ]
         );
+    }
+
+    #[Route('/dashboard/assistant', name: 'dashboard_assistant', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function assistant(
+        Request $request,
+        UserRepository $userRepository,
+        ProductRepository $productRepository,
+        CommandeRepository $commandeRepository,
+        EvenementRepository $evenementRepository,
+        ArticleRepository $articleRepository,
+        GeminiChatService $geminiChatService
+    ): JsonResponse {
+        $data = $request->toArray();
+        $message = trim((string) ($data['message'] ?? ''));
+
+        if ($message === '') {
+            return new JsonResponse(['error' => 'Empty message'], 400);
+        }
+
+        $context = [
+            'users' => $userRepository->countAll(),
+            'active_users' => $userRepository->countActive(),
+            'inactive_users' => $userRepository->countInactive(),
+            'recent_users' => $userRepository->countRecentRegistrations(7),
+            'dormant_users' => $userRepository->countDormant(30),
+            'without_role' => $userRepository->countWithoutRole(),
+            'incomplete_profiles' => $userRepository->countIncompleteProfiles(),
+            'products' => $productRepository->countAll(),
+            'orders' => $commandeRepository->countAll(),
+            'events' => $evenementRepository->countAll(),
+            'articles' => $articleRepository->countAll(),
+        ];
+
+        try {
+            $reply = $geminiChatService->ask($message, $context);
+
+            return new JsonResponse([
+                'reply' => $reply,
+            ]);
+        } catch (\Throwable $e) {
+            return new JsonResponse([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

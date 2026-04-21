@@ -87,6 +87,6 @@ class __TwigTemplate_6cd8e0ddc24eaf8bc33eb68fe6e388a1 extends Template
         return new Source("<h1>Welcome</h1>
 
 <a href=\"{{ path('frontend_blog_index') }}\">Enter Blog (User)</a>
-<a href=\"{{ path('article_index') }}\">Enter Admin</a>", "home/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\home\\index.html.twig");
+<a href=\"{{ path('article_index') }}\">Enter Admin</a>", "home/index.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\home\\index.html.twig");
     }
 }

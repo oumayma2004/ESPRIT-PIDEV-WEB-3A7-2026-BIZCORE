@@ -454,6 +454,6 @@ const b = document.getElementById('biographie'), c = document.getElementById('bi
 if (b && c) { const u = () => { const l = b.value.length; c.textContent = `\${l} / 2000 caractères`; c.style.color = l > 1800 ? '#ef4444' : '#9ca3af'; }; b.addEventListener('input', u); u(); }
 </script>
 {% endblock %}
-", "coach/edit.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\coach\\edit.html.twig");
+", "coach/edit.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\coach\\edit.html.twig");
     }
 }

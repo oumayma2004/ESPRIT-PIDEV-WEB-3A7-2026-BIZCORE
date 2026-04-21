@@ -3345,6 +3345,6 @@ const ChatbotWidget = (function() {
 })();
 </script>
 {% endblock %}
-", "coach/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\coach\\index.html.twig");
+", "coach/index.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\coach\\index.html.twig");
     }
 }

@@ -1087,6 +1087,6 @@ function filterCards() {
 }
 </script>
 {% endblock %}
-", "events/front_index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\events\\front_index.html.twig");
+", "events/front_index.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\events\\front_index.html.twig");
     }
 }

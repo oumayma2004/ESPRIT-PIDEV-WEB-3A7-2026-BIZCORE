@@ -627,6 +627,6 @@ async function markAllNotificationsRead() {
 document.addEventListener('DOMContentLoaded', refreshNotificationBell);
 </script>
 {% endif %}
-", "components/_notification_bell.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\components\\_notification_bell.html.twig");
+", "components/_notification_bell.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\components\\_notification_bell.html.twig");
     }
 }

@@ -1281,6 +1281,6 @@ class __TwigTemplate_fc69c92a991dc6cd990be6f45208a5ca extends Template
 {{ include('components/_error_popup.html.twig') }}
 </body>
 </html>
-", "base.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\base.html.twig");
+", "base.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\base.html.twig");
     }
 }

@@ -567,6 +567,6 @@ $context["s"], "statut", [], "any", false, false, false, 152) == "traite")) {
 
 <footer>© 2026 <span>Bizcore</span> — Tous droits réservés</footer>
 </body>
-</html>", "signalement/index.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\signalement\\index.html.twig");
+</html>", "signalement/index.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\signalement\\index.html.twig");
     }
 }

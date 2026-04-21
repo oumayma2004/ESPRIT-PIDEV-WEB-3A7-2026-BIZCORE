@@ -1321,6 +1321,6 @@ document.getElementById('gen-titre')?.addEventListener('blur', function () {
     }
 });
 </script>
-{% endblock %}", "article/new.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\new.html.twig");
+{% endblock %}", "article/new.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\article\\new.html.twig");
     }
 }

@@ -1420,6 +1420,6 @@ async function fetchReadability() {
     }
 }
 </script>
-{% endblock %}", "article/edit.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\article\\edit.html.twig");
+{% endblock %}", "article/edit.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\article\\edit.html.twig");
     }
 }

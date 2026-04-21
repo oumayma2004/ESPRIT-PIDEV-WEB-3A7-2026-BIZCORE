@@ -49,12 +49,15 @@
 <div class="card">
     <h1>Create account</h1>
     <p>Register a BizCore user account.</p>
+    <div id="captchaStatus" style="display:none; margin-bottom:14px; padding:10px 12px; border-radius:12px; font-size:14px; font-weight:700;"></div>
 
     {% if error %}
         <div class="error">{{ error }}</div>
     {% endif %}
 
-    <form method="post" action="{{ path('app_register') }}">
+    <form method="post" action="{{ path('app_register') }}" id="registerForm">
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
         <div class="grid">
             <div class="field">
                 <label>First name</label>
@@ -94,4 +97,42 @@
         Already have an account? <a href="{{ path('app_login') }}">Login</a>
     </div>
 </div>
+
+<script src="https://www.google.com/recaptcha/api.js?render={{ recaptchaSiteKey }}"></script>
+<script>
+    const form = document.getElementById('registerForm');
+    const tokenInput = document.getElementById('recaptcha_token');
+    const statusBox = document.getElementById('captchaStatus');
+
+    function showStatus(message, ok) {
+        statusBox.style.display = 'block';
+        statusBox.textContent = message;
+        statusBox.style.background = ok ? '#dcfce7' : '#fee2e2';
+        statusBox.style.color = ok ? '#166534' : '#991b1b';
+    }
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (typeof grecaptcha === 'undefined') {
+            showStatus('Captcha not loaded. Please refresh the page.', false);
+            return;
+        }
+
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ recaptchaSiteKey }}', { action: 'register' })
+                .then(function (token) {
+                    tokenInput.value = token;
+                    showStatus('Captcha verified ✓', true);
+
+                    setTimeout(function () {
+                        form.submit();
+                    }, 500);
+                })
+                .catch(function () {
+                    showStatus('Captcha verification failed. Please try again.', false);
+                });
+        });
+    });
+</script>
 {% endblock %}

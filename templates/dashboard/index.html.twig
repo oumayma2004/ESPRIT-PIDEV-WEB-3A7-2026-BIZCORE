@@ -4,7 +4,9 @@
   BizCore Dashboard
 {% endblock %}
 
-{% block page_title %}GESTION UTILISATEURS{% endblock %}
+{% block page_title %}
+  GESTION UTILISATEURS
+{% endblock %}
 
 {% block body %}
   <style>
@@ -692,7 +694,7 @@
   {% set auth = authUser %}
   {% set displayName = auth ? (auth.prenom ~ ' ' ~ auth.nom)|trim:'Guest' %}
   {% set displayRole = auth and auth.roleEntity ? auth.roleEntity.nomRole : 'Visitor' %}
-  {% set avatarLetter = auth ? (auth.prenom ? : auth.nom)|first|upper : 'G' %}
+  {% set avatarLetter = auth ? (auth.prenom ? : auth.nom)|first|upper:'G' %}
   {% set maxKpi = max([stats.users, stats.products, stats.orders, stats.events, stats.articles, 1]) %}
 
   <div class="dashboard-shell">
@@ -1321,4 +1323,146 @@
       </div>
     </div>
   </div>
+
+  <div id="aiChatLauncher" style="position:fixed; right:22px; bottom:22px; z-index:20000;">
+    <button id="aiChatButton" type="button" style="
+        width:64px;
+        height:64px;
+        border:0;
+        border-radius:50%;
+        background:#5b7cff;
+        color:#fff;
+        box-shadow:0 18px 40px rgba(91,124,255,.35);
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:26px;
+    ">🤖</button>
+
+    <div id="aiChatBox" style="
+        display:none;
+        position:absolute;
+        right:0;
+        bottom:78px;
+        width:320px;
+        height:420px;
+        background:#fff;
+        border:1px solid #e5e7ef;
+        border-radius:22px;
+        box-shadow:0 24px 70px rgba(0,0,0,.18);
+        overflow:hidden;
+        flex-direction:column;
+    ">
+      <div style="padding:14px 16px; background:#5b7cff; color:#fff; font-weight:700; display:flex; justify-content:space-between; align-items:center;">
+        <span>BizCore Assistant</span>
+        <button type="button" id="aiChatClose" style="border:0; background:transparent; color:#fff; font-size:18px; cursor:pointer;">×</button>
+      </div>
+
+      <div id="aiChatMessages" style="flex:1; padding:14px; overflow:auto; background:#f8f9ff;"></div>
+
+      <form id="aiChatForm" style="display:flex; gap:8px; padding:12px; border-top:1px solid #e5e7ef;">
+        <input id="aiChatInput" type="text" placeholder="Ask about users, stats, alerts..." style="
+                flex:1;
+                border:1px solid #d7ddf2;
+                border-radius:12px;
+                padding:10px 12px;
+                outline:none;
+            " />
+        <button type="submit" style="
+                border:0;
+                border-radius:12px;
+                background:#5b7cff;
+                color:#fff;
+                padding:10px 14px;
+                font-weight:700;
+                cursor:pointer;
+            ">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const aiChatButton = document.getElementById('aiChatButton')
+    const aiChatBox = document.getElementById('aiChatBox')
+    const aiChatClose = document.getElementById('aiChatClose')
+    const aiChatForm = document.getElementById('aiChatForm')
+    const aiChatInput = document.getElementById('aiChatInput')
+    const aiChatMessages = document.getElementById('aiChatMessages')
+    
+    const AI_URL = "{{ path('dashboard_assistant') }}"
+    
+    function addMessage(text, role) {
+      const bubble = document.createElement('div')
+      bubble.style.maxWidth = '85%'
+      bubble.style.marginBottom = '10px'
+      bubble.style.padding = '10px 12px'
+      bubble.style.borderRadius = '14px'
+      bubble.style.whiteSpace = 'pre-wrap'
+      bubble.style.fontSize = '13px'
+    
+      if (role === 'user') {
+        bubble.style.marginLeft = 'auto'
+        bubble.style.background = '#5b7cff'
+        bubble.style.color = '#fff'
+      } else {
+        bubble.style.marginRight = 'auto'
+        bubble.style.background = '#fff'
+        bubble.style.border = '1px solid #e5e7ef'
+        bubble.style.color = '#111827'
+      }
+    
+      bubble.textContent = text
+      aiChatMessages.appendChild(bubble)
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight
+    }
+    
+    aiChatButton.addEventListener('click', () => {
+      aiChatBox.style.display = aiChatBox.style.display === 'none' ? 'flex' : 'none'
+      if (aiChatBox.style.display === 'flex' && aiChatMessages.childElementCount === 0) {
+        addMessage('Hello 👋 I can help you read dashboard stats, suggest admin actions, or explain user activity.', 'bot')
+      }
+    })
+    
+    aiChatClose.addEventListener('click', () => {
+      aiChatBox.style.display = 'none'
+    })
+    
+    aiChatForm.addEventListener('submit', async (e) => {
+      e.preventDefault()
+    
+      const message = aiChatInput.value.trim()
+      if (!message) return
+    
+      addMessage(message, 'user')
+      aiChatInput.value = ''
+    
+      addMessage('Thinking...', 'bot')
+      const typingBubble = aiChatMessages.lastElementChild
+    
+      try {
+        const response = await fetch(AI_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({ message })
+        })
+    
+        const data = await response.json()
+        typingBubble.remove()
+    
+        if (!response.ok) {
+          addMessage(data.error || 'Something went wrong.', 'bot')
+          return
+        }
+    
+        addMessage(data.reply || 'No response received.', 'bot')
+      } catch (err) {
+        typingBubble.remove()
+        addMessage('AI service unavailable right now.', 'bot')
+      }
+    })
+  </script>
 {% endblock %}

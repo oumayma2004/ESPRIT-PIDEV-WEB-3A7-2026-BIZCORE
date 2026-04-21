@@ -289,6 +289,6 @@ class __TwigTemplate_e4fba251f76bd655744e83daf5af0883 extends Template
 
 </div>
 {% endblock %}
-", "coach/delete.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\coach\\delete.html.twig");
+", "coach/delete.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\coach\\delete.html.twig");
     }
 }

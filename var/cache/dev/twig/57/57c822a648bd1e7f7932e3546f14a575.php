@@ -174,6 +174,6 @@ class __TwigTemplate_875676bcff0b28a9c8fcd08fd7332a5f extends Template
     <button>{{ options.button }}</button>
 
 </form>
-", "@KnpPaginator/Pagination/filtration.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\filtration.html.twig");
+", "@KnpPaginator/Pagination/filtration.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\filtration.html.twig");
     }
 }

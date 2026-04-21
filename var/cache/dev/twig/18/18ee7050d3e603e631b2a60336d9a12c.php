@@ -1342,6 +1342,6 @@ class __TwigTemplate_7a65f0aedf502c2b7397a4e5bf1855c7 extends Template
 
 
 {% endblock %}
-", "events/show.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\events\\show.html.twig");
+", "events/show.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\events\\show.html.twig");
     }
 }

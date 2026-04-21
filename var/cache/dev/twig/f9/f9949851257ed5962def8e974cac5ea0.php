@@ -314,6 +314,6 @@ class __TwigTemplate_f80d653d06f130583015ce8978fad87b extends Template
             <button type=\"button\" class=\"page-btn\" data-page=\"{{ totalPages }}\">Last</button>
         </div>
     {% endif %}
-</div>", "dashboard/_users.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\dashboard\\_users.html.twig");
+</div>", "dashboard/_users.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\dashboard\\_users.html.twig");
     }
 }

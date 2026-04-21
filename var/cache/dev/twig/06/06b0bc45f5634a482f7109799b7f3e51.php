@@ -237,6 +237,6 @@ class __TwigTemplate_3841b851f7295fa791665aaacd999fb5 extends Template
         <div class=\"footer\">✅ Bonne expérience !</div>
     </div>
 </body>
-</html>", "ticket/view.html.twig", "C:\\Users\\MSI\\Desktop\\payment +qrcode\\bizcore\\templates\\ticket\\view.html.twig");
+</html>", "ticket/view.html.twig", "C:\\xampp\\htdocs\\bizcore-main\\templates\\ticket\\view.html.twig");
     }
 }
