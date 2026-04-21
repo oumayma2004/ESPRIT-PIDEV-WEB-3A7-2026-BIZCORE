@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Votre Billet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .welcome {
+            font-size: 28px;
+            color: #4F46E5;
+            margin-bottom: 8px;
+        }
+        .name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 24px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+        }
+        td:first-child {
+            color: #888;
+            width: 40%;
+        }
+        .footer {
+            margin-top: 24px;
+            color: #4F46E5;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="welcome">🎟️ Bienvenue</div>
+        <div class="name">{{ customer }}</div>
+
+        <table>
+            <tr><td>Réservation</td><td>#{{ id }}</td></tr>
+            <tr><td>Événement</td><td>{{ event }}</td></tr>
+            <tr><td>Place</td><td>{{ seat }}</td></tr>
+            <tr><td>Montant</td><td>{{ amount }}</td></tr>
+            <tr><td>Date</td><td>{{ date }}</td></tr>
+        </table>
+
+        <div class="footer">✅ Bonne expérience !</div>
+    </div>
+</body>
+</html>

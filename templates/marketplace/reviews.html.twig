@@ -1,0 +1,346 @@
+{% extends 'base.html.twig' %}
+{% block title %}Avis - {{ product.nomProduit }}{% endblock %}
+
+{% block body %}
+<!-- Styles specific for the reviews page -->
+<style>
+    .sr-container {
+        max-width: 900px;
+        margin: 40px auto;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .sr-header-box {
+        background: #fff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+        border: 1px solid #e1e7ef;
+        text-align: center;
+    }
+    .sr-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #1e293b;
+        margin: 0 0 10px 0;
+    }
+    .sr-subtitle {
+        color: #64748b;
+        font-size: 16px;
+        margin: 0 0 20px 0;
+    }
+    
+    .sr-stats {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    .sr-stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .sr-stat-value {
+        font-size: 32px;
+        font-weight: 800;
+        color: #0d9488;
+    }
+    .sr-stat-label {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #94a3b8;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    /* Sentiment Bar */
+    .sr-sentiment-bar-wrapper {
+        margin-top: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .sr-sentiment-bar {
+        height: 12px;
+        display: flex;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #f1f5f9;
+        margin-bottom: 8px;
+    }
+    .sr-sentiment-segment {
+        height: 100%;
+        transition: width 0.5s ease;
+    }
+    .sr-sentiment-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .color-pos { background: #10b981; color: #10b981; }
+    .color-neu { background: #fbbf24; color: #fbbf24; }
+    .color-neg { background: #ef4444; color: #ef4444; }
+
+    /* Tabs */
+    .sr-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+    .sr-tab-btn {
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        background: #fff;
+        color: #64748b;
+        border: 2px solid #e2e8f0;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .sr-tab-btn:hover {
+        border-color: #cbd5e1;
+        background: #f8fafc;
+    }
+    .sr-tab-btn.active {
+        background: #0f172a;
+        color: #fff;
+        border-color: #0f172a;
+    }
+
+    /* Platform Icons */
+    .ico-google { color: #ea4335; }
+    .ico-facebook { color: #1877f2; }
+    .ico-instagram { color: #e1306c; }
+    .ico-reddit { color: #ff4500; }
+    .ico-tiktok { color: #000; }
+    .sr-tab-btn.active [class^="ico-"] {
+        color: #fff; /* White icon when active */
+    }
+
+    /* Grid */
+    .sr-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    .sr-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        border: 1px solid #e2e8f0;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s;
+    }
+    .sr-card:hover {
+        transform: translateY(-2px);
+    }
+    .sr-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    .sr-card-user {
+        font-weight: 700;
+        color: #1e293b;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .sr-card-date {
+        font-size: 12px;
+        color: #94a3b8;
+    }
+    .sr-card-stars {
+        color: #f59e0b;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    .sr-card-text {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.6;
+        flex-grow: 1;
+    }
+    .sr-card-footer {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 15px;
+    }
+    .sr-sentiment-badge {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+    .badge-pos { background: #d1fae5; color: #065f46; }
+    .badge-neu { background: #fef3c7; color: #92400e; }
+    .badge-neg { background: #fee2e2; color: #991b1b; }
+
+</style>
+
+<div class="sr-container">
+    
+    <div style="margin-bottom: 20px;">
+        <a href="{{ path('marketplace_index') }}" style="color: #64748b; text-decoration: none; font-weight: 600; font-size: 14px;">
+            ← Retour à la Marketplace
+        </a>
+    </div>
+
+    <div class="sr-header-box">
+        <h1 class="sr-title">Avis sociaux pour "{{ product.nomProduit }}"</h1>
+        <p class="sr-subtitle">Découvrez ce que les internautes disent de ce produit à travers le web.</p>
+        
+        <div class="sr-stats">
+            <div class="sr-stat-item">
+                <span class="sr-stat-value">{{ summary.score|number_format(1) }}</span>
+                <span class="sr-stat-label">Note Globale</span>
+            </div>
+            <div class="sr-stat-item">
+                <span class="sr-stat-value">{{ summary.total }}</span>
+                <span class="sr-stat-label">Avis Analysés</span>
+            </div>
+        </div>
+
+        {% set p = summary.sentiments.positive|default(0) %}
+        {% set neu = summary.sentiments.neutral|default(0) %}
+        {% set neg = summary.sentiments.negative|default(0) %}
+        
+        <div class="sr-sentiment-bar-wrapper">
+            <div class="sr-sentiment-labels" style="margin-bottom: 8px;">
+                <span style="color: #10b981;">Positifs ({{ p }}%)</span>
+                <span style="color: #fbbf24;">Neutres ({{ neu }}%)</span>
+                <span style="color: #ef4444;">Négatifs ({{ neg }}%)</span>
+            </div>
+            <div class="sr-sentiment-bar">
+                <div class="sr-sentiment-segment color-pos" style="width: {{ p }}%;"></div>
+                <div class="sr-sentiment-segment color-neu" style="width: {{ neu }}%;"></div>
+                <div class="sr-sentiment-segment color-neg" style="width: {{ neg }}%;"></div>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 10px;">
+                <i class="fas fa-robot"></i> Sentiment analysé par intelligence artificielle (OpenAI)
+            </div>
+        </div>
+    </div>
+
+    {# Extrait des plateformes uniques #}
+    {% set platforms = [] %}
+    {% for r in reviews %}
+        {% if r.platform not in platforms %}
+            {% set platforms = platforms|merge([r.platform]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if reviews|length == 0 %}
+        <div style="text-align: center; padding: 50px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
+            <p style="color: #64748b; font-size: 16px;">Aucun avis n'a encore été trouvé pour ce produit.</p>
+        </div>
+    {% else %}
+        
+        <div class="sr-tabs">
+            <button class="sr-tab-btn active" onclick="filterReviews('all', this)">
+                <i class="fas fa-globe"></i> Tout afficher
+            </button>
+            {% for plat in platforms %}
+                <button class="sr-tab-btn" onclick="filterReviews('{{ plat }}', this)">
+                    {% if plat == 'Google' %}<i class="fab fa-google ico-google"></i>
+                    {% elseif plat == 'Facebook' %}<i class="fab fa-facebook ico-facebook"></i>
+                    {% elseif plat == 'Instagram' %}<i class="fab fa-instagram ico-instagram"></i>
+                    {% elseif plat == 'Reddit' %}<i class="fab fa-reddit ico-reddit"></i>
+                    {% elseif plat == 'TikTok' %}<i class="fab fa-tiktok ico-tiktok"></i>
+                    {% else %}<i class="fas fa-comment"></i>{% endif %}
+                    {{ plat }}
+                </button>
+            {% endfor %}
+        </div>
+
+        <div class="sr-grid" id="reviewsGrid">
+            {% for r in reviews %}
+                
+                {% set badgeClass = 'badge-neu' %}
+                {% set sentLabel = 'Neutre' %}
+                {% if r.sentiment == 'positive' %} {% set badgeClass = 'badge-pos' %} {% set sentLabel = 'Positif' %}
+                {% elseif r.sentiment == 'negative' %} {% set badgeClass = 'badge-neg' %} {% set sentLabel = 'Négatif' %}
+                {% endif %}
+
+                <div class="sr-card" data-platform="{{ r.platform }}">
+                    <div class="sr-card-header">
+                        <div>
+                            <div class="sr-card-user">{{ r.username|default('Anonyme') }}</div>
+                            <div class="sr-card-date">{{ r.date }}</div>
+                        </div>
+                        <div style="display:flex; flex-direction:column; align-items:flex-end;">
+                            <div class="sr-card-stars">
+                                {% if r.stars %}
+                                    {% for i in 1..5 %}
+                                        {% if i <= r.stars|round %}
+                                            ★
+                                        {% else %}
+                                            ☆
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sr-card-text">
+                        "{{ r.text }}"
+                    </div>
+                    
+                    <div class="sr-card-footer">
+                        <span class="sr-sentiment-badge {{ badgeClass }}">{{ sentLabel }}</span>
+                        
+                        <span style="font-weight: bold; font-size: 13px; color: #64748b; display: flex; align-items: center; gap: 6px;">
+                            {% if r.platform == 'Google' %}<i class="fab fa-google" style="color:#ea4335"></i>
+                            {% elseif r.platform == 'Facebook' %}<i class="fab fa-facebook" style="color:#1877f2"></i>
+                            {% elseif r.platform == 'Instagram' %}<i class="fab fa-instagram" style="color:#e1306c"></i>
+                            {% elseif r.platform == 'Reddit' %}<i class="fab fa-reddit" style="color:#ff4500"></i>
+                            {% elseif r.platform == 'TikTok' %}<i class="fab fa-tiktok" style="color:#000"></i>
+                            {% else %}<i class="fas fa-globe"></i>{% endif %}
+                            {{ r.platform }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+    function filterReviews(platform, btn) {
+        // Toggle Active Class
+        document.querySelectorAll('.sr-tab-btn').forEach(el => el.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter Cards
+        const cards = document.querySelectorAll('.sr-card');
+        cards.forEach(card => {
+            if (platform === 'all' || card.dataset.platform === platform) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+{% endblock %}

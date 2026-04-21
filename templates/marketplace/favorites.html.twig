@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mes Favoris{% endblock %}
+
+{% block body %}
+<style>#content { padding: 0 !important; background: var(--bc-bg); }</style>
+    <div class="bc-main" style="border-radius: 8px; border: 1px solid var(--bc-border);">
+        <header class="bc-topbar">
+            <div class="marketplace-header" style="margin:0;flex:1;">
+                <h1 style="font-size:22px;margin:0;">Mes Favoris</h1>
+                <p style="font-size:12px;color:var(--bc-text-light);margin:0;">Vos produits sauvegardés pour plus tard</p>
+            </div>
+            
+            <a href="{{ path('marketplace_index') }}" class="btn btn-secondary" style="margin-left:15px;">
+                ← Retour Marketplace
+            </a>
+
+            <a href="{{ path('cart_index') }}" class="btn btn-dark" id="cart-btn" style="position:relative;flex-shrink:0;margin-left: 10px;">
+                🛒 Panier <span id="cart-count-top" style="background:var(--bc-teal);border-radius:12px;padding:1px 8px;font-size:11px;margin-left:4px;">{{ cart_count|default(0) }}</span>
+            </a>
+        </header>
+
+        <div class="bc-content">
+            {% if products is empty %}
+                <div class="bc-empty">
+                    <div class="bc-empty-icon">❤️</div>
+                    <h3>Aucun favori</h3>
+                    <p>Vous n'avez pas encore sauvegardé de produit dans vos favoris.</p>
+                </div>
+            {% else %}
+                <div class="products-grid">
+                    {% for product in products %}
+                    <div class="product-card" id="fav-card-{{ product.idProduit }}">
+                        <div class="product-card-img" style="position:relative;">
+                            {% if product.imageUrl %}
+                                <img src="{{ product.imageUrl }}" alt="{{ product.nomProduit }}" loading="lazy">
+                            {% else %}
+                                <div class="no-img">📦</div>
+                            {% endif %}
+                            
+                            <!-- Bonton enlever des favoris -->
+                            <button onclick="toggleFavorite({{ product.idProduit }})" 
+                                    style="position:absolute; top:8px; left:8px; background:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; color:#ef4444; font-size:18px;">
+                                ♥
+                            </button>
+                        </div>
+
+                        <div class="product-card-body">
+                            <div class="product-card-header">
+                                <div class="product-card-name">{{ product.nomProduit }}</div>
+                                <div class="product-card-price">{{ product.prix }} €</div>
+                            </div>
+                            <div class="product-card-desc">{{ product.description }}</div>
+
+                            {% if product.stockDisponible > 0 %}
+                                <form method="post" action="{{ path('cart_add', {id: product.idProduit}) }}" style="margin-top:10px;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('cart_add_' ~ product.idProduit) }}">
+                                    <button type="submit" class="btn-add-cart">
+                                        🛒 Ajouter au panier
+                                    </button>
+                                </form>
+                            {% else %}
+                                <button class="btn-add-cart" disabled style="background:#CBD5E1;cursor:not-allowed;margin-top:10px;">
+                                    Indisponible
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+window.toggleFavorite = function(id) {
+    fetch('/marketplace/api/favorites/toggle/' + id, {method: 'POST'})
+    .then(r => r.json())
+    .then(data => {
+        if(data.success && !data.isFavorite) {
+            let card = document.getElementById('fav-card-' + id);
+            if (card) {
+                card.style.display = 'none';
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

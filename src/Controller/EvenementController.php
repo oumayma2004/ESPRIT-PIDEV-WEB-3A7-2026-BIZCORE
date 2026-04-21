@@ -1,0 +1,208 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Evenement;
+use App\Entity\Reservation;
+use App\Form\EvenementType;
+use App\Form\ReservationType;
+<<<<<<< HEAD
+use App\Service\AIAnalyzerService;
+=======
+>>>>>>> gdd
+use App\Repository\EvenementRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+#[Route('/evenement')]
+class EvenementController extends AbstractController
+{
+    #[Route('/', name: 'evenement_index', methods: ['GET'])]
+    public function index(EvenementRepository $evenementRepository): Response
+    {
+<<<<<<< HEAD
+        $evenements = $evenementRepository->findAll();
+
+        $aiRatings = [];
+        foreach ($evenements as $e) {
+            $aiRatings[$e->getId()] = $e->getAiRating();
+        }
+
+        return $this->render('evenement/index.html.twig', [
+            'evenements' => $evenements,
+            'aiRatings'  => $aiRatings,
+=======
+        return $this->render('evenement/index.html.twig', [
+            'evenements' => $evenementRepository->findAll(),
+>>>>>>> gdd
+        ]);
+    }
+
+    #[Route('/new', name: 'evenement_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    {
+        $evenement = new Evenement();
+        $form = $this->createForm(EvenementType::class, $evenement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle image upload
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                    $evenement->setImage($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
+                }
+            }
+
+            $entityManager->persist($evenement);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Événement créé avec succès !');
+            return $this->redirectToRoute('evenement_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('evenement/new.html.twig', [
+            'evenement' => $evenement,
+            'form'      => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'evenements_show', methods: ['GET'])]
+    public function show(Evenement $evenement): Response
+{
+    return $this->render('evenement/show.html.twig', [
+        'evenement' => $evenement,
+    ]);
+}
+
+    #[Route('/{id}/edit', name: 'evenement_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    {
+        $form = $this->createForm(EvenementType::class, $evenement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle image upload
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                    $evenement->setImage($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
+                }
+            }
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Événement modifié avec succès !');
+            return $this->redirectToRoute('evenement_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('evenement/edit.html.twig', [
+            'evenement' => $evenement,
+            'form'      => $form,
+        ]);
+    }
+
+    #[Route('/{id}/delete', name: 'evenement_delete', methods: ['POST'])]
+    public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($evenement);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('evenement_index', [], Response::HTTP_SEE_OTHER);
+    }
+<<<<<<< HEAD
+
+#[Route('/events/{id}/analyze', name: 'event_analyze')]
+public function analyze(Evenement $event, AIAnalyzerService $ai, EntityManagerInterface $em)
+{
+    $commentsText = [];
+
+    foreach ($event->getCommentaires() as $c) {
+        if ($c->getContenu()) {
+            $commentsText[] = $c->getContenu();
+        }
+    }
+
+    // DEBUG: show comment count
+    $this->addFlash('info', '🔍 ' . count($commentsText) . ' commentaire(s) trouvé(s) pour analyse.');
+
+    $result = $ai->analyzeComments($commentsText);
+
+    // DEBUG: show AI result
+    $this->addFlash('info', '🤖 Résultat IA: rating=' . $result['rating'] . ' | summary=' . $result['summary']);
+
+    // Only save if rating > 0 (meaning AI succeeded)
+    if ($result['rating'] > 0) {
+        $event->setAiRating($result['rating']);
+        $event->setAiPositive($result['positive']);
+        $event->setAiNeutral($result['neutral']);
+        $event->setAiNegative($result['negative']);
+        $event->setAiSummary($result['summary']);
+        $em->flush();
+        $this->addFlash('success', '✅ Analyse IA sauvegardée !');
+    } else {
+        $this->addFlash('error', '❌ Échec analyse IA: ' . $result['summary']);
+    }
+
+    return $this->redirectToRoute('evenement_index');
+}
+#[Route('/admin/events/analyze-all', name: 'events_analyze_all')]
+public function analyzeAll(EvenementRepository $repo, AIAnalyzerService $ai, EntityManagerInterface $em)
+{
+    $events = $repo->findAll();
+
+    foreach ($events as $event) {
+
+        $commentsText = [];
+
+        foreach ($event->getCommentaires() as $c) {
+            $commentsText[] = $c->getContenu();
+        }
+
+        if (!empty($commentsText)) {
+            $result = $ai->analyzeComments($commentsText);
+
+            $event->setAiRating($result['rating']);
+            $event->setAiPositive($result['positive']);
+            $event->setAiNeutral($result['neutral']);
+            $event->setAiNegative($result['negative']);
+            $event->setAiSummary($result['summary']);
+        }
+    }
+
+    $em->flush();
+
+    return $this->redirectToRoute('evenement_index');
+}
+=======
+>>>>>>> gdd
+}
