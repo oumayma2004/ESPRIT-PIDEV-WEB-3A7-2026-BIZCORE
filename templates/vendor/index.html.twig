@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Vendeurs{% endblock %}
+{% block page_title %}VENDEURS{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .vendor-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
+    .vendor-header h2 { font-size:18px; font-weight:700; color:#111827; }
+    .vendor-header .muted { font-size:13px; color:#6b7280; margin-top:4px; }
+    .btn-new { background:#20c997; color:#fff; padding:9px 18px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background .15s; border:none; }
+    .btn-new:hover { background:#1ab386; color:#fff; }
+    .vendor-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(310px, 1fr)); gap:18px; }
+    .vendor-card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; transition:box-shadow .15s, transform .15s; }
+    .vendor-card:hover { box-shadow:0 6px 18px rgba(0,0,0,.07); transform:translateY(-2px); }
+    .vendor-top { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .vendor-avatar { width:44px; height:44px; border-radius:50%; background:#20c997; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .vendor-name { font-size:15px; font-weight:700; color:#111827; }
+    .vendor-email { font-size:12px; color:#6b7280; }
+    .vendor-meta { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
+    .chip { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+    .chip-actif     { background:#d1fae5; color:#065f46; }
+    .chip-inactif   { background:#fee2e2; color:#991b1b; }
+    .chip-suspendu  { background:#fef3c7; color:#92400e; }
+    .chip-products  { background:#dbeafe; color:#1e40af; }
+    .chip-rating    { background:#fef3c7; color:#92400e; }
+    .vendor-info-row { font-size:13px; color:#374151; display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .vendor-info-row i { color:#9ca3af; width:14px; text-align:center; }
+    .vendor-actions { display:flex; gap:8px; margin-top:14px; padding-top:14px; border-top:1px solid #f3f4f6; }
+    .vendor-actions a, .vendor-actions button { flex:1; padding:8px; font-size:12px; font-weight:600; border-radius:6px; text-decoration:none; text-align:center; border:1px solid transparent; cursor:pointer; transition:all .15s; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+    .btn-view   { background:#f3f4f6; color:#374151; }
+    .btn-view:hover   { background:#e5e7eb; color:#111827; }
+    .btn-edit   { background:#dbeafe; color:#1e40af; }
+    .btn-edit:hover   { background:#bfdbfe; color:#1e3a8a; }
+    .btn-delete { background:#fee2e2; color:#991b1b; }
+    .btn-delete:hover { background:#fecaca; color:#7f1d1d; }
+    .empty-state { text-align:center; padding:60px 20px; color:#9ca3af; }
+    .empty-state i { font-size:42px; color:#d1d5db; margin-bottom:14px; }
+    .empty-state h3 { font-size:16px; color:#6b7280; margin-bottom:8px; }
+    .flash { padding:12px 16px; border-radius:8px; font-size:13px; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+    .flash-success { background:#d1fae5; color:#065f46; border:1px solid #a7f3d0; }
+    .flash-error   { background:#fee2e2; color:#991b1b; border:1px solid #fecaca; }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="vendor-header">
+    <div>
+        <h2>Liste des Vendeurs</h2>
+        <div class="muted">{{ rows|length }} vendeur{{ rows|length != 1 ? 's' : '' }} au total</div>
+    </div>
+    <a href="{{ path('vendor_new') }}" class="btn-new">
+        <i class="fas fa-plus"></i> Nouveau vendeur
+    </a>
+</div>
+
+{% for msg in app.flashes('success') %}
+    <div class="flash flash-success"><i class="fas fa-check-circle"></i> {{ msg }}</div>
+{% endfor %}
+{% for msg in app.flashes('error') %}
+    <div class="flash flash-error"><i class="fas fa-exclamation-circle"></i> {{ msg }}</div>
+{% endfor %}
+
+{% if rows is empty %}
+    <div class="empty-state">
+        <i class="fas fa-store-slash"></i>
+        <h3>Aucun vendeur enregistré</h3>
+        <p>Commencez par créer votre premier vendeur.</p>
+    </div>
+{% else %}
+    <div class="vendor-grid">
+        {% for row in rows %}
+            {% set vendor = row.vendor %}           {# ✅ corrigé : row[0] → row.vendor #}
+            {% set productCount = row.productCount ?? 0 %}
+            <div class="vendor-card">
+                <div class="vendor-top">
+                    <div class="vendor-avatar">{{ vendor.nom|first|upper }}</div>
+                    <div style="flex:1; min-width:0;">
+                        <div class="vendor-name">{{ vendor.nom }}</div>
+                        <div class="vendor-email">{{ vendor.email }}</div>
+                    </div>
+                </div>
+
+                <div class="vendor-meta">
+                    <span class="chip chip-{{ vendor.statut|lower }}">{{ vendor.statut|capitalize }}</span>
+                    <span class="chip chip-products">
+                        <i class="fas fa-box"></i> {{ productCount }} produit{{ productCount != 1 ? 's' : '' }}
+                    </span>
+                    {% if vendor.rating and vendor.rating > 0 %}
+                        <span class="chip chip-rating">
+                            <i class="fas fa-star"></i> {{ vendor.rating|number_format(1) }}
+                            {% if vendor.ratingCount %}({{ vendor.ratingCount }}){% endif %}
+                        </span>
+                    {% endif %}
+                </div>
+
+                {% if vendor.telephone %}
+                    <div class="vendor-info-row">
+                        <i class="fas fa-phone"></i> {{ vendor.telephone }}
+                    </div>
+                {% endif %}
+
+                <div class="vendor-actions">
+                    <a href="{{ path('vendor_show', {id: vendor.id}) }}" class="btn-view">
+                        <i class="fas fa-eye"></i> Voir
+                    </a>
+                    <a href="{{ path('vendor_edit', {id: vendor.id}) }}" class="btn-edit">
+                        <i class="fas fa-pen"></i> Modifier
+                    </a>
+                    <a href="{{ path('vendor_confirm_delete', {id: vendor.id}) }}" class="btn-delete">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

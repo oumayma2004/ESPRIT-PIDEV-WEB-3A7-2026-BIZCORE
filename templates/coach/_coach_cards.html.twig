@@ -1,0 +1,89 @@
+{% if coaches is defined and coaches is not empty %}
+    {% for coach in coaches %}
+    <div class="coach-card mb-3"
+         data-coach-id="{{ coach.id }}"
+         data-disponible="{{ coach.disponibilite == 'Disponible' ? '1' : '0' }}"
+         data-note="{{ coach.noteMoyenne ?? 0 }}"
+         style="background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s;"
+         onclick="selectCoach({{ coach.id }}, '{{ coach.prenom }} {{ coach.nom }}', '{{ coach.domaine }}', {{ coach.disponibilite == 'Disponible' ? 'true' : 'false' }})">
+
+        {# Avatar and Name #}
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: {% set colorIndex = loop.index % 5 %}{% if colorIndex == 0 %}#3b82f6{% elseif colorIndex == 4 %}#f59e0b{% elseif colorIndex == 3 %}#20c997{% elseif colorIndex == 2 %}#8b5cf6{% else %}#ec4899{% endif %}; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: 700;">
+                {{ coach.prenom|slice(0,1)|upper }}{{ coach.nom|slice(0,1)|upper }}
+            </div>
+            <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 14px; color: #111827;">
+                    {{ coach.prenom }} {{ coach.nom }}
+                </div>
+                {% if coach.domaine %}
+                <span class="badge-domain" style="font-size: 9px; padding: 2px 8px; margin-top: 4px; display: inline-block;">
+                    {{ coach.domaine }}
+                </span>
+                {% endif %}
+            </div>
+        </div>
+
+        {# Availability Badge #}
+        <div class="mb-2">
+            {% if coach.disponibilite == 'Disponible' %}
+                <span class="badge-disponible">✓ Disponible</span>
+            {% else %}
+                <span class="badge-indisponible">✗ Indisponible</span>
+            {% endif %}
+        </div>
+
+        {# Stats #}
+        <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">
+            <div><strong>Tarif:</strong> {{ coach.tarifHoraire }} DT/H</div>
+            <div><strong>Expérience:</strong> {{ coach.experienceAnnees }} ans</div>
+            <div><strong>Tél:</strong> {{ coach.numTel }}</div>
+        </div>
+
+        {# Star Rating #}
+        <div class="rating-component" data-coach-id="{{ coach.id }}" style="margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;" id="avg-stars-{{ coach.id }}">
+                {% if coach.noteMoyenne is not null and coach.noteMoyenne > 0 %}
+                    {% set avg = coach.noteMoyenne|number_format(1) %}
+                    {% set avgRound = coach.noteMoyenne|round(0, 'common') %}
+                    {% for i in 1..5 %}
+                        <i class="fas fa-star" style="color: {{ i <= avgRound ? '#f59e0b' : '#d1d5db' }}; font-size: 14px;"></i>
+                    {% endfor %}
+                    <span style="font-size:12px; color:#374151; margin-left:6px;">
+                        <strong>{{ avg }}</strong>/5
+                    </span>
+                {% else %}
+                    {% for i in 1..5 %}
+                        <i class="fas fa-star" style="color: #d1d5db; font-size: 14px;"></i>
+                    {% endfor %}
+                    <span style="font-size:12px; color:#9ca3af; margin-left:6px;">Pas d'évaluation encore</span>
+                {% endif %}
+            </div>
+
+            {% if is_granted('ROLE_USER') %}
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <div id="stars-{{ coach.id }}" class="star-rating" style="display: flex; gap: 4px; cursor: pointer;">
+                    {% for i in 1..5 %}
+                        <i class="fas fa-star" data-value="{{ i }}" style="color: #d1d5db; font-size: 14px; cursor: pointer; transition: color 0.2s;"></i>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        {# Action Button #}
+        <div class="d-flex gap-2">
+            <button class="btn btn-sm" style="background: #20c997; color: #fff; border: none; flex: 1;"
+                    onclick="event.stopPropagation(); selectCoach({{ coach.id }}, '{{ coach.prenom }} {{ coach.nom }}', '{{ coach.domaine }}', {{ coach.disponibilite == 'Disponible' ? 'true' : 'false' }})">
+                <i class="fas fa-calendar"></i> Disponibilité
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div style="text-align: center; padding: 40px; color: #9ca3af;">
+        <i class="fas fa-search fa-2x mb-2" style="display: block;"></i>
+        <div style="font-size: 14px; font-weight: 600;">Aucun coach trouvé</div>
+        <div style="font-size: 12px; margin-top: 4px;">Essayez d'ajuster vos filtres</div>
+    </div>
+{% endif %}

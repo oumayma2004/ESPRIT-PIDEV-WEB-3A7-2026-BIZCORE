@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes signalements — Bizcore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1e293b; }
+        .navbar { background:#fff; border-bottom:1px solid #e2e8f0; padding:0 40px; height:64px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+        .nav-brand { font-size:20px; font-weight:800; color:#0f172a; }
+        .nav-brand span { color:#22c55e; }
+        .nav-links a { font-size:14px; font-weight:500; color:#64748b; text-decoration:none; margin-left:28px; }
+        .nav-links a:hover,.nav-links a.active { color:#0f172a; }
+        .nav-cta { background:#22c55e; color:#fff !important; padding:8px 18px; border-radius:8px; font-weight:600 !important; }
+
+        .page { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+        .page-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:12px; }
+        .page-title { font-size:24px; font-weight:800; color:#0f172a; }
+        .page-subtitle { font-size:14px; color:#64748b; margin-top:4px; }
+        .back-link { display:inline-flex; align-items:center; gap:6px; color:#64748b; text-decoration:none; font-size:13px; font-weight:500; margin-bottom:20px; }
+        .back-link:hover { color:#22c55e; }
+
+        .flash { padding:12px 16px; border-radius:10px; font-size:13px; margin-bottom:18px; }
+        .flash-success { background:#dcfce7; border:1px solid #bbf7d0; color:#15803d; }
+        .flash-error   { background:#fee2e2; border:1px solid #fecaca; color:#dc2626; }
+        .flash-warning { background:#fef9c3; border:1px solid #fde047; color:#854d0e; }
+
+        /* Stats row */
+        .stats-row { display:flex; gap:12px; margin-bottom:28px; flex-wrap:wrap; }
+        .stat-chip { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 20px; display:flex; align-items:center; gap:10px; flex:1; min-width:140px; }
+        .stat-icon { font-size:22px; }
+        .stat-val  { font-size:22px; font-weight:800; color:#0f172a; line-height:1; }
+        .stat-lbl  { font-size:11px; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:.4px; }
+
+        /* Table */
+        .card { background:#fff; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+        .table-wrap { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; font-size:13px; }
+        th { text-align:left; padding:11px 16px; font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:.5px; border-bottom:1px solid #e2e8f0; background:#f8fafc; white-space:nowrap; }
+        td { padding:14px 16px; border-bottom:1px solid #f1f5f9; vertical-align:middle; color:#334155; }
+        tr:last-child td { border-bottom:none; }
+        tr:hover td { background:#f8fafc; }
+
+        .article-title { font-weight:600; color:#0f172a; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .article-title a { color:#0f172a; text-decoration:none; }
+        .article-title a:hover { color:#22c55e; }
+
+        .motif-badge { display:inline-block; background:#f1f5f9; color:#475569; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; }
+
+        .statut-badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:4px 11px; border-radius:20px; }
+        .statut-en_attente { background:#fef9c3; color:#854d0e; border:1px solid #fde047; }
+        .statut-traite     { background:#dcfce7; color:#15803d; border:1px solid #bbf7d0; }
+        .statut-rejete     { background:#fee2e2; color:#dc2626; border:1px solid #fecaca; }
+
+        .date-cell { font-size:12px; color:#94a3b8; white-space:nowrap; }
+
+        .actions { display:flex; gap:6px; flex-shrink:0; }
+        .btn-sm { display:inline-flex; align-items:center; gap:4px; padding:6px 12px; border-radius:7px; font-size:12px; font-weight:600; text-decoration:none; border:none; cursor:pointer; font-family:'Inter',sans-serif; transition:opacity .15s; }
+        .btn-view   { background:#f1f5f9; color:#475569; }
+        .btn-edit   { background:#dbeafe; color:#1d4ed8; }
+        .btn-delete { background:#fee2e2; color:#dc2626; }
+        .btn-sm:hover { opacity:.8; }
+        .btn-sm:disabled, .btn-sm.disabled { opacity:.4; cursor:not-allowed; pointer-events:none; }
+
+        .empty-state { text-align:center; padding:60px 24px; }
+        .empty-icon  { font-size:52px; margin-bottom:14px; }
+        .empty-title { font-size:18px; font-weight:700; color:#64748b; margin-bottom:8px; }
+        .empty-sub   { font-size:14px; color:#94a3b8; }
+
+        .btn-primary { display:inline-flex; align-items:center; gap:8px; background:#22c55e; color:#fff; padding:10px 22px; border-radius:10px; font-size:14px; font-weight:700; text-decoration:none; transition:background .15s; }
+        .btn-primary:hover { background:#16a34a; }
+
+        footer { background:#0f172a; color:#64748b; text-align:center; padding:24px; font-size:13px; margin-top:60px; }
+        footer span { color:#22c55e; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-brand">Biz<span>core</span></div>
+    <div class="nav-links">
+        <a href="#">Accueil</a>
+        <a href="{{ path('frontend_blog_index') }}">Blog</a>
+        <a href="{{ path('signalement_index') }}" class="active">Mes signalements</a>
+    </div>
+</nav>
+
+<div class="page">
+    <a href="{{ path('frontend_blog_index') }}" class="back-link">← Retour au blog</a>
+
+    <div class="page-header">
+        <div>
+            <div class="page-title">🚩 Mes signalements</div>
+            <div class="page-subtitle">Suivez l'état de vos signalements d'articles</div>
+        </div>
+    </div>
+
+    {% for msg in app.flashes('success') %}<div class="flash flash-success">✅ {{ msg }}</div>{% endfor %}
+    {% for msg in app.flashes('error') %}<div class="flash flash-error">❌ {{ msg }}</div>{% endfor %}
+    {% for msg in app.flashes('warning') %}<div class="flash flash-warning">⚠️ {{ msg }}</div>{% endfor %}
+
+    {# Stats #}
+    {% set nb_attente = signalements|filter(s => s.statut == 'en_attente')|length %}
+    {% set nb_traite  = signalements|filter(s => s.statut == 'traite')|length %}
+    {% set nb_rejete  = signalements|filter(s => s.statut == 'rejete')|length %}
+
+    <div class="stats-row">
+        <div class="stat-chip"><span class="stat-icon">📋</span><div><div class="stat-val">{{ signalements|length }}</div><div class="stat-lbl">Total</div></div></div>
+        <div class="stat-chip"><span class="stat-icon">⏳</span><div><div class="stat-val" style="color:#854d0e">{{ nb_attente }}</div><div class="stat-lbl">En attente</div></div></div>
+        <div class="stat-chip"><span class="stat-icon">✅</span><div><div class="stat-val" style="color:#15803d">{{ nb_traite }}</div><div class="stat-lbl">Traités</div></div></div>
+        <div class="stat-chip"><span class="stat-icon">❌</span><div><div class="stat-val" style="color:#dc2626">{{ nb_rejete }}</div><div class="stat-lbl">Rejetés</div></div></div>
+    </div>
+
+    <div class="card">
+        {% if signalements is empty %}
+            <div class="empty-state">
+                <div class="empty-icon">🚩</div>
+                <div class="empty-title">Aucun signalement</div>
+                <div class="empty-sub">Vous n'avez pas encore signalé d'article. Si vous trouvez du contenu inapproprié, utilisez le bouton "Signaler" sur la page de l'article.</div>
+            </div>
+        {% else %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Article</th>
+                            <th>Motif</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in signalements %}
+                        <tr>
+                            <td style="color:#94a3b8;font-size:12px">#{{ s.idSignalement }}</td>
+                            <td>
+                                <div class="article-title">
+                                    <a href="{{ path('frontend_blog_show', {id: s.idArticle}) }}">
+                                        {{ article_map[s.idArticle] ?? '(supprimé)' }}
+                                    </a>
+                                </div>
+                            </td>
+                            <td><span class="motif-badge">{{ s.motif|replace({'_': ' '})|capitalize }}</span></td>
+                            <td>
+                                <span class="statut-badge statut-{{ s.statut }}">
+                                    {% if s.statut == 'en_attente' %}⏳ En attente
+                                    {% elseif s.statut == 'traite' %}✅ Traité
+                                    {% else %}❌ Rejeté
+                                    {% endif %}
+                                </span>
+                            </td>
+                            <td class="date-cell">{{ s.dateSignalement|date('d/m/Y H:i') }}</td>
+                            <td>
+                                <div class="actions">
+                                    <a href="{{ path('signalement_show', {id: s.idSignalement}) }}" class="btn-sm btn-view">👁 Voir</a>
+                                    {% if s.enAttente %}
+                                        <a href="{{ path('signalement_edit', {id: s.idSignalement}) }}" class="btn-sm btn-edit">✏ Modifier</a>
+                                        <form method="post" action="{{ path('signalement_delete', {id: s.idSignalement}) }}" style="display:inline" onsubmit="return confirm('Retirer ce signalement ?')">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ s.idSignalement) }}">
+                                            <button type="submit" class="btn-sm btn-delete">🗑</button>
+                                        </form>
+                                    {% else %}
+                                        <span class="btn-sm btn-edit disabled">✏</span>
+                                        <span class="btn-sm btn-delete disabled">🗑</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<footer>© 2026 <span>Bizcore</span> — Tous droits réservés</footer>
+</body>
+</html>

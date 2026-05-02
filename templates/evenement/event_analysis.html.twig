@@ -1,0 +1,18 @@
+<h2>📊 AI Analysis - {{ event.title }}</h2>
+
+<div class="card p-4">
+    <h3>⭐ Rating: {{ analysis.rating }}/5</h3>
+
+    <p>😊 Positive: {{ analysis.positive }}%</p>
+    <p>😐 Neutral: {{ analysis.neutral }}%</p>
+    <p>😡 Negative: {{ analysis.negative }}%</p>
+
+    <hr>
+
+    <h4>🧾 Summary</h4>
+    <p>{{ analysis.summary }}</p>
+</div>
+
+<a href="{{ path('admin_events') }}" class="btn btn-secondary mt-3">
+    ⬅ Back
+</a>
