@@ -1,0 +1,1821 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* dashboard/index.html.twig */
+class __TwigTemplate_14245ed687ea4f055cc4c33305162c22 extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->blocks = [
+            'title' => [$this, 'block_title'],
+            'page_title' => [$this, 'block_page_title'],
+            'body' => [$this, 'block_body'],
+        ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "base.html.twig";
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $this->parent = $this->load("base.html.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 4
+        yield "  BizCore Dashboard
+";
+        yield from [];
+    }
+
+    // line 7
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_page_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 8
+        yield "  GESTION UTILISATEURS
+";
+        yield from [];
+    }
+
+    // line 11
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_body(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 12
+        yield "  <style>
+    :root {
+      --bg-page: #d1d1ff;
+      --bg-app: #ffffff;
+      --bg-card: #f6f7fb;
+      --text-main: #111827;
+      --text-soft: #667085;
+      --line: #e5e7ef;
+      --accent: #5b7cff;
+      --shadow: 0 26px 70px rgba(17, 24, 39, 0.14);
+    }
+    
+    .dashboard-shell *,
+    .dashboard-shell *::before,
+    .dashboard-shell *::after {
+      box-sizing: border-box;
+    }
+    .dashboard-shell a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .dashboard-shell {
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .dashboard-app {
+      width: 100%;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr) 350px;
+      overflow: hidden;
+    }
+    .dashboard-sidebar,
+    .dashboard-main,
+    .dashboard-rightbar {
+      padding: 20px;
+    }
+    .dashboard-main {
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+    }
+    .card {
+      background: var(--bg-app);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 10px 28px rgba(17, 24, 39, 0.04);
+    }
+    .card-pad {
+      padding: 18px;
+    }
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .brand strong {
+      display: block;
+      font-size: 22px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+    .topbar .title strong {
+      font-size: 20px;
+      display: block;
+    }
+    .topbar .title span {
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+    .clock {
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: #f2f4fb;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .kpi {
+      padding: 18px;
+      min-height: 118px;
+    }
+    .kpi .label {
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+    .kpi .value {
+      margin-top: 12px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    .kpi .sub {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+    .kpi .accent-line {
+      height: 4px;
+      border-radius: 999px;
+      background: #edf1f8;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+    .kpi .accent-line i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #25c18f, #51a9ff);
+    }
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .weekday {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+    .day {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      background: #f6f7fb;
+    }
+    .day.today {
+      border: 2px solid #5b7cff;
+      font-weight: bold;
+    }
+    .profile-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .profile-meta strong {
+      display: block;
+      font-size: 14px;
+    }
+    .profile-meta span {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #f6f7fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffb199, #ff6a88);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    .avatar span {
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .avatar-lg {
+      width: 72px;
+      height: 72px;
+    }
+    .avatar-lg span {
+      font-size: 28px;
+    }
+    .profile-menu-wrap {
+      position: relative;
+    }
+    .profile-menu {
+      position: absolute;
+      top: 45px;
+      right: 0;
+      width: 180px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .profile-menu a,
+    .profile-menu button {
+      width: 100%;
+      padding: 10px 12px;
+      border: none;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .profile-menu a:hover,
+    .profile-menu button:hover {
+      background: #f5f7ff;
+    }
+    .section-card {
+      padding: 14px;
+      border-radius: 20px;
+      background: var(--bg-app);
+      border: 1px solid var(--line);
+    }
+    .quick-icons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .quick-icon {
+      height: 65px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: #f4f6ff;
+      border: 1px solid var(--line);
+      transition: 0.2s ease;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+    .quick-icon:hover {
+      transform: translateY(-4px);
+      background: #eef2ff;
+      color: var(--text-main);
+    }
+    .quick-icon.active {
+      background: #5b7cff;
+      color: white;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .overview-kpi {
+      padding: 12px;
+      border-radius: 16px;
+      background: #fafbff;
+      border: 1px solid #e5e7ef;
+    }
+    .overview-kpi span {
+      display: block;
+      font-size: 11px;
+      color: #667085;
+      margin-bottom: 6px;
+    }
+    .overview-kpi strong {
+      font-size: 20px;
+    }
+    .overview-alerts {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .alert-box {
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .alert-box.warning {
+      background: #fff7e6;
+      color: #9a6700;
+      border: 1px solid #ffd88a;
+    }
+    .alert-box.danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    .alert-box.info {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 10000;
+    }
+    .modal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.45);
+      backdrop-filter: blur(3px);
+      z-index: 10000;
+    }
+    .modal-card {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(760px, calc(100% - 24px));
+      max-height: calc(100vh - 24px);
+      z-index: 10001;
+      background: #fff;
+      border-radius: 24px;
+      overflow: auto;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      border-bottom: 1px solid #e5e7ef;
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .modal-close {
+      border: 0;
+      background: #f4f6ff;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .profile-summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .profile-field {
+      padding: 10px 12px;
+      background: #fafbff;
+      border: 1px solid #e5e7ef;
+      border-radius: 14px;
+      margin-bottom: 10px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field.full {
+      grid-column: 1 / -1;
+    }
+    .field input,
+    .field select {
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid #d7ddf2;
+      outline: none;
+      background: #fff;
+    }
+    .field input:focus,
+    .field select:focus {
+      border-color: #5b7cff;
+      box-shadow: 0 0 0 3px rgba(91, 124, 255, 0.12);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      padding: 0 20px 20px;
+    }
+    .modal-footer {
+      border-top: 1px solid #e5e7ef;
+      padding-top: 16px;
+    }
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #5b7cff;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #eef2ff;
+      color: #111827;
+    }
+    .btn-danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .users-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .users-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .users-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 240px;
+    }
+    .users-search input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 13px;
+      background: #fff;
+    }
+    .users-search input:focus {
+      border-color: #5b7cff;
+      box-shadow: 0 0 0 3px rgba(91, 124, 255, 0.12);
+    }
+    .users-table {
+      width: 100%;
+      min-width: 1020px;
+      border-collapse: collapse;
+      font-size: 13px;
+      table-layout: fixed;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .users-table th,
+    .users-table td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+    }
+    .users-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef2ff;
+      font-size: 11px;
+    }
+    .pagination {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      border: 1px solid #d7ddf2;
+      background: #fff;
+      color: #111827;
+      padding: 8px 11px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.15s ease;
+    }
+    .page-btn:hover {
+      background: #f5f7ff;
+      transform: translateY(-1px);
+    }
+    .page-input {
+      width: 70px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .calendar-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #f6f7fb;
+      border: 1px solid var(--line);
+      color: var(--text-main);
+      padding: 0;
+      flex: 0 0 auto;
+    }
+    
+    .nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .nav-btn:hover {
+      background: #eef2ff;
+    }
+    
+    .quick-icons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .quick-icon {
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      background: #f4f6ff;
+      border: 1px solid var(--line);
+      transition: 0.2s ease;
+      font-size: 10px;
+      color: var(--text-soft);
+    }
+    
+    .quick-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .quick-icon:hover {
+      transform: translateY(-3px);
+      background: #eef2ff;
+      color: var(--text-main);
+    }
+    
+    .stats-vertical {
+      margin-top: 14px;
+    }
+    
+    .vertical-bars {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 14px;
+      height: 150px;
+      margin-top: 12px;
+    }
+    
+    .v-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      height: 100%;
+    }
+    
+    .v-bar {
+      width: 12px;
+      border-radius: 999px;
+      min-height: 8px;
+    }
+    
+    .v-bar.blue {
+      background: #5b7cff;
+    }
+    
+    .v-bar.green {
+      background: #25c18f;
+    }
+    
+    .v-bar.orange {
+      background: #ff9800;
+    }
+    
+    .v-bar.purple {
+      background: #8b5cf6;
+    }
+    
+    .v-item span {
+      font-size: 11px;
+      font-weight: 700;
+    }
+    
+    .v-item small {
+      font-size: 10px;
+      color: var(--text-soft);
+    }
+    
+    @media (max-width: 1280px) {
+      .dashboard-app {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-main {
+        border-left: 0;
+        border-right: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 720px) {
+      .dashboard-shell {
+        padding: 10px;
+      }
+      .dashboard-sidebar,
+      .dashboard-main,
+      .dashboard-rightbar {
+        padding: 14px;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  ";
+        // line 694
+        $context["auth"] = ($context["authUser"] ?? null);
+        // line 695
+        yield "  ";
+        $context["displayName"] = (((($tmp = ($context["auth"] ?? null)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? (Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "prenom", [], "any", false, false, false, 695) . " ") . CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "nom", [], "any", false, false, false, 695)))) : ("Guest"));
+        // line 696
+        yield "  ";
+        $context["displayRole"] = (((($context["auth"] ?? null) && CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "roleEntity", [], "any", false, false, false, 696))) ? (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "roleEntity", [], "any", false, false, false, 696), "nomRole", [], "any", false, false, false, 696)) : ("Visitor"));
+        // line 697
+        yield "  ";
+        $context["avatarLetter"] = (((($tmp = ($context["auth"] ?? null)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? (Twig\Extension\CoreExtension::upper($this->env->getCharset(), Twig\Extension\CoreExtension::first($this->env->getCharset(), ((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "prenom", [], "any", false, false, false, 697)) ? (CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "prenom", [], "any", false, false, false, 697)) : (CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "nom", [], "any", false, false, false, 697)))))) : ("G"));
+        // line 698
+        yield "  ";
+        $context["maxKpi"] = max([CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 698), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "products", [], "any", false, false, false, 698), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "orders", [], "any", false, false, false, 698), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "events", [], "any", false, false, false, 698), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "articles", [], "any", false, false, false, 698), 1]);
+        // line 699
+        yield "
+  <div class=\"dashboard-shell\">
+    <div class=\"dashboard-app\">
+      <aside class=\"dashboard-sidebar\">
+        <div class=\"brand\">
+          <strong>BiZCoRE</strong>
+        </div>
+
+        <section class=\"card card-pad\">
+          <div class=\"section-title\">Calendar</div>
+          <div class=\"calendar-header\">
+            <span>";
+        // line 710
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["currentMonthLabel"] ?? null), "html", null, true);
+        yield "</span>
+
+            <div class=\"calendar-nav\">
+              <a class=\"nav-btn prev\" href=\"";
+        // line 713
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard", ["month" => ($context["prevMonth"] ?? null), "year" => ($context["prevYear"] ?? null)]), "html", null, true);
+        yield "\" title=\"Previous month\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <path d=\"M15 18l-6-6 6-6\" />
+                </svg>
+              </a>
+
+              <a class=\"nav-btn today\" href=\"";
+        // line 719
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard");
+        yield "\" title=\"Current month\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"3\" />
+                  <path d=\"M8 3v4M16 3v4M3 10h18\" />
+                </svg>
+              </a>
+
+              <a class=\"nav-btn next\" href=\"";
+        // line 726
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard", ["month" => ($context["nextMonth"] ?? null), "year" => ($context["nextYear"] ?? null)]), "html", null, true);
+        yield "\" title=\"Next month\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <path d=\"M9 18l6-6-6-6\" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class=\"calendar-grid\">
+            ";
+        // line 735
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+        foreach ($context['_seq'] as $context["_key"] => $context["d"]) {
+            // line 736
+            yield "              <div class=\"weekday\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["d"], "html", null, true);
+            yield "</div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['d'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 738
+        yield "
+            ";
+        // line 739
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(range(1, (($context["firstDayOfMonth"] ?? null) - 1)));
+        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+            // line 740
+            yield "              <div></div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 742
+        yield "
+            ";
+        // line 743
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(range(1, ($context["daysInMonth"] ?? null)));
+        foreach ($context['_seq'] as $context["_key"] => $context["day"]) {
+            // line 744
+            yield "              ";
+            $context["isToday"] = ((($context["day"] == CoreExtension::getAttribute($this->env, $this->source, $this->extensions['Twig\Extension\CoreExtension']->convertDate(), "format", ["j"], "method", false, false, false, 744)) && (($context["month"] ?? null) == CoreExtension::getAttribute($this->env, $this->source, $this->extensions['Twig\Extension\CoreExtension']->convertDate(), "format", ["n"], "method", false, false, false, 744))) && (($context["year"] ?? null) == CoreExtension::getAttribute($this->env, $this->source, $this->extensions['Twig\Extension\CoreExtension']->convertDate(), "format", ["Y"], "method", false, false, false, 744)));
+            // line 745
+            yield "              <div class=\"day ";
+            yield (((($tmp = ($context["isToday"] ?? null)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ("today") : (""));
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["day"], "html", null, true);
+            yield "</div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['day'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 747
+        yield "          </div>
+        </section>
+
+        <section class=\"card card-pad\" style=\"margin-top:16px;\">
+          <div class=\"section-title\">Overview</div>
+          <div class=\"overview-grid\">
+            <div class=\"overview-kpi\">
+              <span>Total</span>
+              <strong>";
+        // line 755
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 755), "html", null, true);
+        yield "</strong>
+            </div>
+            <div class=\"overview-kpi\">
+              <span>Active</span>
+              <strong>";
+        // line 759
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "active_users", [], "any", false, false, false, 759), "html", null, true);
+        yield "</strong>
+            </div>
+            <div class=\"overview-kpi\">
+              <span>New 7d</span>
+              <strong>";
+        // line 763
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "recent_users", [], "any", false, false, false, 763), "html", null, true);
+        yield "</strong>
+            </div>
+            <div class=\"overview-kpi\">
+              <span>Dormant</span>
+              <strong>";
+        // line 767
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "dormant_users", [], "any", false, false, false, 767), "html", null, true);
+        yield "</strong>
+            </div>
+          </div>
+
+          <div class=\"overview-alerts\">
+            ";
+        // line 772
+        if ((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "without_role", [], "any", false, false, false, 772) > 0)) {
+            // line 773
+            yield "              <div class=\"alert-box warning\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "without_role", [], "any", false, false, false, 773), "html", null, true);
+            yield "
+                user(s) without role</div>
+            ";
+        }
+        // line 776
+        yield "            ";
+        if ((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "incomplete_profiles", [], "any", false, false, false, 776) > 0)) {
+            // line 777
+            yield "              <div class=\"alert-box danger\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "incomplete_profiles", [], "any", false, false, false, 777), "html", null, true);
+            yield "
+                incomplete profile(s)</div>
+            ";
+        }
+        // line 780
+        yield "            ";
+        if ((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "dormant_users", [], "any", false, false, false, 780) > 0)) {
+            // line 781
+            yield "              <div class=\"alert-box info\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "dormant_users", [], "any", false, false, false, 781), "html", null, true);
+            yield "
+                dormant account(s)</div>
+            ";
+        }
+        // line 784
+        yield "          </div>
+        </section>
+      </aside>
+
+      <main class=\"dashboard-main\">
+        <div class=\"topbar card\">
+          <div class=\"title\">
+            <strong>Dashboard</strong>
+            <span>
+              Welcome back,
+              ";
+        // line 794
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["displayName"] ?? null), "html", null, true);
+        yield "
+            </span>
+          </div>
+          <div class=\"clock\" id=\"liveClock\">00:00:00</div>
+        </div>
+
+        <section class=\"kpi-grid\">
+          <div class=\"card kpi\">
+            <div class=\"label\">Total users</div>
+            <div class=\"value\">";
+        // line 803
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 803), "html", null, true);
+        yield "</div>
+            <div class=\"sub\">Registered accounts</div>
+            <div class=\"accent-line\">
+              <i style=\"width: ";
+        // line 806
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 806) / ($context["maxKpi"] ?? null)) * 100), "html", null, true);
+        yield "%\"></i>
+            </div>
+          </div>
+          <div class=\"card kpi\">
+            <div class=\"label\">Products</div>
+            <div class=\"value\">";
+        // line 811
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "products", [], "any", false, false, false, 811), "html", null, true);
+        yield "</div>
+            <div class=\"sub\">Catalog items</div>
+            <div class=\"accent-line\">
+              <i style=\"width: ";
+        // line 814
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "products", [], "any", false, false, false, 814) / ($context["maxKpi"] ?? null)) * 100), "html", null, true);
+        yield "%\"></i>
+            </div>
+          </div>
+          <div class=\"card kpi\">
+            <div class=\"label\">Orders</div>
+            <div class=\"value\">";
+        // line 819
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "orders", [], "any", false, false, false, 819), "html", null, true);
+        yield "</div>
+            <div class=\"sub\">Sales activity</div>
+            <div class=\"accent-line\">
+              <i style=\"width: ";
+        // line 822
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "orders", [], "any", false, false, false, 822) / ($context["maxKpi"] ?? null)) * 100), "html", null, true);
+        yield "%\"></i>
+            </div>
+          </div>
+          <div class=\"card kpi\">
+            <div class=\"label\">Events</div>
+            <div class=\"value\">";
+        // line 827
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "events", [], "any", false, false, false, 827), "html", null, true);
+        yield "</div>
+            <div class=\"sub\">Upcoming sessions</div>
+            <div class=\"accent-line\">
+              <i style=\"width: ";
+        // line 830
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "events", [], "any", false, false, false, 830) / ($context["maxKpi"] ?? null)) * 100), "html", null, true);
+        yield "%\"></i>
+            </div>
+          </div>
+          <div class=\"card kpi\">
+            <div class=\"label\">Articles</div>
+            <div class=\"value\">";
+        // line 835
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "articles", [], "any", false, false, false, 835), "html", null, true);
+        yield "</div>
+            <div class=\"sub\">Blog posts</div>
+            <div class=\"accent-line\">
+              <i style=\"width: ";
+        // line 838
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "articles", [], "any", false, false, false, 838) / ($context["maxKpi"] ?? null)) * 100), "html", null, true);
+        yield "%\"></i>
+            </div>
+          </div>
+        </section>
+
+        <div id=\"dynamicContent\" class=\"card\" style=\"padding:20px; margin-top:16px;\"></div>
+      </main>
+
+      <aside class=\"dashboard-rightbar\">
+        <div class=\"card\" style=\"padding:18px;\">
+          <div style=\"display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;\">
+            <div class=\"profile-head\">
+              <div class=\"avatar\">
+                <span>";
+        // line 851
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["avatarLetter"] ?? null), "html", null, true);
+        yield "</span>
+              </div>
+              <div class=\"profile-meta\">
+                <strong>";
+        // line 854
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["displayName"] ?? null), "html", null, true);
+        yield "</strong>
+                <span>";
+        // line 855
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["displayRole"] ?? null), "html", null, true);
+        yield "</span>
+              </div>
+            </div>
+
+            <div class=\"profile-menu-wrap\">
+              <button class=\"icon-btn\" id=\"menuBtn\">☰</button>
+              <div class=\"profile-menu\" id=\"menu\">
+                <a href=\"#\" onclick=\"openProfileModal(); return false;\">
+                  Profile
+                  <span>›</span>
+                </a>
+                <a href=\"";
+        // line 866
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+        yield "\">
+                  Logout
+                  <span>↩</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class=\"section-card\" style=\"margin-top:14px;\">
+            <div class=\"section-title\">
+              <strong>Shortcuts</strong>
+            </div>
+
+            <div class=\"quick-icons\">
+              <a href=\"#\" class=\"quick-icon\" onclick=\"toggleView('users'); return false;\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <circle cx=\"12\" cy=\"7\" r=\"4\" />
+                  <path d=\"M4 20c1.8-3.5 5-5 8-5s6.2 1.5 8 5\" />
+                </svg>
+                <span>Users</span>
+              </a>
+
+              <a href=\"#\" class=\"quick-icon\" onclick=\"toggleView('products'); return false;\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <path d=\"M4 7h16v13H4z\" />
+                  <path d=\"M8 7V5a4 4 0 0 1 8 0v2\" />
+                </svg>
+                <span>Products</span>
+              </a>
+
+              <a href=\"#\" class=\"quick-icon\" onclick=\"toggleView('orders'); return false;\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"3\" />
+                  <path d=\"M8 9h8M8 13h5\" />
+                </svg>
+                <span>Orders</span>
+              </a>
+
+              <a href=\"/evenement/\" class=\"quick-icon\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"3\" />
+                  <path d=\"M8 3v4M16 3v4M3 10h18\" />
+                </svg>
+                <span>Events</span>
+              </a>
+
+              <a href=\"#\" class=\"quick-icon\" onclick=\"toggleView('article'); return false;\">
+                <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <path d=\"M4 4h16v16H4z\" />
+                  <path d=\"M8 8h8M8 12h8M8 16h5\" />
+                </svg>
+                <span>Article</span>
+              </a>
+            </div>
+          </div>
+
+          <div class=\"section-card\" style=\"margin-top:14px;\">
+            <a href=\"";
+        // line 923
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_report");
+        yield "\" target=\"_blank\" class=\"btn-primary\" style=\"width:100%; gap:8px;\">
+              <svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"width:16px;height:16px;\">
+                <path d=\"M6 2h9l5 5v15H6z\" />
+                <path d=\"M14 2v6h6\" />
+                <path d=\"M8 13h8M8 17h8M8 9h2\" />
+              </svg>Report PDF
+            </a>
+          </div>
+
+          <div class=\"section-card stats-vertical\" style=\"margin-top:14px;\">
+            <div class=\"section-title\">
+              <strong>Statistics</strong>
+            </div>
+
+            ";
+        // line 937
+        $context["maxStat"] = max([CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 937), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "products", [], "any", false, false, false, 937), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "orders", [], "any", false, false, false, 937), CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "events", [], "any", false, false, false, 937), 1]);
+        // line 938
+        yield "
+            <div class=\"vertical-bars\">
+              <div class=\"v-item\">
+                <div class=\"v-bar blue\" style=\"height: ";
+        // line 941
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 941) / ($context["maxStat"] ?? null)) * 120), "html", null, true);
+        yield "px\"></div>
+                <span>";
+        // line 942
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "users", [], "any", false, false, false, 942), "html", null, true);
+        yield "</span>
+                <small>Users</small>
+              </div>
+
+              <div class=\"v-item\">
+                <div class=\"v-bar green\" style=\"height: ";
+        // line 947
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "products", [], "any", false, false, false, 947) / ($context["maxStat"] ?? null)) * 120), "html", null, true);
+        yield "px\"></div>
+                <span>";
+        // line 948
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "products", [], "any", false, false, false, 948), "html", null, true);
+        yield "</span>
+                <small>Products</small>
+              </div>
+
+              <div class=\"v-item\">
+                <div class=\"v-bar orange\" style=\"height: ";
+        // line 953
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "orders", [], "any", false, false, false, 953) / ($context["maxStat"] ?? null)) * 120), "html", null, true);
+        yield "px\"></div>
+                <span>";
+        // line 954
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "orders", [], "any", false, false, false, 954), "html", null, true);
+        yield "</span>
+                <small>Orders</small>
+              </div>
+
+              <div class=\"v-item\">
+                <div class=\"v-bar purple\" style=\"height: ";
+        // line 959
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "events", [], "any", false, false, false, 959) / ($context["maxStat"] ?? null)) * 120), "html", null, true);
+        yield "px\"></div>
+                <span>";
+        // line 960
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["stats"] ?? null), "events", [], "any", false, false, false, 960), "html", null, true);
+        yield "</span>
+                <small>Events</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id=\"profileModal\" class=\"modal\">
+    <div class=\"modal-backdrop\" onclick=\"closeProfileModal()\"></div>
+
+    <div class=\"modal-card\">
+      <div class=\"modal-header\">
+        <h3>My Profile</h3>
+        <button type=\"button\" class=\"modal-close\" onclick=\"closeProfileModal()\">×</button>
+      </div>
+
+      <div class=\"modal-body\">
+        <div class=\"profile-summary\">
+          <div class=\"avatar avatar-lg\">
+            <span>";
+        // line 982
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["avatarLetter"] ?? null), "html", null, true);
+        yield "</span>
+          </div>
+          <div>
+            <div style=\"font-weight:800; font-size:18px;\">";
+        // line 985
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["displayName"] ?? null), "html", null, true);
+        yield "</div>
+            <div style=\"color:#667085;\">";
+        // line 986
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["displayRole"] ?? null), "html", null, true);
+        yield "</div>
+          </div>
+        </div>
+
+        <div id=\"profileViewBox\">
+          <div class=\"profile-field\">
+            <strong>Email:</strong>
+            ";
+        // line 993
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "email", [], "any", true, true, false, 993) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "email", [], "any", false, false, false, 993)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "email", [], "any", false, false, false, 993), "html", null, true)) : ("-"));
+        yield "
+          </div>
+          <div class=\"profile-field\">
+            <strong>Phone:</strong>
+            ";
+        // line 997
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "telephone", [], "any", true, true, false, 997) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "telephone", [], "any", false, false, false, 997)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "telephone", [], "any", false, false, false, 997), "html", null, true)) : ("-"));
+        yield "
+          </div>
+          <div class=\"profile-field\">
+            <strong>Address:</strong>
+            ";
+        // line 1001
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "adresse", [], "any", true, true, false, 1001) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "adresse", [], "any", false, false, false, 1001)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "adresse", [], "any", false, false, false, 1001), "html", null, true)) : ("-"));
+        yield "
+          </div>
+          <div class=\"profile-field\">
+            <strong>Status:</strong>
+            ";
+        // line 1005
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "statut", [], "any", true, true, false, 1005) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "statut", [], "any", false, false, false, 1005)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "statut", [], "any", false, false, false, 1005), "html", null, true)) : ("-"));
+        yield "
+          </div>
+        </div>
+
+        <form id=\"profileEditForm\" method=\"POST\" action=\"";
+        // line 1009
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("profile_update");
+        yield "\" style=\"display:none;\">
+          <div class=\"form-grid\">
+            <div class=\"field\">
+              <label>First name</label>
+              <input type=\"text\" name=\"prenom\" value=\"";
+        // line 1013
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "prenom", [], "any", true, true, false, 1013) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "prenom", [], "any", false, false, false, 1013)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "prenom", [], "any", false, false, false, 1013), "html", null, true)) : (""));
+        yield "\" required minlength=\"2\" maxlength=\"50\" />
+            </div>
+
+            <div class=\"field\">
+              <label>Last name</label>
+              <input type=\"text\" name=\"nom\" value=\"";
+        // line 1018
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "nom", [], "any", true, true, false, 1018) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "nom", [], "any", false, false, false, 1018)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "nom", [], "any", false, false, false, 1018), "html", null, true)) : (""));
+        yield "\" required minlength=\"2\" maxlength=\"50\" />
+            </div>
+
+            <div class=\"field full\">
+              <label>Email</label>
+              <input type=\"email\" name=\"email\" value=\"";
+        // line 1023
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "email", [], "any", true, true, false, 1023) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "email", [], "any", false, false, false, 1023)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "email", [], "any", false, false, false, 1023), "html", null, true)) : (""));
+        yield "\" required maxlength=\"100\" />
+            </div>
+
+            <div class=\"field\">
+              <label>Phone</label>
+              <input type=\"tel\" name=\"telephone\" value=\"";
+        // line 1028
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "telephone", [], "any", true, true, false, 1028) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "telephone", [], "any", false, false, false, 1028)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "telephone", [], "any", false, false, false, 1028), "html", null, true)) : (""));
+        yield "\" maxlength=\"20\" inputmode=\"tel\" autocomplete=\"tel\" />
+            </div>
+
+            <div class=\"field full\">
+              <label>Address</label>
+              <input type=\"text\" name=\"adresse\" value=\"";
+        // line 1033
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "adresse", [], "any", true, true, false, 1033) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "adresse", [], "any", false, false, false, 1033)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["auth"] ?? null), "adresse", [], "any", false, false, false, 1033), "html", null, true)) : (""));
+        yield "\" maxlength=\"255\" autocomplete=\"street-address\" />
+            </div>
+
+            <div class=\"field full\">
+              <label>Current password</label>
+              <input type=\"password\" name=\"current_password\" minlength=\"6\" autocomplete=\"current-password\" />
+            </div>
+
+            <div class=\"field\">
+              <label>New password</label>
+              <input type=\"password\" name=\"new_password\" minlength=\"8\" autocomplete=\"new-password\" />
+            </div>
+
+            <div class=\"field\">
+              <label>Confirm password</label>
+              <input type=\"password\" name=\"confirm_password\" minlength=\"8\" autocomplete=\"new-password\" />
+            </div>
+          </div>
+
+          <div class=\"field full\">
+            <label>Role</label>
+            <input type=\"text\" value=\"";
+        // line 1054
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["displayRole"] ?? null), "html", null, true);
+        yield "\" readonly />
+          </div>
+
+          <div class=\"modal-actions\" style=\"padding:18px 0 0; justify-content:flex-end;\">
+            <button type=\"submit\" class=\"btn-primary\">Save changes</button>
+          </div>
+        </form>
+      </div>
+
+      <div class=\"modal-actions modal-footer\">
+        <button type=\"button\" class=\"btn-secondary\" id=\"profileEditBtn\" onclick=\"toggleProfileEdit()\">Edit</button>
+        <a class=\"btn-danger\" href=\"";
+        // line 1065
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+        yield "\">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LOAD_URL = \"";
+        // line 1071
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_load");
+        yield "\"
+    const liveClock = document.getElementById('liveClock')
+    let currentView = null
+    let currentSearch = ''
+    let currentSort = 'id'
+    let currentDir = 'ASC'
+    
+    function updateClock() {
+      const now = new Date()
+      liveClock.textContent = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      })
+    }
+    
+    updateClock()
+    setInterval(updateClock, 1000)
+    
+    function initMenu() {
+      const btn = document.getElementById('menuBtn')
+      const menu = document.getElementById('menu')
+    
+      if (!btn || !menu) return
+    
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation()
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block'
+      })
+    
+      document.addEventListener('click', () => {
+        menu.style.display = 'none'
+      })
+    }
+    
+    function loadView(view, page = 1, search = '', sort = currentSort, dir = currentDir) {
+      const container = document.getElementById('dynamicContent')
+      currentSearch = search ?? ''
+      currentSort = sort ?? 'id'
+      currentDir = dir ?? 'ASC'
+    
+      fetch(`\${LOAD_URL}?view=\${encodeURIComponent(view)}&page=\${encodeURIComponent(page)}&search=\${encodeURIComponent(currentSearch)}&sort=\${encodeURIComponent(currentSort)}&dir=\${encodeURIComponent(currentDir)}`)
+        .then((res) => {
+          if (res.status === 401) {
+            window.location.href = \"";
+        // line 1115
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+        yield "\"
+            return null
+          }
+          return res.text()
+        })
+        .then((html) => {
+          if (html === null) return
+          container.innerHTML = html
+          container.style.display = 'block'
+          currentView = view
+        })
+        .catch(() => {
+          container.innerHTML = '<p style=\"padding:12px; color:#b91c1c;\">Failed to load content.</p>'
+          container.style.display = 'block'
+        })
+    }
+    
+    function toggleView(view) {
+      const container = document.getElementById('dynamicContent')
+    
+      if (currentView === view && container.style.display === 'block') {
+        container.innerHTML = ''
+        container.style.display = 'none'
+        currentView = null
+        return
+      }
+    
+      if (view === 'users') {
+        loadView('users', 1, currentSearch, currentSort, currentDir)
+      } else {
+        loadView(view)
+      }
+    }
+    
+    function submitUsersSearch(form) {
+      const search = form.search.value.trim()
+      loadView('users', 1, search, currentSort, currentDir)
+      return false
+    }
+    
+    function goToUsersPage(page) {
+      const safePage = Math.max(1, parseInt(page, 10) || 1)
+      loadView('users', safePage, currentSearch, currentSort, currentDir)
+    }
+    
+    function toggleSort(sortKey) {
+      const nextDir = currentSort === sortKey && currentDir === 'ASC' ? 'DESC' : 'ASC'
+      loadView('users', 1, currentSearch, sortKey, nextDir)
+    }
+    
+    function openProfileModal() {
+      document.getElementById('profileModal').classList.add('open')
+      document.getElementById('profileViewBox').style.display = 'block'
+      document.getElementById('profileEditForm').style.display = 'none'
+      document.getElementById('profileEditBtn').textContent = 'Edit'
+    }
+    
+    function closeProfileModal() {
+      document.getElementById('profileModal').classList.remove('open')
+    }
+    
+    function toggleProfileEdit() {
+      const view = document.getElementById('profileViewBox')
+      const form = document.getElementById('profileEditForm')
+      const btn = document.getElementById('profileEditBtn')
+      const editing = form.style.display === 'block'
+    
+      form.style.display = editing ? 'none' : 'block'
+      view.style.display = editing ? 'block' : 'none'
+      btn.textContent = editing ? 'Edit' : 'Back'
+    }
+    
+    function openUserCreateModal() {
+      const modal = document.getElementById('userModal')
+      const form = document.getElementById('userForm')
+      document.getElementById('userModalTitle').textContent = 'Add user'
+      form.action = \"";
+        // line 1191
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_store");
+        yield "\"
+      form.reset()
+      document.getElementById('user_password').required = true
+      modal.classList.add('open')
+    }
+    
+    function openUserEditModal(user) {
+      const modal = document.getElementById('userModal')
+      const form = document.getElementById('userForm')
+      document.getElementById('userModalTitle').textContent = 'Edit user'
+      form.action = \"";
+        // line 1201
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_update");
+        yield "\"
+    
+      document.getElementById('user_id').value = user.id_user || ''
+      document.getElementById('user_prenom').value = user.prenom || ''
+      document.getElementById('user_nom').value = user.nom || ''
+      document.getElementById('user_email').value = user.email || ''
+      document.getElementById('user_telephone').value = user.telephone || ''
+      document.getElementById('user_adresse').value = user.adresse || ''
+      document.getElementById('user_statut').value = user.statut || 'actif'
+      document.getElementById('user_role').value = user.id_role || ''
+      document.getElementById('user_password').required = false
+      document.getElementById('user_password').value = ''
+    
+      modal.classList.add('open')
+    }
+    
+    function closeUserModal() {
+      document.getElementById('userModal').classList.remove('open')
+    }
+    
+    function deleteUser(id) {
+      if (!confirm('Delete this user?')) return
+      window.location.href = \"";
+        // line 1223
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_delete", ["id" => 0]);
+        yield "\".replace('/0', '/' + id)
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      initMenu()
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('view')) toggleView(params.get('view'))
+    
+      const container = document.getElementById('dynamicContent')
+    
+      container.addEventListener('click', (e) => {
+        const sortBtn = e.target.closest('[data-sort]')
+        if (sortBtn) {
+          e.preventDefault()
+          toggleSort(sortBtn.dataset.sort)
+          return
+        }
+    
+        const btn = e.target.closest('[data-page]')
+        if (!btn) return
+    
+        e.preventDefault()
+        goToUsersPage(btn.dataset.page)
+      })
+    
+      container.addEventListener('submit', (e) => {
+        const form = e.target
+    
+        if (form.classList.contains('users-search-form')) {
+          e.preventDefault()
+          submitUsersSearch(form)
+          return
+        }
+    
+        if (form.classList.contains('users-page-form')) {
+          e.preventDefault()
+          const input = form.querySelector('input[name=\"page\"]')
+          goToUsersPage(input ? input.value : 1)
+        }
+      })
+    })
+  </script>
+
+  <div id=\"userModal\" class=\"modal\">
+    <div class=\"modal-backdrop\" onclick=\"closeUserModal()\"></div>
+
+    <div class=\"modal-card\">
+      <div class=\"modal-header\">
+        <h3 id=\"userModalTitle\">Add user</h3>
+        <button type=\"button\" class=\"modal-close\" onclick=\"closeUserModal()\">×</button>
+      </div>
+
+      <div class=\"modal-body\">
+        <form id=\"userForm\" method=\"POST\" action=\"";
+        // line 1276
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_store");
+        yield "\">
+          <input type=\"hidden\" name=\"id_user\" id=\"user_id\" />
+
+          <div class=\"form-grid\">
+            <div class=\"field\">
+              <label>First name</label>
+              <input type=\"text\" name=\"prenom\" id=\"user_prenom\" required minlength=\"2\" maxlength=\"50\" />
+            </div>
+            <div class=\"field\">
+              <label>Last name</label>
+              <input type=\"text\" name=\"nom\" id=\"user_nom\" required minlength=\"2\" maxlength=\"50\" />
+            </div>
+            <div class=\"field full\">
+              <label>Email</label>
+              <input type=\"email\" name=\"email\" id=\"user_email\" required maxlength=\"100\" />
+            </div>
+            <div class=\"field\">
+              <label>Password</label>
+              <input type=\"password\" name=\"password\" id=\"user_password\" minlength=\"8\" maxlength=\"100\" />
+            </div>
+            <div class=\"field\">
+              <label>Phone</label>
+              <input type=\"tel\" name=\"telephone\" id=\"user_telephone\" maxlength=\"20\" inputmode=\"tel\" autocomplete=\"tel\" placeholder=\"+216 00 000 000\" />
+            </div>
+            <div class=\"field full\">
+              <label>Address</label>
+              <input type=\"text\" name=\"adresse\" id=\"user_adresse\" maxlength=\"255\" autocomplete=\"street-address\" placeholder=\"Street, city, country\" />
+            </div>
+            <div class=\"field full\">
+              <label>Status</label>
+              <input type=\"text\" name=\"statut\" id=\"user_statut\" maxlength=\"20\" value=\"actif\" />
+            </div>
+            <div class=\"field full\">
+              <label>Role</label>
+              <select name=\"id_role\" id=\"user_role\">
+                <option value=\"\">No role</option>
+                ";
+        // line 1312
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((((array_key_exists("roles", $context) &&  !(null === $context["roles"]))) ? ($context["roles"]) : ([])));
+        foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
+            // line 1313
+            yield "                  <option value=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["role"], "id_role", [], "any", false, false, false, 1313), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["role"], "nom_role", [], "any", false, false, false, 1313), "html", null, true);
+            yield "</option>
+                ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['role'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 1315
+        yield "              </select>
+            </div>
+          </div>
+
+          <div class=\"modal-actions\" style=\"padding:0; margin-top:16px;\">
+            <button type=\"submit\" class=\"btn-primary\">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id=\"aiChatLauncher\" style=\"position:fixed; right:22px; bottom:22px; z-index:20000;\">
+    <button id=\"aiChatButton\" type=\"button\" style=\"
+        width:64px;
+        height:64px;
+        border:0;
+        border-radius:50%;
+        background:#5b7cff;
+        color:#fff;
+        box-shadow:0 18px 40px rgba(91,124,255,.35);
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:26px;
+    \">🤖</button>
+
+    <div id=\"aiChatBox\" style=\"
+        display:none;
+        position:absolute;
+        right:0;
+        bottom:78px;
+        width:320px;
+        height:420px;
+        background:#fff;
+        border:1px solid #e5e7ef;
+        border-radius:22px;
+        box-shadow:0 24px 70px rgba(0,0,0,.18);
+        overflow:hidden;
+        flex-direction:column;
+    \">
+      <div style=\"padding:14px 16px; background:#5b7cff; color:#fff; font-weight:700; display:flex; justify-content:space-between; align-items:center;\">
+        <span>BizCore Assistant</span>
+        <button type=\"button\" id=\"aiChatClose\" style=\"border:0; background:transparent; color:#fff; font-size:18px; cursor:pointer;\">×</button>
+      </div>
+
+      <div id=\"aiChatMessages\" style=\"flex:1; padding:14px; overflow:auto; background:#f8f9ff;\"></div>
+
+      <form id=\"aiChatForm\" style=\"display:flex; gap:8px; padding:12px; border-top:1px solid #e5e7ef;\">
+        <input id=\"aiChatInput\" type=\"text\" placeholder=\"Ask about users, stats, alerts...\" style=\"
+                flex:1;
+                border:1px solid #d7ddf2;
+                border-radius:12px;
+                padding:10px 12px;
+                outline:none;
+            \" />
+        <button type=\"submit\" style=\"
+                border:0;
+                border-radius:12px;
+                background:#5b7cff;
+                color:#fff;
+                padding:10px 14px;
+                font-weight:700;
+                cursor:pointer;
+            \">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const aiChatButton = document.getElementById('aiChatButton')
+    const aiChatBox = document.getElementById('aiChatBox')
+    const aiChatClose = document.getElementById('aiChatClose')
+    const aiChatForm = document.getElementById('aiChatForm')
+    const aiChatInput = document.getElementById('aiChatInput')
+    const aiChatMessages = document.getElementById('aiChatMessages')
+    
+    const AI_URL = \"";
+        // line 1393
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_assistant");
+        yield "\"
+    
+    function addMessage(text, role) {
+      const bubble = document.createElement('div')
+      bubble.style.maxWidth = '85%'
+      bubble.style.marginBottom = '10px'
+      bubble.style.padding = '10px 12px'
+      bubble.style.borderRadius = '14px'
+      bubble.style.whiteSpace = 'pre-wrap'
+      bubble.style.fontSize = '13px'
+    
+      if (role === 'user') {
+        bubble.style.marginLeft = 'auto'
+        bubble.style.background = '#5b7cff'
+        bubble.style.color = '#fff'
+      } else {
+        bubble.style.marginRight = 'auto'
+        bubble.style.background = '#fff'
+        bubble.style.border = '1px solid #e5e7ef'
+        bubble.style.color = '#111827'
+      }
+    
+      bubble.textContent = text
+      aiChatMessages.appendChild(bubble)
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight
+    }
+    
+    aiChatButton.addEventListener('click', () => {
+      aiChatBox.style.display = aiChatBox.style.display === 'none' ? 'flex' : 'none'
+      if (aiChatBox.style.display === 'flex' && aiChatMessages.childElementCount === 0) {
+        addMessage('Hello 👋 I can help you read dashboard stats, suggest admin actions, or explain user activity.', 'bot')
+      }
+    })
+    
+    aiChatClose.addEventListener('click', () => {
+      aiChatBox.style.display = 'none'
+    })
+    
+    aiChatForm.addEventListener('submit', async (e) => {
+      e.preventDefault()
+    
+      const message = aiChatInput.value.trim()
+      if (!message) return
+    
+      addMessage(message, 'user')
+      aiChatInput.value = ''
+    
+      addMessage('Thinking...', 'bot')
+      const typingBubble = aiChatMessages.lastElementChild
+    
+      try {
+        const response = await fetch(AI_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({ message })
+        })
+    
+        const data = await response.json()
+        typingBubble.remove()
+    
+        if (!response.ok) {
+          addMessage(data.error || 'Something went wrong.', 'bot')
+          return
+        }
+    
+        addMessage(data.reply || 'No response received.', 'bot')
+      } catch (err) {
+        typingBubble.remove()
+        addMessage('AI service unavailable right now.', 'bot')
+      }
+    })
+  </script>
+";
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "dashboard/index.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  1713 => 1393,  1633 => 1315,  1622 => 1313,  1618 => 1312,  1579 => 1276,  1523 => 1223,  1498 => 1201,  1485 => 1191,  1406 => 1115,  1359 => 1071,  1350 => 1065,  1336 => 1054,  1312 => 1033,  1304 => 1028,  1296 => 1023,  1288 => 1018,  1280 => 1013,  1273 => 1009,  1266 => 1005,  1259 => 1001,  1252 => 997,  1245 => 993,  1235 => 986,  1231 => 985,  1225 => 982,  1200 => 960,  1196 => 959,  1188 => 954,  1184 => 953,  1176 => 948,  1172 => 947,  1164 => 942,  1160 => 941,  1155 => 938,  1153 => 937,  1136 => 923,  1076 => 866,  1062 => 855,  1058 => 854,  1052 => 851,  1036 => 838,  1030 => 835,  1022 => 830,  1016 => 827,  1008 => 822,  1002 => 819,  994 => 814,  988 => 811,  980 => 806,  974 => 803,  962 => 794,  950 => 784,  943 => 781,  940 => 780,  933 => 777,  930 => 776,  923 => 773,  921 => 772,  913 => 767,  906 => 763,  899 => 759,  892 => 755,  882 => 747,  871 => 745,  868 => 744,  864 => 743,  861 => 742,  854 => 740,  850 => 739,  847 => 738,  838 => 736,  834 => 735,  822 => 726,  812 => 719,  803 => 713,  797 => 710,  784 => 699,  781 => 698,  778 => 697,  775 => 696,  772 => 695,  770 => 694,  86 => 12,  79 => 11,  73 => 8,  66 => 7,  60 => 4,  53 => 3,  42 => 1,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("", "dashboard/index.html.twig", "C:\\Users\\MSI\\Desktop\\final_bizcore\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE\\templates\\dashboard\\index.html.twig");
+    }
+}

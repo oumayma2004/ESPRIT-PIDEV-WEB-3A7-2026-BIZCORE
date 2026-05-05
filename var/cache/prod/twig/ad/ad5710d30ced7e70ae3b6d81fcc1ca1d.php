@@ -1,0 +1,571 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* admin/statistics/index.html.twig */
+class __TwigTemplate_a807a242cd87703785c2aa68034fb01e extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->blocks = [
+            'title' => [$this, 'block_title'],
+            'page_title' => [$this, 'block_page_title'],
+            'body' => [$this, 'block_body'],
+        ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "base.html.twig";
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $this->parent = $this->load("base.html.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        yield "Statistiques des Coachs - Admin";
+        yield from [];
+    }
+
+    // line 5
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_page_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        yield "STATISTIQUES DES COACHS";
+        yield from [];
+    }
+
+    // line 7
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_body(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 8
+        yield "<div class=\"container-fluid py-5\">
+    <!-- Header -->
+    <div class=\"row mb-5\">
+        <div class=\"col-md-8\">
+            <h1 class=\"display-4 fw-bold text-dark\">
+                <i class=\"fas fa-chart-line text-primary me-3\"></i>Statistiques des Coachs
+            </h1>
+            <p class=\"lead text-muted\">Classement global, KPI et analyse de performance</p>
+        </div>
+        <div class=\"col-md-4 text-end\">
+            <div class=\"alert alert-info py-3\">
+                <strong>";
+        // line 19
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["totalCoaches"] ?? null), "html", null, true);
+        yield "</strong> coachs analysés
+            </div>
+        </div>
+    </div>
+
+    <!-- Highlights: Top & Bottom Coaches -->
+    ";
+        // line 25
+        if ((($context["topCoach"] ?? null) && ($context["bottomCoach"] ?? null))) {
+            // line 26
+            yield "    <div class=\"row mb-5\">
+        <!-- Top Coach (Best Performer) -->
+        <div class=\"col-md-6\">
+            <div class=\"card border-success shadow-sm h-100\">
+                <div class=\"card-header bg-success text-white\">
+                    <h5 class=\"card-title mb-0\">
+                        <i class=\"fas fa-trophy me-2\"></i>Meilleur Coach
+                    </h5>
+                </div>
+                <div class=\"card-body\">
+                    <div class=\"d-flex align-items-center mb-3\">
+                        <div class=\"flex-grow-1\">
+                            <h4 class=\"mb-0\">";
+            // line 38
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "fullName", [], "any", false, false, false, 38), "html", null, true);
+            yield "</h4>
+                            <small class=\"text-muted\">Classement : <strong>#";
+            // line 39
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "rang", [], "any", false, false, false, 39), "html", null, true);
+            yield "</strong></small>
+                        </div>
+                        <div class=\"text-end\">
+                            <div class=\"display-6 text-success fw-bold\">";
+            // line 42
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "scoreGlobal", [], "any", false, false, false, 42), "html", null, true);
+            yield "/100</div>
+                        </div>
+                    </div>
+                    <div class=\"row\">
+                        <div class=\"col-6 mb-2\">
+                            <small class=\"text-muted\">Occupation</small><br>
+                            <strong>";
+            // line 48
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "tauxOccupation", [], "any", false, false, false, 48), "html", null, true);
+            yield "%</strong>
+                        </div>
+                        <div class=\"col-6 mb-2\">
+                            <small class=\"text-muted\">Fidélité</small><br>
+                            <strong>";
+            // line 52
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "fidelite", [], "any", false, false, false, 52), "html", null, true);
+            yield "%</strong>
+                        </div>
+                        <div class=\"col-6\">
+                            <small class=\"text-muted\">Note</small><br>
+                            <strong>";
+            // line 56
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "notePonderee", [], "any", false, false, false, 56), "html", null, true);
+            yield "/100</strong>
+                        </div>
+                        <div class=\"col-6\">
+                            <small class=\"text-muted\">Tendance</small><br>
+                            <strong>";
+            // line 60
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["topCoach"] ?? null), "tendance", [], "any", false, false, false, 60), "html", null, true);
+            yield "</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Coach (Needs Improvement) -->
+        <div class=\"col-md-6\">
+            <div class=\"card border-warning shadow-sm h-100\">
+                <div class=\"card-header bg-warning text-dark\">
+                    <h5 class=\"card-title mb-0\">
+                        <i class=\"fas fa-exclamation-circle me-2\"></i>À Améliorer
+                    </h5>
+                </div>
+                <div class=\"card-body\">
+                    <div class=\"d-flex align-items-center mb-3\">
+                        <div class=\"flex-grow-1\">
+                            <h4 class=\"mb-0\">";
+            // line 78
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "fullName", [], "any", false, false, false, 78), "html", null, true);
+            yield "</h4>
+                            <small class=\"text-muted\">Classement : <strong>#";
+            // line 79
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "rang", [], "any", false, false, false, 79), "html", null, true);
+            yield "</strong></small>
+                        </div>
+                        <div class=\"text-end\">
+                            <div class=\"display-6 text-warning fw-bold\">";
+            // line 82
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "scoreGlobal", [], "any", false, false, false, 82), "html", null, true);
+            yield "/100</div>
+                        </div>
+                    </div>
+                    <div class=\"row\">
+                        <div class=\"col-6 mb-2\">
+                            <small class=\"text-muted\">Occupation</small><br>
+                            <strong>";
+            // line 88
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "tauxOccupation", [], "any", false, false, false, 88), "html", null, true);
+            yield "%</strong>
+                        </div>
+                        <div class=\"col-6 mb-2\">
+                            <small class=\"text-muted\">Fidélité</small><br>
+                            <strong>";
+            // line 92
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "fidelite", [], "any", false, false, false, 92), "html", null, true);
+            yield "%</strong>
+                        </div>
+                        <div class=\"col-6\">
+                            <small class=\"text-muted\">Note</small><br>
+                            <strong>";
+            // line 96
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "notePonderee", [], "any", false, false, false, 96), "html", null, true);
+            yield "/100</strong>
+                        </div>
+                        <div class=\"col-6\">
+                            <small class=\"text-muted\">Tendance</small><br>
+                            <strong>";
+            // line 100
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["bottomCoach"] ?? null), "tendance", [], "any", false, false, false, 100), "html", null, true);
+            yield "</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    ";
+        }
+        // line 108
+        yield "
+    <!-- Classement Complet -->
+    <div class=\"card shadow-sm\">
+        <div class=\"card-header bg-primary text-white\">
+            <h5 class=\"card-title mb-0\">
+                <i class=\"fas fa-list-ol me-2\"></i>Classement Complet des Coachs
+            </h5>
+        </div>
+        <div class=\"card-body p-0\">
+            <div class=\"table-responsive\">
+                <table class=\"table table-hover mb-0\">
+                    <thead class=\"table-light\">
+                        <tr>
+                            <th style=\"width: 5%;\">#</th>
+                            <th style=\"width: 20%;\">Coach</th>
+                            <th style=\"width: 12%;\">Domaine</th>
+                            <th style=\"width: 13%;\">Score Global</th>
+                            <th style=\"width: 12%;\">Occupation</th>
+                            <th style=\"width: 12%;\">Fidélité</th>
+                            <th style=\"width: 13%;\">Note</th>
+                            <th style=\"width: 13%;\">Tendance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ";
+        // line 132
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(($context["coachesStatistics"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["stat"]) {
+            // line 133
+            yield "                        <tr class=\"align-middle\">
+                            <!-- Rang -->
+                            <td>
+                                <span class=\"badge bg-primary fs-6\">";
+            // line 136
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "rang", [], "any", false, false, false, 136), "html", null, true);
+            yield "</span>
+                            </td>
+
+                            <!-- Nom Coach -->
+                            <td>
+                                <strong class=\"text-dark\">";
+            // line 141
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "fullName", [], "any", false, false, false, 141), "html", null, true);
+            yield "</strong><br>
+                                <small class=\"text-muted\">";
+            // line 142
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "experienceAnnees", [], "any", false, false, false, 142), "html", null, true);
+            yield " ans exp.</small>
+                            </td>
+
+                            <!-- Domaine -->
+                            <td>
+                                ";
+            // line 147
+            $context["domaineBadgeClass"] = (((CoreExtension::getAttribute($this->env, $this->source, ["BRANDING" => "warning", "E_COMMERCE" => "info", "LEADERSHIP" => "success", "FINANCE" => "danger", "FUNDING" => "primary"], CoreExtension::getAttribute($this->env, $this->source,             // line 153
+$context["stat"], "domaine", [], "any", false, false, false, 153), [], "array", true, true, false, 148) &&  !(null === (($_v0 = ["BRANDING" => "warning", "E_COMMERCE" => "info", "LEADERSHIP" => "success", "FINANCE" => "danger", "FUNDING" => "primary"]) && is_array($_v0) || $_v0 instanceof ArrayAccess ? ($_v0[CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "domaine", [], "any", false, false, false, 153)] ?? null) : null)))) ? ((($_v1 = ["BRANDING" => "warning", "E_COMMERCE" => "info", "LEADERSHIP" => "success", "FINANCE" => "danger", "FUNDING" => "primary"]) && is_array($_v1) || $_v1 instanceof ArrayAccess ? ($_v1[CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "domaine", [], "any", false, false, false, 153)] ?? null) : null)) : ("secondary"));
+            // line 154
+            yield "                                <span class=\"badge bg-";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["domaineBadgeClass"] ?? null), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "domaine", [], "any", false, false, false, 154), "html", null, true);
+            yield "</span>
+                            </td>
+
+                            <!-- Score Global -->
+                            <td>
+                                <div class=\"d-flex align-items-center\">
+                                    <strong class=\"fs-5 text-dark me-2\">";
+            // line 160
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "scoreGlobal", [], "any", false, false, false, 160), "html", null, true);
+            yield "</strong>
+                                    <div class=\"progress flex-grow-1\" style=\"height: 8px;\">
+                                        ";
+            // line 162
+            $context["scoreColor"] = (((CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "scoreGlobal", [], "any", false, false, false, 162) >= 70)) ? ("success") : ((((CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "scoreGlobal", [], "any", false, false, false, 162) >= 50)) ? ("warning") : ("danger"))));
+            // line 163
+            yield "                                        <div class=\"progress-bar bg-";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["scoreColor"] ?? null), "html", null, true);
+            yield "\" 
+                                             role=\"progressbar\" 
+                                             style=\"width: ";
+            // line 165
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "scoreGlobal", [], "any", false, false, false, 165), "html", null, true);
+            yield "%;\" 
+                                             aria-valuenow=\"";
+            // line 166
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "scoreGlobal", [], "any", false, false, false, 166), "html", null, true);
+            yield "\" 
+                                             aria-valuemin=\"0\" 
+                                             aria-valuemax=\"100\">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- Taux d'Occupation (35%) -->
+                            <td>
+                                <div class=\"progress\" style=\"height: 20px;\">
+                                    <div class=\"progress-bar bg-info\" 
+                                         role=\"progressbar\" 
+                                         style=\"width: ";
+            // line 179
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "tauxOccupation", [], "any", false, false, false, 179), "html", null, true);
+            yield "%;\"
+                                         title=\"Taux d'occupation: ";
+            // line 180
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "tauxOccupation", [], "any", false, false, false, 180), "html", null, true);
+            yield "%\">
+                                        <small>";
+            // line 181
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "tauxOccupation", [], "any", false, false, false, 181), "html", null, true);
+            yield "%</small>
+                                    </div>
+                                </div>
+                                <small class=\"text-muted d-block mt-1\">35% du score</small>
+                            </td>
+
+                            <!-- Fidélité Client (20%) -->
+                            <td>
+                                <div class=\"progress\" style=\"height: 20px;\">
+                                    <div class=\"progress-bar bg-success\" 
+                                         role=\"progressbar\" 
+                                         style=\"width: ";
+            // line 192
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "fidelite", [], "any", false, false, false, 192), "html", null, true);
+            yield "%;\"
+                                         title=\"Fidélité: ";
+            // line 193
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "fidelite", [], "any", false, false, false, 193), "html", null, true);
+            yield "%\">
+                                        <small>";
+            // line 194
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "fidelite", [], "any", false, false, false, 194), "html", null, true);
+            yield "%</small>
+                                    </div>
+                                </div>
+                                <small class=\"text-muted d-block mt-1\">20% du score</small>
+                            </td>
+
+                            <!-- Note Pondérée (35%) -->
+                            <td>
+                                <div class=\"d-flex align-items-center\">
+                                    ";
+            // line 203
+            $context["noteInt"] = Twig\Extension\CoreExtension::round(CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "notePonderee", [], "any", false, false, false, 203), 0);
+            // line 204
+            yield "                                    <strong class=\"me-2\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["noteInt"] ?? null), "html", null, true);
+            yield "/100</strong>
+                                    ";
+            // line 205
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable(range(1, 5));
+            foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+                // line 206
+                yield "                                        ";
+                if (($context["i"] <= (($context["noteInt"] ?? null) / 20))) {
+                    // line 207
+                    yield "                                            <i class=\"fas fa-star text-warning fs-6\"></i>
+                                        ";
+                } else {
+                    // line 209
+                    yield "                                            <i class=\"far fa-star text-muted fs-6\"></i>
+                                        ";
+                }
+                // line 211
+                yield "                                    ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 212
+            yield "                                </div>
+                                <small class=\"text-muted d-block mt-1\">35% du score</small>
+                            </td>
+
+                            <!-- Tendance (10%) -->
+                            <td>
+                                <div class=\"d-flex align-items-center\">
+                                    ";
+            // line 219
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "tendance", [], "any", false, false, false, 219) > 100)) {
+                // line 220
+                yield "                                        <i class=\"fas fa-arrow-up text-success me-2\"></i>
+                                        <span class=\"text-success fw-bold\">";
+                // line 221
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "tendance", [], "any", false, false, false, 221) - 100), 0), "html", null, true);
+                yield "%</span>
+                                    ";
+            } elseif ((CoreExtension::getAttribute($this->env, $this->source,             // line 222
+$context["stat"], "tendance", [], "any", false, false, false, 222) < 100)) {
+                // line 223
+                yield "                                        <i class=\"fas fa-arrow-down text-danger me-2\"></i>
+                                        <span class=\"text-danger fw-bold\">";
+                // line 224
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((100 - CoreExtension::getAttribute($this->env, $this->source, $context["stat"], "tendance", [], "any", false, false, false, 224)), 0), "html", null, true);
+                yield "%</span>
+                                    ";
+            } else {
+                // line 226
+                yield "                                        <i class=\"fas fa-minus text-muted me-2\"></i>
+                                        <span class=\"text-muted\">Stable</span>
+                                    ";
+            }
+            // line 229
+            yield "                                </div>
+                                <small class=\"text-muted d-block mt-1\">10% du score</small>
+                            </td>
+                        </tr>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['stat'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 234
+        yield "                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Légende et Explication des KPI -->
+    <div class=\"row mt-5\">
+        <div class=\"col-lg-12\">
+            <div class=\"card bg-light border-0\">
+                <div class=\"card-header bg-dark text-white\">
+                    <h5 class=\"card-title mb-0\">
+                        <i class=\"fas fa-info-circle me-2\"></i>Explications des KPI
+                    </h5>
+                </div>
+                <div class=\"card-body\">
+                    <div class=\"row\">
+                        <div class=\"col-md-6 mb-3\">
+                            <h6 class=\"fw-bold text-info\">
+                                <i class=\"fas fa-chart-pie text-info me-2\"></i>Taux d'Occupation (35%)
+                            </h6>
+                            <p class=\"text-muted small\">Pourcentage de créneaux réservés par rapport aux créneaux disponibles. Un coach très occupé a un taux élevé.</p>
+                        </div>
+                        <div class=\"col-md-6 mb-3\">
+                            <h6 class=\"fw-bold text-success\">
+                                <i class=\"fas fa-star text-success me-2\"></i>Note Pondérée (35%)
+                            </h6>
+                            <p class=\"text-muted small\">Note moyenne ajustée selon le nombre d'avis. Une note avec peu d'avis compte moins qu'une note établie.</p>
+                        </div>
+                        <div class=\"col-md-6 mb-3\">
+                            <h6 class=\"fw-bold text-success\">
+                                <i class=\"fas fa-handshake text-success me-2\"></i>Fidélité Client (20%)
+                            </h6>
+                            <p class=\"text-muted small\">Pourcentage de clients qui reviennent réserver plusieurs fois avec le même coach. Indicateur de satisfaction.</p>
+                        </div>
+                        <div class=\"col-md-6 mb-3\">
+                            <h6 class=\"fw-bold text-warning\">
+                                <i class=\"fas fa-chart-line text-warning me-2\"></i>Tendance (10%)
+                            </h6>
+                            <p class=\"text-muted small\">Comparaison des réservations du mois courant vs mois précédent. Montre l'évolution de la demande.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <p class=\"text-muted small mb-0\">
+                        <strong>Score Global :</strong> Calcul pondéré des 4 KPI (35% + 35% + 20% + 10% = 100%). 
+                        Les coachs sont classés du score le plus élevé au plus bas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class=\"row mt-5\">
+        <div class=\"col-md-6\">
+            <a href=\"";
+        // line 289
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_coach_index");
+        yield "\" class=\"btn btn-secondary btn-lg\">
+                <i class=\"fas fa-arrow-left me-2\"></i>Retour à la Gestion des Coachs
+            </a>
+        </div>
+        <div class=\"col-md-6 text-end\">
+            <a href=\"";
+        // line 294
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_statistics_detailed");
+        yield "\" class=\"btn btn-primary btn-lg\">
+                <i class=\"fas fa-chart-bar me-2\"></i>Vue Détaillée
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .progress-bar {
+        transition: width 0.6s ease;
+    }
+</style>
+";
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "admin/statistics/index.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  513 => 294,  505 => 289,  448 => 234,  438 => 229,  433 => 226,  428 => 224,  425 => 223,  423 => 222,  419 => 221,  416 => 220,  414 => 219,  405 => 212,  399 => 211,  395 => 209,  391 => 207,  388 => 206,  384 => 205,  379 => 204,  377 => 203,  365 => 194,  361 => 193,  357 => 192,  343 => 181,  339 => 180,  335 => 179,  319 => 166,  315 => 165,  309 => 163,  307 => 162,  302 => 160,  290 => 154,  288 => 153,  287 => 147,  279 => 142,  275 => 141,  267 => 136,  262 => 133,  258 => 132,  232 => 108,  221 => 100,  214 => 96,  207 => 92,  200 => 88,  191 => 82,  185 => 79,  181 => 78,  160 => 60,  153 => 56,  146 => 52,  139 => 48,  130 => 42,  124 => 39,  120 => 38,  106 => 26,  104 => 25,  95 => 19,  82 => 8,  75 => 7,  64 => 5,  53 => 3,  42 => 1,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("", "admin/statistics/index.html.twig", "C:\\Users\\MSI\\Desktop\\final_bizcore\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE\\templates\\admin\\statistics\\index.html.twig");
+    }
+}

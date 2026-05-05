@@ -1,0 +1,952 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* blog/index.html.twig */
+class __TwigTemplate_3e169290afecb780c82f3cae6892c4f2 extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->blocks = [
+            'title' => [$this, 'block_title'],
+            'page_title' => [$this, 'block_page_title'],
+            'sidebar_content' => [$this, 'block_sidebar_content'],
+            'stylesheets' => [$this, 'block_stylesheets'],
+            'body' => [$this, 'block_body'],
+        ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "base.html.twig";
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $this->parent = $this->load("base.html.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        yield "Blog — Bizcore";
+        yield from [];
+    }
+
+    // line 4
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_page_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        yield "BLOG";
+        yield from [];
+    }
+
+    // line 6
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_sidebar_content(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 7
+        yield "<div class=\"sidebar-section\">
+    <div class=\"sidebar-section-label\">NAVIGATION</div>
+    ";
+        // line 9
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 10
+            yield "    <a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard");
+            yield "\"
+       class=\"";
+            // line 11
+            yield (((is_string($_v0 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 11), "attributes", [], "any", false, false, false, 11), "get", ["_route"], "method", false, false, false, 11)) && is_string($_v1 = "dashboard") && str_starts_with($_v0, $_v1))) ? ("active") : (""));
+            yield "\">
+        <i class=\"fas fa-tachometer-alt\"></i> DASHBOARD
+    </a>
+    ";
+        } else {
+            // line 15
+            yield "    <a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("marketplace_index");
+            yield "\"
+       class=\"";
+            // line 16
+            yield (((is_string($_v2 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 16), "attributes", [], "any", false, false, false, 16), "get", ["_route"], "method", false, false, false, 16)) && is_string($_v3 = "marketplace") && str_starts_with($_v2, $_v3))) ? ("active") : (""));
+            yield "\">
+        <i class=\"fas fa-shopping-cart\"></i> MARKETPLACE
+    </a>
+    ";
+        }
+        // line 20
+        yield "    <a href=\"";
+        yield (((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_index")) : ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("evenement_front")));
+        yield "\"
+       class=\"";
+        // line 21
+        yield (((is_string($_v4 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 21), "attributes", [], "any", false, false, false, 21), "get", ["_route"], "method", false, false, false, 21)) && is_string($_v5 = "evenement") && str_starts_with($_v4, $_v5))) ? ("active") : (""));
+        yield "\">
+        <i class=\"fas fa-calendar-alt\"></i> ÉVÉNEMENTS
+    </a>
+    <a href=\"";
+        // line 24
+        yield (((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_coach_index")) : ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coach_index")));
+        yield "\"
+       class=\"";
+        // line 25
+        yield ((((is_string($_v6 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 25), "attributes", [], "any", false, false, false, 25), "get", ["_route"], "method", false, false, false, 25)) && is_string($_v7 = "app_coach") && str_starts_with($_v6, $_v7)) || (is_string($_v8 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 25), "attributes", [], "any", false, false, false, 25), "get", ["_route"], "method", false, false, false, 25)) && is_string($_v9 = "admin_coach") && str_starts_with($_v8, $_v9)))) ? ("active") : (""));
+        yield "\">
+        <i class=\"fas fa-user-tie\"></i> COACHING
+    </a>
+    <a href=\"";
+        // line 28
+        yield (((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article_index")) : ($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("frontend_blog_index")));
+        yield "\"
+       class=\"";
+        // line 29
+        yield ((((is_string($_v10 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 29), "attributes", [], "any", false, false, false, 29), "get", ["_route"], "method", false, false, false, 29)) && is_string($_v11 = "frontend_blog") && str_starts_with($_v10, $_v11)) || (is_string($_v12 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 29), "attributes", [], "any", false, false, false, 29), "get", ["_route"], "method", false, false, false, 29)) && is_string($_v13 = "article") && str_starts_with($_v12, $_v13)))) ? ("active") : (""));
+        yield "\">
+        <i class=\"fas fa-blog\"></i> BLOG
+    </a>
+    <a href=\"";
+        // line 32
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("profile_index");
+        yield "\"
+       class=\"";
+        // line 33
+        yield (((is_string($_v14 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "request", [], "any", false, false, false, 33), "attributes", [], "any", false, false, false, 33), "get", ["_route"], "method", false, false, false, 33)) && is_string($_v15 = "profile") && str_starts_with($_v14, $_v15))) ? ("active") : (""));
+        yield "\">
+        <i class=\"fas fa-user-circle\"></i> PROFIL
+    </a>
+</div>
+";
+        yield from [];
+    }
+
+    // line 39
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_stylesheets(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 40
+        yield "<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap\" rel=\"stylesheet\">
+<style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; }
+
+        /* NAV */
+        .navbar { background:#fff; border-bottom:1px solid #e2e8f0; padding:0 40px; height:64px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+        .nav-brand { font-size:20px; font-weight:800; color:#0f172a; letter-spacing:-.5px; }
+        .nav-brand span { color:#22c55e; }
+        .nav-links { display:flex; align-items:center; gap:28px; }
+        .nav-links a { font-size:14px; font-weight:500; color:#64748b; text-decoration:none; transition:color .15s; }
+        .nav-links a:hover,.nav-links a.active { color:#0f172a; }
+        .nav-cta { background:#22c55e; color:#fff !important; padding:8px 18px; border-radius:8px; font-weight:600 !important; }
+        .nav-cta:hover { background:#16a34a; }
+
+        /* HERO */
+        .hero { background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%); padding:64px 40px; text-align:center; color:#fff; }
+        .hero-tag { display:inline-block; background:rgba(34,197,94,.15); color:#22c55e; border:1px solid rgba(34,197,94,.3); padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px; }
+        .hero h1 { font-size:42px; font-weight:800; letter-spacing:-1px; margin-bottom:14px; line-height:1.15; }
+        .hero p { font-size:16px; color:#94a3b8; max-width:500px; margin:0 auto 28px; line-height:1.7; }
+        .hero-search { display:flex; max-width:440px; margin:0 auto; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.2); }
+        .hero-search input { flex:1; padding:13px 18px; border:none; outline:none; font-family:'Inter',sans-serif; font-size:14px; color:#1e293b; }
+        .hero-search button { padding:13px 20px; background:#22c55e; color:#fff; border:none; font-family:'Inter',sans-serif; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s; }
+        .hero-search button:hover { background:#16a34a; }
+
+        /* FLASH */
+        .flash-wrap { max-width:1200px; margin:24px auto 0; padding:0 24px; }
+        .flash { padding:11px 16px; border-radius:8px; font-size:13px; margin-bottom:10px; }
+        .flash-success { background:#dcfce7; border:1px solid #bbf7d0; color:#15803d; }
+        .flash-error   { background:#fee2e2; border:1px solid #fecaca; color:#dc2626; }
+
+        /* CONTENT */
+        .content { max-width:1200px; margin:0 auto; padding:48px 24px; }
+        .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+        .section-title { font-size:22px; font-weight:700; color:#0f172a; }
+        .section-right { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+        .section-count { font-size:13px; color:#94a3b8; }
+
+        /* FILTER TABS */
+        .filter-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+        .tab-btn { padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; border:1px solid #e2e8f0; background:#fff; color:#64748b; cursor:pointer; transition:all .15s; }
+        .tab-btn:hover { border-color:#22c55e; color:#22c55e; }
+        .tab-btn.active { background:#22c55e; color:#fff; border-color:#22c55e; }
+
+        /* SORT */
+        .sort-select { padding:8px 14px; border-radius:8px; border:1px solid #e2e8f0; font-size:13px; font-family:'Inter',sans-serif; color:#334155; background:#fff; cursor:pointer; }
+
+        /* STATS BUTTON */
+        .btn-stats { display:inline-flex; align-items:center; gap:7px; background:#0f172a; color:#fff; border:none; padding:9px 18px; border-radius:8px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; cursor:pointer; transition:background .15s; }
+        .btn-signalement { display:inline-flex; align-items:center; gap:7px; background:#fff5f5; color:#dc2626; border:1.5px solid #fecaca; padding:9px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:all .15s; white-space:nowrap; }
+        .btn-signalement:hover { background:#fee2e2; border-color:#ef4444; transform:translateY(-1px); }
+        .btn-stats:hover { background:#1e293b; }
+
+        /* STAT PILLS */
+        .stat-pills { display:flex; align-items:center; gap:10px; margin-bottom:28px; flex-wrap:wrap; }
+        .pill { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px 18px; display:flex; align-items:center; gap:8px; }
+        .pill-num { font-size:17px; font-weight:700; }
+        .pill-label { font-size:12px; color:#64748b; font-weight:500; }
+
+        /* GRID */
+        .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:24px; }
+
+        /* CARD */
+        .article-card { background:#fff; border-radius:16px; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,.05); transition:transform .2s,box-shadow .2s; display:flex; flex-direction:column; }
+        .article-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,.1); }
+        .card-img { position:relative; height:200px; overflow:hidden; background:#f1f5f9; }
+        .card-img img { width:100%; height:100%; object-fit:cover; transition:transform .3s; }
+        .article-card:hover .card-img img { transform:scale(1.05); }
+        .card-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:52px; background:linear-gradient(135deg,#e0f2fe,#f0fdf4); }
+        .card-badge { position:absolute; top:14px; left:14px; font-size:12px; font-weight:700; padding:4px 11px; border-radius:20px; color:#fff; }
+        .badge-publié    { background:#22c55e; }
+        .badge-brouillon { background:#f59e0b; }
+        .badge-archivé   { background:#94a3b8; }
+        .card-cat { position:absolute; top:14px; right:14px; background:rgba(15,23,42,.8); backdrop-filter:blur(6px); color:#fff; font-size:13px; font-weight:700; padding:4px 11px; border-radius:20px; }
+        .card-body { padding:20px; flex:1; display:flex; flex-direction:column; gap:12px; }
+        .card-title { font-size:17px; font-weight:700; color:#0f172a; line-height:1.3; }
+        .card-desc { font-size:13px; color:#64748b; line-height:1.65; flex:1; }
+        .card-meta { display:flex; flex-direction:column; gap:6px; padding-top:12px; border-top:1px solid #f1f5f9; }
+        .meta-row { display:flex; align-items:center; gap:8px; font-size:12px; color:#64748b; }
+        .meta-row .dot { width:6px; height:6px; border-radius:50%; background:#22c55e; flex-shrink:0; }
+        .card-footer { padding:16px 20px; border-top:1px solid #f1f5f9; display:flex; gap:10px; }
+        .btn-voir { flex:1; padding:10px; text-align:center; border-radius:8px; font-size:13px; font-weight:700; font-family:'Inter',sans-serif; text-decoration:none; background:#22c55e; color:#fff; border:none; cursor:pointer; transition:all .15s; }
+        .btn-voir:hover { background:#16a34a; }
+
+        /* REACTION BADGE */
+        .reaction-badge { display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+        .rbadge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; background:#f0fdf4; color:#16a34a; padding:3px 9px; border-radius:20px; border:1px solid #bbf7d0; }
+
+        /* TRENDING BADGE */
+        .trending-badge { position:absolute; top:14px; left:50%; transform:translateX(-50%); display:inline-flex; align-items:center; gap:4px; background:linear-gradient(135deg,#f97316,#ef4444); color:#fff; font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px; white-space:nowrap; animation:pulse 2s infinite; z-index:2; }
+        @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.75} }
+        .card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+        .card-tag { background:#ede9fe; color:#5b21b6; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; }
+        .trending-section { margin-bottom:36px; }
+        .trending-title { font-size:16px; font-weight:800; color:#0f172a; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+        .trending-scroll { display:flex; gap:16px; overflow-x:auto; padding-bottom:8px; }
+        .trending-scroll::-webkit-scrollbar { height:4px; }
+        .trending-scroll::-webkit-scrollbar-thumb { background:#e2e8f0; border-radius:4px; }
+        .trending-card { flex-shrink:0; width:260px; background:#fff; border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.05); cursor:pointer; transition:transform .2s,box-shadow .2s; }
+        .trending-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.1); }
+        .trending-img { height:130px; overflow:hidden; background:#f1f5f9; }
+        .trending-img img { width:100%; height:100%; object-fit:cover; }
+        .trending-img-ph { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:36px; background:linear-gradient(135deg,#fef9c3,#fff7ed); }
+        .trending-body { padding:12px 14px; }
+        .trending-card-title { font-size:13px; font-weight:700; color:#0f172a; line-height:1.3; margin-bottom:6px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+        .trending-meta { display:flex; align-items:center; justify-content:space-between; font-size:11px; color:#94a3b8; }
+
+        /* EMPTY / LOADING */
+        .empty { text-align:center; padding:80px 20px; color:#94a3b8; grid-column:1 / -1; }
+        .empty .empty-icon { font-size:56px; margin-bottom:16px; }
+        .empty h3 { font-size:18px; color:#64748b; margin-bottom:8px; }
+        .skeleton { background:linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; border-radius:8px; }
+        @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+        .skeleton-card { background:#fff; border-radius:16px; overflow:hidden; border:1px solid #e2e8f0; height:360px; }
+        .skeleton-img  { height:200px; }
+        .skeleton-body { padding:20px; display:flex; flex-direction:column; gap:12px; }
+        .skeleton-line { height:14px; border-radius:4px; }
+
+        /* PAGINATION */
+        .pagination { display:flex; justify-content:center; align-items:center; gap:8px; margin-top:40px; }
+        .page-btn { padding:8px 14px; border-radius:8px; border:1px solid #e2e8f0; background:#fff; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; color:#334155; }
+        .page-btn:hover:not(:disabled) { border-color:#22c55e; color:#22c55e; }
+        .page-btn.active { background:#22c55e; color:#fff; border-color:#22c55e; }
+        .page-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+        /* FOOTER */
+        .footer { background:#0f172a; color:#64748b; text-align:center; padding:28px; font-size:13px; margin-top:60px; }
+        .footer span { color:#22c55e; }
+
+        /* MODAL */
+        .modal-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,.6); backdrop-filter:blur(4px); z-index:999; align-items:center; justify-content:center; padding:20px; }
+        .modal-overlay.open { display:flex; }
+        .modal { background:#fff; border-radius:20px; width:100%; max-width:760px; max-height:88vh; overflow-y:auto; box-shadow:0 24px 60px rgba(0,0,0,.25); animation:modalIn .22s ease; }
+        @keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+        .modal-header { display:flex; align-items:center; justify-content:space-between; padding:24px 28px 20px; border-bottom:1px solid #e2e8f0; }
+        .modal-title { font-size:18px; font-weight:800; color:#0f172a; display:flex; align-items:center; gap:10px; }
+        .modal-close { background:#f1f5f9; border:none; border-radius:8px; width:34px; height:34px; font-size:18px; cursor:pointer; color:#64748b; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+        .modal-close:hover { background:#e2e8f0; color:#0f172a; }
+        .modal-body { padding:28px; display:flex; flex-direction:column; gap:28px; }
+        .modal-loading { text-align:center; padding:40px; color:#94a3b8; }
+
+        /* KPI */
+        .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+        @media(max-width:600px){ .kpi-row{grid-template-columns:repeat(2,1fr);} }
+        .kpi-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; text-align:center; }
+        .kpi-val { font-size:26px; font-weight:800; color:#0f172a; line-height:1; margin-bottom:6px; }
+        .kpi-label { font-size:11px; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:.5px; }
+
+        /* BAR CHART */
+        .stat-section-title { font-size:13px; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:.6px; margin-bottom:12px; }
+        .bar-list { display:flex; flex-direction:column; gap:10px; }
+        .bar-item { display:flex; flex-direction:column; gap:4px; }
+        .bar-label-row { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+        .bar-name { font-weight:600; color:#334155; }
+        .bar-val  { font-weight:700; color:#0f172a; }
+        .bar-track { height:8px; background:#f1f5f9; border-radius:99px; overflow:hidden; }
+        .bar-fill { height:100%; border-radius:99px; transition:width .4s ease; }
+        .bar-fill-green  { background:#22c55e; }
+        .bar-fill-yellow { background:#f59e0b; }
+        .bar-fill-slate  { background:#94a3b8; }
+        .bar-fill-blue   { background:#3b82f6; }
+        .bar-fill-purple { background:#a855f7; }
+        .bar-fill-orange { background:#f97316; }
+
+        /* TOP TABLE */
+        .top-table { width:100%; border-collapse:collapse; font-size:13px; }
+        .top-table th { text-align:left; padding:8px 10px; font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:.5px; border-bottom:1px solid #e2e8f0; }
+        .top-table td { padding:10px 10px; border-bottom:1px solid #f1f5f9; color:#334155; vertical-align:middle; }
+        .top-table tr:last-child td { border-bottom:none; }
+        .top-table .rank { font-weight:800; color:#22c55e; width:30px; }
+        .views-badge { display:inline-flex; align-items:center; gap:4px; background:#f0fdf4; color:#16a34a; padding:3px 9px; border-radius:20px; font-weight:700; font-size:12px; }
+
+        /* TWO COL */
+        .stats-two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+        @media(max-width:600px){ .stats-two-col{grid-template-columns:1fr;} }
+        .stat-block { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:18px; }
+
+        /* TOAST */
+        .toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:12px 20px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .25s; pointer-events:none; }
+        .toast.show { opacity:1; transform:translateY(0); }
+    </style>
+";
+        yield from [];
+    }
+
+    // line 223
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_body(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 225
+        yield "<section class=\"hero\">
+    <div class=\"hero-tag\">📝 Blog</div>
+    <h1>Découvrez nos<br>articles</h1>
+    <p>Restez informé grâce à nos articles, conseils et actualités rédigés par nos experts.</p>
+    <div class=\"hero-search\">
+        <input type=\"text\" id=\"searchInput\" placeholder=\"Rechercher un article…\" autocomplete=\"off\">
+        <button onclick=\"applySearch()\">Rechercher</button>
+    </div>
+</section>
+
+";
+        // line 236
+        yield "<div class=\"flash-wrap\">
+    ";
+        // line 237
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "flashes", ["success"], "method", false, false, false, 237));
+        foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
+            // line 238
+            yield "        <div class=\"flash flash-success\">✅ ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
+            yield "</div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 240
+        yield "    ";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, ($context["app"] ?? null), "flashes", ["error"], "method", false, false, false, 240));
+        foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
+            // line 241
+            yield "        <div class=\"flash flash-error\">❌ ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
+            yield "</div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 243
+        yield "</div>
+
+";
+        // line 246
+        yield "<div class=\"content\">
+
+    ";
+        // line 249
+        yield "    <div class=\"stat-pills\" id=\"statPills\">
+        <div class=\"pill\"><span class=\"pill-num skeleton\" style=\"width:30px;height:20px;display:inline-block;\">  </span><span class=\"pill-label\">Articles</span></div>
+        <div class=\"pill\"><span class=\"pill-num skeleton\" style=\"width:30px;height:20px;display:inline-block;\">  </span><span class=\"pill-label\">Publiés</span></div>
+        <div class=\"pill\"><span class=\"pill-num skeleton\" style=\"width:30px;height:20px;display:inline-block;\">  </span><span class=\"pill-label\">Brouillons</span></div>
+        <div class=\"pill\"><span class=\"pill-num skeleton\" style=\"width:30px;height:20px;display:inline-block;\">  </span><span class=\"pill-label\">Vues totales</span></div>
+    </div>
+
+    ";
+        // line 257
+        yield "    <div class=\"filter-tabs\" id=\"filterTabs\">
+        <button class=\"tab-btn active\" data-cat=\"\" onclick=\"filterByCategory(this)\">Toutes</button>
+    </div>
+
+    ";
+        // line 262
+        yield "    <div class=\"section-header\">
+        <div class=\"section-title\">Tous les articles</div>
+        <div class=\"section-right\">
+            <span class=\"section-count\" id=\"countLabel\">Chargement…</span>
+            <select class=\"sort-select\" id=\"sortSelect\" onchange=\"applySort()\">
+                <option value=\"id_article|DESC\">Plus récents</option>
+                <option value=\"id_article|ASC\">Plus anciens</option>
+                <option value=\"nombre_vues|DESC\">Plus vus</option>
+                <option value=\"nombre_vues|ASC\">Moins vus</option>
+                <option value=\"titre|ASC\">A → Z</option>
+                <option value=\"titre|DESC\">Z → A</option>
+            </select>
+            <a href=\"";
+        // line 274
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("signalement_index");
+        yield "\" class=\"btn-signalement\">🚩 Mes signalements</a>
+            <button class=\"btn-stats\" onclick=\"openStats()\">📊 Statistiques</button>
+        </div>
+    </div>
+
+    ";
+        // line 280
+        yield "    <div class=\"trending-section\" id=\"trendingSection\" style=\"display:none\">
+        <div class=\"trending-title\">🔥 Articles en Tendance</div>
+        <div class=\"trending-scroll\" id=\"trendingScroll\"></div>
+    </div>
+
+    ";
+        // line 286
+        yield "    <div class=\"cards-grid\" id=\"cardsGrid\">
+        ";
+        // line 288
+        yield "        ";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(range(1, 6));
+        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+            // line 289
+            yield "        <div class=\"skeleton-card\">
+            <div class=\"skeleton-img skeleton\"></div>
+            <div class=\"skeleton-body\">
+                <div class=\"skeleton-line skeleton\" style=\"width:60%\"></div>
+                <div class=\"skeleton-line skeleton\" style=\"width:90%\"></div>
+                <div class=\"skeleton-line skeleton\" style=\"width:75%\"></div>
+            </div>
+        </div>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 298
+        yield "    </div>
+
+    ";
+        // line 301
+        yield "    <div class=\"pagination\" id=\"pagination\"></div>
+
+</div>
+
+";
+        // line 306
+        yield "<footer class=\"footer\">
+    © 2026 <span>Bizcore</span> — Tous droits réservés
+</footer>
+
+";
+        // line 311
+        yield "<div class=\"modal-overlay\" id=\"statsModal\" onclick=\"handleOverlayClick(event)\">
+    <div class=\"modal\">
+        <div class=\"modal-header\">
+            <div class=\"modal-title\">📊 Statistiques du Blog</div>
+            <button class=\"modal-close\" onclick=\"closeStats()\">✕</button>
+        </div>
+        <div class=\"modal-body\" id=\"statsBody\">
+            <div class=\"modal-loading\">⏳ Chargement des statistiques…</div>
+        </div>
+    </div>
+</div>
+
+";
+        // line 324
+        yield "<div class=\"toast\" id=\"toast\"></div>
+
+";
+        // line 329
+        yield "<script>
+// ────────────────────────────────────────────────────────────────
+// STATE
+// ────────────────────────────────────────────────────────────────
+const API_BASE   = '/api/articles';
+const BLOG_BASE  = '/blog';         // for \"Lire l'article\" links
+let state = {
+    page:      1,
+    limit:     9,
+    search:    '',
+    categorie: '',
+    statut:    '',
+    sortBy:    'id_article',
+    sortDir:   'DESC',
+};
+
+// ────────────────────────────────────────────────────────────────
+// TOAST NOTIFICATION
+// ────────────────────────────────────────────────────────────────
+function showToast(msg, duration = 2800) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+}
+
+// ────────────────────────────────────────────────────────────────
+// FETCH ARTICLES  →  GET /api/articles
+// ────────────────────────────────────────────────────────────────
+async function fetchArticles() {
+    const params = new URLSearchParams({
+        page:      state.page,
+        limit:     state.limit,
+        sortBy:    state.sortBy,
+        sortDir:   state.sortDir,
+        search:    state.search,
+        categorie: state.categorie,
+        statut:    state.statut,
+    });
+
+    try {
+        const res  = await fetch(`\${API_BASE}?\${params}`);
+        const json = await res.json();
+
+        if (!json.success) throw new Error(json.message);
+        renderArticles(json.data.articles);
+        renderPagination(json.data.pagination);
+
+        const total = json.data.pagination.total;
+        document.getElementById('countLabel').textContent =
+            `\${total} article\${total !== 1 ? 's' : ''}`;
+    } catch (err) {
+        document.getElementById('cardsGrid').innerHTML = `
+            <div class=\"empty\">
+                <div class=\"empty-icon\">⚠️</div>
+                <h3>Erreur de chargement</h3>
+                <p>\${err.message}</p>
+            </div>`;
+        document.getElementById('countLabel').textContent = '';
+        document.getElementById('pagination').innerHTML = '';
+    }
+}
+
+// ────────────────────────────────────────────────────────────────
+// RENDER CARDS
+// ────────────────────────────────────────────────────────────────
+function renderArticles(articles) {
+    const grid = document.getElementById('cardsGrid');
+
+    if (!articles.length) {
+        grid.innerHTML = `
+            <div class=\"empty\">
+                <div class=\"empty-icon\">📭</div>
+                <h3>Aucun article trouvé</h3>
+                <p>Modifiez vos filtres ou revenez bientôt.</p>
+            </div>`;
+        return;
+    }
+
+    const barColors = ['badge-publié','badge-brouillon','badge-archivé'];
+
+    grid.innerHTML = articles.map(a => {
+        const imgHtml = a.image_principale
+            ? `<img src=\"/uploads/\${a.image_principale}\" alt=\"\${escHtml(a.titre)}\" loading=\"lazy\">`
+            : `<div class=\"card-img-placeholder\">📝</div>`;
+
+        const badgeClass = a.statut ? `badge-\${a.statut.replace('é','e').replace('é','e')}` : '';
+
+        return `
+        <div class=\"article-card\">
+            <div class=\"card-img\">
+                \${imgHtml}
+                \${a.statut ? `<div class=\"card-badge badge-\${a.statut}\">\${cap(a.statut)}</div>` : ''}
+                \${a.categorie ? `<div class=\"card-cat\">\${escHtml(a.categorie)}</div>` : ''}
+                \${a.is_trending ? `<span class=\"trending-badge\">🔥 Trending</span>` : ''}
+            </div>
+            <div class=\"card-body\">
+                <div class=\"card-title\">\${escHtml(a.titre)}</div>
+                <div class=\"card-desc\">\${escHtml(a.resume_ia || a.contenu_extrait)}</div>
+                \${a.mots_cles && a.mots_cles.length ? `<div class=\"card-tags\">\${a.mots_cles.slice(0,3).map(t=>`<span class=\"card-tag\">\${escHtml(t)}</span>`).join('')}</div>` : ''}
+                <div class=\"card-meta\">
+                    <div class=\"meta-row\"><div class=\"dot\"></div> 👁 \${a.nombre_vues} vue\${a.nombre_vues !== 1 ? 's' : ''} · ⏱ \${a.reading_minutes ?? '?'} min</div>
+                    <div class=\"reaction-badge\" id=\"rb-\${a.id}\">
+                        <span class=\"rbadge\">⏳</span>
+                    </div>
+                </div>
+            </div>
+            <div class=\"card-footer\">
+                <a href=\"\${BLOG_BASE}/\${a.id}\"
+                   class=\"btn-voir\"
+                   onclick=\"trackView(event, \${a.id})\">Lire l'article →</a>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ────────────────────────────────────────────────────────────────
+// TRACK VIEW  →  PATCH /api/articles/{id}/view
+// ────────────────────────────────────────────────────────────────
+async function trackView(event, id) {
+    // Fire-and-forget — don't block navigation
+    try {
+        await fetch(`\${API_BASE}/\${id}/view`, { method: 'PATCH' });
+    } catch (_) {}
+    // Let the default href navigate (don't preventDefault)
+}
+
+// ────────────────────────────────────────────────────────────────
+// RENDER PAGINATION
+// ────────────────────────────────────────────────────────────────
+function renderPagination(pag) {
+    const el = document.getElementById('pagination');
+    if (pag.total_pages <= 1) { el.innerHTML = ''; return; }
+
+    let html = `<button class=\"page-btn\" onclick=\"goPage(\${pag.page - 1})\" \${!pag.has_prev ? 'disabled' : ''}>← Préc.</button>`;
+
+    const range = pageRange(pag.page, pag.total_pages);
+    range.forEach(p => {
+        if (p === '…') {
+            html += `<span style=\"color:#94a3b8;padding:0 4px;\">…</span>`;
+        } else {
+            html += `<button class=\"page-btn \${p === pag.page ? 'active' : ''}\" onclick=\"goPage(\${p})\">\${p}</button>`;
+        }
+    });
+
+    html += `<button class=\"page-btn\" onclick=\"goPage(\${pag.page + 1})\" \${!pag.has_next ? 'disabled' : ''}>Suiv. →</button>`;
+    el.innerHTML = html;
+}
+
+function pageRange(current, total) {
+    if (total <= 7) return Array.from({length: total}, (_, i) => i + 1);
+    const pages = [1];
+    if (current > 3) pages.push('…');
+    for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) pages.push(p);
+    if (current < total - 2) pages.push('…');
+    pages.push(total);
+    return pages;
+}
+
+function goPage(p) {
+    state.page = p;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    fetchArticles();
+}
+
+// ────────────────────────────────────────────────────────────────
+// FETCH CATEGORIES  →  GET /api/articles/categories
+// ────────────────────────────────────────────────────────────────
+async function loadCategories() {
+    try {
+        const res  = await fetch(`\${API_BASE}/categories`);
+        const json = await res.json();
+        if (!json.success) return;
+
+        const tabs = document.getElementById('filterTabs');
+        json.data.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn';
+            btn.dataset.cat = cat;
+            btn.textContent = cat;
+            btn.onclick = () => filterByCategory(btn);
+            tabs.appendChild(btn);
+        });
+    } catch (_) {}
+}
+
+function filterByCategory(btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.categorie = btn.dataset.cat;
+    state.page = 1;
+    fetchArticles();
+}
+
+// ────────────────────────────────────────────────────────────────
+// FETCH STATS for pills  →  GET /api/articles/stats
+// ────────────────────────────────────────────────────────────────
+async function loadStatPills() {
+    try {
+        const res  = await fetch(`\${API_BASE}/stats`);
+        const json = await res.json();
+        if (!json.success) return;
+        const d = json.data;
+        document.getElementById('statPills').innerHTML = `
+            <div class=\"pill\"><span class=\"pill-num\">\${d.total}</span><span class=\"pill-label\">Articles</span></div>
+            <div class=\"pill\"><span class=\"pill-num\" style=\"color:#16a34a\">\${d.publie}</span><span class=\"pill-label\">Publiés</span></div>
+            <div class=\"pill\"><span class=\"pill-num\" style=\"color:#a16207\">\${d.brouillon}</span><span class=\"pill-label\">Brouillons</span></div>
+            <div class=\"pill\"><span class=\"pill-num\" style=\"color:#0ea5e9\">\${d.total_vues}</span><span class=\"pill-label\">Vues totales</span></div>`;
+    } catch (_) {}
+}
+
+// ────────────────────────────────────────────────────────────────
+// STATISTICS MODAL  →  GET /api/articles/stats
+// ────────────────────────────────────────────────────────────────
+async function openStats() {
+    document.getElementById('statsModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('statsBody').innerHTML = '<div class=\"modal-loading\">⏳ Chargement des statistiques…</div>';
+
+    try {
+        const res  = await fetch(`\${API_BASE}/stats`);
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message);
+        const d = json.data;
+
+        const barColors = ['bar-fill-blue','bar-fill-purple','bar-fill-orange','bar-fill-green','bar-fill-yellow','bar-fill-slate'];
+
+        const catBars = Object.entries(d.categories).map(([cat, count], i) => `
+            <div class=\"bar-item\">
+                <div class=\"bar-label-row\">
+                    <span class=\"bar-name\">\${escHtml(cat)}</span>
+                    <span class=\"bar-val\">\${count}</span>
+                </div>
+                <div class=\"bar-track\">
+                    <div class=\"bar-fill \${barColors[i % barColors.length]}\" style=\"width:\${d.total > 0 ? Math.round(count / d.total * 100) : 0}%\"></div>
+                </div>
+            </div>`).join('');
+
+        const top5Rows = d.top5.map((a, i) => `
+            <tr>
+                <td class=\"rank\">#\${i + 1}</td>
+                <td><a href=\"\${BLOG_BASE}/\${a.id}\" style=\"color:#0f172a;text-decoration:none;font-weight:600\">\${escHtml(a.titre.length > 45 ? a.titre.slice(0, 45) + '…' : a.titre)}</a></td>
+                <td style=\"color:#64748b\">\${escHtml(a.categorie ?? '—')}</td>
+                <td><span class=\"views-badge\">👁 \${a.nombre_vues}</span></td>
+            </tr>`).join('');
+
+        document.getElementById('statsBody').innerHTML = `
+            <div>
+                <div class=\"stat-section-title\">Vue d'ensemble</div>
+                <div class=\"kpi-row\">
+                    <div class=\"kpi-card\"><div class=\"kpi-val\">\${d.total}</div><div class=\"kpi-label\">Articles</div></div>
+                    <div class=\"kpi-card\"><div class=\"kpi-val\" style=\"color:#22c55e\">\${d.total_vues}</div><div class=\"kpi-label\">Vues totales</div></div>
+                    <div class=\"kpi-card\"><div class=\"kpi-val\" style=\"color:#3b82f6\">\${d.moy_vues}</div><div class=\"kpi-label\">Moy. vues/article</div></div>
+                    <div class=\"kpi-card\"><div class=\"kpi-val\" style=\"color:#a855f7\">\${Object.keys(d.categories).length}</div><div class=\"kpi-label\">Catégories</div></div>
+                </div>
+            </div>
+            <div class=\"stats-two-col\">
+                <div class=\"stat-block\">
+                    <div class=\"stat-section-title\">Par statut</div>
+                    <div class=\"bar-list\">
+                        <div class=\"bar-item\">
+                            <div class=\"bar-label-row\"><span class=\"bar-name\">✅ Publiés</span><span class=\"bar-val\">\${d.publie}</span></div>
+                            <div class=\"bar-track\"><div class=\"bar-fill bar-fill-green\" style=\"width:\${d.total > 0 ? Math.round(d.publie / d.total * 100) : 0}%\"></div></div>
+                        </div>
+                        <div class=\"bar-item\">
+                            <div class=\"bar-label-row\"><span class=\"bar-name\">📝 Brouillons</span><span class=\"bar-val\">\${d.brouillon}</span></div>
+                            <div class=\"bar-track\"><div class=\"bar-fill bar-fill-yellow\" style=\"width:\${d.total > 0 ? Math.round(d.brouillon / d.total * 100) : 0}%\"></div></div>
+                        </div>
+                        <div class=\"bar-item\">
+                            <div class=\"bar-label-row\"><span class=\"bar-name\">📦 Archivés</span><span class=\"bar-val\">\${d.archive}</span></div>
+                            <div class=\"bar-track\"><div class=\"bar-fill bar-fill-slate\" style=\"width:\${d.total > 0 ? Math.round(d.archive / d.total * 100) : 0}%\"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=\"stat-block\">
+                    <div class=\"stat-section-title\">Par catégorie</div>
+                    <div class=\"bar-list\">\${catBars || '<p style=\"color:#94a3b8;font-size:13px\">Aucune catégorie</p>'}</div>
+                </div>
+            </div>
+            <div>
+                <div class=\"stat-section-title\">🏆 Top 5 articles les plus lus</div>
+                <table class=\"top-table\">
+                    <thead><tr><th>#</th><th>Titre</th><th>Catégorie</th><th>Vues</th></tr></thead>
+                    <tbody>\${top5Rows}</tbody>
+                </table>
+            </div>`;
+    } catch (err) {
+        document.getElementById('statsBody').innerHTML = `<div class=\"modal-loading\">❌ Erreur : \${err.message}</div>`;
+    }
+}
+
+function closeStats() {
+    document.getElementById('statsModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+    if (e.target === document.getElementById('statsModal')) closeStats();
+}
+
+// ────────────────────────────────────────────────────────────────
+// SEARCH
+// ────────────────────────────────────────────────────────────────
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(applySearch, 350);
+});
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { clearTimeout(searchTimer); applySearch(); }
+});
+
+function applySearch() {
+    state.search = document.getElementById('searchInput').value.trim();
+    state.page = 1;
+    fetchArticles();
+}
+
+// ────────────────────────────────────────────────────────────────
+// SORT
+// ────────────────────────────────────────────────────────────────
+function applySort() {
+    const [sortBy, sortDir] = document.getElementById('sortSelect').value.split('|');
+    state.sortBy  = sortBy;
+    state.sortDir = sortDir;
+    state.page    = 1;
+    fetchArticles();
+}
+
+// ────────────────────────────────────────────────────────────────
+// KEYBOARD SHORTCUT
+// ────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeStats();
+});
+
+// ────────────────────────────────────────────────────────────────
+// UTILS
+// ────────────────────────────────────────────────────────────────
+function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');
+}
+
+function cap(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ────────────────────────────────────────────────────────────────
+// LOAD REACTION BADGES ON CARDS
+// ────────────────────────────────────────────────────────────────
+async function loadReactionBadges(articles) {
+    await Promise.all(articles.map(async (a) => {
+        const el = document.getElementById('rb-' + a.id);
+        if (!el) return;
+        try {
+            const res  = await fetch(`/blog/\${a.id}/reactions`);
+            const json = await res.json();
+            if (!json.success) { el.innerHTML = ''; return; }
+            const c = json.counts;
+            const total = c.like + c.helpful + c.bookmark + c.share;
+            if (total === 0) { el.innerHTML = ''; return; }
+            let html = '';
+            if (c.like     > 0) html += `<span class=\"rbadge\">👍 \${c.like}</span>`;
+            if (c.helpful  > 0) html += `<span class=\"rbadge\">✅ \${c.helpful}</span>`;
+            if (c.bookmark > 0) html += `<span class=\"rbadge\">🔖 \${c.bookmark}</span>`;
+            if (c.share    > 0) html += `<span class=\"rbadge\">📤 \${c.share}</span>`;
+            if (json.avg_note) html += `<span class=\"rbadge\">⭐ \${json.avg_note}</span>`;
+            el.innerHTML = html;
+        } catch (_) { el.innerHTML = ''; }
+    }));
+}
+
+// ────────────────────────────────────────────────────────────────
+// TRENDING
+// ────────────────────────────────────────────────────────────────
+async function loadTrending() {
+    try {
+        const res  = await fetch(`\${API_BASE}/trending?limit=8`);
+        const json = await res.json();
+        if (!json.success || !json.data.articles.length) return;
+        const scroll = document.getElementById('trendingScroll');
+        scroll.innerHTML = json.data.articles.map(a => {
+            const imgH = a.image_principale
+                ? `<img src=\"/uploads/\${a.image_principale}\" loading=\"lazy\" alt=\"\">`
+                : `<div class=\"trending-img-ph\">📝</div>`;
+            return `<div class=\"trending-card\" onclick=\"window.location='\${BLOG_BASE}/\${a.id}'\">
+                <div class=\"trending-img\">\${imgH}</div>
+                <div class=\"trending-body\">
+                    <div class=\"trending-card-title\">\${escHtml(a.titre)}</div>
+                    <div class=\"trending-meta\"><span>👁 \${a.nombre_vues}</span><span>⏱ \${a.reading_minutes ?? '?'} min</span></div>
+                </div></div>`;
+        }).join('');
+        document.getElementById('trendingSection').style.display = '';
+    } catch(_) {}
+}
+
+// ────────────────────────────────────────────────────────────────
+// INIT — load everything on page ready
+// ────────────────────────────────────────────────────────────────
+(async () => {
+    await Promise.all([
+        loadStatPills(),
+        loadCategories(),
+        fetchArticles(),
+        loadTrending(),
+    ]);
+})();
+</script>
+";
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "blog/index.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  509 => 329,  505 => 324,  491 => 311,  485 => 306,  479 => 301,  475 => 298,  461 => 289,  456 => 288,  453 => 286,  446 => 280,  438 => 274,  424 => 262,  418 => 257,  409 => 249,  405 => 246,  401 => 243,  392 => 241,  387 => 240,  378 => 238,  374 => 237,  371 => 236,  359 => 225,  352 => 223,  166 => 40,  159 => 39,  149 => 33,  145 => 32,  139 => 29,  135 => 28,  129 => 25,  125 => 24,  119 => 21,  114 => 20,  107 => 16,  102 => 15,  95 => 11,  90 => 10,  88 => 9,  84 => 7,  77 => 6,  66 => 4,  55 => 3,  44 => 1,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("", "blog/index.html.twig", "C:\\Users\\MSI\\Desktop\\final_bizcore\\ESPRIT-PIDEV-WEB-3A7-2026-BIZCORE\\templates\\blog\\index.html.twig");
+    }
+}

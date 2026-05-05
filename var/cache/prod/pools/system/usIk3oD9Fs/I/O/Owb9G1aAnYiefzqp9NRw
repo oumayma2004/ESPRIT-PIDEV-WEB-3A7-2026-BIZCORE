@@ -1,0 +1,111 @@
+<?php //5288c7d18145900614cb289592598048
+
+return [PHP_INT_MAX, new class() implements \Symfony\Component\Cache\Traits\CachedValueInterface { public function getValue(): mixed { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            'sqlFinalizer' => [
+                $o[1],
+            ],
+            'resultSetMapping' => [
+                $o[2],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer' => [
+            'sql' => [
+                1 => 'SELECT e0_.id_evenement AS id_evenement_0, e0_.titre AS titre_1, e0_.description AS description_2, e0_.prix AS prix_3, e0_.date_debut AS date_debut_4, e0_.capacite_max AS capacite_max_5, e0_.image_url AS image_url_6, e0_.lieu AS lieu_7, e0_.ai_rating AS ai_rating_8, e0_.ai_positive AS ai_positive_9, e0_.ai_neutral AS ai_neutral_10, e0_.ai_negative AS ai_negative_11, e0_.ai_summary AS ai_summary_12 FROM evenement e0_ ORDER BY e0_.date_debut ASC',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'e' => 'App\\Entity\\Evenement',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_evenement_0' => 'id',
+                    'titre_1' => 'title',
+                    'description_2' => 'description',
+                    'prix_3' => 'price',
+                    'date_debut_4' => 'date',
+                    'capacite_max_5' => 'capacity',
+                    'image_url_6' => 'image',
+                    'lieu_7' => 'lieu',
+                    'ai_rating_8' => 'aiRating',
+                    'ai_positive_9' => 'aiPositive',
+                    'ai_neutral_10' => 'aiNeutral',
+                    'ai_negative_11' => 'aiNegative',
+                    'ai_summary_12' => 'aiSummary',
+                ],
+            ],
+            'columnAliasMappings' => [
+                2 => [
+                    'App\\Entity\\Evenement' => [
+                        'e' => [
+                            'id' => 'id_evenement_0',
+                            'title' => 'titre_1',
+                            'description' => 'description_2',
+                            'price' => 'prix_3',
+                            'date' => 'date_debut_4',
+                            'capacity' => 'capacite_max_5',
+                            'image' => 'image_url_6',
+                            'lieu' => 'lieu_7',
+                            'aiRating' => 'ai_rating_8',
+                            'aiPositive' => 'ai_positive_9',
+                            'aiNeutral' => 'ai_neutral_10',
+                            'aiNegative' => 'ai_negative_11',
+                            'aiSummary' => 'ai_summary_12',
+                        ],
+                    ],
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'e' => null,
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_evenement_0' => 'e',
+                    'titre_1' => 'e',
+                    'description_2' => 'e',
+                    'prix_3' => 'e',
+                    'date_debut_4' => 'e',
+                    'capacite_max_5' => 'e',
+                    'image_url_6' => 'e',
+                    'lieu_7' => 'e',
+                    'ai_rating_8' => 'e',
+                    'ai_positive_9' => 'e',
+                    'ai_neutral_10' => 'e',
+                    'ai_negative_11' => 'e',
+                    'ai_summary_12' => 'e',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_evenement_0' => 'App\\Entity\\Evenement',
+                    'titre_1' => 'App\\Entity\\Evenement',
+                    'description_2' => 'App\\Entity\\Evenement',
+                    'prix_3' => 'App\\Entity\\Evenement',
+                    'date_debut_4' => 'App\\Entity\\Evenement',
+                    'capacite_max_5' => 'App\\Entity\\Evenement',
+                    'image_url_6' => 'App\\Entity\\Evenement',
+                    'lieu_7' => 'App\\Entity\\Evenement',
+                    'ai_rating_8' => 'App\\Entity\\Evenement',
+                    'ai_positive_9' => 'App\\Entity\\Evenement',
+                    'ai_neutral_10' => 'App\\Entity\\Evenement',
+                    'ai_negative_11' => 'App\\Entity\\Evenement',
+                    'ai_summary_12' => 'App\\Entity\\Evenement',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); } }];

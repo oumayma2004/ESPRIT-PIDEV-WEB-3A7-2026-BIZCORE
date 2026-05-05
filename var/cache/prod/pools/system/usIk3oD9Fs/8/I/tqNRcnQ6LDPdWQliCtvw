@@ -1,0 +1,140 @@
+<?php //5f53982d74ed38635cb022ddd4f6957f
+
+return [PHP_INT_MAX, new class() implements \Symfony\Component\Cache\Traits\CachedValueInterface { public function getValue(): mixed { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            'sqlFinalizer' => [
+                $o[1],
+            ],
+            'resultSetMapping' => [
+                $o[2],
+            ],
+            'parameterMappings' => [
+                [
+                    'id' => [
+                        0,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer' => [
+            'sql' => [
+                1 => 'SELECT u0_.id_user AS id_user_0, u0_.nom AS nom_1, u0_.prenom AS prenom_2, u0_.email AS email_3, u0_.password AS password_4, u0_.telephone AS telephone_5, u0_.adresse AS adresse_6, u0_.statut AS statut_7, u0_.date_inscription AS date_inscription_8, u0_.derniere_connexion AS derniere_connexion_9, r1_.id_role AS id_role_10, r1_.nom_role AS nom_role_11, u0_.id_role AS id_role_12 FROM users u0_ LEFT JOIN role r1_ ON u0_.id_role = r1_.id_role WHERE u0_.id_user = ?',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'u' => 'App\\Entity\\User',
+                    'r' => 'App\\Entity\\Role',
+                ],
+            ],
+            'relationMap' => [
+                2 => [
+                    'r' => 'role',
+                ],
+            ],
+            'parentAliasMap' => [
+                2 => [
+                    'r' => 'u',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_user_0' => 'id',
+                    'nom_1' => 'nom',
+                    'prenom_2' => 'prenom',
+                    'email_3' => 'email',
+                    'password_4' => 'password',
+                    'telephone_5' => 'telephone',
+                    'adresse_6' => 'adresse',
+                    'statut_7' => 'statut',
+                    'date_inscription_8' => 'dateInscription',
+                    'derniere_connexion_9' => 'derniereConnexion',
+                    'id_role_10' => 'idRole',
+                    'nom_role_11' => 'nomRole',
+                ],
+            ],
+            'columnAliasMappings' => [
+                2 => [
+                    'App\\Entity\\User' => [
+                        'u' => [
+                            'id' => 'id_user_0',
+                            'nom' => 'nom_1',
+                            'prenom' => 'prenom_2',
+                            'email' => 'email_3',
+                            'password' => 'password_4',
+                            'telephone' => 'telephone_5',
+                            'adresse' => 'adresse_6',
+                            'statut' => 'statut_7',
+                            'dateInscription' => 'date_inscription_8',
+                            'derniereConnexion' => 'derniere_connexion_9',
+                        ],
+                    ],
+                    'App\\Entity\\Role' => [
+                        'r' => [
+                            'idRole' => 'id_role_10',
+                            'nomRole' => 'nom_role_11',
+                        ],
+                    ],
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'id_role_12' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'u' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'id_role_12' => 'id_role',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_user_0' => 'u',
+                    'nom_1' => 'u',
+                    'prenom_2' => 'u',
+                    'email_3' => 'u',
+                    'password_4' => 'u',
+                    'telephone_5' => 'u',
+                    'adresse_6' => 'u',
+                    'statut_7' => 'u',
+                    'date_inscription_8' => 'u',
+                    'derniere_connexion_9' => 'u',
+                    'id_role_10' => 'r',
+                    'nom_role_11' => 'r',
+                    'id_role_12' => 'u',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_user_0' => 'App\\Entity\\User',
+                    'nom_1' => 'App\\Entity\\User',
+                    'prenom_2' => 'App\\Entity\\User',
+                    'email_3' => 'App\\Entity\\User',
+                    'password_4' => 'App\\Entity\\User',
+                    'telephone_5' => 'App\\Entity\\User',
+                    'adresse_6' => 'App\\Entity\\User',
+                    'statut_7' => 'App\\Entity\\User',
+                    'date_inscription_8' => 'App\\Entity\\User',
+                    'derniere_connexion_9' => 'App\\Entity\\User',
+                    'id_role_10' => 'App\\Entity\\Role',
+                    'nom_role_11' => 'App\\Entity\\Role',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); } }];
